@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: "Inter", sans-serif;
+  }
+
+  ::selection {
+    background: #f5f5f5;
+    color: #000;
+  }
+}
+
+@layer components {
+  .input {
+    @apply bg-slate-300 dark:bg-gray-normal;
+  }
+  .main-bg {
+    @apply grid grid-rows-6 min-h-screen min-w-fit bg-slate-300 dark:bg-gray-dark;
+  }
+  .course-node {
+    @apply p-4 text-xl rounded-lg shadow-lg w-max h-fit
+            bg-slate-500 dark:bg-gray-normal text-white mx-10;
+  }
+}
