@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './admin_page.css'
+// import './admin_page.css'
 import { UserGetHandle, UserUpdateHandle, UserDeleteHandle } from '../service_page/UserView';
 import { ContainerProviderTendon } from 'linkWithBackend/services/container';
 import { User } from "linkWithBackend/interfaces/TendonType";

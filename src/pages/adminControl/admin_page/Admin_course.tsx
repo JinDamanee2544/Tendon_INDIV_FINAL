@@ -24,7 +24,7 @@ function AdminCourse() {
   }
 
   return (
-    <div className="AdminCourse">
+    <div className="admin-manu">
       <div>
         <button onClick={ () => submitHandle("Create")} className="button-shown"> CREATE </button>
         <CoursePage method="CREATE" shown = {show.showCreate} />

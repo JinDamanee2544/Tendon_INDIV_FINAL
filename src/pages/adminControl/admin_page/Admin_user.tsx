@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './admin_page.css'
+// import './admin_page.css'
 import UserInputPage from './admin_user_page';
 
 interface showComponentModel {

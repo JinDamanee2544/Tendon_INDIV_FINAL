@@ -25,3 +25,32 @@
             bg-slate-500 dark:bg-gray-normal text-white mx-10;
   }
 }
+
+/* Tan Part  */
+.admin-manu {
+  text-align: center;
+}
+.button-menu {
+  margin: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.admin-buttton {
+  background-color: rgb(89, 117, 239);
+  color: wheat;
+  padding: 25px 50px 25px;
+  border-radius: 15px;
+}
+
+.admin-buttton:hover {
+  background-color: rgb(43, 64, 255);
+}
+
+.admin-banner {
+  background-color: palevioletred;
+  height: 50px;
+  text-align: center;
+  padding: 10px;
+}
