@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
 import { Suspense, useEffect } from "react";
 import LoadingSpinner from "@components/baseComponents/LoadingSpinner";
-import MainLayout from "@components/layout/MainLayout";
+import MainLayout from "@components/Layout/MainLayout";
 import { MockRelateCourse } from "@data/graphNode";
 import { LearningNodeProps, StatusType } from "@customTypes/index";
 import { useBreadCrumb } from "context/breadCrumb";

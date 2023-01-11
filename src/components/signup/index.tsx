@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import Setting from '../dashboard/setting';
+import Setting from '../Dashboard/setting';
 const SignupBox = () => {
     return (
         <div className="flex gap-x-20 justify-center">

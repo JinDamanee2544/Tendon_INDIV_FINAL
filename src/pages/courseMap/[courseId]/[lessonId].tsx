@@ -1,5 +1,5 @@
 import LoadingSpinner from "@components/baseComponents/LoadingSpinner";
-import MainLayout from "@components/layout/MainLayout";
+import MainLayout from "@components/Layout/MainLayout";
 import LessonNode from "@components/learningNode";
 import { mockLearningNode } from "@customTypes/mockData";
 import { LearningNode } from "@customTypes/tendonAPItype";

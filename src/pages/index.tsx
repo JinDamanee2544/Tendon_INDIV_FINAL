@@ -1,9 +1,10 @@
+import React from "react";
 import type { NextPage } from "next";
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
 import LoadingSpinner from "@baseComponents/LoadingSpinner";
-import MainLayout from "@components/layout/MainLayout";
-const DashBoard = dynamic(() => import("../components/dashboard"), { suspense: true });
+import MainLayout from "../components/Layout/MainLayout";
+const DashBoard = dynamic(() => import("../components/Dashboard"), { suspense: true });
 
 const DashBoardPage: NextPage = () => {
   return (

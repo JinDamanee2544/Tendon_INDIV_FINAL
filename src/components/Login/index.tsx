@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-import Setting from '../dashboard/setting'
+import Setting from '../Dashboard/setting'
+
 const Login = () => {
     return (
         <div

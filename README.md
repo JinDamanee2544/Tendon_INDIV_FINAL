@@ -26,5 +26,3 @@ Not my part, But you can see it in : [Tendon's Backend](https://github.com/Tendo
 
 - Just a snapshot, Not the current one! -> [CodeSandBox](https://codesandbox.io/s/suspicious-waterfall-nux5dp)
 # Tendon_INDIV_FINAL
-# Tendon_INDIV_FINAL
-# Tendon_INDIV_FINAL
