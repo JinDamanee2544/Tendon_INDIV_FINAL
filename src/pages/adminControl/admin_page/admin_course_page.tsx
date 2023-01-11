@@ -37,11 +37,11 @@ function ShowResultField(props: resultShowType) {
         } else if (props.method === "GET") {
             return (
                 <>
-                    <ContainerProviderTendon>
+                    {/* <ContainerProviderTendon>
                         <div>
                             <CourseGetHandle body = {props.body} ></CourseGetHandle>
                         </div>
-                    </ContainerProviderTendon>
+                    </ContainerProviderTendon> */}
                 </>
             )
         } else if ( props.method === "UPDATE" ) {

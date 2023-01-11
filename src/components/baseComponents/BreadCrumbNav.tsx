@@ -8,7 +8,7 @@ const BreadCrumbNav = () => {
     const { pathList } = useBreadCrumb()
 
     useEffect(() => {
-        console.log(pathList);
+        // console.log(pathList);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 

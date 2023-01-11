@@ -7,8 +7,18 @@ import CourseDataViewModel from "./CourseViewModel";
 import { Course } from "linkWithBackend/interfaces/TendonType";
 import { token } from "../_demo_setting";
 
+import ResumeList from "@components/Dashboard/resume/ResumeList";
+import Xarrow from "react-xarrows";
+import { useTheme } from "next-themes";
+import ResumeItem from "@components/Dashboard/resume/ResumeItem";
+import { resumeProps } from "@data/index";
+
 interface propsInterface {
     body: Course
+}
+
+interface realInterface {
+    id: string
 }
 
 export const CourseCreateHandle = observer((props: propsInterface) => {
@@ -51,10 +61,12 @@ export const CourseCreateHandle = observer((props: propsInterface) => {
     }
 })
 
-export const CourseGetHandle = observer((props: propsInterface) => {              
-    const course_id = props.body.id
-    const [courseView, setCourseView] = useState<Course>({} as Course)  
+export const CourseGetHandle = observer((props: realInterface) => {  
+    const { theme } = useTheme();            
+    const course_id = props.id
+    const [courseView, setCourseView] = useState<resumeProps>({} as resumeProps)  
     const [message, setMessage] = useState<String>("")
+    const [isReady, setIsReady] = useState(false);
     const viewModel = new CourseDataViewModel(useTendonContainer())
     new Promise(function(myResolve, myReject) {
         useEffect(() => {
@@ -62,7 +74,11 @@ export const CourseGetHandle = observer((props: propsInterface) => {
             myResolve(tmpValue)
         }, [])
     }).then(() => {
-        setCourseView(viewModel.getCourse())
+        setCourseView({
+            id: viewModel.getCourse().id,
+            courseName: viewModel.getCourse().name,
+            setIsReady: setIsReady
+        })            // viewModel.getCourse()
         setMessage(viewModel.getMessage())
     })
 
@@ -74,16 +90,15 @@ export const CourseGetHandle = observer((props: propsInterface) => {
         }
         return (
             <div>
-                <p>  Course GET ERROR ZONE:  </p>
-                <p> { message } </p>
-            </div>              
+                {/* <p>  Course GET ERROR ZONE:  </p>
+                <p> { message } </p> */}
+            </div>       
         )
     }
 
     return (
         <div>
-                <p> [ Course GET ] </p>
-                <CourseView viewModel={ courseView } />
+                <ResumeItem key={courseView.id} { ... courseView } setIsReady={ setIsReady } />
         </div>              
     )
 })

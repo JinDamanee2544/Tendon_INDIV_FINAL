@@ -12,6 +12,8 @@ import { modeType } from "customTypes";
 import NavigateButton from "./NavigateButton";
 import DashBoardContainer from "@components/baseComponents/DashBoardContainer";
 
+import { ContainerProviderTendon } from 'linkWithBackend/services/container'
+
 const DashBoard = () => {
     const [mode, setMode] = useState<modeType>(modeType.main);
     //const [width, setWidth] = useState(0)
@@ -69,7 +71,9 @@ const DashBoard = () => {
                     onClick={() => navigateMode()}
                 />
             </DashBoardContainer>
-            {mode === modeType.resume && <ResumeList />}
+            <ContainerProviderTendon>
+                {mode === modeType.resume && <ResumeList />}
+            </ContainerProviderTendon>
 
         </div>
     )

@@ -198,7 +198,7 @@ const statData: statDataProps[] = [
 
 ]
 export interface resumeProps {
-  id: number,
+  id: string,
   courseName: string,
   setIsReady: (value: boolean) => void
 }
