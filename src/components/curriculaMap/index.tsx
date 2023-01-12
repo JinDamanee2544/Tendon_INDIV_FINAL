@@ -18,7 +18,7 @@ const LearningNodeMap = ({ learningNodeData: learningNodeID }: LearningNodeMapPr
     const [childReady, setChildReady] = useState(false);
     const [onClient, setOnClient] = useState(false);
 
-    // const mappedNodeprop = useMemo(() => prepNode(learningNodeData, setChildReady), [learningNodeData])
+    //const mappedNodeprop = useMemo(() => prepNode(learningNodeData, setChildReady), [learningNodeData])
 
     useEffect(() => {
         setOnClient(true)
