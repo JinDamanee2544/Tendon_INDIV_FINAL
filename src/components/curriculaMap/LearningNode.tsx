@@ -18,7 +18,7 @@ const CourseNode = ({ lessonId: courseId, lessonName: courseName, next, setChild
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     const statusColor = useMemo(() => nodeStatusColor(status), [])
-
+    
     return (
         <>
             <LearningNodeMotion

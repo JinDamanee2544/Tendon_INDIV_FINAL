@@ -16,10 +16,7 @@ export const nodeStatusColor = (status: StatusType): string => {
     }
 }
 
-export const prepNode = (
-    startNode: LearningLessonNodeProps,
-    defaultSetChildReady: (value: boolean) => void): RenderLearningLessonNodeProps[] => {
-
+export const prepNode = ( startNode: LearningLessonNodeProps, defaultSetChildReady: (value: boolean) => void): RenderLearningLessonNodeProps[] => {
     const outputNode: RenderLearningLessonNodeProps[] = [];
     const nodeHistory: string[] = [];
 

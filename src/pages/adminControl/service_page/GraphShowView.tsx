@@ -68,6 +68,7 @@ export default function GraphPathView({ courseView } : graphProps) {
     const [topoResult, setTopoResult] = useState<string[]>([])
     const [levelResult, setLevelResult] = useState<{[key: string]: coordinateXY}>({})
     const [dataDict, setDataDict] = useState<{[key: string]: Lesson}>({})
+    const [isRender, setIsRender] = useState<{[key: string]: boolean}>({})
     const [pairArray, setPairArray] = useState<string[][]>([])
     const [firstCal, setFirstCal] = useState<boolean>(false)
     const [childReady, setChildReady] = useState(false)
@@ -81,6 +82,7 @@ export default function GraphPathView({ courseView } : graphProps) {
         promise.then( value => {
             // var tmp = dataDict
             dataDict[value.id] = value
+            isRender[value.id] = true
             data.push(value)
             if (value.prevLesson.length === 0) {
                 lonely.push(value.id)
@@ -96,10 +98,16 @@ export default function GraphPathView({ courseView } : graphProps) {
                 setPairArray(pairing)
                 setInitNode(lonely)
                 setFirstCal(true)
-                console.log("Dict: ", dataDict)
+                console.log("lonely: ", lonely)
             }
         })
     }
+
+    useEffect(() => {
+        for (let e in isRender) {
+            isRender[e] = true
+        }
+    }, [dataDict, pairArray, firstCal, childReady, initNode, lessonResult, topoResult])
 
     return (
         <>
@@ -143,7 +151,7 @@ export default function GraphPathView({ courseView } : graphProps) {
 
                 <div className="flex flex-col gap-10">
                     <Xwrapper>
-                        {topoResult.map((lesson_id, index) => {
+                        {/* {topoResult.map((lesson_id, index) => {
                             return (
                                 <div key={index} className="flex gap-10 items-center" >
                                     <CourseNode
@@ -155,6 +163,68 @@ export default function GraphPathView({ courseView } : graphProps) {
                                         setChildReady = { setChildReady }
                                         isRender = { true }
                                     />
+                                </div>
+                            )
+                        })} */}
+                        {initNode.map((initLesson, index) => {
+                            return (
+                                <div key={index} className="flex gap-10 items-center" >
+                                    <CourseNode
+                                        key={ initLesson }
+                                        lessonId = { initLesson }
+                                        lessonName = {dataDict[initLesson!]?.name!}
+                                        status = {StatusType.INPROGRESS}
+                                        // next =  {RenderLearningLessonNodeProps[]}
+                                        setChildReady = { setChildReady }
+                                        isRender = {isRender[initLesson!]!}
+                                    />
+                                    {childReady && (
+                                        <ArrowBox>
+                                            <Xarrow
+                                                start={ courseView.id }
+                                                end={ initLesson }
+                                                color={theme === 'light' ? '#475569' : '#961EFF'}
+                                            />
+                                        </ArrowBox>
+                                    )}
+
+                                    {isRender[initLesson!]! = false}
+                                </div>
+                            )
+                        })}
+                        {pairArray.map((pairing, index) => {
+                            return (
+                                <div key={index} className="flex gap-10 items-center" >
+                                    <CourseNode
+                                        key={ pairing[0] }
+                                        lessonId = { pairing[0]! }
+                                        lessonName = {dataDict[pairing[0]!]?.name!}
+                                        status = {StatusType.INPROGRESS}
+                                        // next =  {RenderLearningLessonNodeProps[]}
+                                        setChildReady = { setChildReady }
+                                        isRender = {isRender[pairing[0]!]!}
+                                    />
+                                    <CourseNode
+                                        key={ pairing[1] }
+                                        lessonId = { pairing[1]! }
+                                        lessonName = {dataDict[pairing[1]!]?.name!}
+                                        status = {StatusType.INPROGRESS}
+                                        // next =  {RenderLearningLessonNodeProps[]}
+                                        setChildReady = { setChildReady }
+                                        isRender = {isRender[pairing[1]!]!}
+                                    />
+                                    {isRender[pairing[0]!]! = false}
+                                    {isRender[pairing[1]!]! = false}
+
+                                    {childReady && (
+                                        <ArrowBox>
+                                            <Xarrow
+                                                start={ pairing[0]! }
+                                                end={ pairing[1]! }
+                                                color={theme === 'light' ? '#475569' : '#961EFF'}
+                                            />
+                                        </ArrowBox>
+                                    )}
                                 </div>
                             )
                         })}
@@ -172,22 +242,7 @@ export default function GraphPathView({ courseView } : graphProps) {
                                     )}
                                 </div>
                             )
-                        })}
-                        {pairArray.map((pairing, index) => {
-                            return (
-                                <div key={index} className="flex gap-10 items-center" >
-                                    {childReady && (
-                                        <ArrowBox>
-                                            <Xarrow
-                                                start={ pairing[0]! }
-                                                end={ pairing[1]! }
-                                                color={theme === 'light' ? '#475569' : '#961EFF'}
-                                            />
-                                        </ArrowBox>
-                                    )}
-                                </div>
-                            )
-                        })}
+                        })} 
                     </Xwrapper >
                 </div >
             </Xwrapper>

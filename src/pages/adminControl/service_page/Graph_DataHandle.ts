@@ -30,3 +30,7 @@ export function dataPairHandle(props: Lesson[]) {
 
     return dataPair
 }
+
+export function linkDataHandle() {
+    
+}
