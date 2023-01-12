@@ -33,6 +33,7 @@ async function getLessonInformation(lesson_id: string) {
 
 export default function GraphPathView({ courseView } : graphProps) {
     const lessonArray = courseView.lessons
+    var lessonTopoArray: string[] = []
     var data: Lesson[] = []
     for (let i = 0; i < lessonArray.length; i++) {
         let promise = new Promise<Lesson>((resolve, reject) => {
@@ -41,14 +42,33 @@ export default function GraphPathView({ courseView } : graphProps) {
         })
         promise.then( value => {
             data.push(value)
-            // setLessonData(data)
-        });
+            console.log(data)
+        }).then( value => {
+            if (data.length === lessonArray.length) {
+                lessonTopoArray = TopologicalSort(data)
+                console.log(lessonTopoArray)
+            }
+        })
     }
-    // console.log(lessonData)
-    const lessonTopoArray = TopologicalSort(data)
     console.log("Topo: ", lessonTopoArray)
 
     return (
-        <></>
+        <>
+            <CourseNode
+                // renderId={startCourseNode.courseId} // Types require this, but it's not used
+                key={courseView.id}
+                lessonId={courseView.id}
+                lessonName={courseView.name}
+                status= {StatusType.COMPLETED}
+                setChildReady={() => { }} // No Child will use this one so it's fine
+                isRender={true}
+            />
+            {lessonArray.map((lesson_id: string, index: number) => (
+                <div key= {index}>
+                    <LessonGetHandle lesson_id={lesson_id} />
+                </div>
+            ))}
+
+        </>
     )
 }

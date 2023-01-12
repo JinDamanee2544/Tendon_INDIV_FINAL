@@ -2,7 +2,7 @@ import { Lesson } from "linkWithBackend/interfaces/TendonType";
 import React from "react";
 
 interface graphData {
-    name: string
+    id: string
     nextLesson: string[]
     prevLesson: string[] 
     isPass: boolean
@@ -16,8 +16,7 @@ function clearNodeGraph(indexDelete: number) {
         var prevArray = graph[i]!.prevLesson
         let tmp = []
         for (let j = 0; j < prevArray.length; j++) {
-            if (prevArray[j] === graph[indexDelete]!.name) {
-                
+            if (prevArray[j] === graph[indexDelete]!.id) {
             } else {
                 tmp.push(prevArray[j])
             }
@@ -32,7 +31,7 @@ function findHaveNotIn() {
             graph[i]!.isPass = true
             graph[i]!.nextLesson = []
             clearNodeGraph(i)
-            return graph[i]!.name
+            return graph[i]!.id
         }
     }
     return "No In"
@@ -42,7 +41,7 @@ export default function TopologicalSort(lessonData: Lesson[]) {
     var result: string[] = []
     for (let i = 0; i < lessonData.length; i++) {
         graph[i] = {
-            name: lessonData[i]!.name,
+            id: lessonData[i]!.id,
             prevLesson: lessonData[i]!.prevLesson,
             nextLesson: lessonData[i]!.nextLesson,
             isPass: false
@@ -53,7 +52,7 @@ export default function TopologicalSort(lessonData: Lesson[]) {
         if (nextVertex === "No In") {
             break
         }
-        result.push(nextVertex!)
+        result.push(nextVertex)
     }
 
     return result

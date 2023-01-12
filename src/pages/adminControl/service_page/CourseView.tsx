@@ -73,6 +73,7 @@ export const CourseGetHandle = observer((props: realInterface) => {
     const [message, setMessage] = useState<String>("")
     const [isReady, setIsReady] = useState(false);
     const viewModel = new CourseDataViewModel(useTendonContainer())
+
     new Promise(function(myResolve, myReject) {
         useEffect(() => {
             const tmpValue = viewModel.getCourseData(course_id, token)
