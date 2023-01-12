@@ -1,43 +1,43 @@
-import { LearningNodeProps, StatusType } from "../customTypes";
+import { LearningLessonNodeProps, StatusType } from "../customTypes";
 
 
 
-export const MockRelateCourse: LearningNodeProps[] = [
+export const MockRelateCourse: LearningLessonNodeProps[] = [
     {
-        courseId: '2',
-        courseName: "First",
+        lessonId: '2',
+        lessonName: "First",
         status: StatusType.COMPLETED,
         next: [
             {
-                courseId: '3',
-                courseName: "Framework",
+                lessonId: '3',
+                lessonName: "Framework",
                 status: StatusType.INPROGRESS,
                 next: [
                     {
-                        courseId: '4',
-                        courseName: "React",
+                        lessonId: '4',
+                        lessonName: "React",
                         status: StatusType.NOTSTARTED,
                     },
                     {
-                        courseId: '5',
-                        courseName: "Vue",
+                        lessonId: '5',
+                        lessonName: "Vue",
                         status: StatusType.NOTSTARTED,
                     },
                 ]
             },
             {
-                courseId: '7',
-                courseName: "Language",
+                lessonId: '7',
+                lessonName: "Language",
                 status: StatusType.NOTSTARTED,
                 next: [
                     {
-                        courseId: '8',
-                        courseName: "JavaScript",
+                        lessonId: '8',
+                        lessonName: "JavaScript",
                         status: StatusType.NOTSTARTED,
                     },
                     {
-                        courseId: '9',
-                        courseName: "TypeScript",
+                        lessonId: '9',
+                        lessonName: "TypeScript",
                         status: StatusType.NOTSTARTED,
                     },
                 ]
@@ -45,13 +45,13 @@ export const MockRelateCourse: LearningNodeProps[] = [
         ]
     },
     {
-        courseId: '6',
-        courseName: "Second",
+        lessonId: '6',
+        lessonName: "Second",
         status: StatusType.COMPLETED,
         next: [
             {
-                courseId: '7',
-                courseName: "Language",
+                lessonId: '7',
+                lessonName: "Language",
                 status: StatusType.NOTSTARTED,
             }
         ]

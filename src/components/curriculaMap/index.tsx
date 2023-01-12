@@ -3,20 +3,22 @@ import { motion } from 'framer-motion'
 import Xarrow, { Xwrapper } from 'react-xarrows'
 import { useTheme } from "next-themes";
 import React, { useEffect, useMemo, useState } from "react"
-import { LearningNodeProps } from "customTypes";
+import { LearningLessonNodeProps } from "customTypes";
 import ArrowBox from "../baseComponents/ArrowBox";
 import { prepNode } from "./LeaningNodeViewModel";
+import { CourseGetHandle } from "pages/adminControl/service_page/CourseView";
+import { ContainerProviderTendon } from "linkWithBackend/services/container";
 
 interface LearningNodeMapProps {
-    learningNodeData: LearningNodeProps
+    learningNodeData: string
 }
 // Entire View of the Course Map (Container)
-const LearningNodeMap = ({ learningNodeData }: LearningNodeMapProps) => {
+const LearningNodeMap = ({ learningNodeData: learningNodeID }: LearningNodeMapProps) => {
     const { theme } = useTheme();
     const [childReady, setChildReady] = useState(false);
     const [onClient, setOnClient] = useState(false);
 
-    const mappedNodeprop = useMemo(() => prepNode(learningNodeData, setChildReady), [learningNodeData])
+    // const mappedNodeprop = useMemo(() => prepNode(learningNodeData, setChildReady), [learningNodeData])
 
     useEffect(() => {
         setOnClient(true)
@@ -31,34 +33,25 @@ const LearningNodeMap = ({ learningNodeData }: LearningNodeMapProps) => {
                 transition={{ duration: 0.5, type: "spring", stiffness: 100 }}
             >
                 {/* Start Node */}
-                <CourseNode
-                    // renderId={startCourseNode.courseId} // Types require this, but it's not used
-                    key={learningNodeData.courseId}
-                    courseId={learningNodeData.courseId}
-                    courseName={learningNodeData.courseName}
-                    status={learningNodeData.status}
-                    setChildReady={() => { }} // No Child will use this one so it's fine
-                    isRender={true}
-                />
-                <div className="flex flex-col gap-10">
+                <ContainerProviderTendon>
+                    <CourseGetHandle id = { learningNodeID } component = {"map"} key = { learningNodeID } ></CourseGetHandle>
+                </ContainerProviderTendon> 
+                         
+                {/* <div className="flex flex-col gap-10">
                     <Xwrapper>
-
-                        {/* Like Next Mapping Render */}
                         {mappedNodeprop.map((item, index) => {
                             return (
-                                // End Node
-                                // logic Rendering
                                 <div key={index} className="flex gap-10 items-center" >
                                     <CourseNode
-                                        key={item.courseId}
+                                        key={item.lessonId}
                                         {...item}
                                     />
                                     {
                                         childReady && (
                                             <ArrowBox>
                                                 <Xarrow
-                                                    start={learningNodeData.courseId.toString()}
-                                                    end={item.courseId.toString()}
+                                                    start={ learningNodeData.lessonId }
+                                                    end={item.lessonId.toString()}
                                                     color={theme === 'light' ? '#475569' : '#961EFF'}
                                                 />
                                             </ArrowBox>
@@ -68,7 +61,7 @@ const LearningNodeMap = ({ learningNodeData }: LearningNodeMapProps) => {
                             )
                         })}
                     </Xwrapper >
-                </div >
+                </div > */}
             </motion.main >
         </>
     )

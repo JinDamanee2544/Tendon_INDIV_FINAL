@@ -15,19 +15,19 @@ export enum StatusType {
     'COMPLETED', 'INPROGRESS', 'NOTSTARTED'
 }
 
-export type LearningNodeProps = {
-    courseId: string
-    courseName: string
+export type LearningLessonNodeProps = {
+    lessonId: string
+    lessonName: string
     status: StatusType
-    next?: LearningNodeProps[]
+    next?: LearningLessonNodeProps[]
 }
 
-export interface RenderLearningNodeProps {
+export interface RenderLearningLessonNodeProps {
     // renderId: number
-    courseId: string
-    courseName: string
+    lessonId: string
+    lessonName: string
     status: StatusType
-    next?: RenderLearningNodeProps[]
+    next?: RenderLearningLessonNodeProps[]
     setChildReady: (value: boolean) => void
     isRender: boolean
 }

@@ -2,12 +2,12 @@ import { useEffect, useMemo, useState } from 'react'
 import { Xwrapper } from 'react-xarrows'
 import Xarrow from 'react-xarrows'
 import { useTheme } from 'next-themes'
-import { RenderLearningNodeProps } from '../../customTypes'
+import { RenderLearningLessonNodeProps } from '../../customTypes'
 import ArrowBox from '../baseComponents/ArrowBox'
 import { nodeStatusColor } from './LeaningNodeViewModel'
 import LearningNodeMotion from '@components/baseComponents/LearningNodeMotion'
 
-const CourseNode = ({ courseId, courseName, next, setChildReady, isRender, status }: RenderLearningNodeProps) => {
+const CourseNode = ({ lessonId: courseId, lessonName: courseName, next, setChildReady, isRender, status }: RenderLearningLessonNodeProps) => {
     const { theme } = useTheme();
     const [subChildReady, setSubChildReady] = useState(false);
 
@@ -39,7 +39,7 @@ const CourseNode = ({ courseId, courseName, next, setChildReady, isRender, statu
                                 (
                                     <div key={index} className="flex items-center">
                                         <CourseNode
-                                            key={item.courseId}
+                                            key={item.lessonId}
                                             {...item}
                                             setChildReady={setSubChildReady}
                                         />
@@ -47,7 +47,7 @@ const CourseNode = ({ courseId, courseName, next, setChildReady, isRender, statu
                                             {subChildReady &&
                                                 <Xarrow
                                                     start={courseId.toString()}
-                                                    end={item.courseId.toString()}
+                                                    end={item.lessonId.toString()}
                                                     color={theme === 'light' ? '#475569' : '#961EFF'}
                                                 />
                                             }

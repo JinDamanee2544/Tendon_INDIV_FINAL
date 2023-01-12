@@ -1,4 +1,4 @@
-import { LearningNodeProps, RenderLearningNodeProps, StatusType } from "../../customTypes";
+import { LearningLessonNodeProps, RenderLearningLessonNodeProps, StatusType } from "../../customTypes";
 /*
     View Model
 */
@@ -17,27 +17,27 @@ export const nodeStatusColor = (status: StatusType): string => {
 }
 
 export const prepNode = (
-    startNode: LearningNodeProps,
-    defaultSetChildReady: (value: boolean) => void): RenderLearningNodeProps[] => {
+    startNode: LearningLessonNodeProps,
+    defaultSetChildReady: (value: boolean) => void): RenderLearningLessonNodeProps[] => {
 
-    const outputNode: RenderLearningNodeProps[] = [];
+    const outputNode: RenderLearningLessonNodeProps[] = [];
     const nodeHistory: string[] = [];
 
     // Recursive function to map the node
-    const mapToRenderProps = (node: LearningNodeProps): RenderLearningNodeProps => {
+    const mapToRenderProps = (node: LearningLessonNodeProps): RenderLearningLessonNodeProps => {
         let isShouldRender;
-        if (nodeHistory.includes(node.courseId)) {
+        if (nodeHistory.includes(node.lessonId)) {
             isShouldRender = false;
         } else {
             isShouldRender = true;
-            nodeHistory.push(node.courseId);
+            nodeHistory.push(node.lessonId);
         }
-        const next: RenderLearningNodeProps[] | undefined = node.next === undefined ? undefined : node.next.map(childNode => {
+        const next: RenderLearningLessonNodeProps[] | undefined = node.next === undefined ? undefined : node.next.map(childNode => {
             return mapToRenderProps(childNode)
         })
-        const mapNode: RenderLearningNodeProps = {
-            courseId: node.courseId,
-            courseName: node.courseName,
+        const mapNode: RenderLearningLessonNodeProps = {
+            lessonId: node.lessonId,
+            lessonName: node.lessonName,
             status: node.status,
             next: next,
             setChildReady: defaultSetChildReady,

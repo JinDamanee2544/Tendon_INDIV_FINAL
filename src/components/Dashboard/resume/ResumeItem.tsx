@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { useXarrow } from 'react-xarrows';
 import { resumeProps } from '../../../data';
 
-const ResumeItem = ({ id, courseName, setIsReady }: resumeProps) => {
+const ResumeItem = ({ id, courseData, setIsReady }: resumeProps) => {
     const updateArrow = useXarrow();
     const router = useRouter();
 
@@ -26,9 +26,9 @@ const ResumeItem = ({ id, courseName, setIsReady }: resumeProps) => {
             onUpdate={() => {
                 setInterval(updateArrow, 100)
             }}
-            onClick={() => router.push(`/courseMap/${id}`)}
+            onClick={() => router.push(`/courseMap/${id}${"*"}${courseData.name}`)}
         >
-            {courseName}
+            {courseData.name}
         </motion.button>
     )
 }

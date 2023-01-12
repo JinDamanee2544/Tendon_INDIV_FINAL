@@ -1,4 +1,4 @@
-import { LearningNodeProps } from "@customTypes/index";
+import { LearningLessonNodeProps } from "@customTypes/index";
 import { LearningNode } from "@customTypes/tendonAPItype";
 import { useBreadCrumb } from "context";
 import { useCallback, useEffect } from "react";
@@ -6,7 +6,7 @@ import useLocalStorage from "./useLocalStorage";
 
 type navPathProp = {
     page: string
-    curriculaData?: LearningNodeProps,
+    curriculaData?: LearningLessonNodeProps,
     courseId?: string,
     mockLearningNode?: LearningNode
 }
@@ -25,7 +25,7 @@ const useNavPath = ({ page, courseId, curriculaData, mockLearningNode }: navPath
                         link: '/',
                     },
                     {
-                        name: curriculaData.courseName,
+                        name: curriculaData.lessonName,
                         link: `/courseMap/${courseId}`,
                     }
                 ])

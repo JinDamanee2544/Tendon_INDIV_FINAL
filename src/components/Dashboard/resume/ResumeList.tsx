@@ -32,7 +32,7 @@ const ResumeList = () => {
                         return (
                             <div key={index}>
                                 <ContainerProviderTendon>
-                                    <CourseGetHandle id = { item } key = { item } ></CourseGetHandle>
+                                    <CourseGetHandle id = { item } component = {"resume"} key = { item } ></CourseGetHandle>
                                 </ContainerProviderTendon>
                             </div>
                         )

@@ -4,7 +4,7 @@ import { Suspense, useEffect } from "react";
 import LoadingSpinner from "@components/baseComponents/LoadingSpinner";
 import MainLayout from "@components/Layout/MainLayout";
 import { MockRelateCourse } from "@data/graphNode";
-import { LearningNodeProps, StatusType } from "@customTypes/index";
+import { LearningLessonNodeProps, StatusType } from "@customTypes/index";
 import { useBreadCrumb } from "context/breadCrumb";
 import useLocalStorage from "hooks/useLocalStorage";
 import useNavPath from "hooks/useNavPath";
@@ -12,19 +12,29 @@ import useNavPath from "hooks/useNavPath";
 const CourseMap = dynamic(() => import("@components/curriculaMap"));
 
 // Fetch Curriculum Data
-const getCurriculaNodeData = (courseId: string): LearningNodeProps => {
-    return {
-        courseId: courseId,
-        courseName: "Introduction to Programming",
-        status: StatusType.COMPLETED,
-        next: MockRelateCourse
-    }
-}
+// const getCurriculaNodeData = (courseId: string): LearningLessonNodeProps => {
+//     return {
+//         lessonId: courseId,
+//         lessonName: "Introduction to Programming",
+//         status: StatusType.COMPLETED,
+//         next: MockRelateCourse
+//     }
+// }
 
 const CoursePage = () => {
     const router = useRouter();
-    const courseId = router.query.courseId ? router.query.courseId.toString() : "";
-    const curriculaData = getCurriculaNodeData(courseId);
+    const courseParam = router.query.courseId ? router.query.courseId.toString() : "";
+    var splitted = courseParam.split("*", ); 
+    // console.log(splitted)
+    var courseId = ""
+    var courseName = ""
+    if (splitted[1] !== undefined) {
+        courseName = splitted[1]
+    }
+    if (splitted[0] !== undefined) {
+        courseId = splitted[0]
+    }
+    // const curriculaData = getCurriculaNodeData(courseId);
     const { pathList, setPathList } = useBreadCrumb()
     const [storedPath, setStoredPath] = useLocalStorage('path', pathList);
 
@@ -41,7 +51,7 @@ const CoursePage = () => {
                 link: '/',
             },
             {
-                name: curriculaData.courseName,
+                name: courseName,
                 link: `/courseMap/${courseId}`,
             }
         ])
@@ -53,7 +63,7 @@ const CoursePage = () => {
         // <BreadcrumbProvider>
         <MainLayout>
             <Suspense fallback={<LoadingSpinner />}>
-                <CourseMap learningNodeData={curriculaData} />
+                <CourseMap learningNodeData={ courseId } />
             </Suspense>
         </MainLayout>
         // </BreadcrumbProvider>
