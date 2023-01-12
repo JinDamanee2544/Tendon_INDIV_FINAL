@@ -12,6 +12,7 @@ import Xarrow from "react-xarrows";
 import { useTheme } from "next-themes";
 import ResumeItem from "@components/Dashboard/resume/ResumeItem";
 import { resumeProps } from "@data/index";
+import ArrowBox from "@components/baseComponents/ArrowBox";
 
 interface propsInterface {
     body: Course
@@ -90,16 +91,27 @@ export const CourseGetHandle = observer((props: realInterface) => {
         }
         return (
             <div>
-                {/* <p>  Course GET ERROR ZONE:  </p>
-                <p> { message } </p> */}
+                <p> Error {message} </p>
             </div>       
         )
     }
 
     return (
-        <div>
-                <ResumeItem key={courseView.id} { ... courseView } setIsReady={ setIsReady } />
-        </div>              
+        <>
+            <ResumeItem key={courseView.id} { ... courseView } setIsReady={ setIsReady } />
+            {
+                isReady && (
+                    <ArrowBox>
+                        <Xarrow
+                            start={'dashboard'}
+                            end={ courseView.id }
+                            color={theme === 'light' ? '#475569' : '#961EFF'}
+                        />
+                    </ArrowBox>
+
+                )
+            } 
+        </>        
     )
 })
 

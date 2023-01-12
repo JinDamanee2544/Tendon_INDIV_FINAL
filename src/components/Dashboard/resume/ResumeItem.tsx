@@ -22,7 +22,7 @@ const ResumeItem = ({ id, courseName, setIsReady }: resumeProps) => {
             whileTap={{ scale: 0.9 }}
             whileHover={{ scale: 1.1 }}
             transition={{ duration: 0.5, type: "spring", stiffness: 100 }}
-            id={id.toString()}
+            id={ id }
             onUpdate={() => {
                 setInterval(updateArrow, 100)
             }}

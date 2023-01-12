@@ -19,28 +19,8 @@ interface propsInterface {
 }
 
 const ResumeList = () => {
-    const { theme } = useTheme();
-    const [isReady, setIsReady] = useState(false);
 
-    const resumeData: resumeProps[] = [
-        {
-            id: '101',
-            courseName: "Web Development",
-            setIsReady: setIsReady,
-        },
-        {
-            id: '102',
-            courseName: "Machine Learning",
-            setIsReady: setIsReady,
-        },
-        {
-            id: '103',
-            courseName: "Embedded System",
-            setIsReady: setIsReady,
-        },
-    ]
-
-    //const resumeData: resumeProps[] = []
+    const resumeData: string[] = ["63becc58e68081422d62f422", "63becc6ce68081422d62f423", "63becc7de68081422d62f424"]
 
     return (
         <motion.main
@@ -51,24 +31,9 @@ const ResumeList = () => {
                     resumeData.map((item, index) => {
                         return (
                             <div key={index}>
-                                {/* <ResumeItem key={item.id} {...item} setIsReady={setIsReady} /> */}
                                 <ContainerProviderTendon>
-                                    <div>
-                                        <CourseGetHandle id = { "63becc58e68081422d62f422" } ></CourseGetHandle>
-                                    </div>
+                                    <CourseGetHandle id = { item } key = { item } ></CourseGetHandle>
                                 </ContainerProviderTendon>
-                                {
-                                    isReady && (
-                                        <ArrowBox>
-                                            <Xarrow
-                                                start={'dashboard'}
-                                                end={item.id.toString()}
-                                                color={theme === 'light' ? '#475569' : '#961EFF'}
-                                            />
-                                        </ArrowBox>
-
-                                    )
-                                }
                             </div>
                         )
                     })
