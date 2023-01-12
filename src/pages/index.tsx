@@ -23,7 +23,6 @@ const DashBoardPage: NextPage = () => {
           < DashBoard />
         </Suspense>
       </MainLayout>
-
       <div>
         
       <button onClick={handleClick} >

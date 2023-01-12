@@ -15,15 +15,14 @@ export enum StatusType {
     'COMPLETED', 'INPROGRESS', 'NOTSTARTED'
 }
 
-export type LearningLessonNodeProps = {
+export type LearningLessonNodeProps = {                 // *
     lessonId: string
     lessonName: string
     status: StatusType
     next?: LearningLessonNodeProps[]
 }
 
-export interface RenderLearningLessonNodeProps {
-    // renderId: number
+export interface RenderLearningLessonNodeProps {            // *     
     lessonId: string
     lessonName: string
     status: StatusType

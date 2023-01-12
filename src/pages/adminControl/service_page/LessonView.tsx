@@ -6,9 +6,15 @@ import { useTendonContainer } from "linkWithBackend/services/container";
 import LessonDataViewModel from "./LessonViewModel";
 import { Lesson } from "linkWithBackend/interfaces/TendonType";
 import { token } from "../_demo_setting";
+import CourseNode from "@components/curriculaMap/LearningNode";
+import { StatusType } from "@customTypes/index";
 
 interface propsInterface {
     body: Lesson
+}
+
+interface realLessonInterface {
+    lesson_id: string
 }
 
 export const LessonCreateHandle = observer((props: propsInterface) => {
@@ -51,8 +57,8 @@ export const LessonCreateHandle = observer((props: propsInterface) => {
     }
 })
 
-export const LessonGetHandle = observer((props: propsInterface) => {              
-    const lesson_id = props.body.id
+export const LessonGetHandle = observer((props: realLessonInterface) => {              
+    const lesson_id = props.lesson_id
     const [lessonView, setLessonView] = useState<Lesson>({} as Lesson)  
     const [message, setMessage] = useState<String>("")
     const viewModel = new LessonDataViewModel(useTendonContainer())
@@ -82,8 +88,14 @@ export const LessonGetHandle = observer((props: propsInterface) => {
 
     return (
         <div>
-                <p> [ LESSON GET ] </p>
-                <LessonView viewModel={ lessonView } />
+            <CourseNode
+                key={lessonView.id}
+                lessonId={lessonView.id}
+                lessonName={lessonView.name}
+                status= {StatusType.COMPLETED}
+                setChildReady={() => { }}
+                isRender={true}
+            />
         </div>              
     )
 })

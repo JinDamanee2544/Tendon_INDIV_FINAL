@@ -26,7 +26,7 @@ const ResumeItem = ({ id, courseData, setIsReady }: resumeProps) => {
             onUpdate={() => {
                 setInterval(updateArrow, 100)
             }}
-            onClick={() => router.push(`/courseMap/${id}${"*"}${courseData.name}`)}
+            onClick={() => router.push(`/courseMap/${id}${"-"}${courseData.name}`)}
         >
             {courseData.name}
         </motion.button>
