@@ -100,7 +100,8 @@ export interface LearningNode {
 
 export interface Node {
   name: string
-  type: "pdfNode" | "videoNode" | "textNode" | "soundNode" | "imageNode";
+  // type: "pdfNode" | "videoNode" | "textNode" | "soundNode" | "imageNode";
+  type: string
   id: string;
   attributes: {
     priority: "require" | "extension" | "optional";

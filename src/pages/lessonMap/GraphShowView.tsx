@@ -13,29 +13,12 @@ import { prepNode } from "../../components/curriculaMap/LeaningNodeViewModel";
 import { LearningLessonNodeProps } from "../../customTypes"
 import prepNodeAlgo from "../../linkWithBackend/lessonHandle/Graph_PrepNodeData";
 import { motion } from "framer-motion";
+import { getLessonInformation } from "../../linkWithBackend/lessonHandle/lessonData"
 
 //@components/curriculaMap/LearningNode
 
 interface graphProps {
     courseView: Course
-}
-
-async function getLessonInformation(lesson_id: string) {
-    var result: Lesson = {} as Lesson
-    var lessonGraph = new LessonGraphService()
-    var lessonInformation:Lesson = await lessonGraph.getLessonById(lesson_id, token)
-
-    result = {
-        ... result,
-        id: lessonInformation?.id,
-        name: lessonInformation?.name,
-        description: lessonInformation?.description,
-        access: lessonInformation?.access,
-        nodes: lessonInformation?.nodes,
-        nextLesson: lessonInformation?.nextLesson,
-        prevLesson: lessonInformation?.prevLesson
-    }
-    return result
 }
 
 export interface coordinateXY {

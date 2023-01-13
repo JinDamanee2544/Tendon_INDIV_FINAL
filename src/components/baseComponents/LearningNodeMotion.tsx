@@ -13,7 +13,7 @@ type LearningNodeProps = {
     status: StatusType
 }
 
-const LearningNode = ({ statusColor, courseId, courseName, isRender, status }: LearningNodeProps) => {
+const LearningNode = ({ statusColor, courseId: lessonId, courseName, isRender, status }: LearningNodeProps) => {
     const updateArrow = useXarrow();
     const router = useRouter();
     const nodeRef = useRef(null);
@@ -25,7 +25,7 @@ const LearningNode = ({ statusColor, courseId, courseName, isRender, status }: L
                     <span className="indicator-item indicator-start badge mx-10 dark:bg-gray-medium dark:shadow-xl dark:shadow-gray-dark dark:border-0">{["✓", "...", "!"][status]}</span>
                     <motion.button
                         className={`course-node ${statusColor}`}
-                        id={courseId.toString()}
+                        id={lessonId.toString()}
                         initial={{ opacity: 0, scale: 0 }}
                         animate={{
                             opacity: 1, scale: 1,
@@ -43,7 +43,7 @@ const LearningNode = ({ statusColor, courseId, courseName, isRender, status }: L
                         }}
                         onClick={() => {
                             router.push({
-                                pathname: `${router.asPath}/${courseId}`,
+                                pathname: `${router.asPath}/${lessonId}`,
                             })
                         }}
                     >

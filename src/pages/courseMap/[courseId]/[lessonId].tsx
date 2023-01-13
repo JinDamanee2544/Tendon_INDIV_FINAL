@@ -6,6 +6,7 @@ import { LearningNode } from "@customTypes/tendonAPItype";
 import { useBreadCrumb } from "context/breadCrumb";
 import useLocalStorage from "hooks/useLocalStorage";
 import useNavPath from "hooks/useNavPath";
+import { ContainerProviderTendon } from "linkWithBackend/services/container";
 import { useRouter } from "next/router";
 import { Suspense, useEffect } from "react";
 
@@ -16,7 +17,8 @@ const getLearningNodeById = (id: string): LearningNode => {
 
 const Lesson = () => {
     const router = useRouter();
-    const nodeId = router.query.nodeId ? router.query.nodeId.toString() : "";
+    const nodeId = router.query.lessonId ? router.query.lessonId.toString() : "";
+    console.log("id: ", nodeId)
     const { pathList, setPathList } = useBreadCrumb()
     const [storedPath, setStoredPath] = useLocalStorage('path', pathList);
     const mockLearningNode = getLearningNodeById(nodeId);
@@ -54,7 +56,7 @@ const Lesson = () => {
         <MainLayout>
             <Suspense fallback={<LoadingSpinner />}>
                 <LessonNode
-                    LearningNodeData={mockLearningNode}
+                    lesson_id = {nodeId} 
                 />
             </Suspense>
         </MainLayout>

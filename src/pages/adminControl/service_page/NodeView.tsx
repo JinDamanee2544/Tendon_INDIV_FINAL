@@ -6,6 +6,9 @@ import { useTendonContainer } from "linkWithBackend/services/container";
 import NodeDataViewModel from "./NodeViewModel";
 import { Node } from "linkWithBackend/interfaces/TendonType";
 import { token } from "../_demo_setting";
+import NodeItem from "@components/learningNode/NodeItem";
+import { resSource } from "../../../customTypes";
+// import { resSource } from "@customTypes/";
 
 interface propsInterface {
     body: Node
@@ -51,8 +54,14 @@ export const NodeCreateHandle = observer((props: propsInterface) => {
     }
 })
 
-export const NodeGetHandle = observer((props: propsInterface) => {              
-    const node_id = props.body.id
+interface getNodeInterface {
+    node_id: string
+    setIsOpened: (value: boolean) => void
+    setResSource: (value: resSource) => void
+}
+
+export const NodeGetHandle = observer((props: getNodeInterface) => {              
+    const node_id = props.node_id
     const [nodeView, setNodeView] = useState<Node>({} as Node)  
     const [message, setMessage] = useState<String>("")
     const viewModel = new NodeDataViewModel(useTendonContainer())
@@ -80,11 +89,27 @@ export const NodeGetHandle = observer((props: propsInterface) => {
         )
     }
 
+    // attributes: {
+    //     priority: "require" | "extension" | "optional";
+    //     size: number;
+    //     /** @example "/resources/pdf/1234" */
+    //     resources: string;
+    //   };
+
     return (
-        <div>
-                <p> [ Node GET ] </p>
-                <NodeView viewModel={ nodeView } />
-        </div>              
+        <>
+            <NodeItem
+                key={nodeView.id}
+                type={nodeView.type}
+                name={nodeView.data}
+                id={nodeView.id}
+                setIsOpened={props.setIsOpened}
+                setResSource={props.setResSource}
+                attributes = {
+                    {priority: "require", size: 9, resources: "www.google.com"}
+                }
+            />
+        </>              
     )
 })
 

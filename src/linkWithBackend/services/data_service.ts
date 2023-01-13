@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { makeAutoObservable } from "mobx"
+import "reflect-metadata";
 import { injectable } from 'inversify'
 import { Lesson } from 'linkWithBackend/interfaces/TendonType'
 
