@@ -15,7 +15,7 @@ import { resumeProps } from "@data/index";
 import ArrowBox from "@components/baseComponents/ArrowBox";
 import CourseNode from "@components/curriculaMap/LearningNode";
 import { StatusType } from "@customTypes/index";
-import GraphPathView from "./GraphShowView";
+import GraphPathView from "../../lessonMap/GraphShowView";
 
 interface propsInterface {
     body: Course
