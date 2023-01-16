@@ -1,6 +1,68 @@
 import { motion } from 'framer-motion'
+import { useState } from 'react';
 import Setting from '../Dashboard/setting';
+import { User } from 'linkWithBackend/interfaces/TendonType';
+import { ContainerProviderTendon } from 'linkWithBackend/services/container';
+import { SignUpHandle } from 'pages/adminControl/service_page/SignView';
 const SignupBox = () => {
+    const [userProps, setUserProps] = useState<User>({} as User)
+    const [confirmPassword, setConfirmPassword] = useState<string>("")
+    const [isCal, setisCal] =useState<boolean>(false)
+    const onChangeFName = (e: React.FormEvent<HTMLInputElement>): void => {
+        setUserProps({
+            ... userProps,
+            firstName: e.currentTarget.value
+        })
+    };
+    const onChangeLName = (e: React.FormEvent<HTMLInputElement>): void => {
+        setUserProps({
+            ... userProps,
+            lastName: e.currentTarget.value
+        })
+    };
+    const onChangeEmail = (e: React.FormEvent<HTMLInputElement>): void => {
+        setUserProps({
+            ... userProps,
+            email: e.currentTarget.value
+        })
+    };
+    const onChangePassword = (e: React.FormEvent<HTMLInputElement>): void => {
+        setUserProps({
+            ... userProps,
+            password: e.currentTarget.value
+        })
+    };
+    const onChangeConfirmPassword = (e: React.FormEvent<HTMLInputElement>): void => {
+        setConfirmPassword(e.currentTarget.value)
+    };
+
+    const submitHandle = (): void => {
+        console.log(userProps.email)
+        if (userProps.email === undefined) {
+            setisCal(false)
+            alert("Email cannot be blank")
+        }
+        else if (userProps.firstName === undefined) {
+            setisCal(false)
+            alert("Firstname cannot be blank")
+        }
+        else if (userProps.lastName === undefined) {
+            setisCal(false)
+            alert("Lastname cannot be blank")
+        }
+        else if (userProps.password === undefined || userProps.password === "") {
+            setisCal(false)
+            alert("Password cannot be blank")
+        }
+        else if (userProps.password !== confirmPassword) {
+            setisCal(false)
+            alert("Password and Confirm Password must be the same.!!!")
+        } else {
+            console.log("right")
+            setisCal(true)
+        } 
+    }
+
     return (
         <div className="flex gap-x-20 justify-center">
             <motion.main
@@ -20,29 +82,36 @@ const SignupBox = () => {
                     <input
                         type="text"
                         placeholder='myemail@mail.com'
-                        className='input' />
+                        className='input' 
+                        onChange={ onChangeEmail } 
+                        required/>
                     <div className='flex gap-4'>
                         <input
                             type="text"
                             placeholder='First Name'
-                            className='input ' />
+                            className='input '
+                            onChange={ onChangeFName } />
                         <input
                             type="text"
                             placeholder='Last Name'
-                            className='input' />
+                            className='input'
+                            onChange={ onChangeLName } />
                     </div>
                     <input
                         type="password"
                         placeholder='Password'
-                        className='input' />
+                        className='input' 
+                        onChange={ onChangePassword }/>
                     <input
                         type="password"
                         placeholder='Confirm Password'
-                        className='input' />
+                        className='input' 
+                        onChange={ onChangeConfirmPassword }/>
                     <motion.button
                         className="bg-gradient-to-r from-purple-light to-purple-neon border-0 text-white font-bold py-2 px-4 rounded-full"
                         whileTap={{ scale: 1 }}
                         whileHover={{ scale: 1.02 }}
+                        onClick = { submitHandle }
                     >
                         Sign Up
                     </motion.button>
@@ -51,6 +120,10 @@ const SignupBox = () => {
                     <Setting />
                 </div>
             </motion.main>
+
+            < ContainerProviderTendon >
+                < SignUpHandle body={ userProps } isCal = {isCal} />
+            </ContainerProviderTendon>
         </div>
     )
 }
