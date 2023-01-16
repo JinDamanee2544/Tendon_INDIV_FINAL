@@ -1,13 +1,14 @@
 import NodeItem from './NodeItem';
 import { LearningNode } from '@customTypes/tendonAPItype';
-import { Suspense, useEffect, useState } from 'react';
+import { Suspense, useEffect, useMemo, useRef, useState } from 'react';
 import LoadingSpinner from '@components/baseComponents/LoadingSpinner';
 import Modal from './Modal';
 import { resSource } from '@customTypes/index';
 import { dictLesson } from "linkWithBackend/lessonHandle/lessonData";
-import { Node } from 'linkWithBackend/interfaces/TendonType';
+import { Lesson, Node } from 'linkWithBackend/interfaces/TendonType';
 import { ContainerProviderTendon } from 'linkWithBackend/services/container';
 import { NodeGetHandle } from 'pages/adminControl/service_page/NodeView';
+import { getLessonInformation } from 'linkWithBackend/lessonHandle/lessonData';
 
 // Mock fetchings
 const getResData = ({ resLink, resType }: resSource) => {
@@ -36,16 +37,32 @@ const LessonNode = ({ lesson_id }: LessonNodeDataProps) => {
         if (isOpened) {
             setModalData(getResData(resSource))
         }
-        setNodeArray(dictLesson[lesson_id]?.nodes!)
     }, [isOpened, resSource])
 
+    useEffect(() => {
+        let promise = new Promise<Lesson>((resolve, reject) => {
+            console.log("Lesson ID ", lesson_id)
+            const tmpValue = getLessonInformation(lesson_id)
+            resolve(tmpValue)
+        })
+        promise.then( value => {
+            setNodeArray(value.nodes)
+            console.log("value: ", value)
+        })
+
+    }, [])
+   
+    console.log(nodeArray)
+    while (nodeArray === undefined) {
+
+    }
     return (
         <>
             {
                 isLoading ? <LoadingSpinner /> :
                     <>
                         {
-                            <div className='flex gap-x-20 justify-center mt-10'                 >
+                            <div className='flex gap-x-20 justify-center mt-10'>
                                 <div className='flex flex-col gap-4 p-6 bg-slate-100 dark:bg-gray-normal rounded-3xl  min-w-[300px]'                    >
                                     {/* <h1 className='text-2xl p-2 font-bold text-center'>{LearningNodeData.attributes?.learningNodeName}</h1>
                                     {
@@ -65,7 +82,7 @@ const LessonNode = ({ lesson_id }: LessonNodeDataProps) => {
                                         })
                                     } */}
                                     <h1 className='text-2xl p-2 font-bold text-center'> File~~~ </h1>
-                                    {nodeArray.map((nodeId, index) => {
+                                    {nodeArray!== undefined && nodeArray.map((nodeId, index) => {
                                         return (
                                             <div key={index} className="flex gap-10 items-center" >
                                                 <ContainerProviderTendon>

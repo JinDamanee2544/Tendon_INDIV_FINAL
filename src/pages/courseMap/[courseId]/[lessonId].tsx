@@ -6,9 +6,11 @@ import { LearningNode } from "@customTypes/tendonAPItype";
 import { useBreadCrumb } from "context/breadCrumb";
 import useLocalStorage from "hooks/useLocalStorage";
 import useNavPath from "hooks/useNavPath";
+import { Lesson } from "linkWithBackend/interfaces/TendonType";
+import { getLessonInformation } from "linkWithBackend/lessonHandle/lessonData";
 import { ContainerProviderTendon } from "linkWithBackend/services/container";
 import { useRouter } from "next/router";
-import { Suspense, useEffect } from "react";
+import { Suspense, useEffect, useState } from "react";
 
 // Fetch Learning Node Data
 const getLearningNodeById = (id: string): LearningNode => {
@@ -17,11 +19,12 @@ const getLearningNodeById = (id: string): LearningNode => {
 
 const Lesson = () => {
     const router = useRouter();
-    const nodeId = router.query.lessonId ? router.query.lessonId.toString() : "";
-    console.log("id: ", nodeId)
-    const { pathList, setPathList } = useBreadCrumb()
-    const [storedPath, setStoredPath] = useLocalStorage('path', pathList);
-    const mockLearningNode = getLearningNodeById(nodeId);
+    const lessonId = router.query.lessonId ? router.query.lessonId.toString() : "";
+    console.log("id: ", lessonId)
+    const { pathList, setPathList } = useBreadCrumb()                               // Display Path
+    const [storedPath, setStoredPath] = useLocalStorage('path', pathList);          // cache for refreshing page 
+    const mockLearningNode = getLearningNodeById(lessonId);
+    const [lessonName, setLessonName] = useState<string>("")
 
     // useNavPath({
     //     page: 'LearningNode',
@@ -29,34 +32,44 @@ const Lesson = () => {
     // });
 
     useEffect(() => {
-        setPathList((prev) => {
-            if (prev.length != 0) {
-                return [
-                    ...prev,
-                    {
-                        name: mockLearningNode.attributes?.learningNodeName || 'Error',
-                        link: 'มีไปก็กดไม่ได้ (ตาม Usecase)',
-                    }
-                ]
-            } else {    // no previous path
-                return [
-                    ...storedPath,
-                    {
-                        name: mockLearningNode.attributes?.learningNodeName || 'Error',
-                        link: 'มีไปก็กดไม่ได้ (ตาม Usecase)',
-                    }
-                ]
-            }
+        let promise = new Promise<Lesson>((resolve, reject) => {
+            const tmpValue = getLessonInformation(lessonId)
+            resolve(tmpValue)
         })
-        setStoredPath(pathList);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+        promise.then( value => {
+            setLessonName(value.name)
+
+            // -------
+            setPathList((prev) => {
+                if (prev.length != 0) {
+                    return [
+                        ...prev,
+                        {
+                            name: value.name || 'Error',
+                            link: 'มีไปก็กดไม่ได้ (ตาม Usecase)',
+                        }
+                    ]
+                } else {    // no previous path  (For refresh)
+                    return [
+                        ...storedPath,
+                        {
+                            name: value.name || 'Error',
+                            link: 'มีไปก็กดไม่ได้ (ตาม Usecase)',
+                        }
+                    ]
+                }
+            })
+            setStoredPath(pathList);
+            // --------
+        })
+        
     }, [])
 
     return (
         <MainLayout>
             <Suspense fallback={<LoadingSpinner />}>
                 <LessonNode
-                    lesson_id = {nodeId} 
+                    lesson_id = {lessonId} 
                 />
             </Suspense>
         </MainLayout>

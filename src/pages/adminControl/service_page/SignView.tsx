@@ -5,14 +5,22 @@ import { useState, useEffect } from "react";
 import { useTendonContainer } from "linkWithBackend/services/container";
 import SignDataViewModel from "./SignViewModel";
 import { User } from "linkWithBackend/interfaces/TendonType";
+import { useRouter } from 'next/router'
 
 export var user_id_new: string;         // For Testing purpose
 
 interface signViewInterface {
-    body: User
+    body: User,
+    isCal?: boolean
 }
 
 export const SignUpHandle = observer((signView: signViewInterface) => {
+    if (signView.isCal === false) {
+        return (
+            <>
+            </>
+        )
+    }
     const body = signView.body
     const [userView, setUserView] = useState<User>({} as User)
     const [message, setMessage] = useState<String>("")
@@ -29,7 +37,6 @@ export const SignUpHandle = observer((signView: signViewInterface) => {
         setMessage(viewModel.getMessage())
         setStatus(viewModel.getStatus())
     })
-
     if (status === 201) {
         return (
             <div>
@@ -55,6 +62,8 @@ export const SignUpHandle = observer((signView: signViewInterface) => {
 })
 
 export const SignInHandle = observer((signView: signViewInterface) => {
+    console.log(2)
+    const router = useRouter();
     const body = signView.body
     const [userView, setUserView] = useState<User>({} as User)
     const [message, setMessage] = useState<String>("")
@@ -73,6 +82,7 @@ export const SignInHandle = observer((signView: signViewInterface) => {
     })
 
     if (status === 200) {
+        router.push('/')
         return (
             <div>
                 <p> [ Sign-In ] </p>

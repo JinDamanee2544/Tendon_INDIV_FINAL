@@ -1,8 +1,33 @@
 import { motion } from 'framer-motion'
 import Link from 'next/link'
+import { ReactElement, useState } from 'react'
 import Setting from '../Dashboard/setting'
+import { NextResponse, NextRequest } from 'next/server'
+import { useRouter } from 'next/router'
+import { User } from 'linkWithBackend/interfaces/TendonType'
+import { SignInHandle } from 'pages/adminControl/service_page/SignView'
+import { ContainerProviderTendon } from 'linkWithBackend/services/container'
 
 const Login = () => {
+    const router = useRouter();
+    const [userProps, setUserProps] = useState<User>({} as User)
+    const [isCal, setisCal] =useState<boolean>(false)
+    const onChangeEmail = (e: React.FormEvent<HTMLInputElement>): void => {
+        setUserProps({
+            ... userProps,
+            email: e.currentTarget.value
+        })
+    };
+    const onChangePassword = (e: React.FormEvent<HTMLInputElement>): void => {
+        setUserProps({
+            ... userProps,
+            password: e.currentTarget.value
+        })
+    };
+    const submitHandle = (): void => {
+       setisCal(true)
+    }
+
     return (
         <div
             className="flex gap-x-20 justify-center"
@@ -24,18 +49,25 @@ const Login = () => {
                     <input
                         type="text"
                         placeholder='myemail@mail.com'
-                        className='input' />
+                        className='input' onChange={ onChangeEmail } />
                     <input
                         type="password"
                         placeholder='Password'
-                        className='input' />
+                        className='input' onChange={ onChangePassword } />
                     <motion.button
                         className="bg-gradient-to-r text-white from-purple-light to-purple-neon border-0  font-bold py-2 px-4 rounded-full"
                         whileTap={{ scale: 1 }}
                         whileHover={{ scale: 1.05 }}
+                        onClick={ submitHandle }
                     >
                         Log In
                     </motion.button>
+
+
+                    < ContainerProviderTendon >
+                        < SignInHandle body={ userProps } isCal = {isCal} />
+                    </ContainerProviderTendon>
+
                     <p className=' text-sm text-center'>
                         Don’t have an account &nbsp;
                         <Link href={'/signup'} >

@@ -4,7 +4,7 @@ import Activity from "./Activity";
 import Statistic from "./Statistic";
 import { AnimatePresence, motion } from "framer-motion";
 import Setting from "./setting";
-import { IoCaretForwardOutline } from 'react-icons/io5'
+import { IoCaretForwardOutline, IoAddCircle } from 'react-icons/io5'
 import { useRef, useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import ResumeList from "./resume/ResumeList";
@@ -13,6 +13,7 @@ import NavigateButton from "./NavigateButton";
 import DashBoardContainer from "@components/baseComponents/DashBoardContainer";
 
 import { ContainerProviderTendon } from 'linkWithBackend/services/container'
+import AdminButton from "./AdminButton";
 
 const DashBoard = () => {
     const [mode, setMode] = useState<modeType>(modeType.main);
@@ -37,6 +38,10 @@ const DashBoard = () => {
             console.log(currentWidth);
             */
         }
+    }
+
+    const adminMode = () => {
+
     }
 
     return (
@@ -74,7 +79,11 @@ const DashBoard = () => {
             <ContainerProviderTendon>
                 {mode === modeType.resume && <ResumeList />}
             </ContainerProviderTendon>
-
+            {/* <AdminButton
+                direction="left"
+                Icon={IoAddCircle}
+                onClick={() => adminMode()}
+            /> */}
         </div>
     )
 }
