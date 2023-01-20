@@ -12,7 +12,7 @@ const Profile = (props: profileInterface) => {
                 <Image src={'/raiden.jpg'} alt='user-profile' width={100} height={100} />
             </div>
             <div className="h-full flex flex-col">
-                <h1 className=" text-3xl font-bold"> {props.firstName} <br /> {props.lastName} </h1>
+                <h1 className=" text-3xl font-bold"> {props.firstName || 'Unknown Name'} <br /> {props.lastName} </h1>
                 <h2> Beginner User </h2>
             </div>
         </main>

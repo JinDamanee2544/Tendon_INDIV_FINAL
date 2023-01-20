@@ -3,7 +3,7 @@ import Acheivement from "./Acheivement";
 import Activity from "./Activity";
 import Statistic from "./Statistic";
 import { AnimatePresence, motion } from "framer-motion";
-import Setting from "./setting";
+import Setting from "./Setting";
 import { IoCaretForwardOutline, IoAddCircle } from 'react-icons/io5'
 import { useEffect, useRef, useState } from "react";
 import { AiOutlineLogin, AiOutlineLogout, AiOutlineSearch, AiOutlineSetting, AiOutlineUser } from "react-icons/ai";
@@ -15,7 +15,7 @@ import { ContainerProviderTendon } from 'linkWithBackend/services/container'
 import AdminButton from "./AdminButton";
 import { useRouter } from "next/router";
 import ControlBtn from "./setting/settingBtn";
-import LoginFirstBtn from "./setting/loginBtnFirst";
+import LoginFirstBtn from "./Setting/loginBtnFirst";
 import { getToken, getUserCurrentData } from "@components/ShareData/user_setting";
 
 const DashBoard = () => {
