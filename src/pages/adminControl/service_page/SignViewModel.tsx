@@ -67,19 +67,20 @@ class SignDataViewModel{
     }
 
     private handleErrorStatus() {
-        if (this.status === 400) {
-            this.message = "some field not exit --> " + this.SignService.getMessage()
-        } else if (this.status === 401) {
-            this.message = "Unauthorized"
-        } else if (this.status === 404) {
-            this.message = "Doesn't have this ID"
-        } else if (this.status === 406) {
-            this.message = "wrong email or password"
-        } else if (this.status === 409) {
-            this.message = "email already exists"
-        } else {
-            this.message = "Internal Error"
-        }
+        // if (this.status === 400) {
+        //     this.message = "Error: " + this.SignService.getMessage()
+        // } else if (this.status === 401) {
+        //     this.message = "Unauthorized"
+        // } else if (this.status === 404) {
+        //     this.message = "Doesn't have this ID"
+        // } else if (this.status === 406) {
+        //     this.message = "wrong email or password"
+        // } else if (this.status === 409) {
+        //     this.message = "email already exists"
+        // } else {
+        //     this.message = "Internal Error"
+        // }
+        this.message = "" + this.SignService.getMessage()
     }
 
 }

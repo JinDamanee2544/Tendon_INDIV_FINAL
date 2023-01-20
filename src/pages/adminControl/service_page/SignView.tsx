@@ -14,6 +14,11 @@ interface signViewInterface {
     isCal?: boolean
 }
 
+export interface signViewRealInterface {
+    body: User,
+    isCal: boolean
+}
+
 export const SignUpHandle = observer((signView: signViewInterface) => {
     const body = signView.body
     const [userView, setUserView] = useState<User>({} as User)
@@ -62,7 +67,7 @@ export const SignUpHandle = observer((signView: signViewInterface) => {
     }
 })
 
-export const SignInHandle = observer((signView: signViewInterface) => {
+export const SignInHandle = observer((signView: signViewRealInterface) => {
     const router = useRouter();
     const body = signView.body
     const [userView, setUserView] = useState<User>({} as User)
@@ -74,25 +79,26 @@ export const SignInHandle = observer((signView: signViewInterface) => {
         useEffect(() => {
             const tmpValue = viewModel.signIn(body)
             myResolve(tmpValue)
-        }, [])
+            setMessage("")
+        }, [signView.isCal])
     }).then(() => {
         setUserView(viewModel.getUser())
         setMessage(viewModel.getMessage())
         setStatus(viewModel.getStatus())
     })
+
     if (signView.isCal === false) {
         return (
             <>
             </>
         )
     }
-
     if (status === 200) {
         router.push('/')
         return (
             <div>
-                <p> [ Sign-In ] </p>
-                <DataView viewModel={ userView } />
+                <p> [ Sign-In SUCCESSFULLY!!] </p>
+                {/* <DataView viewModel={ userView } /> */}
             </div>              
         )
     } else {
@@ -105,7 +111,7 @@ export const SignInHandle = observer((signView: signViewInterface) => {
         }
         return (
             <div>
-                <p> Sign-In ERROR ZONE: </p>
+                {/* <p> Sign-In ERROR ZONE: </p> */}
                 <p> { message } </p>
             </div>              
         )

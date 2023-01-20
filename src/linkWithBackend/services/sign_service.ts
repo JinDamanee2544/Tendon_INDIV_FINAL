@@ -51,7 +51,13 @@ class SignService {
         .catch((err) => {
             this.status = Object(err)["response"]["request"]["status"]
             this.response = {} as User
-            this.message = [Object(err)["response"]["data"]["error"]["signInReq.Email"], Object(err)["response"]["data"]["error"]["signInReq.Password"] ]
+            console.log(Object(err))
+
+            try {
+                this.message = [Object(err)["response"]["data"]["error"]["signInReq.Email"], Object(err)["response"]["data"]["error"]["signInReq.Password"] ]
+            } catch(error) {
+                this.message = [Object(err)["response"]["data"]["message"]]
+            }
         });
 
         return this.response
