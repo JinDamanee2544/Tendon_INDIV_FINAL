@@ -7,7 +7,6 @@ import { useRouter } from 'next/router'
 import { User } from 'linkWithBackend/interfaces/TendonType'
 import { SignInHandle } from 'pages/adminControl/service_page/SignView'
 import { ContainerProviderTendon } from 'linkWithBackend/services/container'
-import SignInMiddleHandle from './handleLogIn'
 
 const Login = () => {
     const router = useRouter();
@@ -30,8 +29,6 @@ const Login = () => {
     const submitHandle = (): void => {
        setisCal(true)
     }
-    // console.log("current email: ", userProps.email)
-    // console.log("current password: ", userProps.password)
 
     return (
         <div

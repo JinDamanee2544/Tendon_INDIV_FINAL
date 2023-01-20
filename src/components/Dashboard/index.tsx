@@ -5,43 +5,52 @@ import Statistic from "./Statistic";
 import { AnimatePresence, motion } from "framer-motion";
 import Setting from "./setting";
 import { IoCaretForwardOutline, IoAddCircle } from 'react-icons/io5'
-import { useRef, useState } from "react";
-import { AiOutlineSearch } from "react-icons/ai";
+import { useEffect, useRef, useState } from "react";
+import { AiOutlineLogin, AiOutlineLogout, AiOutlineSearch, AiOutlineSetting, AiOutlineUser } from "react-icons/ai";
 import ResumeList from "./resume/ResumeList";
 import { modeType } from "customTypes";
 import NavigateButton from "./NavigateButton";
 import DashBoardContainer from "@components/baseComponents/DashBoardContainer";
-
 import { ContainerProviderTendon } from 'linkWithBackend/services/container'
 import AdminButton from "./AdminButton";
+import { useRouter } from "next/router";
+import ControlBtn from "./setting/settingBtn";
+import LoginFirstBtn from "./setting/loginBtnFirst";
+import { getToken, getUserCurrentData } from "@components/ShareData/user_setting";
 
 const DashBoard = () => {
     const [mode, setMode] = useState<modeType>(modeType.main);
-    //const [width, setWidth] = useState(0)
+    const [ready, setReady] = useState<boolean>(false);
+
+    const router = useRouter()
+    const userInformation = getUserCurrentData()
 
     const navigateMode = () => {
         //const currentWidth = dashboardRef.current.clientWidth
         if (mode === modeType.main) {
             setMode(modeType.resume)
-            /*
-            if (currentWidth !== 0) {
-                setWidth(currentWidth)
-            }
-            console.log(currentWidth);
-            */
         } else {
             setMode(modeType.main)
-            /*
-            if (currentWidth !== 0) {
-                setWidth(currentWidth)
-            }
-            console.log(currentWidth);
-            */
         }
     }
 
-    const adminMode = () => {
+    useEffect(() => {
+        setReady(true)
+    }, [])
 
+    if (ready && userInformation.firstName === 'undefined' && userInformation.lastName === 'undefined') {            // Must Login
+        router.push({
+            pathname: '/login'
+        })
+    }
+
+    if (ready) {
+        // console.log("--> ", getToken(), getUserCurrentData())
+    }
+    if (!ready) {
+        return (
+            <p> Loading... </p>
+        )
     }
 
     return (
@@ -58,7 +67,7 @@ const DashBoard = () => {
                 />
 
                 {<div className="mt-5">
-                    <Profile />
+                    <Profile firstName={userInformation.firstName} lastName={userInformation.lastName} />
                     <Activity />
                     <Statistic />
                 </div>}
@@ -79,11 +88,6 @@ const DashBoard = () => {
             <ContainerProviderTendon>
                 {mode === modeType.resume && <ResumeList />}
             </ContainerProviderTendon>
-            {/* <AdminButton
-                direction="left"
-                Icon={IoAddCircle}
-                onClick={() => adminMode()}
-            /> */}
         </div>
     )
 }

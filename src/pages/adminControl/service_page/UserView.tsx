@@ -5,13 +5,14 @@ import UserDataViewModel from './UserViewModel'
 
 import { useTendonContainer } from "linkWithBackend/services/container";
 import { User } from "linkWithBackend/interfaces/TendonType";
-import { token } from "../_demo_setting";
+import { getToken } from "../../../components/ShareData/user_setting";
 
 interface UserProps {
     user_id: string,
     body: User
 }
 
+var token = getToken()
 export const UserGetHandle = observer((props: UserProps) => {              
     const userID = props.user_id
     const [userGetView, setUserGetView] = useState<User>({} as User)  

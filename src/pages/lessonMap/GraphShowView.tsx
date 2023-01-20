@@ -3,7 +3,7 @@ import { Course, Lesson } from "linkWithBackend/interfaces/TendonType";
 import React, { useEffect, useMemo, useState } from "react";
 import { StatusType } from "@customTypes/index";
 import LessonDataViewModel from "../adminControl/service_page/LessonViewModel";
-import { lesson_id, token } from "../adminControl/_demo_setting";
+import { getToken } from "../../components/ShareData/user_setting";
 import LessonGraphService from "linkWithBackend/services/data_service";
 import Xarrow, { useXarrow, Xwrapper } from "react-xarrows";
 import Draggable from "react-draggable";
@@ -26,7 +26,7 @@ export interface coordinateXY {
     levelY: number,
     direction: boolean,       // true = up, false = down
 }
-
+var token = getToken()
 const DraggableBoxx = ({id, name, level} : { id: string, name: string, level: {[key: string]: coordinateXY} }) => {
     const updateXarrow = useXarrow();
     

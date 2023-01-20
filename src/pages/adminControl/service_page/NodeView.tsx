@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { useTendonContainer } from "linkWithBackend/services/container";
 import NodeDataViewModel from "./NodeViewModel";
 import { Node } from "linkWithBackend/interfaces/TendonType";
-import { token } from "../_demo_setting";
+import { getToken } from "../../../components/ShareData/user_setting";
 import NodeItem from "@components/learningNode/NodeItem";
 import { resSource } from "../../../customTypes";
 // import { resSource } from "@customTypes/";
@@ -13,7 +13,7 @@ import { resSource } from "../../../customTypes";
 interface propsInterface {
     body: Node
 }
-
+var token = getToken()
 export const NodeCreateHandle = observer((props: propsInterface) => {
     const body = props.body
     const [nodeView, setNodeView] = useState<Node>({} as Node)

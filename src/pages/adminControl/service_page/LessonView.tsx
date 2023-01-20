@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { useTendonContainer } from "linkWithBackend/services/container";
 import LessonDataViewModel from "./LessonViewModel";
 import { Lesson } from "linkWithBackend/interfaces/TendonType";
-import { token } from "../_demo_setting";
+import { getToken } from "../../../components/ShareData/user_setting";
 import CourseNode from "@components/curriculaMap/LearningNode";
 import { StatusType } from "@customTypes/index";
 
@@ -16,6 +16,8 @@ interface propsInterface {
 interface realLessonInterface {
     lesson_id: string
 }
+
+var token = getToken()
 
 export const LessonCreateHandle = observer((props: propsInterface) => {
     const body = props.body

@@ -6,6 +6,8 @@ import { useTendonContainer } from "linkWithBackend/services/container";
 import SignDataViewModel from "./SignViewModel";
 import { User } from "linkWithBackend/interfaces/TendonType";
 import { useRouter } from 'next/router'
+import DashBoard from "@components/Dashboard";
+import { setToken, userInformation } from "../../../components/ShareData/user_setting";
 
 export var user_id_new: string;         // For Testing purpose
 
@@ -72,7 +74,8 @@ export const SignInHandle = observer((signView: signViewRealInterface) => {
     const body = signView.body
     const [userView, setUserView] = useState<User>({} as User)
     const [message, setMessage] = useState<String>("")
-    const [status, setStatus] = useState<Number>(0)   
+    const [status, setStatus] = useState<Number>(0)
+    const [accessToken, setAccessToken] = useState<string>("")   
     const viewModel = new SignDataViewModel(useTendonContainer())
 
     new Promise(function(myResolve, myReject) {
@@ -85,6 +88,8 @@ export const SignInHandle = observer((signView: signViewRealInterface) => {
         setUserView(viewModel.getUser())
         setMessage(viewModel.getMessage())
         setStatus(viewModel.getStatus())
+        setToken(viewModel.getUser().accessToken)
+        userInformation(viewModel.getUser())
     })
 
     if (signView.isCal === false) {
@@ -94,12 +99,22 @@ export const SignInHandle = observer((signView: signViewRealInterface) => {
         )
     }
     if (status === 200) {
-        router.push('/')
+        // router.push('/?pid:123')
+        router.push({
+            pathname: '/',
+            query: { 
+                // email: "test@email.com",
+                // firstName: "NewName",
+                // id: "63b513ede68081422d62f401",
+                // lastName: "NewLastName"
+            },
+        })
         return (
-            <div>
+            <>
+                {/* < DashBoard /> */}
                 <p> [ Sign-In SUCCESSFULLY!!] </p>
                 {/* <DataView viewModel={ userView } /> */}
-            </div>              
+            </>              
         )
     } else {
         if (message === "") {

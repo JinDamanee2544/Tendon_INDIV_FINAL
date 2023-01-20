@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { useTendonContainer } from "linkWithBackend/services/container";
 import CourseDataViewModel from "./CourseViewModel";
 import { Course } from "linkWithBackend/interfaces/TendonType";
-import { token } from "../_demo_setting";
+import { getToken } from "../../../components/ShareData/user_setting";
 
 import ResumeList from "@components/Dashboard/resume/ResumeList";
 import Xarrow, { Xwrapper } from "react-xarrows";
@@ -25,6 +25,8 @@ interface realInterface {
     id: string,
     component: string
 }
+
+var token = getToken()
 
 export const CourseCreateHandle = observer((props: propsInterface) => {
     const body = props.body
