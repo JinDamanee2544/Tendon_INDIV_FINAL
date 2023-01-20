@@ -10,6 +10,8 @@ import { ContainerProviderTendon } from 'linkWithBackend/services/container'
 
 const Login = () => {
     const router = useRouter();
+    const signupMessage = router.query
+
     const [userProps, setUserProps] = useState<User>({} as User)
     const [isCal, setisCal] =useState<boolean>(false)
     const onChangeEmail = (e: React.FormEvent<HTMLInputElement>): void => {
@@ -31,6 +33,10 @@ const Login = () => {
     }
 
     return (
+        <>
+        <div className="flex gap-x-20 justify-center" style={ {margin: '10px', color: "#c5aac8"} }>
+            <p> { signupMessage['message'] } </p>
+        </div>
         <div
             className="flex gap-x-20 justify-center"
         >
@@ -85,6 +91,7 @@ const Login = () => {
                 </div>
             </motion.main>
         </div>
+        </>
     )
 }
 export default Login

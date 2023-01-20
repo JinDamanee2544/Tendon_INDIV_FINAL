@@ -7,7 +7,7 @@ import { SignUpHandle } from 'pages/adminControl/service_page/SignView';
 const SignupBox = () => {
     const [userProps, setUserProps] = useState<User>({} as User)
     const [confirmPassword, setConfirmPassword] = useState<string>("")
-    const [isCal, setisCal] =useState<boolean>(false)
+    const [isCal, setIsCal] =useState<boolean>(false)
     const onChangeFName = (e: React.FormEvent<HTMLInputElement>): void => {
         setUserProps({
             ... userProps,
@@ -37,29 +37,28 @@ const SignupBox = () => {
     };
 
     const submitHandle = (): void => {
-        console.log(userProps.email)
         if (userProps.email === undefined) {
-            setisCal(false)
+            setIsCal(false)
             alert("Email cannot be blank")
         }
         else if (userProps.firstName === undefined) {
-            setisCal(false)
+            setIsCal(false)
             alert("Firstname cannot be blank")
         }
         else if (userProps.lastName === undefined) {
-            setisCal(false)
+            setIsCal(false)
             alert("Lastname cannot be blank")
         }
         else if (userProps.password === undefined || userProps.password === "") {
-            setisCal(false)
+            setIsCal(false)
             alert("Password cannot be blank")
         }
         else if (userProps.password !== confirmPassword) {
-            setisCal(false)
+            setIsCal(false)
             alert("Password and Confirm Password must be the same.!!!")
         } else {
             console.log("right")
-            setisCal(true)
+            setIsCal(true)
         } 
     }
 

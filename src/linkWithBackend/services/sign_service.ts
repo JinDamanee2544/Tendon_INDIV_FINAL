@@ -29,10 +29,14 @@ class SignService {
         })
         .catch((err) => {
             this.status = Object(err)["response"]["request"]["status"]
-            this.message =  [Object(err)["response"]["data"]["error"]["signUpReq.Email"], 
-            Object(err)["response"]["data"]["error"]["signUpReq.FirstName"],
-            Object(err)["response"]["data"]["error"]["signUpReq.LastName"],
-            Object(err)["response"]["data"]["error"]["signUpReq.Password"]]
+            try {
+                this.message =  [Object(err)["response"]["data"]["error"]["signUpReq.Email"], 
+                Object(err)["response"]["data"]["error"]["signUpReq.FirstName"],
+                Object(err)["response"]["data"]["error"]["signUpReq.LastName"],
+                Object(err)["response"]["data"]["error"]["signUpReq.Password"]]
+            } catch(error) {
+                this.message = [Object(err)["response"]["data"]["message"]]
+            }
             this.response = {} as User
         });
 
