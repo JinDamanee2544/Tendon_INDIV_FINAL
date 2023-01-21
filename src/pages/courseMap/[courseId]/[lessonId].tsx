@@ -20,8 +20,10 @@ const getLearningNodeById = (id: string): LearningNode => {
 const Lesson = () => {
     const router = useRouter();
     const lessonId = router.query.lessonId ? router.query.lessonId.toString() : "";
-    console.log("id: ", lessonId)
+    // console.log("id: ", lessonId)
     const { pathList, setPathList } = useBreadCrumb()                               // Display Path
+    // console.log(pathList)
+    // console.log("--> ", router.pathname)            // get current path
     const [storedPath, setStoredPath] = useLocalStorage('path', pathList);          // cache for refreshing page 
     const mockLearningNode = getLearningNodeById(lessonId);
     const [lessonName, setLessonName] = useState<string>("")
@@ -50,6 +52,7 @@ const Lesson = () => {
                         }
                     ]
                 } else {    // no previous path  (For refresh)
+                    console.log("--> ", storedPath)
                     return [
                         ...storedPath,
                         {

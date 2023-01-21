@@ -23,7 +23,8 @@ export const NodeCreateHandle = observer((props: propsInterface) => {
 
     new Promise(function(myResolve, myReject) {
         useEffect(() => {
-            const tmpValue = viewModel.createNode(body, token)
+            var mytoken = getToken()
+            const tmpValue = viewModel.createNode(body, mytoken)
             myResolve(tmpValue)
         }, [])
     }).then(() => {

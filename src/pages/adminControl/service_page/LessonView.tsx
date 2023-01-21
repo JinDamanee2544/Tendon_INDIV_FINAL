@@ -66,7 +66,8 @@ export const LessonGetHandle = observer((props: realLessonInterface) => {
     const viewModel = new LessonDataViewModel(useTendonContainer())
     new Promise(function(myResolve, myReject) {
         useEffect(() => {
-            const tmpValue = viewModel.getLessonData(lesson_id, token)
+            var mytoken = getToken()
+            const tmpValue = viewModel.getLessonData(lesson_id, mytoken)
             myResolve(tmpValue)
         }, [])
     }).then(() => {

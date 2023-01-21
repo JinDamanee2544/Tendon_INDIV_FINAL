@@ -41,18 +41,18 @@ const LessonNode = ({ lesson_id }: LessonNodeDataProps) => {
 
     useEffect(() => {
         let promise = new Promise<Lesson>((resolve, reject) => {
-            console.log("Lesson ID ", lesson_id)
+            // console.log("Lesson ID ", lesson_id)
             const tmpValue = getLessonInformation(lesson_id)
             resolve(tmpValue)
         })
         promise.then( value => {
             setNodeArray(value.nodes)
-            console.log("value: ", value)
+            // console.log("value: ", value)
         })
 
     }, [])
    
-    console.log(nodeArray)
+    // console.log(nodeArray)
     while (nodeArray === undefined) {
 
     }
