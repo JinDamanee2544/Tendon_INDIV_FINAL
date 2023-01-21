@@ -3,7 +3,7 @@ import Acheivement from "./Acheivement";
 import Activity from "./Activity";
 import Statistic from "./Statistic";
 import { AnimatePresence, motion } from "framer-motion";
-import Setting from "./Setting";
+import Setting from "../Dashboard/setting";
 import { IoCaretForwardOutline, IoAddCircle } from 'react-icons/io5'
 import { useEffect, useRef, useState } from "react";
 import { AiOutlineLogin, AiOutlineLogout, AiOutlineSearch, AiOutlineSetting, AiOutlineUser } from "react-icons/ai";
@@ -15,7 +15,6 @@ import { ContainerProviderTendon } from 'linkWithBackend/services/container'
 import AdminButton from "./AdminButton";
 import { useRouter } from "next/router";
 import ControlBtn from "./setting/settingBtn";
-import LoginFirstBtn from "./Setting/loginBtnFirst";
 import { getToken, getUserCurrentData } from "@components/ShareData/user_setting";
 
 const DashBoard = () => {
@@ -23,7 +22,7 @@ const DashBoard = () => {
     const [ready, setReady] = useState<boolean>(false);
 
     const router = useRouter()
-    const userInformation = getUserCurrentData()
+    var userInformation = getUserCurrentData()
 
     const navigateMode = () => {
         //const currentWidth = dashboardRef.current.clientWidth
@@ -45,7 +44,8 @@ const DashBoard = () => {
     }
 
     if (ready) {
-        // console.log("--> ", getToken(), getUserCurrentData())
+        //userInformation = getUserCurrentData()
+        //console.log("--> ", getToken(), getUserCurrentData())
     }
     if (!ready) {
         return (

@@ -16,6 +16,7 @@ import ArrowBox from "@components/baseComponents/ArrowBox";
 import CourseNode from "@components/curriculaMap/LearningNode";
 import { StatusType } from "@customTypes/index";
 import GraphPathView from "../../lessonMap/GraphShowView";
+import { useRouter } from "next/router";
 
 interface propsInterface {
     body: Course
@@ -69,16 +70,19 @@ export const CourseCreateHandle = observer((props: propsInterface) => {
 })
 
 export const CourseGetHandle = observer((props: realInterface) => {  
+    const router = useRouter()
     const { theme } = useTheme();            
     const course_id = props.id
     const [courseView, setCourseView] = useState<Course>({} as Course)  
     const [message, setMessage] = useState<String>("")
-    const [isReady, setIsReady] = useState(false);
+    const [isReady, setIsReady] = useState(false)
+    const [status, setStatus] = useState<Number>(0)
     const viewModel = new CourseDataViewModel(useTendonContainer())
 
     new Promise(function(myResolve, myReject) {
         useEffect(() => {
-            const tmpValue = viewModel.getCourseData(course_id, token)
+            var mytoken = getToken()
+            const tmpValue = viewModel.getCourseData(course_id, mytoken)
             myResolve(tmpValue)
         }, [])
     }).then(() => {
@@ -89,6 +93,7 @@ export const CourseGetHandle = observer((props: realInterface) => {
         // })            
         setCourseView(viewModel.getCourse())
         setMessage(viewModel.getMessage())
+        setStatus(viewModel.getStatus())
     })
 
     if (courseView.id === undefined) {
@@ -97,11 +102,18 @@ export const CourseGetHandle = observer((props: realInterface) => {
                 <div> Loading... </div>
             )
         }
-        return (
-            <div>
-                <p> Error {message} </p>
-            </div>       
-        )
+        if (status === 409) {
+            router.push("/login")
+            return (
+                <div> Expired Time YOU MUST LOGIN! </div>
+            )
+        } else {
+            return (
+                <div>
+                    <p> Error {message} </p>
+                </div>       
+            )
+        }
     }
 
     if (props.component === "resume") {
