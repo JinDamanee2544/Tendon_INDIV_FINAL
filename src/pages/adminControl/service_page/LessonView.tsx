@@ -8,6 +8,7 @@ import { Lesson } from "linkWithBackend/interfaces/TendonType";
 import { getToken } from "../../../components/ShareData/user_setting";
 import CourseNode from "@components/curriculaMap/LearningNode";
 import { StatusType } from "@customTypes/index";
+import { useRouter } from "next/router";
 
 interface propsInterface {
     body: Lesson
@@ -59,10 +60,12 @@ export const LessonCreateHandle = observer((props: propsInterface) => {
     }
 })
 
-export const LessonGetHandle = observer((props: realLessonInterface) => {              
+export const LessonGetHandle = observer((props: realLessonInterface) => {  
+    const router = useRouter()            
     const lesson_id = props.lesson_id
     const [lessonView, setLessonView] = useState<Lesson>({} as Lesson)  
     const [message, setMessage] = useState<String>("")
+    const [status, setStatus] = useState<Number>(0)   
     const viewModel = new LessonDataViewModel(useTendonContainer())
     new Promise(function(myResolve, myReject) {
         useEffect(() => {
@@ -73,12 +76,19 @@ export const LessonGetHandle = observer((props: realLessonInterface) => {
     }).then(() => {
         setLessonView(viewModel.getLesson())
         setMessage(viewModel.getMessage())
+        setStatus(viewModel.getStatus())
     })
 
     if (lessonView.id === undefined) {
         if (message === "") {
             return (
                 <div> Loading... </div>
+            )
+        }
+        if (status === 409) {
+            router.push("/login")
+            return (
+                <div> Expired Time YOU MUST LOGIN! </div>
             )
         }
         return (

@@ -8,13 +8,14 @@ import { Node } from "linkWithBackend/interfaces/TendonType";
 import { getToken } from "../../../components/ShareData/user_setting";
 import NodeItem from "@components/learningNode/NodeItem";
 import { resSource } from "../../../customTypes";
-// import { resSource } from "@customTypes/";
+import { useRouter } from "next/router";
 
 interface propsInterface {
     body: Node
 }
 var token = getToken()
 export const NodeCreateHandle = observer((props: propsInterface) => {
+    const router = useRouter()
     const body = props.body
     const [nodeView, setNodeView] = useState<Node>({} as Node)
     const [message, setMessage] = useState<String>("")
@@ -44,6 +45,12 @@ export const NodeCreateHandle = observer((props: propsInterface) => {
         if (message === "") {
             return (
                 <div> Loading... </div>
+            )
+        }
+        if (status === 409) {
+            router.push("/login")
+            return (
+                <div> Expired Time YOU MUST LOGIN! </div>
             )
         }
         return (
