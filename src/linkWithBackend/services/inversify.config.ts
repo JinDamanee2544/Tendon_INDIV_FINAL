@@ -7,7 +7,7 @@ import NodeService from "./node_services";
 import LessonService from "./lesson_services";
 import CourseService from "./course_services";
 
-var container = new Container();
+var container: Container = new Container();
 container.bind<AuthService>(TYPES.AuthService).to(AuthService)
 container.bind<SignService>(TYPES.SignService).to(SignService)
 container.bind<NodeService>(TYPES.NodeService).to(NodeService)

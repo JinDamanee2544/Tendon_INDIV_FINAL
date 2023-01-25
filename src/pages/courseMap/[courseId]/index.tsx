@@ -56,15 +56,11 @@ const CoursePage = () => {
     }, [splitted[1]])
 
     return (
-        // <BreadcrumbProvider>
         <MainLayout>
-            <ContainerProviderTendon>
-                <Suspense fallback={<LoadingSpinner />}>
-                    <CourseMap learningNodeData={courseId} />
-                </Suspense>
-            </ContainerProviderTendon>
+            <Suspense fallback={<LoadingSpinner />}>
+                <CourseMap lid={courseId} />
+            </Suspense>
         </MainLayout>
-        // </BreadcrumbProvider>
     )
 }
 export default CoursePage;
