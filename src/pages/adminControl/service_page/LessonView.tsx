@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { useTendonContainer } from "linkWithBackend/services/container";
 import LessonDataViewModel from "./LessonViewModel";
 import { Lesson } from "linkWithBackend/interfaces/TendonType";
-import { getToken } from "../../../components/ShareData/user_setting";
+import { getToken } from "../../../components/shareData/user_setting";
 import CourseNode from "@components/curriculaMap/LearningNode";
 import { StatusType } from "@customTypes/index";
 import { useRouter } from "next/router";
@@ -24,10 +24,10 @@ export const LessonCreateHandle = observer((props: propsInterface) => {
     const body = props.body
     const [lessonView, setLessonView] = useState<Lesson>({} as Lesson)
     const [message, setMessage] = useState<String>("")
-    const [status, setStatus] = useState<Number>(0)   
+    const [status, setStatus] = useState<Number>(0)
     const viewModel = new LessonDataViewModel(useTendonContainer())
 
-    new Promise(function(myResolve, myReject) {
+    new Promise(function (myResolve, myReject) {
         useEffect(() => {
             const tmpValue = viewModel.createLesson(body, token)
             myResolve(tmpValue)
@@ -42,8 +42,8 @@ export const LessonCreateHandle = observer((props: propsInterface) => {
         return (
             <div>
                 <p> [ Lesson POST ] </p>
-                <LessonView viewModel={ lessonView } />
-            </div>              
+                <LessonView viewModel={lessonView} />
+            </div>
         )
     } else {
         if (message === "") {
@@ -54,20 +54,20 @@ export const LessonCreateHandle = observer((props: propsInterface) => {
         return (
             <div>
                 <p> Lesson POST ERROR ZONE: </p>
-                <p> { message } </p>
-            </div>              
+                <p> {message} </p>
+            </div>
         )
     }
 })
 
-export const LessonGetHandle = observer((props: realLessonInterface) => {  
-    const router = useRouter()            
+export const LessonGetHandle = observer((props: realLessonInterface) => {
+    const router = useRouter()
     const lesson_id = props.lesson_id
-    const [lessonView, setLessonView] = useState<Lesson>({} as Lesson)  
+    const [lessonView, setLessonView] = useState<Lesson>({} as Lesson)
     const [message, setMessage] = useState<String>("")
-    const [status, setStatus] = useState<Number>(0)   
+    const [status, setStatus] = useState<Number>(0)
     const viewModel = new LessonDataViewModel(useTendonContainer())
-    new Promise(function(myResolve, myReject) {
+    new Promise(function (myResolve, myReject) {
         useEffect(() => {
             var mytoken = getToken()
             const tmpValue = viewModel.getLessonData(lesson_id, mytoken)
@@ -94,8 +94,8 @@ export const LessonGetHandle = observer((props: realLessonInterface) => {
         return (
             <div>
                 <p>  LESSON GET ERROR ZONE: </p>
-                <p> { message } </p>
-            </div>              
+                <p> {message} </p>
+            </div>
         )
     }
 
@@ -105,21 +105,21 @@ export const LessonGetHandle = observer((props: realLessonInterface) => {
                 key={lessonView.id}
                 lessonId={lessonView.id}
                 lessonName={lessonView.name}
-                status= {StatusType.COMPLETED}
+                status={StatusType.COMPLETED}
                 setChildReady={() => { }}
                 isRender={true}
             />
-        </div>              
+        </div>
     )
 })
 
-export const LessonUpdateHandle = observer((props: propsInterface) => {              
+export const LessonUpdateHandle = observer((props: propsInterface) => {
     const body = props.body
     const lesson_id = props.body.id
-    const [lessonView, setLessonView] = useState<Lesson>({} as Lesson)  
+    const [lessonView, setLessonView] = useState<Lesson>({} as Lesson)
     const [message, setMessage] = useState<String>("")
     const viewModel = new LessonDataViewModel(useTendonContainer())
-    new Promise(function(myResolve, myReject) {
+    new Promise(function (myResolve, myReject) {
         useEffect(() => {
             const tmpValue = viewModel.updateLessonData(lesson_id, token, body)
             myResolve(tmpValue)
@@ -138,26 +138,26 @@ export const LessonUpdateHandle = observer((props: propsInterface) => {
         return (
             <div>
                 <p> LESSON UPDATE ERROR ZONE: </p>
-                <p> { message } </p>
-            </div>              
+                <p> {message} </p>
+            </div>
         )
     }
 
     return (
         <div>
             <p> [ LESSON UPDATE ] </p>
-            <LessonView viewModel={lessonView}/>
-        </div>              
+            <LessonView viewModel={lessonView} />
+        </div>
     )
 })
 
-export const LessonDeleteHandle = observer((props: propsInterface) => { 
+export const LessonDeleteHandle = observer((props: propsInterface) => {
     const lesson_id = props.body.id
-    const [deleteStatus, setDeleteStatus] = useState<Number>(0)  
+    const [deleteStatus, setDeleteStatus] = useState<Number>(0)
     const [message, setMessage] = useState<String>("")
     const viewModel = new LessonDataViewModel(useTendonContainer())
 
-    new Promise(function(myResolve, myReject) {
+    new Promise(function (myResolve, myReject) {
         useEffect(() => {
             const tmpValue = viewModel.deleteLesson(lesson_id, token)
             myResolve(tmpValue)
@@ -172,7 +172,7 @@ export const LessonDeleteHandle = observer((props: propsInterface) => {
             <div>
                 <p> [ LESSON DELETE ] </p>
                 <p> Delete Complete </p>
-            </div>              
+            </div>
         )
     } else {
         if (message === "") {
@@ -183,8 +183,8 @@ export const LessonDeleteHandle = observer((props: propsInterface) => {
         return (
             <div>
                 <p> LESSON DELETE ERROR ZONE:  </p>
-                <p> { message } </p>
-            </div>              
+                <p> {message} </p>
+            </div>
         )
     }
 })
@@ -193,38 +193,38 @@ interface ShowDataViewProps {
     viewModel: Lesson
 }
 
-const LessonView = observer(( {viewModel}: ShowDataViewProps) => {
+const LessonView = observer(({ viewModel }: ShowDataViewProps) => {
     return (
         <div>
-                <div key= {viewModel.id}>
-                    <p> #### {viewModel.id} #### </p>
-                    <li> name: {viewModel.name} </li>
-                    <li> description: {viewModel.description} </li>
-                    <br></br>
-                    <li> nodes: 
-                        {viewModel.nodes.map((data: string) => (
-                            <div key= {data}>
-                                <p> {data} </p>
-                            </div>
-                        ))}
-                    </li>
-                    <br></br>
-                    <li> prevLesson: 
-                        {viewModel.prevLesson.map((data: string) => (
-                            <div key= {data}>
-                                <p> {data} </p>
-                            </div>
-                        ))}
-                    </li>
-                    <br></br>
-                    <li> nextLesson: 
-                        {viewModel.nextLesson.map((data: string) => (
-                            <div key= {data}>
-                                <p> {data} </p>
-                            </div>
-                        ))}
-                    </li>
-                </div>
+            <div key={viewModel.id}>
+                <p> #### {viewModel.id} #### </p>
+                <li> name: {viewModel.name} </li>
+                <li> description: {viewModel.description} </li>
+                <br></br>
+                <li> nodes:
+                    {viewModel.nodes.map((data: string) => (
+                        <div key={data}>
+                            <p> {data} </p>
+                        </div>
+                    ))}
+                </li>
+                <br></br>
+                <li> prevLesson:
+                    {viewModel.prevLesson.map((data: string) => (
+                        <div key={data}>
+                            <p> {data} </p>
+                        </div>
+                    ))}
+                </li>
+                <br></br>
+                <li> nextLesson:
+                    {viewModel.nextLesson.map((data: string) => (
+                        <div key={data}>
+                            <p> {data} </p>
+                        </div>
+                    ))}
+                </li>
+            </div>
         </div>
     )
 })

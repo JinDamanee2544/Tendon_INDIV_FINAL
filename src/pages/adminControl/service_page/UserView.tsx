@@ -5,7 +5,7 @@ import UserDataViewModel from './UserViewModel'
 
 import { useTendonContainer } from "linkWithBackend/services/container";
 import { User } from "linkWithBackend/interfaces/TendonType";
-import { getToken } from "../../../components/ShareData/user_setting";
+import { getToken } from "../../../components/shareData/user_setting";
 
 interface UserProps {
     user_id: string,
@@ -13,12 +13,12 @@ interface UserProps {
 }
 
 var token = getToken()
-export const UserGetHandle = observer((props: UserProps) => {              
+export const UserGetHandle = observer((props: UserProps) => {
     const userID = props.user_id
-    const [userGetView, setUserGetView] = useState<User>({} as User)  
+    const [userGetView, setUserGetView] = useState<User>({} as User)
     const [message, setMessage] = useState<String>("")
     const viewModel = new UserDataViewModel(useTendonContainer())
-    new Promise(function(myResolve, myReject) {
+    new Promise(function (myResolve, myReject) {
         useEffect(() => {
             const tmpValue = viewModel.getUserInformation(userID, token)
             myResolve(tmpValue)
@@ -37,8 +37,8 @@ export const UserGetHandle = observer((props: UserProps) => {
             return (
                 <div>
                     <p> GET ERROR ZONE: </p>
-                    <p> { message } </p>
-                </div>              
+                    <p> {message} </p>
+                </div>
             )
         }
     }
@@ -46,18 +46,18 @@ export const UserGetHandle = observer((props: UserProps) => {
     return (
         <div>
             <p> [AUTH] Get Zone</p>
-            <AuthView viewModel={userGetView}/>
-        </div>              
+            <AuthView viewModel={userGetView} />
+        </div>
     )
 })
 
-export const UserUpdateHandle = observer((props: UserProps) => {              
+export const UserUpdateHandle = observer((props: UserProps) => {
     const userID = props.user_id
-    const [userView, setUserView] = useState<User>({} as User)  
+    const [userView, setUserView] = useState<User>({} as User)
     const [message, setMessage] = useState<String>("")
     var body = props.body
     const viewModel = new UserDataViewModel(useTendonContainer())
-    new Promise(function(myResolve, myReject) {
+    new Promise(function (myResolve, myReject) {
         useEffect(() => {
             const tmpValue = viewModel.updateUserInformation(userID, token, body)
             myResolve(tmpValue)
@@ -78,26 +78,26 @@ export const UserUpdateHandle = observer((props: UserProps) => {
         return (
             <div>
                 <p> UPDATE ERROR ZONE: </p>
-                <p> { message } </p>
-            </div>              
+                <p> {message} </p>
+            </div>
         )
     }
 
     return (
         <div>
             <p> [AUTH] Update Zone </p>
-            <AuthView viewModel={userView}/>
-        </div>              
+            <AuthView viewModel={userView} />
+        </div>
     )
 })
 
-export const UserDeleteHandle = observer((props: UserProps) => { 
+export const UserDeleteHandle = observer((props: UserProps) => {
     const userID = props.user_id
-    const [deleteStatus, setDeleteStatus] = useState<Number>(0)  
+    const [deleteStatus, setDeleteStatus] = useState<Number>(0)
     const [message, setMessage] = useState<String>("")
     const viewModel = new UserDataViewModel(useTendonContainer())
 
-    new Promise(function(myResolve, myReject) {
+    new Promise(function (myResolve, myReject) {
         useEffect(() => {
             const tmpValue = viewModel.deleteUserInformation(userID, token)
             myResolve(tmpValue)
@@ -112,7 +112,7 @@ export const UserDeleteHandle = observer((props: UserProps) => {
             <div>
                 <p> [AUTH] Delete Zone </p>
                 <p> Delete Complete </p>
-            </div>              
+            </div>
         )
     } else {
         if (message === "") {
@@ -125,8 +125,8 @@ export const UserDeleteHandle = observer((props: UserProps) => {
             return (
                 <div>
                     <p> DELETE ERROR ZONE: </p>
-                    <p> { message } </p>
-                </div>              
+                    <p> {message} </p>
+                </div>
             )
         }
     }
@@ -137,14 +137,14 @@ interface ShowDataViewProps {
     viewModel: User
 }
 
-const AuthView = observer(({viewModel}: ShowDataViewProps) => {
+const AuthView = observer(({ viewModel }: ShowDataViewProps) => {
     return (
         <div>
-                <div key= {viewModel.id}>
-                    <p>{viewModel.id} { '-->' } {viewModel.email}</p>
-                    <li> {viewModel.firstName} </li>
-                    <li> {viewModel.lastName} </li>
-                    <li> {viewModel.updateAt} </li>
+            <div key={viewModel.id}>
+                <p>{viewModel.id} {'-->'} {viewModel.email}</p>
+                <li> {viewModel.firstName} </li>
+                <li> {viewModel.lastName} </li>
+                <li> {viewModel.updateAt} </li>
                 <hr></hr>
             </div>
         </div>

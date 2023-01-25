@@ -6,13 +6,13 @@ var firstName = ""
 var lastName = ""
 
 function getTokenInitialState() {
-    var tokenMEM = localStorage.getItem( 'tokenMEM' ) || ""
+    let tokenMEM = localStorage.getItem('tokenMEM') || ""
     return tokenMEM
 }
 
 function getUserInitialState() {
-    var fName = localStorage.getItem( 'firstName' ) || ""
-    var lName = localStorage.getItem( 'lastName' ) || ""
+    let fName = localStorage.getItem('firstName') || ""
+    let lName = localStorage.getItem('lastName') || ""
     return {
         firstName: fName,
         lastName: lName
@@ -20,8 +20,8 @@ function getUserInitialState() {
 }
 
 
-function settokenMEM( tokenNew: string) {
-    localStorage.setItem( 'tokenMEM', tokenNew )
+function settokenMEM(tokenNew: string) {
+    localStorage.setItem('tokenMEM', tokenNew)
     token = tokenNew
 }
 
@@ -41,8 +41,8 @@ export function getToken() {
 async function SetuserInformation(user: User) {
     firstName = user.firstName
     lastName = user.lastName
-    localStorage.setItem( 'firstName', user.firstName)
-    localStorage.setItem( 'lastName', user.lastName)
+    localStorage.setItem('firstName', user.firstName)
+    localStorage.setItem('lastName', user.lastName)
 }
 
 export async function userInformation(user: User) {

@@ -5,12 +5,12 @@ import { useState, useEffect } from "react";
 import { useTendonContainer } from "linkWithBackend/services/container";
 import CourseDataViewModel from "./CourseViewModel";
 import { Course } from "linkWithBackend/interfaces/TendonType";
-import { getToken } from "../../../components/ShareData/user_setting";
+import { getToken } from "../../../components/shareData/user_setting";
 
-import ResumeList from "@components/Dashboard/resume/ResumeList";
+import ResumeList from "@components/dashboard/resume/ResumeList";
 import Xarrow, { Xwrapper } from "react-xarrows";
 import { useTheme } from "next-themes";
-import ResumeItem from "@components/Dashboard/resume/ResumeItem";
+import ResumeItem from "@components/dashboard/resume/ResumeItem";
 import { resumeProps } from "@data/index";
 import ArrowBox from "@components/baseComponents/ArrowBox";
 import CourseNode from "@components/curriculaMap/LearningNode";
@@ -33,10 +33,10 @@ export const CourseCreateHandle = observer((props: propsInterface) => {
     const body = props.body
     const [courseView, setCourseView] = useState<Course>({} as Course)
     const [message, setMessage] = useState<String>("")
-    const [status, setStatus] = useState<Number>(0)   
+    const [status, setStatus] = useState<Number>(0)
     const viewModel = new CourseDataViewModel(useTendonContainer())
 
-    new Promise(function(myResolve, myReject) {
+    new Promise(function (myResolve, myReject) {
         useEffect(() => {
             const tmpValue = viewModel.createCourse(body, token)
             myResolve(tmpValue)
@@ -51,8 +51,8 @@ export const CourseCreateHandle = observer((props: propsInterface) => {
         return (
             <div>
                 <p> [ Course POST ] </p>
-                <CourseView viewModel={ courseView } />
-            </div>              
+                <CourseView viewModel={courseView} />
+            </div>
         )
     } else {
         if (message === "") {
@@ -63,23 +63,23 @@ export const CourseCreateHandle = observer((props: propsInterface) => {
         return (
             <div>
                 <p> Course POST ERROR ZONE:  </p>
-                <p> { message } </p>
-            </div>              
+                <p> {message} </p>
+            </div>
         )
     }
 })
 
-export const CourseGetHandle = observer((props: realInterface) => {  
+export const CourseGetHandle = observer((props: realInterface) => {
     const router = useRouter()
-    const { theme } = useTheme();            
+    const { theme } = useTheme();
     const course_id = props.id
-    const [courseView, setCourseView] = useState<Course>({} as Course)  
+    const [courseView, setCourseView] = useState<Course>({} as Course)
     const [message, setMessage] = useState<String>("")
     const [isReady, setIsReady] = useState(false)
     const [status, setStatus] = useState<Number>(0)
     const viewModel = new CourseDataViewModel(useTendonContainer())
 
-    new Promise(function(myResolve, myReject) {
+    new Promise(function (myResolve, myReject) {
         useEffect(() => {
             var mytoken = getToken()
             const tmpValue = viewModel.getCourseData(course_id, mytoken)
@@ -111,7 +111,7 @@ export const CourseGetHandle = observer((props: realInterface) => {
             return (
                 <div>
                     <p> Error {message} </p>
-                </div>       
+                </div>
             )
         }
     }
@@ -119,25 +119,24 @@ export const CourseGetHandle = observer((props: realInterface) => {
     if (props.component === "resume") {
         return (
             <>
-                <ResumeItem key={courseView.id}  id = {courseView.id} courseData = { courseView } setIsReady={ setIsReady } />
+                <ResumeItem key={courseView.id} id={courseView.id} courseData={courseView} setIsReady={setIsReady} />
                 {
                     isReady && (
                         <ArrowBox>
                             <Xarrow
                                 start={'dashboard'}
-                                end={ courseView.id }
+                                end={courseView.id}
                                 color={theme === 'light' ? '#475569' : '#961EFF'}
                             />
                         </ArrowBox>
-    
                     )
-                } 
-            </>        
+                }
+            </>
         )
     } else if (props.component === "map") {
         return (
             <>
-                < GraphPathView courseView={ courseView } />
+                < GraphPathView courseView={courseView} />
             </>
         )
     } else {
@@ -147,13 +146,13 @@ export const CourseGetHandle = observer((props: realInterface) => {
     }
 })
 
-export const CourseUpdateHandle = observer((props: propsInterface) => {              
+export const CourseUpdateHandle = observer((props: propsInterface) => {
     const course_id = props.body.id
     const body = props.body
-    const [courseView, setCourseView] = useState<Course>({} as Course)  
+    const [courseView, setCourseView] = useState<Course>({} as Course)
     const [message, setMessage] = useState<String>("")
     const viewModel = new CourseDataViewModel(useTendonContainer())
-    new Promise(function(myResolve, myReject) {
+    new Promise(function (myResolve, myReject) {
         useEffect(() => {
             const tmpValue = viewModel.updateCourseData(course_id, token, body)
             myResolve(tmpValue)
@@ -173,8 +172,8 @@ export const CourseUpdateHandle = observer((props: propsInterface) => {
             <div>
                 <p> Update Lesson is out-of-service </p>
                 <p> Course UPDATE ERROR ZONE: </p>
-                <p> { message } </p>
-            </div>              
+                <p> {message} </p>
+            </div>
         )
     }
 
@@ -183,17 +182,17 @@ export const CourseUpdateHandle = observer((props: propsInterface) => {
             <p> Update Lesson is out-of-service </p>
             <p> [ Course UPDATE ] </p>
             <p> Updated Successfully!</p>
-        </div>              
+        </div>
     )
 })
 
-export const CourseDeleteHandle = observer((props: propsInterface) => { 
+export const CourseDeleteHandle = observer((props: propsInterface) => {
     const course_id = props.body.id
-    const [deleteStatus, setDeleteStatus] = useState<Number>(0)  
+    const [deleteStatus, setDeleteStatus] = useState<Number>(0)
     const [message, setMessage] = useState<String>("")
     const viewModel = new CourseDataViewModel(useTendonContainer())
 
-    new Promise(function(myResolve, myReject) {
+    new Promise(function (myResolve, myReject) {
         useEffect(() => {
             const tmpValue = viewModel.deleteCourse(course_id, token)
             myResolve(tmpValue)
@@ -208,7 +207,7 @@ export const CourseDeleteHandle = observer((props: propsInterface) => {
             <div>
                 <p> [ Course DELETE ] </p>
                 <p> Delete Complete </p>
-            </div>              
+            </div>
         )
     } else {
         if (message === "") {
@@ -219,8 +218,8 @@ export const CourseDeleteHandle = observer((props: propsInterface) => {
         return (
             <div>
                 <p> Course DELETE ERROR ZONE: </p>
-                <p> { message } </p>
-            </div>              
+                <p> {message} </p>
+            </div>
         )
     }
 })
@@ -229,22 +228,22 @@ interface ShowDataViewProps {
     viewModel: Course
 }
 
-const CourseView = observer(( {viewModel}: ShowDataViewProps) => {
+const CourseView = observer(({ viewModel }: ShowDataViewProps) => {
     return (
         <div>
-                <div key= {viewModel.id}>
-                    <p> #### {viewModel.id} #### </p>
-                    <li> {viewModel.name} </li>
-                    <li> {viewModel.description} </li>
-                    <li> lessons: 
-                        {viewModel.lessons.map((data: string) => (
-                            <div key= {data}>
-                                <p> {data} </p>
-                            </div>
-                        ))}
-                    </li>
-                    <hr></hr>
-                </div>
+            <div key={viewModel.id}>
+                <p> #### {viewModel.id} #### </p>
+                <li> {viewModel.name} </li>
+                <li> {viewModel.description} </li>
+                <li> lessons:
+                    {viewModel.lessons.map((data: string) => (
+                        <div key={data}>
+                            <p> {data} </p>
+                        </div>
+                    ))}
+                </li>
+                <hr></hr>
+            </div>
         </div>
     )
 })

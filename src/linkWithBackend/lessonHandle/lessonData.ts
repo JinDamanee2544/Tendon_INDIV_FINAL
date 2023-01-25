@@ -1,9 +1,9 @@
 import { Lesson } from "linkWithBackend/interfaces/TendonType";
 import LessonGraphService from "linkWithBackend/services/data_service";
-import { getToken } from "@components/ShareData/user_setting";
+import { getToken } from "@components/shareData/user_setting";
 import React from "react";
 
-export var dictLesson: {[key: string]: Lesson} = {}
+export var dictLesson: { [key: string]: Lesson } = {}
 var token = getToken()
 
 export async function getLessonInformation(lesson_id: string) {
@@ -12,10 +12,10 @@ export async function getLessonInformation(lesson_id: string) {
     } else {
         var result: Lesson = {} as Lesson
         var lessonGraph = new LessonGraphService()
-        var lessonInformation:Lesson = await lessonGraph.getLessonById(lesson_id, token)
+        var lessonInformation: Lesson = await lessonGraph.getLessonById(lesson_id, token)
 
         result = {
-            ... result,
+            ...result,
             id: lessonInformation?.id,
             name: lessonInformation?.name,
             description: lessonInformation?.description,

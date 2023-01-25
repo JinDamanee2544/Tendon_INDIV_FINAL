@@ -2,7 +2,7 @@ import React from "react";
 import { AiOutlineLogin, AiOutlineLogout, AiOutlineSearch, AiOutlineSetting, AiOutlineUser } from 'react-icons/ai'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useRouter } from "next/router";
-import ControlBtn from "./settingBtn";
+import ControlBtn from "./SettingBtn";
 
 const Setting = () => {
 

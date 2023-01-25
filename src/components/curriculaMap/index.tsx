@@ -1,11 +1,6 @@
-import CourseNode from "./LearningNode";
 import { motion } from 'framer-motion'
-import Xarrow, { Xwrapper } from 'react-xarrows'
 import { useTheme } from "next-themes";
 import React, { useEffect, useMemo, useState } from "react"
-import { LearningLessonNodeProps } from "customTypes";
-import ArrowBox from "../baseComponents/ArrowBox";
-import { prepNode } from "./LeaningNodeViewModel";
 import { CourseGetHandle } from "pages/adminControl/service_page/CourseView";
 import { ContainerProviderTendon } from "linkWithBackend/services/container";
 
@@ -17,7 +12,6 @@ const LearningNodeMap = ({ learningNodeData: learningNodeID }: LearningNodeMapPr
     const { theme } = useTheme();
     const [childReady, setChildReady] = useState(false);
     const [onClient, setOnClient] = useState(false);
-
     //const mappedNodeprop = useMemo(() => prepNode(learningNodeData, setChildReady), [learningNodeData])
 
     useEffect(() => {
@@ -34,9 +28,13 @@ const LearningNodeMap = ({ learningNodeData: learningNodeID }: LearningNodeMapPr
             >
                 {/* Start Node */}
                 <ContainerProviderTendon>
-                    <CourseGetHandle id = { learningNodeID } component = {"map"} key = { learningNodeID } ></CourseGetHandle>
-                </ContainerProviderTendon> 
-                         
+                    <CourseGetHandle
+                        id={learningNodeID}
+                        component={"map"}
+                        key={learningNodeID}
+                    />
+                </ContainerProviderTendon>
+
                 {/* <div className="flex flex-col gap-10">
                     <Xwrapper>
                         {mappedNodeprop.map((item, index) => {
