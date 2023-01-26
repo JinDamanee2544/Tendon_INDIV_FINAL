@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { useTendonContainer } from "linkWithBackend/services/container";
 import LessonDataViewModel from "./LessonViewModel";
 import { Lesson } from "linkWithBackend/interfaces/TendonType";
-import { getToken } from "../../../components/shareData/user_setting";
+import { getToken } from "../../../components/ShareData/user_setting";
 import CourseNode from "@components/curriculaMap/LearningNode";
 import { StatusType } from "@customTypes/index";
 import { useRouter } from "next/router";

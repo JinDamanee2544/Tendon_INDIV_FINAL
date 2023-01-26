@@ -1,6 +1,6 @@
 import { Lesson } from "linkWithBackend/interfaces/TendonType";
 import LessonGraphService from "linkWithBackend/services/data_service";
-import { getToken } from "@components/shareData/user_setting";
+import { getToken } from "@components/ShareData/user_setting";
 import React from "react";
 
 export var dictLesson: { [key: string]: Lesson } = {}

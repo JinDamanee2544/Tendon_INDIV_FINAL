@@ -104,43 +104,44 @@ export const prepNode = (startNode: LearningLessonNodeProps, defaultSetChildRead
 //     return prepNodePrepare
 // }
 
-export const backendConvert = (c: Course): LearningLessonNodeProps => {
-    const lessonArray = c.lessons
-    const data: Lesson[] = []
-    const lonely: string[] = []
-    let prepArray: LearningLessonNodeProps = {} as LearningLessonNodeProps
+// export const BackendConvert = (course: Course): LearningLessonNodeProps => {
+//     let lessonArray:string[] = []
+//     lessonArray = course.lessons!
+//     const data: Lesson[] = []
+//     const lonely: string[] = []
+//     // let prepArray: LearningLessonNodeProps = {} as LearningLessonNodeProps
+//     const [prepArray, setPrepArray] = useState<LearningLessonNodeProps>({} as LearningLessonNodeProps)
 
-    const dataDict: { [key: string]: Lesson } = {}
-    const isRender: { [key: string]: boolean } = {}
-    let firstCal: boolean = false
-    let childReady: boolean = false
-    let initNode: string[] = []
-    let prepNodePrepare: LearningLessonNodeProps = {} as LearningLessonNodeProps
+//     const dataDict: { [key: string]: Lesson } = {}
+//     const isRender: { [key: string]: boolean } = {}
+//     let firstCal: boolean = false
+//     let childReady: boolean = false
+//     let initNode: string[] = []
+//     let prepNodePrepare: LearningLessonNodeProps = {} as LearningLessonNodeProps
 
-    const allCoursesLoading = Promise.all(lessonArray.map(async (lesson) => {
-        const tmpValue = await getLessonInformation(lesson)
-        dataDict[tmpValue.id] = tmpValue
-        isRender[tmpValue.id] = true
-        data.push(tmpValue)
-        try {
-            if (tmpValue.prevLesson.length === 0) {
-                lonely.push(tmpValue.id)
-            }
-        } catch (err) {
-            // console.log("--> ", value)
-        }
-    }))
+//     const allCoursesLoading = Promise.all(lessonArray?.map(async (lesson) => {
+//         const tmpValue = await getLessonInformation(lesson)
+//         dataDict[tmpValue.id] = tmpValue
+//         isRender[tmpValue.id] = true
+//         data.push(tmpValue)
+//         try {
+//             if (tmpValue.prevLesson.length === 0) {
+//                 lonely.push(tmpValue.id)
+//             }
+//         } catch (err) {
+//             // console.log("--> ", value)
+//         }
+//     }))
 
-    allCoursesLoading.then(() => {
-        initNode = lonely
-        firstCal = true
-        prepArray = prepNodeAlgo({ courseView: c, dataDict: dataDict, initLesson: lonely })
-        prepNodePrepare = prepArray
-    })
+//     allCoursesLoading.then(() => {
+//         initNode = lonely
+//         firstCal = true
+//         setPrepArray(prepNodeAlgo({ courseView: course, dataDict: dataDict, initLesson: lonely }))
+//     })
 
-    console.log('dd', dataDict)
-    console.log('ll', lonely)
-    console.log('pp', prepArray)
+//     // console.log('dd', dataDict)
+//     // console.log('ll', lonely)
+//     // console.log('pp', prepArray)
 
-    return prepNodePrepare
-}
+//     return prepArray
+// }

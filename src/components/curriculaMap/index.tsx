@@ -2,10 +2,10 @@ import { motion } from 'framer-motion'
 import React, { useEffect, useMemo, useState } from "react"
 import { Xwrapper } from 'react-xarrows';
 import CourseNode from './LearningNode';
-import viewmodel from './viewmodel';
 import { observer } from 'mobx-react';
-import { useTendonContainer } from 'linkWithBackend/services/container';
-import Viewmodel from './viewmodel';
+import ViewModel from './viewmodel';
+import { RenderLearningLessonNodeProps } from '../../customTypes/';
+import LoadingSpinner from '@components/baseComponents/LoadingSpinner';
 
 interface LearningNodeMapProps {
     lid: string
@@ -14,12 +14,19 @@ interface LearningNodeMapProps {
 const LearningNodeMap = ({ lid }: LearningNodeMapProps) => {
     const [childReady, setChildReady] = useState(false);
     const [onClient, setOnClient] = useState(false);
-    //const mappedNodeprop = useMemo(() => prepNode(lid, setChildReady), [lid])
 
-    const container = useTendonContainer()
-    const renderingGraph = Viewmodel(lid, container)
+    useEffect(() => {
+        setOnClient(true)
+    }, [])
 
-    if (!onClient) return null;
+    const renderingGraph = ViewModel(lid)
+
+    if (!onClient) {
+        return (
+            <>
+            </>
+        )
+    }
 
     return (
         <>

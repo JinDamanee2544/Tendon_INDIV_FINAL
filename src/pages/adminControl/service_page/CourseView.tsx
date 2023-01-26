@@ -5,12 +5,12 @@ import { useState, useEffect } from "react";
 import { useTendonContainer } from "linkWithBackend/services/container";
 import CourseDataViewModel from "./CourseViewModel";
 import { Course } from "linkWithBackend/interfaces/TendonType";
-import { getToken } from "../../../components/shareData/user_setting";
+import { getToken } from "../../../components/ShareData/user_setting";
 
-import ResumeList from "@components/dashboard/resume/ResumeList";
+import ResumeList from "@components/Dashboard/resume/ResumeList";
 import Xarrow, { Xwrapper } from "react-xarrows";
 import { useTheme } from "next-themes";
-import ResumeItem from "@components/dashboard/resume/ResumeItem";
+import ResumeItem from "@components/Dashboard/resume/ResumeItem";
 import { resumeProps } from "@data/index";
 import ArrowBox from "@components/baseComponents/ArrowBox";
 import CourseNode from "@components/curriculaMap/LearningNode";

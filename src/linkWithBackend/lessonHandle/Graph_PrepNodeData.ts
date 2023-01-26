@@ -36,6 +36,7 @@ export default function prepNodeAlgo(props: prepAlgoInterface) {
     // let promise = new Promise<LearningLessonNodeProps>((resolve, reject) => {
     //     dict = props.dataDict
     // })
+    // console.log(props)
     dict = props.dataDict
     var tmp = {
         lessonId: props.courseView.id,
@@ -43,6 +44,6 @@ export default function prepNodeAlgo(props: prepAlgoInterface) {
         status: StatusType.INPROGRESS,
         next: recursive(props.initLesson)
     }
-    // console.log(dict)
+    // console.log("output: ", tmp)
     return tmp
 }

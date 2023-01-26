@@ -5,7 +5,7 @@ import UserDataViewModel from './UserViewModel'
 
 import { useTendonContainer } from "linkWithBackend/services/container";
 import { User } from "linkWithBackend/interfaces/TendonType";
-import { getToken } from "../../../components/shareData/user_setting";
+import { getToken } from "../../../components/ShareData/user_setting";
 
 interface UserProps {
     user_id: string,
