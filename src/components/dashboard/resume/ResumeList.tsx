@@ -10,6 +10,7 @@ import { useEffect, useState } from 'react'
 import { getToken } from '@components/shareData/user_setting'
 import ArrowBox from '@components/baseComponents/ArrowBox'
 import Xarrow from 'react-xarrows'
+import Viewmodel from './viewmodel'
 interface propsInterface {
     body: Course
 }
@@ -17,30 +18,18 @@ interface propsInterface {
 const ResumeList = () => {
     const { theme } = useTheme()
     const container = useTendonContainer()
-    const courseService = container.get<CourseService>(TYPES.CourseService)
-
-    const [courses, setCourses] = useState<Course[]>([] as Course[])
-
-    useEffect(() => {
-        const resumeCourseID: string[] = ["63becc58e68081422d62f422", "63becc6ce68081422d62f423", "63becc7de68081422d62f424"]
-        const courseLoading = Promise.all(resumeCourseID.map(async (id) => {
-            const course = await courseService.getCourseById(id, getToken())
-            return course
-        }))
-
-        courseLoading.then((course) => {
-            setCourses(prev => [...prev, ...course])
-        })
-    }, [])
-
+    const courses = Viewmodel(container)
 
     return (
-        <motion.main
-            className='flex flex-col gap-10 justify-center'
-        >
+        <main className='flex flex-col gap-10 justify-center'>
             <Xwrapper>
                 {
                     courses.map((course, index) => {
+
+                        // if (course.id === undefined) {
+                        //     return <h1 key={index}>Loading</h1>
+                        // }
+
                         return (
                             <div key={index}>
                                 <>
@@ -67,7 +56,7 @@ const ResumeList = () => {
                     })
                 }
             </Xwrapper>
-        </motion.main>
+        </main>
     )
 }
 export default ResumeList;
