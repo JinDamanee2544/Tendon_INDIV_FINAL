@@ -23,13 +23,13 @@ const DashBoardPage: NextPage = () => {
           < DashBoard />
         </Suspense>
       </MainLayout>
-      <div>
+      {/* <div>
 
         <button onClick={handleClick} >
           Admin Click
         </button>
 
-      </div>
+      </div> */}
     </>
   );
 };

@@ -55,7 +55,7 @@ const DashBoard = () => {
 
     return (
         <div
-            className="flex gap-x-20 justify-center"
+            className="relative flex gap-x-20 justify-center"
         >
             <DashBoardContainer
                 mode={mode}
@@ -67,17 +67,15 @@ const DashBoard = () => {
                 />
 
                 <div className="mt-5">
-                    <Profile firstName={userInformation.firstName} lastName={userInformation.lastName} />
+                    <Profile
+                        firstName={userInformation.firstName}
+                        lastName={userInformation.lastName} />
                     <Activity />
                     <Statistic />
                 </div>
 
-                <AnimatePresence>
-                    {mode === modeType.main && <Acheivement />}
-                </AnimatePresence>
-                <AnimatePresence>
-                    {mode === modeType.main && <Setting />}
-                </AnimatePresence>
+                {mode === modeType.main && <Acheivement />}
+                {mode === modeType.main && <Setting />}
 
                 <NavigateButton
                     direction="right"
@@ -85,9 +83,9 @@ const DashBoard = () => {
                     onClick={() => navigateMode()}
                 />
             </DashBoardContainer>
-            <ContainerProviderTendon>
+            <div className="flex z-0">
                 {mode === modeType.resume && <ResumeList />}
-            </ContainerProviderTendon>
+            </div>
         </div>
     )
 }

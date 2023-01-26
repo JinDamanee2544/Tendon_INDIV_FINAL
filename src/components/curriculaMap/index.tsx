@@ -4,6 +4,7 @@ import { Xwrapper } from 'react-xarrows';
 import CourseNode from './LearningNode';
 import { RenderLearningLessonNodeProps } from '@customTypes/index';
 import useCurriculaMapViewModel from './viewmodel';
+import { observer } from 'mobx-react';
 
 interface LearningNodeMapProps {
     lid: string
