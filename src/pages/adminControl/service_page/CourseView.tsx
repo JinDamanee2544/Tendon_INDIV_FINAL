@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useMemo } from "react"
 import { observer } from "mobx-react"
 import { useState, useEffect } from "react";
 
@@ -77,24 +77,41 @@ export const CourseGetHandle = observer((props: realInterface) => {
     const [message, setMessage] = useState<String>("")
     const [isReady, setIsReady] = useState(false)
     const [status, setStatus] = useState<Number>(0)
-    const viewModel = new CourseDataViewModel(useTendonContainer())
+    // const viewModel = new CourseDataViewModel(useTendonContainer())
 
-    new Promise(function (myResolve, myReject) {
-        useEffect(() => {
-            var mytoken = getToken()
-            const tmpValue = viewModel.getCourseData(course_id, mytoken)
-            myResolve(tmpValue)
-        }, [])
-    }).then(() => {
-        // setCourseView({
-        //     id: viewModel.getCourse().id,
-        //     courseName: viewModel.getCourse().name,
-        //     setIsReady: setIsReady
-        // })            
-        setCourseView(viewModel.getCourse())
-        setMessage(viewModel.getMessage())
-        setStatus(viewModel.getStatus())
-    })
+    const viewModel = useMemo(() => {
+        return new CourseDataViewModel(useTendonContainer())
+    }, [])
+
+    useEffect(() => {
+        // const viewModel = new CourseDataViewModel(useTendonContainer())
+        const mytoken = getToken()
+        const tmpCourse: Promise<Course> = viewModel.getCourseData(course_id, mytoken)
+        tmpCourse.then((value) => {
+            setCourseView(value)
+            setMessage(viewModel.getMessage())
+            setStatus(viewModel.getStatus())
+        }).catch((error) => {
+            console.log(error)
+        })
+    }, [course_id])
+
+    // new Promise(function (myResolve, myReject) {
+    //     useEffect(() => {
+    //         var mytoken = getToken()
+    //         const tmpValue = viewModel.getCourseData(course_id, mytoken)
+    //         myResolve(tmpValue)
+    //     }, [])
+    // }).then(() => {
+    //     // setCourseView({
+    //     //     id: viewModel.getCourse().id,
+    //     //     courseName: viewModel.getCourse().name,
+    //     //     setIsReady: setIsReady
+    //     // })            
+    //     setCourseView(viewModel.getCourse())
+    //     setMessage(viewModel.getMessage())
+    //     setStatus(viewModel.getStatus())
+    // })
 
     if (courseView.id === undefined) {
         if (message === "") {
