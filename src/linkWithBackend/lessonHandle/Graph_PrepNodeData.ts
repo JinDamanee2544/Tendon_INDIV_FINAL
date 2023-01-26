@@ -4,10 +4,10 @@ import { LearningLessonNodeProps, StatusType } from "../../customTypes"
 
 interface prepAlgoInterface {
     courseView: Course
-    dataDict: {[key: string]: Lesson}
+    dataDict: { [key: string]: Lesson }
     initLesson: string[]
 }
-var dict: {[key: string]: Lesson}
+var dict: { [key: string]: Lesson }
 
 function recursive(nextIdArray: string[]) {
     // console.log("call: ", nextIdArray)
@@ -21,18 +21,18 @@ function recursive(nextIdArray: string[]) {
             tmp.push({
                 lessonId: dict[myLessonID!]!.id,
                 lessonName: dict[myLessonID!]!.name,
-                status: StatusType.INPROGRESS,
+                status: StatusType.INPROGRESS,                  // TODO: change to real status                 
                 next: recursive(dict[myLessonID!]!.nextLesson)
             })
         } catch (err) {
             console.log(err + "==> " + myLessonID)
         }
-        
+
     }
     return tmp
 }
 
-export default function prepNodeAlgo( props: prepAlgoInterface) {
+export default function prepNodeAlgo(props: prepAlgoInterface) {
     // let promise = new Promise<LearningLessonNodeProps>((resolve, reject) => {
     //     dict = props.dataDict
     // })

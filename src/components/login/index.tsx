@@ -2,7 +2,6 @@ import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { ReactElement, useState } from 'react'
 import Setting from '../dashboard/setting'
-import { NextResponse, NextRequest } from 'next/server'
 import { useRouter } from 'next/router'
 import { User } from 'linkWithBackend/interfaces/TendonType'
 import { SignInHandle } from 'pages/adminControl/service_page/SignView'
@@ -28,6 +27,7 @@ const Login = () => {
         })
         setisCal(false)
     };
+
     const submitHandle = (): void => {
         setisCal(true)
     }
@@ -62,14 +62,14 @@ const Login = () => {
                             type="password"
                             placeholder='Password'
                             className='input' onChange={onChangePassword} />
-                        <motion.button
-                            className="bg-gradient-to-r text-white from-purple-light to-purple-neon border-0  font-bold py-2 px-4 rounded-full"
-                            whileTap={{ scale: 1 }}
-                            whileHover={{ scale: 1.05 }}
+                        <button
+                            type='submit'
+                            className="bg-gradient-to-r text-white from-purple-light to-purple-neon border-0  font-bold py-2 px-4 rounded-full disabled:opacity-50 disabled:cursor-not-allowed active:scale-105 duration-100"
                             onClick={submitHandle}
+                            disabled={userProps.email == '' || userProps.password == ''}
                         >
                             Log In
-                        </motion.button>
+                        </button>
 
                         {/* < SignInMiddleHandle body={ userProps } isCal = {isCal} /> */}
                         < ContainerProviderTendon >

@@ -1,10 +1,10 @@
 import { getToken } from "@components/shareData/user_setting"
-import { Container } from "inversify"
 import TYPES, { Course } from "linkWithBackend/interfaces/TendonType"
 import CourseService from "linkWithBackend/services/course_services"
+import container from "linkWithBackend/services/inversify.config"
 import { useEffect, useState } from "react"
 
-export default function Viewmodel(container: Container) {
+export default function Viewmodel() {
     const [courses, setCourses] = useState<Course[]>([] as Course[])
 
     useEffect(() => {

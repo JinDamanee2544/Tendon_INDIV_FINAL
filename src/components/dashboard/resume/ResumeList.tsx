@@ -17,8 +17,7 @@ interface propsInterface {
 
 const ResumeList = () => {
     const { theme } = useTheme()
-    const container = useTendonContainer()
-    const courses = Viewmodel(container)
+    const courses = Viewmodel()
 
     return (
         <main className='flex flex-col gap-10 justify-center'>

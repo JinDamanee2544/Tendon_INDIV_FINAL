@@ -1,6 +1,9 @@
+import React from "react";
 import { Course, Lesson } from "linkWithBackend/interfaces/TendonType";
 import prepNodeAlgo from "linkWithBackend/lessonHandle/Graph_PrepNodeData";
 import { getLessonInformation } from "linkWithBackend/lessonHandle/lessonData";
+import { observer } from "mobx-react";
+import { useState } from "react";
 import { LearningLessonNodeProps, RenderLearningLessonNodeProps, StatusType } from "../../customTypes";
 /*
     View Model
@@ -56,54 +59,88 @@ export const prepNode = (startNode: LearningLessonNodeProps, defaultSetChildRead
     return outputNode;
 }
 
+
+// export const BackendConvert = (c: Course): LearningLessonNodeProps => {
+//     const lessonArray = c.lessons
+//     let data: Lesson[] = []
+//     let lonely: string[] = []
+//     let prepArray: LearningLessonNodeProps = {} as LearningLessonNodeProps
+
+//     const [dataDict, setDataDict] = useState<{ [key: string]: Lesson }>({})
+//     const [isRender, setIsRender] = useState<{ [key: string]: boolean }>({})
+//     const [firstCal, setFirstCal] = useState<boolean>(false)
+//     const [childReady, setChildReady] = useState(false)
+//     const [initNode, setInitNode] = useState<string[]>([])
+//     const [prepNodePrepare, setPrepNodePrepare] = useState<LearningLessonNodeProps>({} as LearningLessonNodeProps)
+
+//     for (let i = 0; i < lessonArray.length; i++) {
+//         let promise = new Promise<Lesson>((resolve, reject) => {
+//             const tmpValue = getLessonInformation(lessonArray[i]!)
+//             resolve(tmpValue)
+//         })
+//         promise.then(value => {
+//             // let tmp = dataDict
+//             dataDict[value.id] = value
+//             isRender[value.id] = true
+//             data.push(value)
+//             try {
+//                 if (value.prevLesson.length === 0) {
+//                     lonely.push(value.id)
+//                 }
+//             } catch (err) {
+//                 // console.log("--> ", value)
+//             }
+
+//         }).then(value => {
+//             if (data.length === lessonArray.length && !firstCal) {
+//                 setInitNode(lonely)
+//                 setFirstCal(true)
+//                 prepArray = prepNodeAlgo({ courseView: c, dataDict: dataDict, initLesson: lonely })
+//                 setPrepNodePrepare(prepArray)
+//             }
+//         })
+//     }
+//     console.log('------> ', prepNodePrepare)
+//     return prepNodePrepare
+// }
+
 export const backendConvert = (c: Course): LearningLessonNodeProps => {
     const lessonArray = c.lessons
-    let data: Lesson[] = []
-    let lonely: string[] = []
+    const data: Lesson[] = []
+    const lonely: string[] = []
     let prepArray: LearningLessonNodeProps = {} as LearningLessonNodeProps
 
-    const dataDict = {} as { [key: string]: Lesson }
-    const isRender = {} as { [key: string]: boolean }
-    let firstCal = false
-    let childReady = false
+    const dataDict: { [key: string]: Lesson } = {}
+    const isRender: { [key: string]: boolean } = {}
+    let firstCal: boolean = false
+    let childReady: boolean = false
     let initNode: string[] = []
-    let prepNodePrepare = {} as LearningLessonNodeProps
+    let prepNodePrepare: LearningLessonNodeProps = {} as LearningLessonNodeProps
 
-    // const [dataDict, setDataDict] = useState<{ [key: string]: Lesson }>({})
-    // const [isRender, setIsRender] = useState<{ [key: string]: boolean }>({})
-    // const [firstCal, setFirstCal] = useState<boolean>(false)
-    // const [childReady, setChildReady] = useState(false)
-    // const [initNode, setInitNode] = useState<string[]>([])
-    // const [prepNodePrepare, setPrepNodePrepare] = useState<LearningLessonNodeProps>({} as LearningLessonNodeProps)
-
-    for (let i = 0; i < lessonArray?.length; i++) {
-        let promise = new Promise<Lesson>((resolve, reject) => {
-            const tmpValue = getLessonInformation(lessonArray[i]!)
-            resolve(tmpValue)
-        })
-        promise.then(value => {
-            // var tmp = dataDict
-            dataDict[value.id] = value
-            isRender[value.id] = true
-            data.push(value)
-            try {
-                if (value.prevLesson.length === 0) {
-                    lonely.push(value.id)
-                }
-            } catch (err) {
-                // console.log("--> ", value)
+    const allCoursesLoading = Promise.all(lessonArray.map(async (lesson) => {
+        const tmpValue = await getLessonInformation(lesson)
+        dataDict[tmpValue.id] = tmpValue
+        isRender[tmpValue.id] = true
+        data.push(tmpValue)
+        try {
+            if (tmpValue.prevLesson.length === 0) {
+                lonely.push(tmpValue.id)
             }
+        } catch (err) {
+            // console.log("--> ", value)
+        }
+    }))
 
-        }).then(value => {
-            if (data.length === lessonArray.length && !firstCal) {
-                initNode = lonely
-                firstCal = true
-                prepArray = prepNodeAlgo({ courseView: c, dataDict: dataDict, initLesson: lonely })
-                prepNodePrepare = prepArray
-            }
-        })
-    }
+    allCoursesLoading.then(() => {
+        initNode = lonely
+        firstCal = true
+        prepArray = prepNodeAlgo({ courseView: c, dataDict: dataDict, initLesson: lonely })
+        prepNodePrepare = prepArray
+    })
+
+    console.log('dd', dataDict)
+    console.log('ll', lonely)
+    console.log('pp', prepArray)
+
     return prepNodePrepare
 }
-
-//http://24.199.72.217:8080/api/v1/auth/courses/

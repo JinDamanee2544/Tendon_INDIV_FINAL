@@ -2,20 +2,19 @@ import Profile from "./Profile";
 import Acheivement from "./Acheivement";
 import Activity from "./Activity";
 import Statistic from "./Statistic";
-import { AnimatePresence, motion } from "framer-motion";
 import Setting from "./setting";
 import { IoCaretForwardOutline, IoAddCircle } from 'react-icons/io5'
-import { useEffect, useRef, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { AiOutlineLogin, AiOutlineLogout, AiOutlineSearch, AiOutlineSetting, AiOutlineUser } from "react-icons/ai";
-import ResumeList from "./resume/ResumeList";
 import { modeType } from "customTypes";
 import NavigateButton from "./NavigateButton";
 import DashBoardContainer from "@components/baseComponents/DashBoardContainer";
-import { ContainerProviderTendon } from 'linkWithBackend/services/container'
-import AdminButton from "./AdminButton";
 import { useRouter } from "next/router";
-import ControlBtn from "./setting/SettingBtn";
 import { getToken, getUserCurrentData } from "@components/shareData/user_setting";
+import dynamic from "next/dynamic";
+
+const ResumeList = dynamic(() => import('./resume/ResumeList'), { suspense: true })
+// import ResumeList from "./resume/ResumeList";
 
 const DashBoard = () => {
     const [mode, setMode] = useState<modeType>(modeType.main);
@@ -43,15 +42,15 @@ const DashBoard = () => {
         })
     }
 
-    if (ready) {
-        //userInformation = getUserCurrentData()
-        //console.log("--> ", getToken(), getUserCurrentData())
-    }
     if (!ready) {
         return (
-            <p> Loading... </p>
+            <></>
         )
     }
+    // if (ready) {
+    //     //userInformation = getUserCurrentData()
+    //     //console.log("--> ", getToken(), getUserCurrentData())
+    // }
 
     return (
         <div
