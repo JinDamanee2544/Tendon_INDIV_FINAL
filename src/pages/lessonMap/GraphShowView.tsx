@@ -1,7 +1,7 @@
 import CourseNode from "@components/curriculaMap/LearningNode";
 import { Course, Lesson } from "linkWithBackend/interfaces/TendonType";
 import React, { useMemo, useState } from "react";
-import { getToken } from "../../components/ShareData/user_setting";
+import { getToken } from "../../components/shareData/user_setting";
 import { useXarrow, Xwrapper } from "react-xarrows";
 import Draggable from "react-draggable";
 import { useTheme } from "next-themes";

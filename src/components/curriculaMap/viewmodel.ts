@@ -1,4 +1,4 @@
-import { getToken } from "@components/ShareData/user_setting"
+import { getToken } from "@components/shareData/user_setting"
 import { LearningLessonNodeProps, RenderLearningLessonNodeProps } from "@customTypes/index"
 import TYPES, { Course } from "linkWithBackend/interfaces/TendonType"
 import CourseService from "linkWithBackend/services/course_services"

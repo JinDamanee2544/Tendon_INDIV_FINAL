@@ -10,7 +10,7 @@ import { modeType } from "customTypes";
 import NavigateButton from "./NavigateButton";
 import DashBoardContainer from "@components/baseComponents/DashBoardContainer";
 import { useRouter } from "next/router";
-import { getToken, getUserCurrentData } from "@components/ShareData/user_setting";
+import { getToken, getUserCurrentData } from "@components/shareData/user_setting";
 import dynamic from "next/dynamic";
 
 const ResumeList = dynamic(() => import('./resume/ResumeList'), { suspense: true })
