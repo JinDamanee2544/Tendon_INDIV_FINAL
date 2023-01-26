@@ -40,7 +40,7 @@ const Lesson = () => {
         })
         promise.then( value => {
             setLessonName(value.name)
-
+            
             // -------
             setPathList((prev) => {
                 if (prev.length != 0) {
@@ -52,7 +52,7 @@ const Lesson = () => {
                         }
                     ]
                 } else {    // no previous path  (For refresh)
-                    console.log("--> ", storedPath)
+                    console.log("--> ", ...storedPath)
                     return [
                         ...storedPath,
                         {
@@ -63,7 +63,6 @@ const Lesson = () => {
                 }
             })
             setStoredPath(pathList);
-            // --------
         })
         
     }, [])
