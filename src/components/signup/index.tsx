@@ -1,34 +1,34 @@
 import { motion } from 'framer-motion'
 import { useState } from 'react';
-import Setting from '../Dashboard/setting';
+import Setting from '../dashboard/setting';
 import { User } from 'linkWithBackend/interfaces/TendonType';
 import { ContainerProviderTendon } from 'linkWithBackend/services/container';
 import { SignUpHandle } from 'pages/adminControl/service_page/SignView';
 const SignupBox = () => {
     const [userProps, setUserProps] = useState<User>({} as User)
     const [confirmPassword, setConfirmPassword] = useState<string>("")
-    const [isCal, setIsCal] =useState<boolean>(false)
+    const [isCal, setIsCal] = useState<boolean>(false)
     const onChangeFName = (e: React.FormEvent<HTMLInputElement>): void => {
         setUserProps({
-            ... userProps,
+            ...userProps,
             firstName: e.currentTarget.value
         })
     };
     const onChangeLName = (e: React.FormEvent<HTMLInputElement>): void => {
         setUserProps({
-            ... userProps,
+            ...userProps,
             lastName: e.currentTarget.value
         })
     };
     const onChangeEmail = (e: React.FormEvent<HTMLInputElement>): void => {
         setUserProps({
-            ... userProps,
+            ...userProps,
             email: e.currentTarget.value
         })
     };
     const onChangePassword = (e: React.FormEvent<HTMLInputElement>): void => {
         setUserProps({
-            ... userProps,
+            ...userProps,
             password: e.currentTarget.value
         })
     };
@@ -59,7 +59,7 @@ const SignupBox = () => {
         } else {
             console.log("right")
             setIsCal(true)
-        } 
+        }
     }
 
     return (
@@ -81,36 +81,36 @@ const SignupBox = () => {
                     <input
                         type="text"
                         placeholder='myemail@mail.com'
-                        className='input' 
-                        onChange={ onChangeEmail } 
-                        required/>
+                        className='input'
+                        onChange={onChangeEmail}
+                        required />
                     <div className='flex gap-4'>
                         <input
                             type="text"
                             placeholder='First Name'
                             className='input '
-                            onChange={ onChangeFName } />
+                            onChange={onChangeFName} />
                         <input
                             type="text"
                             placeholder='Last Name'
                             className='input'
-                            onChange={ onChangeLName } />
+                            onChange={onChangeLName} />
                     </div>
                     <input
                         type="password"
                         placeholder='Password'
-                        className='input' 
-                        onChange={ onChangePassword }/>
+                        className='input'
+                        onChange={onChangePassword} />
                     <input
                         type="password"
                         placeholder='Confirm Password'
-                        className='input' 
-                        onChange={ onChangeConfirmPassword }/>
+                        className='input'
+                        onChange={onChangeConfirmPassword} />
                     <motion.button
                         className="bg-gradient-to-r from-purple-light to-purple-neon border-0 text-white font-bold py-2 px-4 rounded-full"
                         whileTap={{ scale: 1 }}
                         whileHover={{ scale: 1.02 }}
-                        onClick = { submitHandle }
+                        onClick={submitHandle}
                     >
                         Sign Up
                     </motion.button>
@@ -121,7 +121,7 @@ const SignupBox = () => {
             </motion.main>
 
             < ContainerProviderTendon >
-                < SignUpHandle body={ userProps } isCal = {isCal} />
+                < SignUpHandle body={userProps} isCal={isCal} />
             </ContainerProviderTendon>
         </div>
     )

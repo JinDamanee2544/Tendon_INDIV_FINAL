@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
 import { Suspense, useEffect, useState } from "react";
 import LoadingSpinner from "@components/baseComponents/LoadingSpinner";
-import MainLayout from "@components/Layout/MainLayout";
+import MainLayout from "layout/MainLayout";
 import { MockRelateCourse } from "@data/graphNode";
 import { LearningLessonNodeProps, StatusType } from "@customTypes/index";
 import { useBreadCrumb } from "context/breadCrumb";
@@ -35,7 +35,7 @@ const CoursePage = () => {
     if (splitted[0] !== undefined) {
         courseId = splitted[0]
     }
-    
+
     // const curriculaData = getCurriculaNodeData(courseId);
     const { pathList, setPathList } = useBreadCrumb()
     const [storedPath, setStoredPath] = useLocalStorage('path', pathList);
@@ -56,15 +56,11 @@ const CoursePage = () => {
     }, [splitted[1]])
 
     return (
-        // <BreadcrumbProvider>
         <MainLayout>
-            <ContainerProviderTendon>
-                <Suspense fallback={<LoadingSpinner />}>
-                    <CourseMap learningNodeData={ courseId } />
-                </Suspense>
-            </ContainerProviderTendon>
+            <Suspense fallback={<LoadingSpinner />}>
+                <CourseMap lid={courseId} />
+            </Suspense>
         </MainLayout>
-        // </BreadcrumbProvider>
     )
 }
 export default CoursePage;

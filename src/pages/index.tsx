@@ -3,8 +3,8 @@ import type { NextPage } from "next";
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
 import LoadingSpinner from "@baseComponents/LoadingSpinner";
-import MainLayout from "../components/Layout/MainLayout";
-const DashBoard = dynamic(() => import("../components/Dashboard"), { suspense: true });
+import MainLayout from "../layout/MainLayout";
+const DashBoard = dynamic(() => import("../components/dashboard"), { suspense: true });
 
 import { useRouter } from 'next/router'
 
@@ -23,13 +23,13 @@ const DashBoardPage: NextPage = () => {
           < DashBoard />
         </Suspense>
       </MainLayout>
-      <div>
-        
-      <button onClick={handleClick} >
-        Admin Click
-      </button>
+      {/* <div>
 
-      </div>
+        <button onClick={handleClick} >
+          Admin Click
+        </button>
+
+      </div> */}
     </>
   );
 };

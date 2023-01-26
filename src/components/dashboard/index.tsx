@@ -2,20 +2,19 @@ import Profile from "./Profile";
 import Acheivement from "./Acheivement";
 import Activity from "./Activity";
 import Statistic from "./Statistic";
-import { AnimatePresence, motion } from "framer-motion";
-import Setting from "../Dashboard/setting";
+import Setting from "./setting";
 import { IoCaretForwardOutline, IoAddCircle } from 'react-icons/io5'
-import { useEffect, useRef, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { AiOutlineLogin, AiOutlineLogout, AiOutlineSearch, AiOutlineSetting, AiOutlineUser } from "react-icons/ai";
-import ResumeList from "./resume/ResumeList";
 import { modeType } from "customTypes";
 import NavigateButton from "./NavigateButton";
 import DashBoardContainer from "@components/baseComponents/DashBoardContainer";
-import { ContainerProviderTendon } from 'linkWithBackend/services/container'
-import AdminButton from "./AdminButton";
 import { useRouter } from "next/router";
-import ControlBtn from "./setting/settingBtn";
-import { getToken, getUserCurrentData } from "@components/ShareData/user_setting";
+import { getToken, getUserCurrentData } from "@components/shareData/user_setting";
+import dynamic from "next/dynamic";
+
+const ResumeList = dynamic(() => import('./resume/ResumeList'), { suspense: true })
+// import ResumeList from "./resume/ResumeList";
 
 const DashBoard = () => {
     const [mode, setMode] = useState<modeType>(modeType.main);
@@ -43,19 +42,19 @@ const DashBoard = () => {
         })
     }
 
-    if (ready) {
-        //userInformation = getUserCurrentData()
-        //console.log("--> ", getToken(), getUserCurrentData())
-    }
     if (!ready) {
         return (
-            <p> Loading... </p>
+            <></>
         )
     }
+    // if (ready) {
+    //     //userInformation = getUserCurrentData()
+    //     //console.log("--> ", getToken(), getUserCurrentData())
+    // }
 
     return (
         <div
-            className="flex gap-x-20 justify-center"
+            className="relative flex gap-x-20 justify-center"
         >
             <DashBoardContainer
                 mode={mode}
@@ -66,18 +65,16 @@ const DashBoard = () => {
                     onClick={() => navigateMode()}
                 />
 
-                {<div className="mt-5">
-                    <Profile firstName={userInformation.firstName} lastName={userInformation.lastName} />
+                <div className="mt-5">
+                    <Profile
+                        firstName={userInformation.firstName}
+                        lastName={userInformation.lastName} />
                     <Activity />
                     <Statistic />
-                </div>}
+                </div>
 
-                <AnimatePresence>
-                    {mode === modeType.main && <Acheivement />}
-                </AnimatePresence>
-                <AnimatePresence>
-                    {mode === modeType.main && <Setting />}
-                </AnimatePresence>
+                {mode === modeType.main && <Acheivement />}
+                {mode === modeType.main && <Setting />}
 
                 <NavigateButton
                     direction="right"
@@ -85,9 +82,9 @@ const DashBoard = () => {
                     onClick={() => navigateMode()}
                 />
             </DashBoardContainer>
-            <ContainerProviderTendon>
+            <div className="flex z-0">
                 {mode === modeType.resume && <ResumeList />}
-            </ContainerProviderTendon>
+            </div>
         </div>
     )
 }

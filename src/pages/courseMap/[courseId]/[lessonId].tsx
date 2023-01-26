@@ -1,5 +1,5 @@
 import LoadingSpinner from "@components/baseComponents/LoadingSpinner";
-import MainLayout from "@components/Layout/MainLayout";
+import MainLayout from "layout/MainLayout";
 import LessonNode from "@components/learningNode";
 import { mockLearningNode } from "@customTypes/mockData";
 import { LearningNode } from "@customTypes/tendonAPItype";
@@ -38,7 +38,7 @@ const Lesson = () => {
             const tmpValue = getLessonInformation(lessonId)
             resolve(tmpValue)
         })
-        promise.then( value => {
+        promise.then(value => {
             setLessonName(value.name)
             
             // -------
@@ -64,14 +64,14 @@ const Lesson = () => {
             })
             setStoredPath(pathList);
         })
-        
+
     }, [])
 
     return (
         <MainLayout>
             <Suspense fallback={<LoadingSpinner />}>
                 <LessonNode
-                    lesson_id = {lessonId} 
+                    lesson_id={lessonId}
                 />
             </Suspense>
         </MainLayout>

@@ -32,8 +32,7 @@ export interface Lesson {
     nextLesson: string[]
     prevLesson: string[]
 }
-
-export interface Node{
+export interface Node {
     id: string
     type: string
     data: string

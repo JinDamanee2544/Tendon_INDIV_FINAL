@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { useTendonContainer } from "linkWithBackend/services/container";
 import NodeDataViewModel from "./NodeViewModel";
 import { Node } from "linkWithBackend/interfaces/TendonType";
-import { getToken } from "../../../components/ShareData/user_setting";
+import { getToken } from "../../../components/shareData/user_setting";
 import NodeItem from "@components/learningNode/NodeItem";
 import { resSource } from "../../../customTypes";
 import { useRouter } from "next/router";
@@ -19,10 +19,10 @@ export const NodeCreateHandle = observer((props: propsInterface) => {
     const body = props.body
     const [nodeView, setNodeView] = useState<Node>({} as Node)
     const [message, setMessage] = useState<String>("")
-    const [status, setStatus] = useState<Number>(0)   
+    const [status, setStatus] = useState<Number>(0)
     const viewModel = new NodeDataViewModel(useTendonContainer())
 
-    new Promise(function(myResolve, myReject) {
+    new Promise(function (myResolve, myReject) {
         useEffect(() => {
             var mytoken = getToken()
             const tmpValue = viewModel.createNode(body, mytoken)
@@ -38,8 +38,8 @@ export const NodeCreateHandle = observer((props: propsInterface) => {
         return (
             <div>
                 <p> [ Node POST ] </p>
-                <NodeView viewModel={ nodeView } />
-            </div>              
+                <NodeView viewModel={nodeView} />
+            </div>
         )
     } else {
         if (message === "") {
@@ -56,8 +56,8 @@ export const NodeCreateHandle = observer((props: propsInterface) => {
         return (
             <div>
                 <p> NODE POST ERROR ZONE: </p>
-                <p> { message } </p>
-            </div>              
+                <p> {message} </p>
+            </div>
         )
     }
 })
@@ -68,12 +68,12 @@ interface getNodeInterface {
     setResSource: (value: resSource) => void
 }
 
-export const NodeGetHandle = observer((props: getNodeInterface) => {              
+export const NodeGetHandle = observer((props: getNodeInterface) => {
     const node_id = props.node_id
-    const [nodeView, setNodeView] = useState<Node>({} as Node)  
+    const [nodeView, setNodeView] = useState<Node>({} as Node)
     const [message, setMessage] = useState<String>("")
     const viewModel = new NodeDataViewModel(useTendonContainer())
-    new Promise(function(myResolve, myReject) {
+    new Promise(function (myResolve, myReject) {
         useEffect(() => {
             const tmpValue = viewModel.getNodeData(node_id, token)
             myResolve(tmpValue)
@@ -92,8 +92,8 @@ export const NodeGetHandle = observer((props: getNodeInterface) => {
         return (
             <div>
                 <p>  NODE GET ERROR ZONE: </p>
-                <p> { message } </p>
-            </div>              
+                <p> {message} </p>
+            </div>
         )
     }
 
@@ -113,21 +113,21 @@ export const NodeGetHandle = observer((props: getNodeInterface) => {
                 id={nodeView.id}
                 setIsOpened={props.setIsOpened}
                 setResSource={props.setResSource}
-                attributes = {
-                    {priority: "require", size: 9, resources: "www.google.com"}
+                attributes={
+                    { priority: "require", size: 9, resources: "www.google.com" }
                 }
             />
-        </>              
+        </>
     )
 })
 
-export const NodeUpdateHandle = observer((props: propsInterface) => {              
+export const NodeUpdateHandle = observer((props: propsInterface) => {
     const node_id = props.body.id
     const body = props.body
-    const [nodeView, setNodeView] = useState<Node>({} as Node)  
+    const [nodeView, setNodeView] = useState<Node>({} as Node)
     const [message, setMessage] = useState<String>("")
     const viewModel = new NodeDataViewModel(useTendonContainer())
-    new Promise(function(myResolve, myReject) {
+    new Promise(function (myResolve, myReject) {
         useEffect(() => {
             const tmpValue = viewModel.updateNodeData(node_id, token, body)
             myResolve(tmpValue)
@@ -146,26 +146,26 @@ export const NodeUpdateHandle = observer((props: propsInterface) => {
         return (
             <div>
                 <p> NODE UPDATE ERROR ZONE: </p>
-                <p> { message } </p>
-            </div>              
+                <p> {message} </p>
+            </div>
         )
     }
 
     return (
         <div>
             <p> [ Node UPDATE ] </p>
-            <NodeView viewModel={nodeView}/>
-        </div>              
+            <NodeView viewModel={nodeView} />
+        </div>
     )
 })
 
-export const NodeDeleteHandle = observer((props: propsInterface) => { 
+export const NodeDeleteHandle = observer((props: propsInterface) => {
     const node_id = props.body.id
-    const [deleteStatus, setDeleteStatus] = useState<Number>(0)  
+    const [deleteStatus, setDeleteStatus] = useState<Number>(0)
     const [message, setMessage] = useState<String>("")
     const viewModel = new NodeDataViewModel(useTendonContainer())
 
-    new Promise(function(myResolve, myReject) {
+    new Promise(function (myResolve, myReject) {
         useEffect(() => {
             const tmpValue = viewModel.deleteNode(node_id, token)
             myResolve(tmpValue)
@@ -180,7 +180,7 @@ export const NodeDeleteHandle = observer((props: propsInterface) => {
             <div>
                 <p> [ Node DELETE ] </p>
                 <p> Delete Complete </p>
-            </div>              
+            </div>
         )
     } else {
         if (message === "") {
@@ -191,8 +191,8 @@ export const NodeDeleteHandle = observer((props: propsInterface) => {
         return (
             <div>
                 <p> NODE DELETE ERROR ZONE: </p>
-                <p> { message } </p>
-            </div>              
+                <p> {message} </p>
+            </div>
         )
     }
 })
@@ -201,16 +201,16 @@ interface ShowDataViewProps {
     viewModel: Node
 }
 
-const NodeView = observer(( {viewModel}: ShowDataViewProps) => {
+const NodeView = observer(({ viewModel }: ShowDataViewProps) => {
     return (
         <div>
-                <div key= {viewModel.id}>
-                    <p> **** {viewModel.id} **** </p>
-                    <li> {viewModel.type} </li>
-                    <li> {viewModel.data} </li>
-                    <li> {viewModel.updateAt} </li>
-                    <hr></hr>
-                </div>
+            <div key={viewModel.id}>
+                <p> **** {viewModel.id} **** </p>
+                <li> {viewModel.type} </li>
+                <li> {viewModel.data} </li>
+                <li> {viewModel.updateAt} </li>
+                <hr></hr>
+            </div>
         </div>
     )
 })

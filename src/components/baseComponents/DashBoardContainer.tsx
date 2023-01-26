@@ -9,7 +9,7 @@ type DashBoardContainerProp = {
 const DashBoardContainer = ({ children, mode }: DashBoardContainerProp) => {
     const dashboardRef = useRef(null)
     return (
-        <motion.main className={`flex gap-4 p-6 bg-slate-100 dark:bg-gray-normal rounded-3xl min-h-[500px]`}
+        <motion.main className={`z-10 flex gap-4 p-6 bg-slate-100 dark:bg-gray-normal rounded-3xl min-h-[500px]`}
             key={'dashboard'}
             initial={{ opacity: 1, y: -100, scale: 0 }}
             animate={{
@@ -29,7 +29,7 @@ const DashBoardContainer = ({ children, mode }: DashBoardContainerProp) => {
 }
 // const DashBoardContainer = forwardRef<HTMLElement, DashBoardContainerProp>(({ children, mode }, dashboardRef) => {
 //     return (
-//         <motion.main className={`flex gap-4 p-6 bg-slate-100 dark:bg-gray-normal rounded-3xl min-h-[500px]`}
+//         <motion.main className={`flex gap - 4 p - 6 bg - slate - 100 dark: bg - gray - normal rounded - 3xl min - h - [500px]`}
 //             key={'dashboard'}
 //             initial={{ opacity: 1, y: -100, scale: 0 }}
 //             animate={{
