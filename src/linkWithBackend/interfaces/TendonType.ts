@@ -12,7 +12,7 @@ export interface User {
 }
 
 export interface Course {
-    id?: string
+    id: string
     name: string
     description: string
     access: string
@@ -26,8 +26,8 @@ export interface Lesson {
     name: string
     description: string
     access: string
-    createBy: string
-    updateAt: string
+    createBy?: string
+    updateAt?: string
     nodes: string[]
     nextLesson: string[]
     prevLesson: string[]
@@ -36,8 +36,8 @@ export interface Node {
     id: string
     type: string
     data: string
-    createBy: string
-    updateAt: string
+    createBy?: string
+    updateAt?: string
 }
 
 let TYPES = {

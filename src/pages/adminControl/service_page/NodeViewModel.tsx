@@ -1,5 +1,5 @@
 // import {useEffect, useState} from "react";
-import { makeAutoObservable } from "mobx"
+import { action, computed, makeAutoObservable, observable } from "mobx"
 
 import { Container } from "inversify";
 import TYPES, { Node } from 'linkWithBackend/interfaces/TendonType'
@@ -7,9 +7,9 @@ import NodeService from "linkWithBackend/services/node_services";
 
 class NodeDataViewModel{
     private NodeService: NodeService 
-    private node: Node
-    private status: Number
-    private message: string
+    @observable private node: Node
+    @observable private status: Number
+    @observable private message: string
 
     constructor(container: Container) {
         makeAutoObservable(this)
@@ -31,6 +31,7 @@ class NodeDataViewModel{
         return {} as Node
     }
 
+    @action
     async getNodeData(id: string, token: string) {
         const tmpValue =  await this.NodeService.getNodeById(id, token)
         this.status = this.NodeService.getStatus()
@@ -40,7 +41,8 @@ class NodeDataViewModel{
         } else {
             this.handleErrorStatus()
         }
-        return {} as Node
+        this.node = tmpValue
+        return tmpValue
     }
 
     async updateNodeData(id: string, token: string, body: Node) {
@@ -66,14 +68,17 @@ class NodeDataViewModel{
         }
     }
 
+    @computed
     public getNode() {
         return this.node
     }
 
+    @computed
     public getStatus() {
         return this.status
     }
 
+    @computed
     public getMessage() {
         return this.message
     }

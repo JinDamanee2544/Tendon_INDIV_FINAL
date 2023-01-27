@@ -53,7 +53,7 @@ export const CourseCreateHandle = observer((props: propsInterface) => {
         return (
             <div>
                 <p> [ Course POST ] </p>
-                <CourseView viewModel={courseView} />
+                {/* <CourseView viewModel={courseView} /> */}
             </div>
         )
     } else {
@@ -166,7 +166,7 @@ export const CourseGetHandle = observer((props: realInterface) => {
 })
 
 export const CourseUpdateHandle = observer((props: propsInterface) => {
-    const course_id = props.body.id
+    const course_id = props.body.id!
     const body = props.body
     const [courseView, setCourseView] = useState<Course>({} as Course)
     const [message, setMessage] = useState<String>("")
@@ -206,7 +206,7 @@ export const CourseUpdateHandle = observer((props: propsInterface) => {
 })
 
 export const CourseDeleteHandle = observer((props: propsInterface) => {
-    const course_id = props.body.id
+    const course_id = props.body.id!
     const [deleteStatus, setDeleteStatus] = useState<Number>(0)
     const [message, setMessage] = useState<String>("")
     const viewModel = new CourseDataViewModel(useTendonContainer())

@@ -1,56 +1,41 @@
 import axios from 'axios'
 import { makeAutoObservable } from "mobx"
-import { injectable } from 'inversify'
-import { Node } from 'linkWithBackend/interfaces/TendonType'
+import { inject, injectable } from 'inversify'
+import TYPES, { Lesson, Node } from 'linkWithBackend/interfaces/TendonType'
+import APIService from './api_services'
 
 @injectable()
 class NodeService {
     response: Node
     status: number
+    apiService: APIService
 
-    constructor() {
+    constructor(
+        @inject(TYPES.APIService) apiService: APIService
+    ) {
         makeAutoObservable(this)
         this.response = {} as Node
+        this.apiService = apiService
         this.status = 0
     }
 
     async postNode(body: Node, token: string) {
-        const config = {
-            headers: { Authorization: `Bearer ${token}` }
-        };
-
-        await axios.post('http://24.199.72.217:8080/api/v1/auth/nodes', {
-                type: body.type,
-                data: body.data
-            }, config)
-
-        .then((response) => {
-            this.status = response.status
-            this.response = response.data
-        })
-        .catch((err) => {
-            this.status = Object(err)["response"]["request"]["status"]
-            this.response = {} as Node
-        });
-
-        return this.response
+        let bodySend: Node = {
+            id: "",
+            type: body.type,
+            data: body.data
+        }
+        const result = await this.apiService.post<Node>(
+            "http://24.199.72.217:8080/api/v1/auth/nodes",
+            bodySend,
+            token
+        )
+        this.status = result.status
+        return this.response = result.response
     }
 
     async getNodeById(id: string, token: string){
-        const config = {
-            headers: { Authorization: `Bearer ${token}` }
-        };
-
-        let tmp_response: any
-        try { 
-            tmp_response =  await axios.get<any>(`http://24.199.72.217:8080/api/v1/auth/nodes/${id}`, config)
-            this.status = tmp_response.status
-            this.response = tmp_response.data
-        } catch (err) {
-            this.status = Object(err)["response"]["request"]["status"]
-            this.response = {} as Node
-        }
-        return this.response
+        return this.response = await this.apiService.getByID<Node>("http://24.199.72.217:8080/api/v1/auth/nodes", id, token)
     }
 
     async updateNode(id: string, token: string, body: Node) {

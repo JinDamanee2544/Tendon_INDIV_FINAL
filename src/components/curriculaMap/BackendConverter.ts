@@ -32,12 +32,12 @@ export default class NewBackendConvert {
     async converter() {
         const allCoursesLoading = Promise.all(this.lessonArray?.map(async (lesson) => {
             const tmpValue = await getLessonInformation(lesson)
-            dataDict[tmpValue.id] = tmpValue
-            isRender[tmpValue.id] = true
+            dataDict[tmpValue.id!] = tmpValue
+            isRender[tmpValue.id!] = true
             this.data.push(tmpValue)
             try {
                 if (tmpValue.prevLesson.length === 0) {
-                    this.lonely.push(tmpValue.id)
+                    this.lonely.push(tmpValue.id!)
                 }
             } catch (err) {
                 console.log("Error: ", err)
@@ -46,6 +46,6 @@ export default class NewBackendConvert {
         await allCoursesLoading;
         initNode = this.lonely;
         firstCal = true;
-        this.prepArray = prepNodeAlgo({ courseView: this.course, dataDict: dataDict, initLesson: this.lonely });
+        this.prepArray = prepNodeAlgo({ courseView: this.course, dataDict: dataDict, initLesson: this.lonely })
     }
 }

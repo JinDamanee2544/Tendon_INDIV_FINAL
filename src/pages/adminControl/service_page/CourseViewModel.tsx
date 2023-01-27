@@ -22,13 +22,15 @@ class CourseDataViewModel{
     async createCourse(body: Course, token: string) {
         const tmpValue =  await this.CourseService.postCourse(body, token)
         this.status = this.CourseService.getStatus()
+        console.log(this.status)
         if (this.status === 201) {
             this.Course = tmpValue
             return this.Course
         } else {
             this.handleErrorStatus()
         }
-        return {} as Course
+        this.Course = tmpValue
+        return this.Course
     }
 
     async getCourseData(id: string, token: string) {
@@ -40,7 +42,8 @@ class CourseDataViewModel{
         } else {
             this.handleErrorStatus()
         }
-        return {} as Course
+        this.Course = tmpValue
+        return this.Course
     }
 
     async updateCourseData(id: string, token: string, body: Course) {
@@ -52,7 +55,8 @@ class CourseDataViewModel{
         } else {
             this.handleErrorStatus()
         }
-        return {} as Course
+        this.Course = tmpValue
+        return this.Course
     }
 
     async deleteCourse(id: string, token: string) {

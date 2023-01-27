@@ -24,35 +24,25 @@ class CourseService {
 
     async postCourse(body: Course, token: string) {
         let bodySend:Course = {
+            id: "",
             name: body.name,
             description: body.description,
             access: body.access,
             lessons: body.lessons
         }
 
-        return this.response = await this.apiService.post<Course>(
+        const result = await this.apiService.post<Course>(
             "http://24.199.72.217:8080/api/v1/auth/courses",
             bodySend,
             token
         )
+        this.message = result.message
+        this.status = result.status
+        return this.response = result.response
     }
 
     async getCourseById(id: string, token: string){
-        const config = {
-            headers: { Authorization: `Bearer ${token}` }
-        };
-
-        let tmp_response: any
-        try { 
-            tmp_response =  await axios.get<any>(`http://24.199.72.217:8080/api/v1/auth/courses/${id}`, config)
-            this.status = tmp_response.status
-            this.response = tmp_response.data
-        } catch (err) {
-            this.status = Object(err)["response"]["request"]["status"]
-            this.message = Object(err)["response"]["data"]["message"]
-            this.response = {} as Course
-        }
-        return this.response
+        return this.response = await this.apiService.getByID<Course>("http://24.199.72.217:8080/api/v1/auth/courses", id, token)
     }
 
     async updateCourse(id: string, token: string, body: Course) {

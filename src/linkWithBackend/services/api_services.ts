@@ -1,6 +1,6 @@
 import axios from "axios";
 import { injectable } from "inversify";
-import { Course, Lesson } from "linkWithBackend/interfaces/TendonType";
+import { Course, Lesson, Node } from "linkWithBackend/interfaces/TendonType";
 import { makeAutoObservable } from "mobx";
 
 @injectable()
@@ -20,9 +20,7 @@ class APIService {
             headers: { Authorization: `Bearer ${token}` }
         };
 
-        await axios.post(url, {
-                body
-            }, config)
+        await axios.post(url, body, config)
 
         .then((response) => {
             this.status = response.status
@@ -34,6 +32,30 @@ class APIService {
             console.log(err)
             response = {} as Type
         })
+
+        return { 
+            response: response, 
+            status: this.status, 
+            message: this.message 
+        }
+    }
+
+    public async getByID<Type>(url: string, id: string, token: string) {
+        let response: Type = {} as Type
+        const config = {
+            headers: { Authorization: `Bearer ${token}` }
+        };
+
+        let tmp_response: any
+        try { 
+            tmp_response =  await axios.get<any>(url+"/"+id, config)
+            this.status = tmp_response.status
+            response = tmp_response.data
+        } catch (err) {
+            this.status = Object(err)["response"]["request"]["status"]
+            this.message = Object(err)["response"]["data"]["message"]
+            response = {} as Type
+        }
 
         return response
     }

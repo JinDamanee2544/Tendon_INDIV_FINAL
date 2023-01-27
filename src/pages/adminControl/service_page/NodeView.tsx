@@ -125,7 +125,7 @@ export const NodeGetHandle = observer((props: getNodeInterface) => {
 })
 
 export const NodeUpdateHandle = observer((props: propsInterface) => {
-    const node_id = props.body.id
+    const node_id = props.body.id!
     const body = props.body
     const [nodeView, setNodeView] = useState<Node>({} as Node)
     const [message, setMessage] = useState<String>("")
@@ -163,7 +163,7 @@ export const NodeUpdateHandle = observer((props: propsInterface) => {
 })
 
 export const NodeDeleteHandle = observer((props: propsInterface) => {
-    const node_id = props.body.id
+    const node_id = props.body.id!
     const [deleteStatus, setDeleteStatus] = useState<Number>(0)
     const [message, setMessage] = useState<String>("")
     const viewModel = new NodeDataViewModel(useTendonContainer())

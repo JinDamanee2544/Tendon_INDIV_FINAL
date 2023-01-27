@@ -117,7 +117,7 @@ export const LessonGetHandle = observer((props: realLessonInterface) => {
 
 export const LessonUpdateHandle = observer((props: propsInterface) => {
     const body = props.body
-    const lesson_id = props.body.id
+    const lesson_id = props.body.id!
     const [lessonView, setLessonView] = useState<Lesson>({} as Lesson)
     const [message, setMessage] = useState<String>("")
     const viewModel = new LessonDataViewModel(useTendonContainer())
@@ -154,7 +154,7 @@ export const LessonUpdateHandle = observer((props: propsInterface) => {
 })
 
 export const LessonDeleteHandle = observer((props: propsInterface) => {
-    const lesson_id = props.body.id
+    const lesson_id = props.body.id!
     const [deleteStatus, setDeleteStatus] = useState<Number>(0)
     const [message, setMessage] = useState<String>("")
     const viewModel = new LessonDataViewModel(useTendonContainer())
