@@ -59,6 +59,46 @@ class APIService {
 
         return response
     }
+
+    public async update<Type>(url: string, body: Type, id: string, token: string) {
+        let response: Type = {} as Type
+        const config = {
+            headers: { Authorization: `Bearer ${token}` }
+        }
+        try { 
+            await axios.patch(url+"/"+id, body, config)
+            .then((res) => {
+                this.status = res.status
+                response = res.data
+            })
+        } catch (err) {
+            this.status = Object(err)["response"]["request"]["status"]
+            this.message = Object(err)["response"]["data"]["message"]
+            response = {} as Type
+        }
+
+        return { 
+            response: response, 
+            status: this.status, 
+            message: this.message 
+        }
+    }
+
+    public async delete<Type>(url: string, id: string, token: string) {
+        const config = {
+            headers: { Authorization: `Bearer ${token}` }
+        };
+
+        try {
+            await axios.delete(url+"/"+id, config)
+            .then((res) => {
+                this.status = res.status
+            })
+        } catch(err) {
+            this.status = Object(err)["response"]["request"]["status"]
+        }
+        return this.status
+    }
 }
 
 export default APIService

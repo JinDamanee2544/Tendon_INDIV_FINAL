@@ -39,40 +39,24 @@ class NodeService {
     }
 
     async updateNode(id: string, token: string, body: Node) {
-        const config = {
-            headers: { Authorization: `Bearer ${token}` }
-        };
-
-        try { 
-            await axios.patch(`http://24.199.72.217:8080/api/v1/auth/nodes/${id}`, {
-                type: body.type,
-                data: body.data
-            }, config)
-            .then((res) => {
-                this.status = res.status
-                this.response = res.data
-            })
-        } catch (err) {
-            this.status = Object(err)["response"]["request"]["status"]
-            this.response = {} as Node
+        let bodySend:Node = {
+            id: "",
+            type: body.type,
+            data: body.data
         }
-        return this.response
+
+        const result = await this.apiService.update<Node>(
+            "http://24.199.72.217:8080/api/v1/auth/nodes",
+            bodySend,
+            id,
+            token
+        )
+        this.status = result.status
+        return this.response = result.response
     }
 
     async deleteNode(id: string, token: string) {
-        const config = {
-            headers: { Authorization: `Bearer ${token}` }
-        };
-
-        try {
-            await axios.delete(`http://24.199.72.217:8080/api/v1/auth/nodes/${id}`, config)
-            .then((res) => {
-                this.status = res.status
-            })
-        } catch(err) {
-            this.status = Object(err)["response"]["request"]["status"]
-        }
-        return this.status
+        this.status = await this.apiService.delete<Node>("http://24.199.72.217:8080/api/v1/auth/nodes", id, token)
     }
 
     public getStatus() {

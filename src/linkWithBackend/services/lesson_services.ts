@@ -48,45 +48,29 @@ class LessonService {
     }
 
     async updateLesson(id: string, token: string, body: Lesson) {
-        const config = {
-            headers: { Authorization: `Bearer ${token}` }
-        };
-
-        try { 
-            await axios.patch(`http://24.199.72.217:8080/api/v1/auth/lessons/${id}`, {
-                name: body.name,
-                description: body.description,
-                access: body.access,
-                nodes: body.nodes,
-                nextLesson: body.nextLesson,
-                prevLesson: body.prevLesson
-            }, config)
-            .then((res) => {
-                this.status = res.status
-                this.response = res.data
-            })
-        } catch (err) {
-            this.status = Object(err)["response"]["request"]["status"]
-            this.message = Object(err)["response"]["data"]["message"]
-            this.response = {} as Lesson
+        let bodySend:Lesson = {
+            id: "",
+            name: body.name,
+            description: body.description,
+            access: body.access,
+            nodes: body.nodes,
+            nextLesson: body.nextLesson,
+            prevLesson: body.prevLesson
         }
-        return this.response
+
+        const result = await this.apiService.update<Lesson>(
+            "http://24.199.72.217:8080/api/v1/auth/lessons",
+            bodySend,
+            id,
+            token
+        )
+        this.message = result.message
+        this.status = result.status
+        return this.response = result.response
     }
 
     async deleteLesson(id: string, token: string) {
-        const config = {
-            headers: { Authorization: `Bearer ${token}` }
-        };
-
-        try {
-            await axios.delete(`http://24.199.72.217:8080/api/v1/auth/lessons/${id}`, config)
-            .then((res) => {
-                this.status = res.status
-            })
-        } catch(err) {
-            this.status = Object(err)["response"]["request"]["status"]
-        }
-        return this.status
+        return this.status = await this.apiService.delete<Lesson>("http://24.199.72.217:8080/api/v1/auth/lessons", id, token)
     }
 
     public getStatus() {
