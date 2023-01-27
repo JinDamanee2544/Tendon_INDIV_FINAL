@@ -1,6 +1,6 @@
 import TYPES, { Lesson } from "linkWithBackend/interfaces/TendonType";
-import LessonGraphService from "linkWithBackend/services/data_service";
 import container from "linkWithBackend/services/inversify.config";
+import LessonService from "linkWithBackend/services/lesson_services";
 import MemoryService from "linkWithBackend/services/memory_services";
 import React from "react";
 
@@ -14,8 +14,8 @@ export async function getLessonInformation(lesson_id: string) {
         return dictLesson[lesson_id]!
     } else {
         var result: Lesson = {} as Lesson
-        var lessonGraph = new LessonGraphService()
-        var lessonInformation: Lesson = await lessonGraph.getLessonById(lesson_id, token)
+        var lessonService = container.get<LessonService>(TYPES.LessonService)
+        var lessonInformation: Lesson = await lessonService.getLessonById(lesson_id, token)
 
         result = {
             ...result,

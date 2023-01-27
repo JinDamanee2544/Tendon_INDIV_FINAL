@@ -2,6 +2,8 @@ import axios from 'axios'
 import { makeAutoObservable } from "mobx"
 import { injectable } from 'inversify'
 import { Course } from 'linkWithBackend/interfaces/TendonType'
+import TYPES from "linkWithBackend/interfaces/TendonType";
+import APIService from './api_services';
 
 @injectable()
 class CourseService {
@@ -9,7 +11,9 @@ class CourseService {
     status: number
     message: string
 
-    constructor() {
+    constructor(
+        /// @inject(TYPES.APIService) apiService: APIService,
+    ) {
         makeAutoObservable(this)
         this.response = {} as Course
         this.status = 0
@@ -113,3 +117,7 @@ class CourseService {
 }
 
 export default CourseService
+
+function inject(Weapon: any) {
+    throw new Error('Function not implemented.')
+}

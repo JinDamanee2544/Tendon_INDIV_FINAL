@@ -46,7 +46,8 @@ let TYPES = {
     NodeService: Symbol("NodeService"),
     LessonService: Symbol("LessonService"),
     CourseService: Symbol("CourseService"),
-    MemoryService: Symbol("MemoryService")
+    MemoryService: Symbol("MemoryService"),
+    APIService: Symbol("APIService")
 };
 
 export default TYPES
