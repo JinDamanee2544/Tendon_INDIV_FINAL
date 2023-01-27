@@ -4,9 +4,10 @@ import { useState, useEffect } from "react";
 
 import { useTendonContainer } from "linkWithBackend/services/container";
 import SignDataViewModel from "./SignViewModel";
-import { User } from "linkWithBackend/interfaces/TendonType";
+import TYPES, { User } from "linkWithBackend/interfaces/TendonType";
 import { useRouter } from 'next/router'
-import { setToken, userInformation } from "../../../components/shareData/user_setting";
+import container from "linkWithBackend/services/inversify.config";
+import MemoryService from "linkWithBackend/services/memory_services";
 
 export var user_id_new: string;         // For Testing purpose
 
@@ -14,6 +15,8 @@ interface signViewInterface {
     body: User,
     isCal?: boolean
 }
+
+var memService = container.get<MemoryService>(TYPES.MemoryService)
 
 export const SignUpHandle = observer((signView: signViewInterface) => {
     const router = useRouter()
@@ -90,8 +93,8 @@ export const SignInHandle = observer((signView: signViewInterface) => {
         setUserView(viewModel.getUser())
         setMessage(viewModel.getMessage())
         setStatus(viewModel.getStatus())
-        setToken(viewModel.getUser().accessToken)
-        userInformation(viewModel.getUser())
+        memService.setToken(viewModel.getUser().accessToken)
+        memService.userInformation(viewModel.getUser())
     })
 
     if (signView.isCal === false) {

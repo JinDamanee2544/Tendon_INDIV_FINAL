@@ -4,11 +4,12 @@ import { useState, useEffect } from "react";
 
 import { useTendonContainer } from "linkWithBackend/services/container";
 import LessonDataViewModel from "./LessonViewModel";
-import { Lesson } from "linkWithBackend/interfaces/TendonType";
-import { getToken } from "../../../components/shareData/user_setting";
+import TYPES, { Lesson } from "linkWithBackend/interfaces/TendonType";
 import CourseNode from "@components/curriculaMap/LearningNode";
 import { StatusType } from "@customTypes/index";
 import { useRouter } from "next/router";
+import container from "linkWithBackend/services/inversify.config";
+import MemoryService from "linkWithBackend/services/memory_services";
 
 interface propsInterface {
     body: Lesson
@@ -18,7 +19,8 @@ interface realLessonInterface {
     lesson_id: string
 }
 
-var token = getToken()
+var memService = container.get<MemoryService>(TYPES.MemoryService)
+var token = memService.getToken()
 
 export const LessonCreateHandle = observer((props: propsInterface) => {
     const body = props.body
@@ -69,7 +71,7 @@ export const LessonGetHandle = observer((props: realLessonInterface) => {
     const viewModel = new LessonDataViewModel(useTendonContainer())
     new Promise(function (myResolve, myReject) {
         useEffect(() => {
-            var mytoken = getToken()
+            var mytoken = memService.getToken()
             const tmpValue = viewModel.getLessonData(lesson_id, mytoken)
             myResolve(tmpValue)
         }, [])

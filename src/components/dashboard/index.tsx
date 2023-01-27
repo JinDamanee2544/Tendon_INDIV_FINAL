@@ -10,8 +10,10 @@ import { modeType } from "customTypes";
 import NavigateButton from "./NavigateButton";
 import DashBoardContainer from "@components/baseComponents/DashBoardContainer";
 import { useRouter } from "next/router";
-import { getToken, getUserCurrentData } from "@components/shareData/user_setting";
 import dynamic from "next/dynamic";
+import container from "linkWithBackend/services/inversify.config";
+import MemoryService from "linkWithBackend/services/memory_services";
+import TYPES from "linkWithBackend/interfaces/TendonType";
 
 const ResumeList = dynamic(() => import('./resume/ResumeList'), { suspense: true })
 // import ResumeList from "./resume/ResumeList";
@@ -21,7 +23,8 @@ const DashBoard = () => {
     const [ready, setReady] = useState<boolean>(false);
 
     const router = useRouter()
-    var userInformation = getUserCurrentData()
+    var memService = container.get<MemoryService>(TYPES.MemoryService)
+    var userInformation = memService.getUserCurrentData()
 
     const navigateMode = () => {
         //const currentWidth = dashboardRef.current.clientWidth

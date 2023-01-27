@@ -1,4 +1,3 @@
-// import {useEffect, useState} from "react";
 import { makeAutoObservable } from "mobx"
 
 import { Container } from "inversify";

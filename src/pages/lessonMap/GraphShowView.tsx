@@ -1,7 +1,6 @@
 import CourseNode from "@components/curriculaMap/LearningNode";
-import { Course, Lesson } from "linkWithBackend/interfaces/TendonType";
+import TYPES, { Course, Lesson } from "linkWithBackend/interfaces/TendonType";
 import React, { useMemo, useState } from "react";
-import { getToken } from "../../components/shareData/user_setting";
 import { useXarrow, Xwrapper } from "react-xarrows";
 import Draggable from "react-draggable";
 import { useTheme } from "next-themes";
@@ -10,8 +9,8 @@ import { LearningLessonNodeProps } from "../../customTypes"
 import prepNodeAlgo from "../../linkWithBackend/lessonHandle/Graph_PrepNodeData";
 import { motion } from "framer-motion";
 import { getLessonInformation } from "../../linkWithBackend/lessonHandle/lessonData"
-
-//@components/curriculaMap/LearningNode
+import container from "linkWithBackend/services/inversify.config";
+import MemoryService from "linkWithBackend/services/memory_services";
 
 interface graphProps {
     courseView: Course
@@ -22,7 +21,9 @@ export interface coordinateXY {
     levelY: number,
     direction: boolean,       // true = up, false = down
 }
-var token = getToken()
+
+const memService = container.get<MemoryService>(TYPES.MemoryService)
+var token = memService.getToken()
 const DraggableBoxx = ({ id, name, level }: { id: string, name: string, level: { [key: string]: coordinateXY } }) => {
     const updateXarrow = useXarrow();
 

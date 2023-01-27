@@ -4,15 +4,17 @@ import { useState, useEffect } from "react";
 import UserDataViewModel from './UserViewModel'
 
 import { useTendonContainer } from "linkWithBackend/services/container";
-import { User } from "linkWithBackend/interfaces/TendonType";
-import { getToken } from "../../../components/shareData/user_setting";
+import TYPES, { User } from "linkWithBackend/interfaces/TendonType";
+import container from "linkWithBackend/services/inversify.config";
+import MemoryService from "linkWithBackend/services/memory_services";
 
 interface UserProps {
     user_id: string,
     body: User
 }
 
-var token = getToken()
+const memService = container.get<MemoryService>(TYPES.MemoryService)
+var token = memService.getToken()
 export const UserGetHandle = observer((props: UserProps) => {
     const userID = props.user_id
     const [userGetView, setUserGetView] = useState<User>({} as User)

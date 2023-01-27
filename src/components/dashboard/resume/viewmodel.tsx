@@ -1,7 +1,7 @@
-import { getToken } from "@components/shareData/user_setting"
 import TYPES, { Course } from "linkWithBackend/interfaces/TendonType"
 import CourseService from "linkWithBackend/services/course_services"
 import container from "linkWithBackend/services/inversify.config"
+import MemoryService from "linkWithBackend/services/memory_services"
 import { useEffect, useState } from "react"
 
 export default function Viewmodel() {
@@ -13,7 +13,8 @@ export default function Viewmodel() {
         const courseService = container.get<CourseService>(TYPES.CourseService)
 
         const courseLoading = Promise.all(resumeCourseID.map(async (id) => {
-            const course = await courseService.getCourseById(id, getToken())
+            const memService = container.get<MemoryService>(TYPES.MemoryService)
+            const course = await courseService.getCourseById(id, memService.getToken())
             return course
         }))
 

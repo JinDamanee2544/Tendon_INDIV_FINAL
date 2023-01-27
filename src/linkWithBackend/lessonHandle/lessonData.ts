@@ -1,10 +1,13 @@
-import { Lesson } from "linkWithBackend/interfaces/TendonType";
+import TYPES, { Lesson } from "linkWithBackend/interfaces/TendonType";
 import LessonGraphService from "linkWithBackend/services/data_service";
-import { getToken } from "@components/shareData/user_setting";
+import container from "linkWithBackend/services/inversify.config";
+import MemoryService from "linkWithBackend/services/memory_services";
 import React from "react";
 
 export var dictLesson: { [key: string]: Lesson } = {}
-var token = getToken()
+
+const memService = container.get<MemoryService>(TYPES.MemoryService)
+var token = memService.getToken()
 
 export async function getLessonInformation(lesson_id: string) {
     if (lesson_id in dictLesson) {

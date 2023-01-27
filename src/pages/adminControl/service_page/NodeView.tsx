@@ -4,16 +4,19 @@ import { useState, useEffect } from "react";
 
 import { useTendonContainer } from "linkWithBackend/services/container";
 import NodeDataViewModel from "./NodeViewModel";
-import { Node } from "linkWithBackend/interfaces/TendonType";
-import { getToken } from "../../../components/shareData/user_setting";
+import TYPES, { Node } from "linkWithBackend/interfaces/TendonType";
 import NodeItem from "@components/learningNode/NodeItem";
 import { resSource } from "../../../customTypes";
 import { useRouter } from "next/router";
+import container from "linkWithBackend/services/inversify.config";
+import MemoryService from "linkWithBackend/services/memory_services";
 
 interface propsInterface {
     body: Node
 }
-var token = getToken()
+const memService = container.get<MemoryService>(TYPES.MemoryService)
+var token = memService.getToken()
+
 export const NodeCreateHandle = observer((props: propsInterface) => {
     const router = useRouter()
     const body = props.body
@@ -24,7 +27,7 @@ export const NodeCreateHandle = observer((props: propsInterface) => {
 
     new Promise(function (myResolve, myReject) {
         useEffect(() => {
-            var mytoken = getToken()
+            var mytoken = memService.getToken()
             const tmpValue = viewModel.createNode(body, mytoken)
             myResolve(tmpValue)
         }, [])

@@ -4,8 +4,7 @@ import { useState, useEffect } from "react";
 
 import { useTendonContainer } from "linkWithBackend/services/container";
 import CourseDataViewModel from "./CourseViewModel";
-import { Course } from "linkWithBackend/interfaces/TendonType";
-import { getToken } from "../../../components/shareData/user_setting";
+import TYPES, { Course } from "linkWithBackend/interfaces/TendonType";
 
 import ResumeList from "@components/dashboard/resume/ResumeList";
 import Xarrow, { Xwrapper } from "react-xarrows";
@@ -17,6 +16,8 @@ import CourseNode from "@components/curriculaMap/LearningNode";
 import { StatusType } from "@customTypes/index";
 import GraphPathView from "../../lessonMap/GraphShowView";
 import { useRouter } from "next/router";
+import container from "linkWithBackend/services/inversify.config";
+import MemoryService from "linkWithBackend/services/memory_services";
 
 interface propsInterface {
     body: Course
@@ -27,7 +28,8 @@ interface realInterface {
     component: string
 }
 
-var token = getToken()
+const memService = container.get<MemoryService>(TYPES.MemoryService)
+var token = memService.getToken()
 
 export const CourseCreateHandle = observer((props: propsInterface) => {
     const body = props.body
@@ -85,7 +87,7 @@ export const CourseGetHandle = observer((props: realInterface) => {
 
     useEffect(() => {
         // const viewModel = new CourseDataViewModel(useTendonContainer())
-        const mytoken = getToken()
+        const mytoken = memService.getToken()
         const tmpCourse: Promise<Course> = viewModel.getCourseData(course_id, mytoken)
         tmpCourse.then((value) => {
             setCourseView(value)
