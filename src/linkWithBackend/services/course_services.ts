@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { makeAutoObservable } from "mobx"
-import { injectable } from 'inversify'
+import { inject, injectable } from 'inversify'
 import { Course } from 'linkWithBackend/interfaces/TendonType'
 import TYPES from "linkWithBackend/interfaces/TendonType";
 import APIService from './api_services';
@@ -10,38 +10,31 @@ class CourseService {
     response: Course
     status: number
     message: string
+    apiService: APIService
 
     constructor(
-        /// @inject(TYPES.APIService) apiService: APIService,
+        @inject(TYPES.APIService) apiService: APIService
     ) {
         makeAutoObservable(this)
+        this.apiService = apiService
         this.response = {} as Course
         this.status = 0
         this.message = ""
     }
 
     async postCourse(body: Course, token: string) {
-        const config = {
-            headers: { Authorization: `Bearer ${token}` }
-        };
-
-        await axios.post('http://24.199.72.217:8080/api/v1/auth/courses', {
+        let bodySend:Course = {
             name: body.name,
             description: body.description,
             access: body.access,
             lessons: body.lessons
-        }, config)
-        .then((response) => {
-            this.status = response.status
-            this.response = response.data
-        })
-        .catch((err) => {
-            this.status = Object(err)["response"]["request"]["status"]
-            this.message = Object(err)["response"]["data"]["message"]
-            this.response = {} as Course
-        });
+        }
 
-        return this.response
+        return this.response = await this.apiService.post<Course>(
+            "http://24.199.72.217:8080/api/v1/auth/courses",
+            bodySend,
+            token
+        )
     }
 
     async getCourseById(id: string, token: string){
@@ -117,7 +110,3 @@ class CourseService {
 }
 
 export default CourseService
-
-function inject(Weapon: any) {
-    throw new Error('Function not implemented.')
-}

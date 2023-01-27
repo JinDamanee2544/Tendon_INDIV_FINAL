@@ -12,12 +12,12 @@ export interface User {
 }
 
 export interface Course {
-    id: string
+    id?: string
     name: string
     description: string
     access: string
-    createBy: string
-    updateAt: string
+    createBy?: string
+    updateAt?: string
     lessons: string[]
 }
 
