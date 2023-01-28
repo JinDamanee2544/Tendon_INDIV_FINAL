@@ -18,8 +18,9 @@ export default function useViewmodel(lid: string): RenderLearningLessonNodeProps
         const fetchCourse = async () => {
             if (lid) {
                 const courseService = container.get<CourseService>(TYPES.CourseService)
-                const tokenService = container.get<MemoryService>(TYPES.MemoryService)
-                const course = await courseService.getCourseById(lid, tokenService.getToken())
+                const memService = container.get<MemoryService>(TYPES.MemoryService)
+                const course = await courseService.getCourseById(lid, memService.getToken())
+                memService.setCourse(lid, course.name)
                 let myClass = new NewBackendConvert(course)
                 const t = await myClass.converter()
                 const lessonGraph: LearningLessonNodeProps = myClass.getPrepArray

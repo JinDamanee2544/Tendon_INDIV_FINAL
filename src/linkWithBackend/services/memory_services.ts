@@ -8,6 +8,8 @@ class MemoryService {
     token: string = ""
     firstName:string = ""
     lastName: string = ""
+    courseID: string = ""
+    courseName: string = ""
 
     constructor() {
         makeAutoObservable(this)
@@ -54,6 +56,29 @@ class MemoryService {
             firstName: this.firstName,
             lastName: this.lastName
         }
+    }
+
+    public getCourseID() {
+        if (typeof window !== 'undefined') {
+            this.courseID = localStorage.getItem('courseID') || ""
+            return this.courseID
+        }
+        return this.courseID
+    }
+
+    public getCourseName() {
+        if (typeof window !== 'undefined') {
+            this.courseName = localStorage.getItem('courseName') || ""
+            return this.courseName
+        }
+        return this.courseName
+    }
+
+    public setCourse(courseID: string, courseName: string) {
+        this.courseID = courseID
+        this.courseName = courseName
+        localStorage.setItem('courseID', courseID)
+        localStorage.setItem('courseName', courseName)
     }
 }
 

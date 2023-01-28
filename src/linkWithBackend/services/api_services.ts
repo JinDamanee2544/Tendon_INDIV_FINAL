@@ -54,6 +54,7 @@ class APIService {
         } catch (err) {
             this.status = Object(err)["response"]["request"]["status"]
             this.message = Object(err)["response"]["data"]["message"]
+            console.log("Error: ", err, " with url: ", url, " and id is: ", id)
             response = {} as Type
         }
 

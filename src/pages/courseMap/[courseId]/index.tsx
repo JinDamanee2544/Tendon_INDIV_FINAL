@@ -48,7 +48,7 @@ const CoursePage = () => {
             },
             {
                 name: courseName,
-                link: `/courseMap/${courseId}`,
+                link: `/courseMap/${courseParam}`,
             }
         ])
         setStoredPath(pathList);

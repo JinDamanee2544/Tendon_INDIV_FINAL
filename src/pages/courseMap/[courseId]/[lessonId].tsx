@@ -6,11 +6,14 @@ import { LearningNode } from "@customTypes/tendonAPItype";
 import { useBreadCrumb } from "context/breadCrumb";
 import useLocalStorage from "hooks/useLocalStorage";
 import useNavPath from "hooks/useNavPath";
-import { Lesson } from "linkWithBackend/interfaces/TendonType";
+import TYPES, { Lesson } from "linkWithBackend/interfaces/TendonType";
 import { getLessonInformation } from "linkWithBackend/lessonHandle/lessonData";
 import { ContainerProviderTendon } from "linkWithBackend/services/container";
 import { useRouter } from "next/router";
 import { Suspense, useEffect, useState } from "react";
+import container from "linkWithBackend/services/inversify.config";
+import MemoryService from "linkWithBackend/services/memory_services";
+import viewModel from "@components/learningNode/viewModel";
 
 // Fetch Learning Node Data
 const getLearningNodeById = (id: string): LearningNode => {
@@ -20,59 +23,69 @@ const getLearningNodeById = (id: string): LearningNode => {
 const Lesson = () => {
     const router = useRouter();
     const lessonId = router.query.lessonId ? router.query.lessonId.toString() : "";
-    // console.log("id: ", lessonId)
     const { pathList, setPathList } = useBreadCrumb()                               // Display Path
-    // console.log(pathList)
-    // console.log("--> ", router.pathname)            // get current path
     const [storedPath, setStoredPath] = useLocalStorage('path', pathList);          // cache for refreshing page 
-    const mockLearningNode = getLearningNodeById(lessonId);
     const [lessonName, setLessonName] = useState<string>("")
 
-    // useNavPath({
-    //     page: 'LearningNode',
-    //     mockLearningNode: mockLearningNode
-    // });
+    const localMem = viewModel()
 
     useEffect(() => {
         let promise = new Promise<Lesson>((resolve, reject) => {
-            const tmpValue = getLessonInformation(lessonId)
+            let tmpValue
+            if (lessonId.trim() !== "" && lessonId !== undefined) {
+                tmpValue = getLessonInformation(lessonId)
+            } else {
+                tmpValue = {} as Lesson
+            }
             resolve(tmpValue)
         })
         promise.then(value => {
-            setLessonName(value.name)
-            
-            // -------
-            setPathList((prev) => {
-                if (prev.length != 0) {
-                    return [
-                        ...prev,
-                        {
-                            name: value.name || 'Error',
-                            link: 'มีไปก็กดไม่ได้ (ตาม Usecase)',
-                        }
-                    ]
-                } else {    // no previous path  (For refresh)
-                    console.log("--> ", ...storedPath)
-                    return [
-                        ...storedPath,
-                        {
-                            name: value.name || 'Error',
-                            link: 'มีไปก็กดไม่ได้ (ตาม Usecase)',
-                        }
-                    ]
-                }
-            })
-            setStoredPath(pathList);
+            if (value.name !== undefined) {
+                setLessonName(value.name)   
+            }
         })
+    }, [lessonId])
 
-    }, [])
+    useEffect(() => {
+        setPathList([
+            {
+                name: 'Dashboard',
+                link: '/',
+            },
+            {
+                name: `${localMem.courseName}`,
+                link: `/courseMap/${localMem.courseID}-${localMem.courseName}`,
+            },
+            {
+                name: `${lessonName}`,
+                link: `/`,
+            }
+        ])
+        setStoredPath([
+            {
+                name: 'Dashboard',
+                link: '/',
+            },
+            {
+                name: `${localMem.courseName}`,
+                link: `/courseMap/${localMem.courseID}-${localMem.courseName}`,
+            },
+            {
+                name: `${lessonName}`,
+                link: `/`,
+            }
+        ]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [lessonName])
 
     return (
         <MainLayout>
             <Suspense fallback={<LoadingSpinner />}>
-                <LessonNode
-                    lesson_id={lessonId}
-                />
+                { lessonId !== undefined && lessonId.trim() !== "" && 
+                    <LessonNode
+                        lesson_id={lessonId}
+                    /> 
+                }
             </Suspense>
         </MainLayout>
     )

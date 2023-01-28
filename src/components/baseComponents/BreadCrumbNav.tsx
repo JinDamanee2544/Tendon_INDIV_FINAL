@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 
 const BreadCrumbNav = () => {
     const { pathList } = useBreadCrumb()
+    // console.log("PathList: ", pathList)
 
     useEffect(() => {
         // console.log(pathList);
