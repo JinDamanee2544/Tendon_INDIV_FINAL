@@ -35,7 +35,9 @@ class NodeService {
     }
 
     async getNodeById(id: string, token: string){
-        return this.response = await this.apiService.getByID<Node>("http://24.199.72.217:8080/api/v1/auth/nodes", id, token)
+        let result = await this.apiService.getByID<Node>("http://24.199.72.217:8080/api/v1/auth/nodes", id, token)
+        this.status = result.status
+        return this.response = result.response
     }
 
     async updateNode(id: string, token: string, body: Node) {

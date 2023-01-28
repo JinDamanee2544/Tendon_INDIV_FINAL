@@ -57,7 +57,11 @@ class APIService {
             response = {} as Type
         }
 
-        return response
+        return { 
+            response: response, 
+            status: this.status, 
+            message: this.message 
+        }
     }
 
     public async update<Type>(url: string, body: Type, id: string, token: string) {

@@ -44,7 +44,10 @@ class LessonService {
     }
 
     async getLessonById(id: string, token: string){
-        return this.response = await this.apiService.getByID<Lesson>("http://24.199.72.217:8080/api/v1/auth/lessons", id, token)
+        var result = await this.apiService.getByID<Lesson>("http://24.199.72.217:8080/api/v1/auth/lessons", id, token)
+        this.message = result.message
+        this.status = result.status
+        return this.response = result.response
     }
 
     async updateLesson(id: string, token: string, body: Lesson) {
