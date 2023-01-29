@@ -3,9 +3,9 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { useBreadCrumb } from "context";
 import useLocalStorage from "hooks/useLocalStorage";
-import ViewModel from 'pages/courseMap/[courseId]/viewModel';
 import { getLessonInformation } from 'linkWithBackend/lessonHandle/lessonData';
 import { useRouter } from 'next/router';
+import ViewModel from './viewModel';
 
 export default function BreadcrumbHandleLesson() {
     const router = useRouter();

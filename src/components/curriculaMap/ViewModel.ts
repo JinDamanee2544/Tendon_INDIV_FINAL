@@ -8,7 +8,7 @@ import NewBackendConvert from "./BackendConverter"
 import { prepNode } from "./LeaningNodeViewModel"
 
 
-export default function useViewmodel(lid: string): RenderLearningLessonNodeProps[] {
+export default function ViewModel(lid: string): RenderLearningLessonNodeProps[] {
 
     const [renderingGraph, setrenderingGraph] = useState<RenderLearningLessonNodeProps[]>([])
     // const [courseData, setCourseData] = useState<Course>({} as Course)

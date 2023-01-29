@@ -1,11 +1,8 @@
 import { motion } from 'framer-motion'
-import React, { useEffect, useMemo, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { Xwrapper } from 'react-xarrows';
 import CourseNode from './LearningNode';
-import { observer } from 'mobx-react';
-import ViewModel from './viewmodel';
-import { RenderLearningLessonNodeProps } from '../../customTypes/';
-import LoadingSpinner from '@components/baseComponents/LoadingSpinner';
+import ViewModel from './ViewModel';
 
 interface LearningNodeMapProps {
     lid: string

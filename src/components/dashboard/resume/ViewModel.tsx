@@ -5,7 +5,7 @@ import MemoryService from "linkWithBackend/services/memory_services"
 import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 
-export default function Viewmodel() {
+export default function ViewModel() {
     const [courses, setCourses] = useState<Course[]>([] as Course[])
     const router = useRouter()
 
