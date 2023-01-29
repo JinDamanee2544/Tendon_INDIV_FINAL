@@ -8,7 +8,7 @@ import { useEffect, useState } from "react"
 export default function Viewmodel() {
     const [courses, setCourses] = useState<Course[]>([] as Course[])
     const router = useRouter()
-    
+
     useEffect(() => {
         const resumeCourseID: string[] = ["63becc58e68081422d62f422", "63becc6ce68081422d62f423", "63becc7de68081422d62f424"]
 
@@ -27,7 +27,7 @@ export default function Viewmodel() {
             setCourses([...course])
         })
 
-    }, [])
+    }, [router])
 
     return courses
 } 

@@ -44,16 +44,12 @@ const LessonNode = ({ lesson_id }: LessonNodeDataProps) => {
             const tmpValue = getLessonInformation(lesson_id)
             resolve(tmpValue)
         })
-        promise.then( value => {
+        promise.then(value => {
             setNodeArray(value.nodes)
         })
 
-    }, [])
-   
-    // console.log(nodeArray)
-    while (nodeArray === undefined) {
+    }, [lesson_id])
 
-    }
     return (
         <>
             {
@@ -80,12 +76,10 @@ const LessonNode = ({ lesson_id }: LessonNodeDataProps) => {
                                         })
                                     } */}
                                     <h1 className='text-2xl p-2 font-bold text-center'> File~~~ </h1>
-                                    {nodeArray!== undefined && nodeArray.map((nodeId, index) => {
+                                    {nodeArray !== undefined && nodeArray.map((nodeId, index) => {
                                         return (
                                             <div key={index} className="flex gap-10 items-center" >
-                                                <ContainerProviderTendon>
-                                                    < NodeGetHandle node_id = { nodeId } setIsOpened = {setIsOpened} setResSource = {setResSource} />
-                                                </ContainerProviderTendon>
+                                                < NodeGetHandle node_id={nodeId} setIsOpened={setIsOpened} setResSource={setResSource} />
                                             </div>
                                         )
                                     })}
