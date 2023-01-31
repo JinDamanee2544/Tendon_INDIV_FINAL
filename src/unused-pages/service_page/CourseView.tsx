@@ -14,7 +14,7 @@ import { resumeProps } from "@data/index";
 import ArrowBox from "@components/baseComponents/ArrowBox";
 import CourseNode from "@components/courseMap/LessonNode";
 import { StatusType } from "@customTypes/index";
-import GraphPathView from "../../lessonMap/GraphShowView";
+import GraphPathView from "../lessonMap/GraphShowView";
 import { useRouter } from "next/router";
 import container from "linkWithBackend/services/inversify.config";
 import MemoryService from "linkWithBackend/services/memory_services";

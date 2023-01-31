@@ -3,7 +3,7 @@ import { useState } from 'react';
 import Setting from '../dashboard/setting';
 import { User } from 'linkWithBackend/interfaces/TendonType';
 import { ContainerProviderTendon } from 'linkWithBackend/services/container';
-import { SignUpHandle } from 'pages/adminControl/service_page/SignView';
+import { SignUpHandle } from '../unused-pages/service_page/SignView';
 const SignupBox = () => {
     const [userProps, setUserProps] = useState<User>({} as User)
     const [confirmPassword, setConfirmPassword] = useState<string>("")

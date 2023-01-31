@@ -1,14 +1,10 @@
-import NodeItem from './NodeItem';
-import { LearningNode } from '@customTypes/tendonAPItype';
-import { Suspense, useEffect, useMemo, useRef, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import LoadingSpinner from '@components/baseComponents/LoadingSpinner';
 import Modal from './Modal';
 import { resSource } from '@customTypes/index';
-import { dictLesson } from "linkWithBackend/lessonHandle/lessonData";
-import { Lesson, Node } from 'linkWithBackend/interfaces/TendonType';
-import { ContainerProviderTendon } from 'linkWithBackend/services/container';
-import { NodeGetHandle } from 'pages/adminControl/service_page/NodeView';
+import { Lesson } from 'linkWithBackend/interfaces/TendonType';
 import { getLessonInformation } from 'linkWithBackend/lessonHandle/lessonData';
+import { NodeGetHandle } from '../../../unused-pages/service_page/NodeView';
 
 // Mock fetchings
 const getResData = ({ resLink, resType }: resSource) => {

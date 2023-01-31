@@ -1,6 +1,6 @@
 import { User } from "linkWithBackend/interfaces/TendonType";
 import { ContainerProviderTendon } from "linkWithBackend/services/container";
-import { SignInHandle } from "pages/adminControl/service_page/SignView";
+import { SignInHandle } from "../unused-pages/service_page/SignView";
 import React from "react";
 
 interface tmpLogIn {
@@ -16,7 +16,7 @@ export default function SignInMiddleHandle(props: tmpLogIn) {
     }
     return (
         < ContainerProviderTendon >
-            < SignInHandle body={ props.body } isCal = {props.isCal} />
+            < SignInHandle body={props.body} isCal={props.isCal} />
         </ContainerProviderTendon>
     )
 }
