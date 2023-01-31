@@ -1,3 +1,4 @@
+import LoadingSpinner from '@components/baseComponents/LoadingSpinner';
 import { motion } from 'framer-motion'
 import React, { useEffect, useState } from "react"
 import { Xwrapper } from 'react-xarrows';
@@ -18,11 +19,13 @@ const LearningNodeMap = ({ lid }: LearningNodeMapProps) => {
 
     const renderingGraph = ViewModel(lid)
 
+    if (renderingGraph.length === 0) {
+        return <LoadingSpinner />
+    }
+
+    // For preventing SSR on Xarrow
     if (!onClient) {
-        return (
-            <>
-            </>
-        )
+        return <></>
     }
 
     return (
