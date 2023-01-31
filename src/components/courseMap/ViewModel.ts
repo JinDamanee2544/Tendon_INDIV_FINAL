@@ -21,9 +21,9 @@ export default function ViewModel(lid: string): RenderLearningLessonNodeProps[] 
                 const memService = container.get<MemoryService>(TYPES.MemoryService)
                 const course = await courseService.getCourseById(lid, memService.getToken())
                 memService.setCourse(lid, course.name)
-                let myClass = new NewBackendConvert(course)
-                await myClass.converter()
-                const lessonGraph: LearningLessonNodeProps = myClass.getPrepArray
+                let Converter = new NewBackendConvert(course)
+                await Converter.converter()
+                const lessonGraph: LearningLessonNodeProps = Converter.getPrepArray
                 const res = prepNode(lessonGraph, () => false)
                 setrenderingGraph([...res])
             }

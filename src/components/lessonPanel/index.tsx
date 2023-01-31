@@ -1,10 +1,9 @@
-import { Suspense, useEffect, useState } from 'react';
+import { Children, useState } from 'react';
 import LoadingSpinner from '@components/baseComponents/LoadingSpinner';
 import Modal from './Modal';
 import { resSource } from '@customTypes/index';
-import { Lesson } from 'linkWithBackend/interfaces/TendonType';
-import { getLessonInformation } from 'linkWithBackend/lessonHandle/lessonData';
-import { NodeGetHandle } from '../../../unused-pages/service_page/NodeView';
+import NodeItem from './NodeItem';
+import ViewModel from './ViewModel';
 
 // Mock fetchings
 const getResData = ({ resLink, resType }: resSource) => {
@@ -21,81 +20,90 @@ type LessonNodeDataProps = {
     lesson_id: string
 }
 
+type PanelContainerProps = {
+    children: React.ReactNode
+}
+
+const PanelContainer = ({ children }: PanelContainerProps) => {
+    return (
+        <div className='flex flex-col gap-4 p-6 bg-slate-100 dark:bg-gray-normal rounded-3xl  min-w-[300px]' >
+            {children}
+        </div>
+    )
+}
+
 const LessonNode = ({ lesson_id }: LessonNodeDataProps) => {
-
-    const [isOpened, setIsOpened] = useState(false)
     const [resSource, setResSource] = useState<resSource>({ resLink: '', resType: '' })
-    const [modalData, setModalData] = useState<any>(null)
-    const [isLoading, setIsLoading] = useState(false)   // mock loading
-    const [nodeArray, setNodeArray] = useState<string[]>([])
+    const { nodes, lessonName } = ViewModel(lesson_id)
+    // const [nodeArray, setNodeArray] = useState<string[]>([])
 
-    useEffect(() => {
-        if (isOpened) {
-            setModalData(getResData(resSource))
-        }
-    }, [isOpened, resSource])
+    // const [isOpened, setIsOpened] = useState(false)
+    // const [modalData, setModalData] = useState<any>(null)
+    // const [isLoading, setIsLoading] = useState(false)   // mock loading
 
-    useEffect(() => {
-        let promise = new Promise<Lesson>((resolve, reject) => {
-            const tmpValue = getLessonInformation(lesson_id)
-            resolve(tmpValue)
-        })
-        promise.then(value => {
-            setNodeArray(value.nodes)
-        })
+    // useEffect(() => {
+    //     if (isOpened) {
+    //         setModalData(getResData(resSource))
+    //     }
+    // }, [isOpened, resSource])
 
-    }, [lesson_id])
+    // useEffect(() => {
+    //     let LessonLoading = new Promise<Lesson>((resolve, reject) => {
+    //         const tmpValue = getLessonInformation(lesson_id)
+    //         resolve(tmpValue)
+    //     })
+    //     LessonLoading.then(value => {
+    //         setNodeArray(value.nodes)
+    //     })
+    // }, [lesson_id])
+
+    if (nodes.length === 0) {
+        return <LoadingSpinner />
+    }
 
     return (
         <>
-            {
-                isLoading ? <LoadingSpinner /> :
-                    <>
-                        {
-                            <div className='flex gap-x-20 justify-center mt-10'>
-                                <div className='flex flex-col gap-4 p-6 bg-slate-100 dark:bg-gray-normal rounded-3xl  min-w-[300px]'                    >
-                                    {/* <h1 className='text-2xl p-2 font-bold text-center'>{LearningNodeData.attributes?.learningNodeName}</h1>
-                                    {
-                                        LearningNodeData.attributes?.subNode && LearningNodeData.attributes?.subNode.map((node, index) => {
-                                            // ********* 
-                                            return (
-                                                <NodeItem
-                                                    key={index}
-                                                    type={node.type}
-                                                    name={node.name}
-                                                    attributes={node.attributes}
-                                                    id={node.id}
-                                                    setIsOpened={setIsOpened}
-                                                    setResSource={setResSource}
-                                                />
-                                            )
-                                        })
-                                    } */}
-                                    <h1 className='text-2xl p-2 font-bold text-center'> File~~~ </h1>
-                                    {nodeArray !== undefined && nodeArray.map((nodeId, index) => {
-                                        return (
-                                            <div key={index} className="flex gap-10 items-center" >
-                                                < NodeGetHandle node_id={nodeId} setIsOpened={setIsOpened} setResSource={setResSource} />
-                                            </div>
-                                        )
-                                    })}
-                                </div>
+            <div className='flex gap-x-20 justify-center mt-10'>
+                <PanelContainer>
+                    <h1 className='text-2xl p-2 font-bold text-center'>{lessonName}</h1>
+                    {nodes.map((node, index) => {
+                        return (
+                            <NodeItem
+                                key={index}
+                                type={node.type}
+                                name={node.data}
+                                attributes={
+                                    { priority: "require", size: 9, resources: "www.google.com" }
+                                }
+                                id={node.id}
+                                setIsOpened={() => false}
+                                setResSource={setResSource}
+                            />
+                        )
+                    })}
+                    {/* <h1 className='text-2xl p-2 font-bold text-center'> File~~~ </h1>
+                    {nodeArray !== undefined && nodeArray.map((nodeId, index) => {
+                        return (
+                            <div key={index} className="flex gap-10 items-center" >
+                                < NodeGetHandle node_id={nodeId} setIsOpened={setIsOpened} setResSource={setResSource} />
                             </div>
-                        }
-                        {   // Modal
-                            isOpened && modalData && (
-                                <Suspense fallback={<LoadingSpinner />}>
-                                    <Modal
-                                        setIsOpened={setIsOpened}
-                                        showData={modalData}
-                                    />
-                                </Suspense>
-                            )
-                        }
-                    </>
-            }
+                        )
+                    })} */}
+                </PanelContainer>
+            </div>
+            {/* 
+            {   // Modal
+                isOpened && modalData && (
+                    <Suspense fallback={<LoadingSpinner />}>
+                        <Modal
+                            setIsOpened={setIsOpened}
+                            showData={modalData}
+                        />
+                        </Suspense>
+                )
+            } 
+            */}
         </>
-
     )
 }
 
