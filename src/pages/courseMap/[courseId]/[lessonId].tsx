@@ -1,6 +1,6 @@
 import LoadingSpinner from "@components/baseComponents/LoadingSpinner";
 import MainLayout from "layout/MainLayout";
-import LessonNode from "@components/learningNode";
+import LessonNode from "@components/lessonPanel";
 import { mockLearningNode } from "@customTypes/mockData";
 import { LearningNode } from "@customTypes/tendonAPItype";
 import { Suspense } from "react";

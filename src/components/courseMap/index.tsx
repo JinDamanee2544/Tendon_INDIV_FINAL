@@ -2,7 +2,7 @@ import LoadingSpinner from '@components/baseComponents/LoadingSpinner';
 import { motion } from 'framer-motion'
 import React, { useEffect, useState } from "react"
 import { Xwrapper } from 'react-xarrows';
-import CourseNode from './LearningNode';
+import CourseNode from './LessonNode';
 import ViewModel from './ViewModel';
 
 interface LearningNodeMapProps {
@@ -19,15 +19,16 @@ const LearningNodeMap = ({ lid }: LearningNodeMapProps) => {
 
     const renderingGraph = ViewModel(lid)
 
-    if (renderingGraph.length === 0) {
-        return <LoadingSpinner />
-    }
-
     // For preventing SSR on Xarrow
     if (!onClient) {
         return <></>
     }
 
+    if (renderingGraph.length === 0) {
+        return <LoadingSpinner />
+    }
+
+    // Return Cluster of Course Nodes that call their children recursively 
     return (
         <>
             <motion.main
