@@ -31,7 +31,7 @@ const LearningNodeMap = ({ lid }: LearningNodeMapProps) => {
     return (
         <>
             <motion.main
-                className="flex items-center justify-center gap-10"
+                className="flex items-center justify-center gap-10 grow"
                 transition={{ duration: 0.5, type: "spring", stiffness: 100 }}
             >
                 {/* HIDE Start Node */}
@@ -45,6 +45,7 @@ const LearningNodeMap = ({ lid }: LearningNodeMapProps) => {
                                         <CourseNode
                                             key={item.lessonId}
                                             {...item}
+                                            setChildReady={setChildReady}
                                         />
                                     </div>
                                 )

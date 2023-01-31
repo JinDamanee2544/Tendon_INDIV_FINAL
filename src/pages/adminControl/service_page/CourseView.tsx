@@ -12,7 +12,7 @@ import { useTheme } from "next-themes";
 import ResumeItem from "@components/dashboard/resume/ResumeItem";
 import { resumeProps } from "@data/index";
 import ArrowBox from "@components/baseComponents/ArrowBox";
-import CourseNode from "@components/curriculaMap/LearningNode";
+import CourseNode from "@components/courseMap/LearningNode";
 import { StatusType } from "@customTypes/index";
 import GraphPathView from "../../lessonMap/GraphShowView";
 import { useRouter } from "next/router";

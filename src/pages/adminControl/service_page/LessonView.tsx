@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { useTendonContainer } from "linkWithBackend/services/container";
 import LessonDataViewModel from "./LessonViewModel";
 import TYPES, { Lesson } from "linkWithBackend/interfaces/TendonType";
-import CourseNode from "@components/curriculaMap/LearningNode";
+import CourseNode from "@components/courseMap/LearningNode";
 import { StatusType } from "@customTypes/index";
 import { useRouter } from "next/router";
 import container from "linkWithBackend/services/inversify.config";

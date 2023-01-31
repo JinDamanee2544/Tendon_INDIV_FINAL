@@ -24,20 +24,18 @@ const BreadCrumbNav = () => {
                         pathList.map((path, index) => {
                             return (
                                 <li key={index}>
-                                    {
-                                        index == pathList.length - 1 ?
-                                            <NavItem
-                                                name={path.name}
-                                                link={path.link}
-                                                isActive={false}
-                                            /> :
-                                            <NavItem
-                                                name={path.name}
-                                                link={path.link}
-                                                isActive={true}
-                                            />
+                                    {index == pathList.length - 1 ?
+                                        <NavItem
+                                            name={path.name}
+                                            link={path.link}
+                                            isActive={false}
+                                        /> :
+                                        <NavItem
+                                            name={path.name}
+                                            link={path.link}
+                                            isActive={true}
+                                        />
                                     }
-
                                 </li>
                             )
                         })

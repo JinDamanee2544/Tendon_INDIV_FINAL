@@ -1,9 +1,9 @@
 import dynamic from "next/dynamic";
 import { Suspense, useEffect } from "react";
 import LoadingSpinner from "@components/baseComponents/LoadingSpinner";
-import MainLayout from "layout/MainLayout";
 import BreadcrumbHandleCourse from "./BreadcrumbHandleCourse";
-const CourseMap = dynamic(() => import("@components/curriculaMap"));
+import GraphLayout from "layout/GraphLayout";
+const CourseMap = dynamic(() => import("@components/courseMap"));
 
 // Fetch Curriculum Data
 // const getCurriculaNodeData = (courseId: string): LearningLessonNodeProps => {
@@ -19,11 +19,11 @@ const CoursePage = () => {
     const { courseId } = BreadcrumbHandleCourse();
 
     return (
-        <MainLayout>
+        <GraphLayout>
             <Suspense fallback={<LoadingSpinner />}>
                 <CourseMap lid={courseId} />
             </Suspense>
-        </MainLayout>
+        </GraphLayout>
     )
 }
 export default CoursePage;
