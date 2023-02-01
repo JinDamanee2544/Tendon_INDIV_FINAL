@@ -5,7 +5,6 @@ import MemoryService from "linkWithBackend/services/memory_services"
 import NodeService from "linkWithBackend/services/node_services"
 import { useEffect, useState } from "react"
 
-
 const memService = container.get<MemoryService>(TYPES.MemoryService)
 
 const fetchAllNode = async(lesson:Lesson) => {
