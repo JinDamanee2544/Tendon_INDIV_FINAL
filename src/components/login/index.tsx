@@ -1,46 +1,18 @@
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-import { ReactElement, useState } from 'react'
 import Setting from '../dashboard/setting'
-import { useRouter } from 'next/router'
-import { User } from 'linkWithBackend/interfaces/TendonType'
-
-import { ContainerProviderTendon } from 'linkWithBackend/services/container'
 import { SignInHandle } from 'unused-pages/service_page/SignView'
+import ViewModel from './ViewModel'
 
 const Login = () => {
-    const router = useRouter();
-    const signupMessage = router.query
-
-    const [userProps, setUserProps] = useState<User>({} as User)
-    const [isCal, setisCal] = useState<boolean>(false)
-    const onChangeEmail = (e: React.FormEvent<HTMLInputElement>): void => {
-        setUserProps({
-            ...userProps,
-            email: e.currentTarget.value,
-        })
-        setisCal(false)
-    };
-    const onChangePassword = (e: React.FormEvent<HTMLInputElement>): void => {
-        setUserProps({
-            ...userProps,
-            password: e.currentTarget.value
-        })
-        setisCal(false)
-    };
-
-    const submitHandle = (): void => {
-        setisCal(true)
-    }
+    const { isCal, onChangeEmail, onChangePassword, signupMessage, submitHandle, userProps } = ViewModel()
 
     return (
         <>
             <div className="flex gap-x-20 justify-center" style={{ margin: '10px', color: "#c5aac8" }}>
                 <p> {signupMessage['message']} </p>
             </div>
-            <div
-                className="flex gap-x-20 justify-center"
-            >
+            <div className="flex gap-x-20 justify-center"            >
                 <motion.main
                     className="bg-slate-100 dark:bg-gray-normal p-6 flex gap-4 rounded-3xl min-h-[500px]"
                     initial={{ opacity: 1, y: -100, scale: 0 }}
@@ -73,9 +45,7 @@ const Login = () => {
                         </button>
 
                         {/* < SignInMiddleHandle body={ userProps } isCal = {isCal} /> */}
-                        < ContainerProviderTendon >
-                            < SignInHandle body={userProps} isCal={isCal} />
-                        </ContainerProviderTendon>
+                        < SignInHandle body={userProps} isCal={isCal} />
 
                         <p className=' text-sm text-center'>
                             Don’t have an account &nbsp;
@@ -87,9 +57,7 @@ const Login = () => {
                             </Link>
                         </p>
                     </motion.div>
-                    <div >
-                        <Setting />
-                    </div>
+                    <Setting />
                 </motion.main>
             </div>
         </>
