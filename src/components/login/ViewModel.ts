@@ -5,25 +5,15 @@ import { useState } from "react";
 export default function ViewModel(){
     const router = useRouter();
     const signupMessage = router.query
-    
     const [isCal, setisCal] = useState<boolean>(false)
     const [userProps, setUserProps] = useState<User>({} as User)
 
-    
-    const onChangeEmail = (e: React.FormEvent<HTMLInputElement>): void => {
+    const onChange = (e: any) => {
         setUserProps({
             ...userProps,
-            email: e.currentTarget.value,
+            [e.target.name]: e.target.value
         })
-        setisCal(false)
-    };
-    const onChangePassword = (e: React.FormEvent<HTMLInputElement>): void => {
-        setUserProps({
-            ...userProps,
-            password: e.currentTarget.value
-        })
-        setisCal(false)
-    };
+    }
 
     const submitHandle = (): void => {
         setisCal(true)
@@ -33,8 +23,7 @@ export default function ViewModel(){
         signupMessage,
         isCal,
         userProps,
-        onChangeEmail,
-        onChangePassword,
+        onChange,
         submitHandle
     }
 }

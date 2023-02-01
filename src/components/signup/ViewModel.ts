@@ -23,18 +23,24 @@ export default function ViewModel(){
             email: e.currentTarget.value,
         });
     };
-    const onChangePassword =
-        (e: React.FormEvent<HTMLInputElement>): void => {
-            setUserProps({
-                ...userProps,
-                password: e.currentTarget.value,
-            });
-        };
+    const onChangePassword = (e: React.FormEvent<HTMLInputElement>): void => {
+        setUserProps({
+            ...userProps,
+            password: e.currentTarget.value,
+        });
+    };
     const onChangeConfirmPassword = (
         e: React.FormEvent<HTMLInputElement>
     ): void => {
         setConfirmPassword(e.currentTarget.value);
     };
+
+    const onChange = (e:any) => {
+        setUserProps({
+            ...userProps,
+            [e.target.name]: e.target.value,
+        });
+    }
 
     const submitHandle = (): void => {
         if (userProps.email === undefined) {
@@ -61,10 +67,7 @@ export default function ViewModel(){
     return {
         isCal,
         userProps,
-        onChangeFName,
-        onChangeLName,
-        onChangeEmail,
-        onChangePassword,
+        onChange,
         onChangeConfirmPassword,
         submitHandle,
     }
