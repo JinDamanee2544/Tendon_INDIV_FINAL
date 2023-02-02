@@ -8,7 +8,7 @@ type LayoutProps = {
 const MainLayout = ({ children }: LayoutProps) => {
     return (
         <main className="main-bg" >
-            <div className="row-span-1">
+            <div className="row-span-1 flex justify-end">
                 <Header />
             </div>
             <div className="row-span-5">

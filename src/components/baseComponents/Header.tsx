@@ -7,10 +7,12 @@ const Header = () => {
     const noNavPath = ['/', '/login', '/signup']
     return (
         <>
-            {!noNavPath.includes(router.pathname) &&
-                <BreadCrumbNav />
-            }
-            <ThemeToggle />
+            <nav className="flex flex-row justify-between items-center">
+                {!noNavPath.includes(router.pathname) &&
+                    <BreadCrumbNav />
+                }
+                <ThemeToggle />
+            </nav>
         </>
     )
 }
