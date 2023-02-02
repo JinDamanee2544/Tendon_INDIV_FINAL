@@ -2,11 +2,18 @@
 
 LMS Extension/Addon/StandAlone? on MyCourseVille (MCV)
 
+
+## Remark (Credit Claiming)
+
+Cloning from previous semester frontend's repo : [Frontend Only](https://github.com/JinDamanee2544/tendon-again)
+
 ## Features
 
 - [X] Component Interaction Animation 
 - [X] Light/Dark Theme
-- [X] MindMap-liked Course Display
+- [X] Mindmap-liked Course Display
+- [X] API Attached
+- [X] Displaying learning's material
 
 ## Frontend Stack
 
@@ -20,12 +27,5 @@ I have designed its UI in previous year with Figma : [Figma](https://www.figma.c
 
 ## Backend Repo
 
-Not my part, But you can see it in : [Tendon's Backend](https://github.com/TendonT52/tendonAgain)
-http://24.199.72.217/#/   <-- Swagger UI
-
-
-## CodeSandBox 
-
-- Just a snapshot, Not the current one! -> [CodeSandBox](https://codesandbox.io/s/suspicious-waterfall-nux5dp)
-# Tendon_INDIV_FINAL
-# Learning Graph Website
+- Not my part, But you can see it in : [Tendon's Backend](https://github.com/TendonT52/tendonAgain)
+- API's Doc : [Swagger](http://24.199.72.217/#/)
