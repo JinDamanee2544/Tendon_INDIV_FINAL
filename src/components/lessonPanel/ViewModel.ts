@@ -11,7 +11,7 @@ const fetchAllNode = async(lesson:Lesson) => {
     const nodeIDs =  lesson.nodes
     const nodeService = container.get<NodeService>(TYPES.NodeService)
     const nodes = await Promise.all(nodeIDs.map(async (nodeID) => {
-        const node = await nodeService.getNodeById(nodeID, memService.getToken())
+        const node = await nodeService.getNodeById(nodeID, memService.getLocalStorage('tokenMEM'))
         return node
     }))
     return nodes
@@ -24,7 +24,7 @@ export default function ViewModel(lesson_id:string) {
     useEffect(() => {
         const fetchLesson = async () => {
             const lessonService = container.get<LessonService>(TYPES.LessonService)
-            const lesson = await lessonService.getLessonById(lesson_id, memService.getToken())
+            const lesson = await lessonService.getLessonById(lesson_id, memService.getLocalStorage('tokenMEM'))
             const nodes = await fetchAllNode(lesson)
             setNodes(nodes)
             setLessonName(lesson.name)

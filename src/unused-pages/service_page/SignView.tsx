@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 
 import { useTendonContainer } from "linkWithBackend/services/container";
 import SignDataViewModel from "./SignViewModel";
-import TYPES, { User } from "linkWithBackend/interfaces/TendonType";
+import TYPES, { localStorageInterface, User } from "linkWithBackend/interfaces/TendonType";
 import { useRouter } from 'next/router'
 import container from "linkWithBackend/services/inversify.config";
 import MemoryService from "linkWithBackend/services/memory_services";
@@ -93,8 +93,11 @@ export const SignInHandle = observer((signView: signViewInterface) => {
         setUserView(viewModel.getUser())
         setMessage(viewModel.getMessage())
         setStatus(viewModel.getStatus())
-        memService.setToken(viewModel.getUser().accessToken)
-        memService.userInformation(viewModel.getUser())
+        let memStore = {} as localStorageInterface
+        memStore.token = viewModel.getUser().accessToken
+        memStore.firstName = viewModel.getUser().firstName
+        memStore.lastName = viewModel.getUser().lastName
+        memService.setLocalStorage(memStore)
     })
 
     if (signView.isCal === false) {

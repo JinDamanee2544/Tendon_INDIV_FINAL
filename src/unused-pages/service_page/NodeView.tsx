@@ -15,7 +15,7 @@ interface propsInterface {
     body: Node
 }
 const memService = container.get<MemoryService>(TYPES.MemoryService)
-var token = memService.getToken()
+var token = memService.getLocalStorage("tokenMEM")
 
 export const NodeCreateHandle = observer((props: propsInterface) => {
     const router = useRouter()
@@ -27,7 +27,7 @@ export const NodeCreateHandle = observer((props: propsInterface) => {
 
     new Promise(function (myResolve, myReject) {
         useEffect(() => {
-            var mytoken = memService.getToken()
+            var mytoken = memService.getLocalStorage("tokenMEM")
             const tmpValue = viewModel.createNode(body, mytoken)
             myResolve(tmpValue)
         }, [])
@@ -109,7 +109,7 @@ export const NodeGetHandle = observer((props: getNodeInterface) => {
 
     return (
         <>
-            <NodeItem
+            {/* <NodeItem
                 key={nodeView.id}
                 type={nodeView.type}
                 name={nodeView.data}
@@ -119,7 +119,7 @@ export const NodeGetHandle = observer((props: getNodeInterface) => {
                 attributes={
                     { priority: "require", size: 9, resources: "www.google.com" }
                 }
-            />
+            /> */}
         </>
     )
 })

@@ -1,5 +1,5 @@
 import React from "react";
-import { Course, Lesson, Node, User } from "./TendonType";
+import { Course, Lesson, localStorageInterface, Node, User } from "./TendonType";
 
 export interface APIServiceInterface {
     post<Type>(url: string, body: Type, token: string): Promise<{ response: Type, status: number, message: string }>;
@@ -42,8 +42,6 @@ export interface SignServiceInterface {
 }
 
 export interface MemoryServiceInterface {           
-    // TODO: Implement this
-    getTokens(): { accessToken: string, refreshToken: string };
-    setTokens(accessToken: string, refreshToken: string): void;
-    
+    setLocalStorage(data: localStorageInterface): void;
+    getLocalStorage(item: string): string;
 }

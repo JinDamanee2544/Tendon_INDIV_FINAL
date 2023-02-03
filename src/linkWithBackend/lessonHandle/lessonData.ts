@@ -7,7 +7,7 @@ import React from "react";
 export var dictLesson: { [key: string]: Lesson } = {}
 
 const memService = container.get<MemoryService>(TYPES.MemoryService)
-var token = memService.getToken()
+var token = memService.getLocalStorage('tokenMEM')
 
 export async function getLessonInformation(lesson_id: string) {
     if (lesson_id in dictLesson) {

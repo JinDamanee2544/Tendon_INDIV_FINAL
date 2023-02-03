@@ -29,7 +29,7 @@ interface realInterface {
 }
 
 const memService = container.get<MemoryService>(TYPES.MemoryService)
-var token = memService.getToken()
+var token = memService.getLocalStorage("tokenMEM")
 
 export const CourseCreateHandle = observer((props: propsInterface) => {
     const body = props.body
@@ -87,7 +87,7 @@ export const CourseGetHandle = observer((props: realInterface) => {
 
     useEffect(() => {
         // const viewModel = new CourseDataViewModel(useTendonContainer())
-        const mytoken = memService.getToken()
+        const mytoken = memService.getLocalStorage("tokenMEM")
         const tmpCourse: Promise<Course> = viewModel.getCourseData(course_id, mytoken)
         tmpCourse.then((value) => {
             setCourseView(value)

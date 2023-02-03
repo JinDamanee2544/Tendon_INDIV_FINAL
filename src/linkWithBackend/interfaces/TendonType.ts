@@ -40,6 +40,14 @@ export interface Node {
     updateAt?: string
 }
 
+export interface localStorageInterface {
+    token: string
+    firstName: string
+    lastName: string
+    courseID: string
+    courseName: string
+}
+
 let TYPES = {
     AuthService: Symbol("AuthService"),
     SignService: Symbol("SignService"),

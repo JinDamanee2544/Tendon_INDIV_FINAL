@@ -1,5 +1,5 @@
 import { LearningLessonNodeProps, RenderLearningLessonNodeProps } from "@customTypes/index"
-import TYPES from "linkWithBackend/interfaces/TendonType"
+import TYPES, { localStorageInterface } from "linkWithBackend/interfaces/TendonType"
 import CourseService from "linkWithBackend/services/course_services"
 import container from "linkWithBackend/services/inversify.config"
 import MemoryService from "linkWithBackend/services/memory_services"
@@ -19,8 +19,9 @@ export default function ViewModel(lid: string): RenderLearningLessonNodeProps[] 
             if (lid) {
                 const courseService = container.get<CourseService>(TYPES.CourseService)
                 const memService = container.get<MemoryService>(TYPES.MemoryService)
-                const course = await courseService.getCourseById(lid, memService.getToken())
-                memService.setCourse(lid, course.name)
+                const course = await courseService.getCourseById(lid, memService.getLocalStorage('tokenMEM'))
+                let memStore = {} as localStorageInterface
+                memService.setLocalStorage({...memStore, courseID: lid, courseName: course.name})
                 let Converter = new NewBackendConvert(course)
                 await Converter.converter()
                 const lessonGraph: LearningLessonNodeProps = Converter.getPrepArray

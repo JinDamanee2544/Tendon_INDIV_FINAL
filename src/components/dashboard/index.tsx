@@ -22,7 +22,7 @@ const DashBoard = () => {
 
     const router = useRouter()
     var memService = container.get<MemoryService>(TYPES.MemoryService)
-    var userInformation = memService.getUserCurrentData()
+    var userInformation = { firstName: memService.getLocalStorage("firstName"), lastName: memService.getLocalStorage("lastName") }
 
     const navigateMode = () => {
         //const currentWidth = dashboardRef.current.clientWidth
