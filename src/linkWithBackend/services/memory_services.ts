@@ -15,7 +15,7 @@ class MemoryService {
         makeAutoObservable(this)
     }
 
-    public getToken() {
+    getToken() {
         if (typeof window !== 'undefined') {
             this.token = localStorage.getItem('tokenMEM') || ""
             return this.token
@@ -23,12 +23,12 @@ class MemoryService {
         return this.token
     }
 
-    public setToken(tokenNew: string) {
+    setToken(tokenNew: string) {
         this.token = tokenNew
         localStorage.setItem('tokenMEM', tokenNew)
     }
     
-    public getUserInitialState() {
+    getUserInitialState() {
         let fName = localStorage.getItem('firstName') || ""
         let lName = localStorage.getItem('lastName') || ""
         return {
@@ -37,18 +37,18 @@ class MemoryService {
         }
     }
     
-    public async SetuserInformation(user: User) {
+    async SetuserInformation(user: User) {
         this.firstName = user.firstName
         this.lastName = user.lastName
         localStorage.setItem('firstName', user.firstName)
         localStorage.setItem('lastName', user.lastName)
     }
     
-    public async userInformation(user: User) {
+    async userInformation(user: User) {
         await this.SetuserInformation(user)
     }
     
-    public getUserCurrentData() {
+    getUserCurrentData() {
         if (typeof window !== 'undefined') {
             return this.getUserInitialState()
         }
@@ -58,7 +58,7 @@ class MemoryService {
         }
     }
 
-    public getCourseID() {
+    getCourseID() {
         if (typeof window !== 'undefined') {
             this.courseID = localStorage.getItem('courseID') || ""
             return this.courseID
@@ -66,7 +66,7 @@ class MemoryService {
         return this.courseID
     }
 
-    public getCourseName() {
+    getCourseName() {
         if (typeof window !== 'undefined') {
             this.courseName = localStorage.getItem('courseName') || ""
             return this.courseName
@@ -74,7 +74,7 @@ class MemoryService {
         return this.courseName
     }
 
-    public setCourse(courseID: string, courseName: string) {
+    setCourse(courseID: string, courseName: string) {
         this.courseID = courseID
         this.courseName = courseName
         localStorage.setItem('courseID', courseID)

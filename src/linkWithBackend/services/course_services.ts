@@ -42,7 +42,7 @@ class CourseService {
     }
 
     async getCourseById(id: string, token: string){
-        let result = await this.apiService.get<Course>(`http://24.199.72.217:8080/api/v1/auth/courses${id}`, token)
+        let result = await this.apiService.get<Course>(`http://24.199.72.217:8080/api/v1/auth/courses/${id}`, token)
         this.message = result.message
         this.status = result.status
         return this.response = result.response
