@@ -22,7 +22,7 @@ class AuthService {
 
 
     async getUserByID(id: string, token: string){
-        let result = await this.apiService.getByID<User>("http://24.199.72.217:8080/api/v1/auth/users", id, token)
+        let result = await this.apiService.get<User>(`http://24.199.72.217:8080/api/v1/auth/users${id}`, token)
         this.status = result.status
         return this.response = result.response
     }

@@ -40,7 +40,7 @@ class APIService {
         }
     }
 
-    public async getByID<Type>(url: string, id: string, token: string) {
+    public async get<Type>(url: string, token: string) {
         let response: Type = {} as Type
         const config = {
             headers: { Authorization: `Bearer ${token}` }
@@ -48,13 +48,12 @@ class APIService {
 
         let tmp_response: any
         try { 
-            tmp_response =  await axios.get<any>(url+"/"+id, config)
+            tmp_response =  await axios.get<any>(url, config)
             this.status = tmp_response.status
             response = tmp_response.data
         } catch (err) {
             this.status = Object(err)["response"]["request"]["status"]
             this.message = Object(err)["response"]["data"]["message"]
-            console.log("Error: ", err, " with url: ", url, " and id is: ", id)
             response = {} as Type
         }
 
@@ -63,7 +62,7 @@ class APIService {
             status: this.status, 
             message: this.message 
         }
-    }
+    } 
 
     public async update<Type>(url: string, body: Type, id: string, token: string) {
         let response: Type = {} as Type
