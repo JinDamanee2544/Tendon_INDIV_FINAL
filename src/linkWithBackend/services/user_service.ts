@@ -53,6 +53,7 @@ class AuthService {
 
     async deleteUser(id: string, token: string) {
         this.status = await this.apiService.delete<User>("http://24.199.72.217:8080/api/v1/auth/users", id, token)
+        return this.status
     }
 
     public getStatus() {

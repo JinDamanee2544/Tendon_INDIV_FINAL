@@ -1,28 +1,44 @@
-import { Node } from '@customTypes/tendonAPItype'
 import { StatusType } from 'customTypes'
 import { motion } from 'framer-motion'
 import { useRouter } from 'next/router'
-import { useRef } from 'react'
+import { useMemo, useRef } from 'react'
 import { useXarrow } from 'react-xarrows'
 
 type LearningNodeProps = {
-    statusColor: string
+    // statusColor: string
     courseId: string
     courseName: string
     isRender: boolean
     status: StatusType
 }
 
-const LearningNode = ({ statusColor, courseId: lessonId, courseName, isRender, status }: LearningNodeProps) => {
+const nodeStatusColor = (status: StatusType): string => {
+    switch (status) {
+        case StatusType.NOTSTARTED:
+            return ''
+        case StatusType.INPROGRESS:
+            return 'bg-purple-light dark:border-2 dark:border-pale-yellow dark:shadow-pale-yellow'
+        case StatusType.COMPLETED:
+            return 'bg-purple-neon dark:border-2 dark:border-purple-light dark:shadow-purple-neon'
+        default:
+            throw new Error('Invalid status')
+    }
+}
+
+const LearningNode = ({ courseId: lessonId, courseName, isRender, status }: LearningNodeProps) => {
     const updateArrow = useXarrow();
     const router = useRouter();
     const nodeRef = useRef(null);
+
+    const statusColor = useMemo(() => nodeStatusColor(status), [status])
 
     return (
         <>
             {isRender && (
                 <div className='indicator'>
-                    <span className="indicator-item indicator-start badge mx-10 dark:bg-gray-medium dark:shadow-xl dark:shadow-gray-dark dark:border-0">{["✓", "...", "!"][status]}</span>
+                    <span className="indicator-item indicator-start badge mx-10 dark:bg-gray-medium dark:shadow-xl dark:shadow-gray-dark dark:border-0">
+                        {["✓", "...", "!"][status]}
+                    </span>
                     <motion.button
                         className={`course-node ${statusColor}`}
                         id={lessonId.toString()}

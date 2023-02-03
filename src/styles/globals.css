@@ -21,7 +21,7 @@
     @apply grid grid-rows-6 min-h-screen min-w-fit bg-slate-300 dark:bg-gray-dark;
   }
   .course-node {
-    @apply p-4 text-xl rounded-lg shadow-lg w-max h-fit
+    @apply p-4 text-xl rounded-lg shadow-lg min-w-[80px] h-fit
             bg-slate-500 dark:bg-gray-normal text-white mx-10;
   }
 }

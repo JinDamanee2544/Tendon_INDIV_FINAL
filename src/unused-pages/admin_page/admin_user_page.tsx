@@ -35,27 +35,27 @@ function ShowResultField(props: resultShowType) {
                 <>
                     <ContainerProviderTendon>
                         <div>
-                            <UserGetHandle user_id = { props.ID } body = { {} as User} ></UserGetHandle>
+                            <UserGetHandle user_id={props.ID} body={{} as User} ></UserGetHandle>
                         </div>
                     </ContainerProviderTendon>
                 </>
             )
-        } else if ( props.method === "UPDATE" ) {
+        } else if (props.method === "UPDATE") {
             return (
                 <>
                     <ContainerProviderTendon>
                         <div>
-                            <UserUpdateHandle user_id = { props.ID } body = {props.body} ></UserUpdateHandle>
+                            <UserUpdateHandle user_id={props.ID} body={props.body} ></UserUpdateHandle>
                         </div>
                     </ContainerProviderTendon>
                 </>
             )
-        } else if ( props.method === "DELETE" ) {
+        } else if (props.method === "DELETE") {
             return (
                 <>
                     <ContainerProviderTendon>
                         <div>
-                            <UserDeleteHandle user_id = { props.ID } body = { {} as User}></UserDeleteHandle>
+                            <UserDeleteHandle user_id={props.ID} body={{} as User}></UserDeleteHandle>
                         </div>
                     </ContainerProviderTendon>
                 </>
@@ -95,20 +95,20 @@ function InputForUpdate(UpdateCase: updateCase) {
         return (
             <>
                 <div className='form-field'>
-                    <div className='label-update'>Firstname: </div> 
-                    <input type="text" onChange={ onChangeFName } />
+                    <div className='label-update'>Firstname: </div>
+                    <input type="text" onChange={onChangeFName} />
                 </div>
                 <div className='form-field'>
-                    <div className='label-update'>Lastname: </div> 
-                    <input type="text" onChange={ onChangeLName } />
+                    <div className='label-update'>Lastname: </div>
+                    <input type="text" onChange={onChangeLName} />
                 </div>
                 <div className='form-field'>
-                    <div className='label-update'>Email: </div> 
-                    <input type="text" onChange={ onChangeEmail } />
+                    <div className='label-update'>Email: </div>
+                    <input type="text" onChange={onChangeEmail} />
                 </div>
                 <div className='form-field'>
-                    <div className='label-update'>Password: </div> 
-                    <input type="text" onChange={ onChangePassword } />
+                    <div className='label-update'>Password: </div>
+                    <input type="text" onChange={onChangePassword} />
                 </div>
             </>
         )
@@ -117,7 +117,7 @@ function InputForUpdate(UpdateCase: updateCase) {
             <></>
         )
     }
-    
+
 }
 
 export default function UserInputPage(props: userInputpageType) {
@@ -142,13 +142,13 @@ export default function UserInputPage(props: userInputpageType) {
         return (
             <>
                 <div>
-                    [ {props.method} method ]  Please Enter User ID:  
-                    <input type="text" value={ state.id } onChange={ onChange } />
-                    <InputForUpdate isUpdate = { props.method === "UPDATE" } state = { showResult } setState = { setShowResult }/>
-                    <button onClick={ submitHandle }> Submit </button>
+                    [ {props.method} method ]  Please Enter User ID:
+                    <input type="text" value={state.id} onChange={onChange} />
+                    <InputForUpdate isUpdate={props.method === "UPDATE"} state={showResult} setState={setShowResult} />
+                    <button onClick={submitHandle}> Submit </button>
                     {/* <p> { state.text } </p> */}
                 </div>
-                <ShowResultField IsShow={ showResult } ID = { state.id } method = { props.method } body = { updatedata } />
+                <ShowResultField IsShow={showResult} ID={state.id} method={props.method} body={updatedata} />
             </>
         );
     }

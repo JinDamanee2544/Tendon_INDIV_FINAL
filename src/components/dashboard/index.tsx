@@ -14,13 +14,11 @@ import dynamic from "next/dynamic";
 import container from "linkWithBackend/services/inversify.config";
 import MemoryService from "linkWithBackend/services/memory_services";
 import TYPES from "linkWithBackend/interfaces/TendonType";
-
-const ResumeList = dynamic(() => import('./resume/ResumeList'), { suspense: true })
-// import ResumeList from "./resume/ResumeList";
+import ResumeList from "./resume/ResumeList";
 
 const DashBoard = () => {
     const [mode, setMode] = useState<modeType>(modeType.main);
-    const [ready, setReady] = useState<boolean>(false);
+    const [onClient, setOnClient] = useState<boolean>(false);
 
     const router = useRouter()
     var memService = container.get<MemoryService>(TYPES.MemoryService)
@@ -36,19 +34,17 @@ const DashBoard = () => {
     }
 
     useEffect(() => {
-        setReady(true)
+        setOnClient(true)
     }, [])
 
-    if (ready && userInformation.firstName === 'undefined' && userInformation.lastName === 'undefined') {            // Must Login
+    if (onClient && userInformation.firstName === 'undefined' && userInformation.lastName === 'undefined') {            // Must Login
         router.push({
             pathname: '/login'
         })
     }
 
-    if (!ready) {
-        return (
-            <></>
-        )
+    if (!onClient) {
+        return <></>
     }
     // if (ready) {
     //     //userInformation = getUserCurrentData()

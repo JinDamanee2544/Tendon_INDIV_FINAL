@@ -1,22 +1,23 @@
-import { motion } from 'framer-motion'
 import { Xwrapper } from 'react-xarrows'
-import TYPES, { Course } from 'linkWithBackend/interfaces/TendonType'
+import { Course } from 'linkWithBackend/interfaces/TendonType'
 import ResumeItem from './ResumeItem'
-
 import { useTheme } from 'next-themes'
-import { useTendonContainer } from 'linkWithBackend/services/container'
-import CourseService from 'linkWithBackend/services/course_services'
-import { useEffect, useState } from 'react'
 import ArrowBox from '@components/baseComponents/ArrowBox'
 import Xarrow from 'react-xarrows'
-import Viewmodel from './viewmodel'
+import ViewModel from './ViewModel'
+import LoadingSpinner from '@components/baseComponents/LoadingSpinner'
+
 interface propsInterface {
     body: Course
 }
 
 const ResumeList = () => {
     const { theme } = useTheme()
-    const courses = Viewmodel()
+    const courses = ViewModel()
+
+    if (courses.length === 0) {
+        return <LoadingSpinner />
+    }
 
     return (
         <main className='flex flex-col gap-10 justify-center'>
@@ -30,25 +31,19 @@ const ResumeList = () => {
 
                         return (
                             <div key={index}>
-                                <>
-                                    <ResumeItem
-                                        key={course.id}
-                                        id={course.id}
-                                        courseData={course}
-                                        setIsReady={() => false}
+                                <ResumeItem
+                                    key={course.id}
+                                    id={course.id}
+                                    courseData={course}
+                                    setIsReady={() => false}
+                                />
+                                <ArrowBox>
+                                    <Xarrow
+                                        start={'dashboard'}
+                                        end={course.id}
+                                        color={theme === 'light' ? '#475569' : '#961EFF'}
                                     />
-                                    {
-                                        (
-                                            <ArrowBox>
-                                                <Xarrow
-                                                    start={'dashboard'}
-                                                    end={course.id}
-                                                    color={theme === 'light' ? '#475569' : '#961EFF'}
-                                                />
-                                            </ArrowBox>
-                                        )
-                                    }
-                                </>
+                                </ArrowBox>
                             </div>
                         )
                     })

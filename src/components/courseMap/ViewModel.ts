@@ -1,14 +1,14 @@
 import { LearningLessonNodeProps, RenderLearningLessonNodeProps } from "@customTypes/index"
-import TYPES, { Course } from "linkWithBackend/interfaces/TendonType"
+import TYPES from "linkWithBackend/interfaces/TendonType"
 import CourseService from "linkWithBackend/services/course_services"
 import container from "linkWithBackend/services/inversify.config"
 import MemoryService from "linkWithBackend/services/memory_services"
-import { useEffect, useMemo, useState } from "react"
+import { useEffect, useState } from "react"
 import NewBackendConvert from "./BackendConverter"
-import { prepNode } from "./LeaningNodeViewModel"
+import { prepNode } from "./LessonNodeViewModel"
 
 
-export default function useViewmodel(lid: string): RenderLearningLessonNodeProps[] {
+export default function ViewModel(lid: string): RenderLearningLessonNodeProps[] {
 
     const [renderingGraph, setrenderingGraph] = useState<RenderLearningLessonNodeProps[]>([])
     // const [courseData, setCourseData] = useState<Course>({} as Course)
@@ -21,9 +21,9 @@ export default function useViewmodel(lid: string): RenderLearningLessonNodeProps
                 const memService = container.get<MemoryService>(TYPES.MemoryService)
                 const course = await courseService.getCourseById(lid, memService.getToken())
                 memService.setCourse(lid, course.name)
-                let myClass = new NewBackendConvert(course)
-                const t = await myClass.converter()
-                const lessonGraph: LearningLessonNodeProps = myClass.getPrepArray
+                let Converter = new NewBackendConvert(course)
+                await Converter.converter()
+                const lessonGraph: LearningLessonNodeProps = Converter.getPrepArray
                 const res = prepNode(lessonGraph, () => false)
                 setrenderingGraph([...res])
             }

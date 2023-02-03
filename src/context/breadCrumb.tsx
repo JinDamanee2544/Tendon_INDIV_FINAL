@@ -1,4 +1,3 @@
-import useLocalStorage from "hooks/useLocalStorage";
 import React, { createContext, useContext, useEffect, useState } from "react";
 
 type path = {

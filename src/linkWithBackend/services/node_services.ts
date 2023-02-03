@@ -59,6 +59,7 @@ class NodeService {
 
     async deleteNode(id: string, token: string) {
         this.status = await this.apiService.delete<Node>("http://24.199.72.217:8080/api/v1/auth/nodes", id, token)
+        return this.status
     }
 
     public getStatus() {
