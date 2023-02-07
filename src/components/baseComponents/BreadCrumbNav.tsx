@@ -3,14 +3,20 @@ import Link from 'next/link';
 import BreadCrumbContainer from '@baseComponents/BreadCrumbContainer';
 import { useBreadCrumb } from 'context/breadCrumb';
 import { useEffect } from 'react';
+import { useRouter } from 'next/router';
 
 const BreadCrumbNav = () => {
+
+    const router = useRouter()
     const { pathList } = useBreadCrumb()
 
     useEffect(() => {
-        console.log(pathList);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [pathList])
+
+    if (router.pathname.split('/')[2] == 'dashboard') {
+        return <div className='mt-36'></div>
+    }
 
     return (
         <BreadCrumbContainer>
