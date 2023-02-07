@@ -6,12 +6,11 @@ import { useEffect } from 'react';
 
 const BreadCrumbNav = () => {
     const { pathList } = useBreadCrumb()
-    // console.log("PathList: ", pathList)
 
     useEffect(() => {
-        // console.log(pathList);
+        console.log(pathList);
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }, [pathList])
 
     return (
         <BreadCrumbContainer>
@@ -55,19 +54,6 @@ type NavItemProps = {
 
 
 const NavItem = ({ name, link, isActive }: NavItemProps) => {
-    // if (isActive) {
-    //     if (!link) {
-    //         throw new Error('Link is required for active nav item')
-    //     }
-    //     return (
-    //         <Link href={link}>
-    //             {name}
-    //         </Link>
-    //     )
-    // } else {
-    //     <span className='bg-white text-purple-light p-2 rounded-xl mr-2'>{name}</span>
-    // }
-
     return (
         <>
             {

@@ -1,4 +1,4 @@
-import { Course } from "linkWithBackend/interfaces/TendonType";
+
 
 type acheivementProps = {
   id: number,
@@ -199,11 +199,7 @@ const statData: statDataProps[] = [
   },
 
 ]
-export interface resumeProps {
-  id: string,
-  courseData: Course,
-  setIsReady: (value: boolean) => void
-}
+
 
 
 export {

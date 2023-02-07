@@ -10,7 +10,6 @@ import { modeType } from "customTypes";
 import NavigateButton from "./NavigateButton";
 import DashBoardContainer from "@components/baseComponents/DashBoardContainer";
 import { useRouter } from "next/router";
-import dynamic from "next/dynamic";
 import container from "linkWithBackend/services/inversify.config";
 import MemoryService from "linkWithBackend/services/memory_services";
 import TYPES from "linkWithBackend/interfaces/TendonType";

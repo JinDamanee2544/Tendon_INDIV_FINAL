@@ -1,21 +1,20 @@
 import LoadingSpinner from "@components/baseComponents/LoadingSpinner";
-import MainLayout from "layout/MainLayout";
 import LessonNode from "@components/lessonPanel";
 
 import { Suspense } from "react";
 import BreadcrumbHandleLesson from './BreadcrumbHandleLesson'
+import MainLayout from "@layout/MainLayout";
 
 const Lesson = () => {
     const { lessonId } = BreadcrumbHandleLesson()
 
+    if (lessonId === undefined || lessonId.trim() === "") {
+        return <LoadingSpinner />
+    }
     return (
         <MainLayout>
             <Suspense fallback={<LoadingSpinner />}>
-                {lessonId !== undefined && lessonId.trim() !== "" &&
-                    <LessonNode
-                        lesson_id={lessonId}
-                    />
-                }
+                <LessonNode lesson_id={lessonId} />
             </Suspense>
         </MainLayout>
     )

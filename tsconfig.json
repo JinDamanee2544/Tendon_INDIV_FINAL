@@ -2,14 +2,30 @@
   "compilerOptions": {
     "baseUrl": "src",
     "paths": {
-      "@customTypes/*": ["customTypes/*"],
-      "@data/*": ["data/*"],
-      "@components/*": ["components/*"],
-      "@baseComponents/*" : ["components/baseComponents/*"],
+      "@layout/*": [
+        "layout/*"
+      ],
+      "@customTypes/*": [
+        "customTypes/*"
+      ],
+      "@data/*": [
+        "data/*"
+      ],
+      "@components/*": [
+        "components/*"
+      ],
+      "@baseComponents/*": [
+        "components/baseComponents/*"
+      ],
     },
     "target": "es5",
-    "lib": ["es6", "dom"],
-    "types": ["reflect-metadata"],
+    "lib": [
+      "es6",
+      "dom"
+    ],
+    "types": [
+      "reflect-metadata"
+    ],
     "module": "commonjs",
     "moduleResolution": "node",
     "experimentalDecorators": true,
@@ -33,5 +49,7 @@
     "**/*.tsx",
     "**/*.js"
   ],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules"
+  ]
 }

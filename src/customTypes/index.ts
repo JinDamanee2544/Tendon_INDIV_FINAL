@@ -1,4 +1,5 @@
 import { IconType } from "react-icons";
+import { Course } from "linkWithBackend/interfaces/TendonType";
 
 export enum modeType {
     'main',
@@ -35,6 +36,12 @@ export type resSource = {
     resLink: string
     resType: string
 }
+
+export interface resumeProps {
+    id: string,
+    courseData: Course,
+    setIsReady: (value: boolean) => void
+  }
 
 // export type Node = {
 //     id: string

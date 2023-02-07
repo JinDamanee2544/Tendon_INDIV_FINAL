@@ -107,9 +107,10 @@ export const SignInHandle = observer((signView: signViewInterface) => {
         )
     }
     if (status === 200) {
+        const username = memService.getLocalStorage('firstName') + memService.getLocalStorage('lastName')
         // router.push('/?pid:123')
         router.push({
-            pathname: '/',
+            pathname: `/${username}/dashboard`,
             query: {
                 // email: "test@email.com",
                 // firstName: "NewName",

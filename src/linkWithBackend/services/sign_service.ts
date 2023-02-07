@@ -1,8 +1,17 @@
 import axios from 'axios'
 import { makeAutoObservable } from "mobx"
-import { injectable } from 'inversify'
-import { User } from 'linkWithBackend/interfaces/TendonType'
+import { inject, injectable } from 'inversify'
+import TYPES, { User } from 'linkWithBackend/interfaces/TendonType'
+import jwt_decode from 'jwt-decode'
 
+type claimProps = {
+    iss: string;
+    sub: string;
+    exp: number;
+    nbf: number;
+    iat: number;
+    jti: string;
+}
 @injectable()
 class SignService {
     response: User
@@ -80,6 +89,18 @@ class SignService {
         });
 
         return this.status
+    }
+
+    public isTokenValid(token : string){
+        if (token == null) {
+            return false
+        }
+        const claim : claimProps = jwt_decode(token)
+        const currentTime = new Date().getTime() / 1000
+        if (claim.exp < currentTime) {
+            return false
+        }
+        return true
     }
 
     public getStatus() {
