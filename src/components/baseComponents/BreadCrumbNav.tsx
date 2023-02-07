@@ -12,11 +12,8 @@ const BreadCrumbNav = () => {
 
     useEffect(() => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
+        // console.log(pathList)
     }, [pathList])
-
-    if (router.pathname.split('/')[2] == 'dashboard') {
-        return <div className='mt-36'></div>
-    }
 
     return (
         <BreadCrumbContainer>

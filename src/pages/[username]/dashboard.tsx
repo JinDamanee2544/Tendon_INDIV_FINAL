@@ -7,33 +7,22 @@ import MainLayout from "@layout/MainLayout";
 const DashBoard = dynamic(() => import("@components/dashboard"), { suspense: true });
 
 import { useRouter } from 'next/router'
+import { AuthProvider } from "context/authContext";
 
 const DashBoardPage: NextPage = () => {
   const router = useRouter();
-  const handleClick = () => {
-    router.push({
-      pathname: '/adminControl/adminMenu'
-    })
-  }
 
   return (
     <>
-      <MainLayout>
-        <Suspense fallback={<LoadingSpinner />}>
-          < DashBoard />
-        </Suspense>
-      </MainLayout>
-      {/* <div>
-
-        <button onClick={handleClick} >
-          Admin Click
-        </button>
-
-      </div> */}
+      <AuthProvider>
+        <MainLayout>
+          <Suspense fallback={<LoadingSpinner />}>
+            < DashBoard />
+          </Suspense>
+        </MainLayout>
+      </AuthProvider>
     </>
   );
 };
-
-
 
 export default DashBoardPage;

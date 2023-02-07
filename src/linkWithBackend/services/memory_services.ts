@@ -21,7 +21,7 @@ class MemoryService {
                 localStorage.setItem('courseName', data.courseName) 
             }
             if ( data.token !== undefined ) {
-                localStorage.setItem('tokenMEM', data.token)
+                localStorage.setItem('token', data.token)
             }
         }
     }
@@ -37,8 +37,8 @@ class MemoryService {
                     return localStorage.getItem('courseID') || ""
                 case 'courseName':
                     return localStorage.getItem('courseName') || ""
-                case 'tokenMEM':
-                    return localStorage.getItem('tokenMEM') || ""
+                case 'token':
+                    return localStorage.getItem('token') || ""
                 default:
                     return ""
             }

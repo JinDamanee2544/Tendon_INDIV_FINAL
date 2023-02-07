@@ -21,11 +21,7 @@ const Setting = () => {
             <ControlBtn Icon={AiOutlineSetting} title='Setting' />
             {
                 router.pathname === '/login' || router.pathname === '/signup' ?
-                    <ControlBtn
-                        Icon={AiOutlineLogin}
-                        title='Login'
-                        onclick={() => router.push('/')}
-                    />
+                    <></>
                     :
                     <ControlBtn
                         Icon={AiOutlineLogout}

@@ -5,8 +5,8 @@ import { Container } from "inversify";
 import TYPES, { User } from 'linkWithBackend/interfaces/TendonType'
 import SignService from "linkWithBackend/services/sign_service";
 
-class SignDataViewModel{
-    private SignService: SignService 
+class SignDataViewModel {
+    private SignService: SignService
     private user: User
     private status: Number
     private message: string
@@ -18,9 +18,9 @@ class SignDataViewModel{
         this.status = 0
         this.message = ''
     }
-    
+
     async signUp(body: User) {
-        const tmpValue =  await this.SignService.signUp(body)
+        const tmpValue = await this.SignService.signUp(body)
         this.status = this.SignService.getStatus()
         if (this.status === 201) {
             this.user = tmpValue
@@ -32,7 +32,7 @@ class SignDataViewModel{
     }
 
     async signIn(body: User) {
-        const tmpValue =  await this.SignService.signIn(body)
+        const tmpValue = await this.SignService.signIn(body)
         this.status = this.SignService.getStatus()
         if (this.status === 200) {
             this.user = tmpValue
@@ -44,7 +44,7 @@ class SignDataViewModel{
     }
 
     async signOut(token: string) {
-        const tmpValue =  await this.SignService.signOut(token)
+        const tmpValue = await this.SignService.signOut(token)
         this.status = this.SignService.getStatus()
         if (this.status === 200) {
             this.status = tmpValue

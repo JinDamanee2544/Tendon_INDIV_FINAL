@@ -16,7 +16,7 @@ export default function ViewModel() {
 
         const courseLoading = Promise.all(resumeCourseID.map(async (id) => {
             const memService = container.get<MemoryService>(TYPES.MemoryService)
-            const course = await courseService.getCourseById(id, memService.getLocalStorage("tokenMEM") )
+            const course = await courseService.getCourseById(id, memService.getLocalStorage("token"))
             if (courseService.getStatus() === 409) {
                 router.push("/login")
             }

@@ -91,16 +91,23 @@ class SignService {
         return this.status
     }
 
-    public isTokenValid(token : string){
-        if (token == null) {
+    public isTokenValid(token : string|null):boolean{
+        if (token === null) {
             return false
         }
-        const claim : claimProps = jwt_decode(token)
-        const currentTime = new Date().getTime() / 1000
-        if (claim.exp < currentTime) {
+        try {
+            const claim : claimProps = jwt_decode(token)
+            // console.log(claim)
+            const currentTime = new Date().getTime() / 1000
+            if (claim.exp < currentTime) {
+                // console.log("Token is expired")
+                return false
+            }
+            return true
+        } catch (error) {
+            // console.log("Token is Error")
             return false
         }
-        return true
     }
 
     public getStatus() {

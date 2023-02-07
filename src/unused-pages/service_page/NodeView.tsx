@@ -15,7 +15,7 @@ interface propsInterface {
     body: Node
 }
 const memService = container.get<MemoryService>(TYPES.MemoryService)
-var token = memService.getLocalStorage("tokenMEM")
+var token = memService.getLocalStorage("token")
 
 export const NodeCreateHandle = observer((props: propsInterface) => {
     const router = useRouter()
@@ -27,7 +27,7 @@ export const NodeCreateHandle = observer((props: propsInterface) => {
 
     new Promise(function (myResolve, myReject) {
         useEffect(() => {
-            var mytoken = memService.getLocalStorage("tokenMEM")
+            var mytoken = memService.getLocalStorage("token")
             const tmpValue = viewModel.createNode(body, mytoken)
             myResolve(tmpValue)
         }, [])

@@ -23,7 +23,7 @@ export interface coordinateXY {
 }
 
 const memService = container.get<MemoryService>(TYPES.MemoryService)
-var token = memService.getLocalStorage("tokenMEM")
+var token = memService.getLocalStorage("token")
 const DraggableBoxx = ({ id, name, level }: { id: string, name: string, level: { [key: string]: coordinateXY } }) => {
     const updateXarrow = useXarrow();
 

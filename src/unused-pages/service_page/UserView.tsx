@@ -14,7 +14,7 @@ interface UserProps {
 }
 
 const memService = container.get<MemoryService>(TYPES.MemoryService)
-var token = memService.getLocalStorage("tokenMEM")
+var token = memService.getLocalStorage("token")
 export const UserGetHandle = observer((props: UserProps) => {
     const userID = props.user_id
     const [userGetView, setUserGetView] = useState<User>({} as User)
