@@ -2,7 +2,6 @@ import TYPES, { Lesson } from "linkWithBackend/interfaces/TendonType";
 import container from "linkWithBackend/services/inversify.config";
 import LessonService from "linkWithBackend/services/lesson_services";
 import MemoryService from "linkWithBackend/services/memory_services";
-import React from "react";
 
 export var dictLesson: { [key: string]: Lesson } = {}
 

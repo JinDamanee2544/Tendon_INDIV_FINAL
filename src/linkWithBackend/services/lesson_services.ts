@@ -1,4 +1,3 @@
-import axios from 'axios'
 import { makeAutoObservable } from "mobx"
 import { inject, injectable } from 'inversify'
 import TYPES, { Lesson } from 'linkWithBackend/interfaces/TendonType'

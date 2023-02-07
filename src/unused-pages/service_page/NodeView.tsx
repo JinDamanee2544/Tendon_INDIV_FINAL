@@ -5,7 +5,6 @@ import { useState, useEffect } from "react";
 import { useTendonContainer } from "linkWithBackend/services/container";
 import NodeDataViewModel from "./NodeViewModel";
 import TYPES, { Node } from "linkWithBackend/interfaces/TendonType";
-import NodeItem from "@components/lessonPanel/NodeMUX";
 import { useRouter } from "next/router";
 import container from "linkWithBackend/services/inversify.config";
 import MemoryService from "linkWithBackend/services/memory_services";

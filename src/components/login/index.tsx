@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import Setting from '../dashboard/setting'
 import { SignInHandle } from 'unused-pages/service_page/SignView'
 import ViewModel from './ViewModel'
 import PanelContainer from '@components/baseComponents/PanelContainer'

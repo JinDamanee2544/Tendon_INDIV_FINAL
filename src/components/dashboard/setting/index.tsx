@@ -1,6 +1,6 @@
 import React from "react";
-import { AiOutlineLogout, AiOutlineSearch, AiOutlineSetting, AiOutlineUser } from 'react-icons/ai'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AiOutlineLogout, AiOutlineSetting, AiOutlineUser } from 'react-icons/ai'
+import { motion } from 'framer-motion'
 import { useRouter } from "next/router";
 import ControlBtn from "./SettingBtn";
 

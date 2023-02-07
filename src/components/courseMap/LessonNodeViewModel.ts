@@ -1,4 +1,4 @@
-import { LearningLessonNodeProps, RenderLearningLessonNodeProps, StatusType } from "../../customTypes";
+import { LearningLessonNodeProps, RenderLearningLessonNodeProps } from "../../customTypes";
 
 
 export const prepNode = (startNode: LearningLessonNodeProps, defaultSetChildReady: (value: boolean) => void): RenderLearningLessonNodeProps[] => {

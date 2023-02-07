@@ -1,4 +1,4 @@
-import { Course, localStorageInterface, User } from "linkWithBackend/interfaces/TendonType";
+import { localStorageInterface } from "linkWithBackend/interfaces/TendonType";
 import { injectable } from "inversify";
 import { makeAutoObservable } from "mobx";
 import 'reflect-metadata'

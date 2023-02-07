@@ -1,5 +1,5 @@
 import dynamic from "next/dynamic";
-import { Suspense, useEffect } from "react";
+import { Suspense } from "react";
 import LoadingSpinner from "@components/baseComponents/LoadingSpinner";
 import BreadcrumbHandleCourse from "./BreadcrumbHandleCourse";
 import GraphLayout from "layout/GraphLayout";

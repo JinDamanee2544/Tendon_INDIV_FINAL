@@ -6,14 +6,10 @@ import { useTendonContainer } from "linkWithBackend/services/container";
 import CourseDataViewModel from "./CourseViewModel";
 import TYPES, { Course } from "linkWithBackend/interfaces/TendonType";
 
-import ResumeList from "@components/dashboard/resume/ResumeList";
-import Xarrow, { Xwrapper } from "react-xarrows";
+import Xarrow from "react-xarrows";
 import { useTheme } from "next-themes";
 import ResumeItem from "@components/dashboard/resume/ResumeItem";
-import { resumeProps } from "@data/index";
 import ArrowBox from "@components/baseComponents/ArrowBox";
-import CourseNode from "@components/courseMap/LessonNode";
-import { StatusType } from "@customTypes/index";
 import GraphPathView from "../lessonMap/GraphShowView";
 import { useRouter } from "next/router";
 import container from "linkWithBackend/services/inversify.config";

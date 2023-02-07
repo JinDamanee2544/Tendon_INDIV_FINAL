@@ -1,7 +1,6 @@
-import axios from 'axios'
 import { makeAutoObservable } from "mobx"
 import { inject, injectable } from 'inversify'
-import TYPES, { Lesson, Node } from 'linkWithBackend/interfaces/TendonType'
+import TYPES, { Node } from 'linkWithBackend/interfaces/TendonType'
 import APIService from './api_services'
 
 @injectable()

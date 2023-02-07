@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Course } from "linkWithBackend/interfaces/TendonType";
 
-import { CourseCreateHandle, CourseGetHandle, CourseUpdateHandle, CourseDeleteHandle } from "../service_page/CourseView";
+import { CourseCreateHandle, CourseUpdateHandle, CourseDeleteHandle } from "../service_page/CourseView";
 import { ContainerProviderTendon } from 'linkWithBackend/services/container';
 
 interface resultShowType {

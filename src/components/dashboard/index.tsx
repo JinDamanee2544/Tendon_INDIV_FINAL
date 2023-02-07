@@ -3,9 +3,9 @@ import Acheivement from "./Acheivement";
 import Activity from "./Activity";
 import Statistic from "./Statistic";
 import Setting from "./setting";
-import { IoCaretForwardOutline, IoAddCircle } from 'react-icons/io5'
-import { Suspense, useEffect, useRef, useState } from "react";
-import { AiOutlineLogin, AiOutlineLogout, AiOutlineSearch, AiOutlineSetting, AiOutlineUser } from "react-icons/ai";
+import { IoCaretForwardOutline } from 'react-icons/io5'
+import { useEffect, useState } from "react";
+import { AiOutlineSearch } from "react-icons/ai";
 import { modeType } from "customTypes";
 import NavigateButton from "./NavigateButton";
 import DashBoardContainer from "@components/baseComponents/DashBoardContainer";

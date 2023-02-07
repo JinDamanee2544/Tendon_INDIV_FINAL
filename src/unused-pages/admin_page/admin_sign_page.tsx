@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 // import './admin_page.css'
-import { SignUpHandle, SignInHandle, SignOutHandle } from '../service_page/SignView';
+import { SignUpHandle, SignInHandle } from '../service_page/SignView';
 import { ContainerProviderTendon } from 'linkWithBackend/services/container';
 import { User } from "linkWithBackend/interfaces/TendonType";
 

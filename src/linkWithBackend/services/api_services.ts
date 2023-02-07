@@ -1,6 +1,5 @@
 import axios from "axios";
 import { injectable } from "inversify";
-import { Course, Lesson, Node } from "linkWithBackend/interfaces/TendonType";
 import { makeAutoObservable } from "mobx";
 
 @injectable()

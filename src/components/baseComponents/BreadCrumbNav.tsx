@@ -1,17 +1,15 @@
-import Image from 'next/image';
-import Link from 'next/link';
 import BreadCrumbContainer from '@baseComponents/BreadCrumbContainer';
 import { useBreadCrumb } from 'context/breadCrumb';
-import { useEffect } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
 const BreadCrumbNav = () => {
 
-    const router = useRouter()
     const { pathList } = useBreadCrumb()
 
     useEffect(() => {
-        // eslint-disable-next-line react-hooks/exhaustive-deps
         // console.log(pathList)
     }, [pathList])
 

@@ -1,5 +1,3 @@
-import { MotionConfig } from 'framer-motion'
-import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { AcheivementData as data } from '../../data/index'
 import Scrollbars from 'react-custom-scrollbars-2'

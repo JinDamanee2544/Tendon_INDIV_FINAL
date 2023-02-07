@@ -1,7 +1,6 @@
 import { LearningLessonNodeProps } from "../../customTypes";
 import { Course, Lesson } from "linkWithBackend/interfaces/TendonType";
 import { action, computed, observable } from "mobx";
-import React from "react";
 import { getLessonInformation } from "linkWithBackend/lessonHandle/lessonData";
 import prepNodeAlgo from "linkWithBackend/lessonHandle/Graph_PrepNodeData";
 

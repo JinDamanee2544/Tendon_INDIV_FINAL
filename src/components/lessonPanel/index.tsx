@@ -1,7 +1,6 @@
 import LoadingSpinner from '@components/baseComponents/LoadingSpinner';
 import ViewModel from './ViewModel';
 import NodeMUX, { NodeType } from './NodeMUX';
-import { useEffect } from 'react';
 
 type LessonPanelProps = {
     lesson_id: string

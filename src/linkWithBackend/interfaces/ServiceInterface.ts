@@ -1,4 +1,3 @@
-import React from "react";
 import { Course, Lesson, localStorageInterface, Node, User } from "./TendonType";
 
 export interface APIServiceInterface {

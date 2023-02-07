@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import Setting from "../dashboard/setting";
 import { SignUpHandle } from "unused-pages/service_page/SignView";
 import ViewModel from "./ViewModel";
 import PanelContainer from "@components/baseComponents/PanelContainer";

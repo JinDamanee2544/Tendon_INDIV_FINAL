@@ -1,4 +1,3 @@
-import axios from 'axios'
 import 'reflect-metadata'
 import { makeAutoObservable } from "mobx"
 import { inject, injectable } from 'inversify'

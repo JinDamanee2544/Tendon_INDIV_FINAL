@@ -28,7 +28,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const router = useRouter();
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = memService.getLocalStorage('token');
     if (!signService.isTokenValid(token)) {
       router.push('/login')
     }

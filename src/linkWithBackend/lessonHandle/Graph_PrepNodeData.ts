@@ -1,5 +1,4 @@
 import { Course, Lesson } from "linkWithBackend/interfaces/TendonType";
-import React from "react";
 import { LearningLessonNodeProps, StatusType } from "../../customTypes"
 
 interface prepAlgoInterface {

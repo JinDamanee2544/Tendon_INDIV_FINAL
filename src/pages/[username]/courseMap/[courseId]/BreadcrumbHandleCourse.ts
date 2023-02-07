@@ -1,10 +1,9 @@
 import { useBreadCrumb } from "context";
-import useLocalStorage from "hooks/useLocalStorage";
 import TYPES from "linkWithBackend/interfaces/TendonType";
 import container from "linkWithBackend/services/inversify.config";
 import MemoryService from "linkWithBackend/services/memory_services";
 import { useRouter } from "next/router";
-import { useEffect, useMemo } from "react";
+import { useEffect } from "react";
 
 const memService = container.get<MemoryService>(TYPES.MemoryService)
 

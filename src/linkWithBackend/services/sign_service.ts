@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { makeAutoObservable } from "mobx"
-import { inject, injectable } from 'inversify'
-import TYPES, { User } from 'linkWithBackend/interfaces/TendonType'
+import { injectable } from 'inversify'
+import { User } from 'linkWithBackend/interfaces/TendonType'
 import jwt_decode from 'jwt-decode'
 
 type claimProps = {
