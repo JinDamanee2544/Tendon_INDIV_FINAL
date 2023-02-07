@@ -49,7 +49,6 @@ const Login = () => {
                             </Link>
                         </p>
                     </FormContainer>
-                    <Setting />
                 </PanelContainer>
             </div>
         </>

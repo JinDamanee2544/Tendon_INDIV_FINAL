@@ -60,7 +60,6 @@ const SignupBox = () => {
                         Sign Up
                     </motion.button>
                 </FormContainer>
-                <Setting />
             </PanelContainer>
         </div >
     );
