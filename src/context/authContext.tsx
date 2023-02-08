@@ -2,7 +2,7 @@ import { createContext, ReactNode, useContext, useEffect } from "react";
 import TYPES from "linkWithBackend/interfaces/TendonType"
 import container from "linkWithBackend/services/inversify.config"
 import MemoryService from "linkWithBackend/services/memory_services"
-import SignService from "linkWithBackend/services/sign_service"
+import AuthService from "linkWithBackend/services/sign_service"
 import { useRouter } from "next/router";
 
 const authContext = createContext<any>(undefined);
@@ -22,7 +22,7 @@ type AuthProviderProps = {
 };
 
 const memService = container.get<MemoryService>(TYPES.MemoryService)
-const signService = container.get<SignService>(TYPES.SignService)
+const signService = container.get<AuthService>(TYPES.AuthService)
 
 export function AuthProvider({ children }: AuthProviderProps) {
   const router = useRouter();

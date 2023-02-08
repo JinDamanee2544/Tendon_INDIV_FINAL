@@ -13,7 +13,7 @@ type claimProps = {
     jti: string;
 }
 @injectable()
-class SignService {
+class AuthService {
     response: User
     status: number
     message: string[]
@@ -124,4 +124,4 @@ class SignService {
 
 }
 
-export default SignService
+export default AuthService

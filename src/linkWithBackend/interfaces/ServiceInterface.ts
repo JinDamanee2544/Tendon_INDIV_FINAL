@@ -28,13 +28,13 @@ export interface NodeServiceInterface {
     deleteNode(id: string, token: string): Promise<number>;
 }
 
-export interface AuthServiceInterface {
+export interface UserServiceInterface {
     getUserByID(id: string, token: string): Promise<User>;
     updateUser(id: string, token: string, body: User): Promise<User>;
     deleteUser(id: string, token: string): Promise<number>;
 }
 
-export interface SignServiceInterface {
+export interface AuthServiceInterface {
     signIn(body: User): Promise<User>;
     signUp(body: User): Promise<User>;
     signOut(token: string): Promise<number>;

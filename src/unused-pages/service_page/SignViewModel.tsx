@@ -3,25 +3,25 @@ import { makeAutoObservable } from "mobx"
 
 import { Container } from "inversify";
 import TYPES, { User } from 'linkWithBackend/interfaces/TendonType'
-import SignService from "linkWithBackend/services/sign_service";
+import AuthService from "linkWithBackend/services/sign_service";
 
 class SignDataViewModel {
-    private SignService: SignService
+    private AuthService: AuthService
     private user: User
     private status: Number
     private message: string
 
     constructor(container: Container) {
         makeAutoObservable(this)
-        this.SignService = container.get<SignService>(TYPES.SignService)
+        this.AuthService = container.get<AuthService>(TYPES.AuthService)
         this.user = {} as User
         this.status = 0
         this.message = ''
     }
 
     async signUp(body: User) {
-        const tmpValue = await this.SignService.signUp(body)
-        this.status = this.SignService.getStatus()
+        const tmpValue = await this.AuthService.signUp(body)
+        this.status = this.AuthService.getStatus()
         if (this.status === 201) {
             this.user = tmpValue
             return this.user
@@ -32,8 +32,8 @@ class SignDataViewModel {
     }
 
     async signIn(body: User) {
-        const tmpValue = await this.SignService.signIn(body)
-        this.status = this.SignService.getStatus()
+        const tmpValue = await this.AuthService.signIn(body)
+        this.status = this.AuthService.getStatus()
         if (this.status === 200) {
             this.user = tmpValue
             return this.user
@@ -44,8 +44,8 @@ class SignDataViewModel {
     }
 
     async signOut(token: string) {
-        const tmpValue = await this.SignService.signOut(token)
-        this.status = this.SignService.getStatus()
+        const tmpValue = await this.AuthService.signOut(token)
+        this.status = this.AuthService.getStatus()
         if (this.status === 200) {
             this.status = tmpValue
         } else {
@@ -68,7 +68,7 @@ class SignDataViewModel {
 
     private handleErrorStatus() {
         // if (this.status === 400) {
-        //     this.message = "Error: " + this.SignService.getMessage()
+        //     this.message = "Error: " + this.AuthService.getMessage()
         // } else if (this.status === 401) {
         //     this.message = "Unauthorized"
         // } else if (this.status === 404) {
@@ -80,7 +80,7 @@ class SignDataViewModel {
         // } else {
         //     this.message = "Internal Error"
         // }
-        this.message = "" + this.SignService.getMessage()
+        this.message = "" + this.AuthService.getMessage()
     }
 
 }

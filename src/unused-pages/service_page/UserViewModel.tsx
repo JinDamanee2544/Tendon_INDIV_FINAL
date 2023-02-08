@@ -3,25 +3,25 @@ import { makeAutoObservable } from "mobx"
 
 import { Container } from "inversify";
 import TYPES, { User } from 'linkWithBackend/interfaces/TendonType'
-import AuthService from "linkWithBackend/services/user_service";
+import UserService from "linkWithBackend/services/user_service";
 
-class UserDataViewModel{
-    private AuthService: AuthService 
+class UserDataViewModel {
+    private UserService: UserService
     private user: User
     private status: Number
     private message: string
 
     constructor(container: Container) {
         makeAutoObservable(this)
-        this.AuthService = container.get<AuthService>(TYPES.AuthService)
+        this.UserService = container.get<UserService>(TYPES.UserService)
         this.user = {} as User
         this.status = 0
         this.message = ''
     }
-    
+
     async getUserInformation(id: string, token: string) {
-        const tmpValue =  await this.AuthService.getUserByID(id, token)
-        this.status = this.AuthService.getStatus()
+        const tmpValue = await this.UserService.getUserByID(id, token)
+        this.status = this.UserService.getStatus()
         if (this.status === 200) {
             this.user = tmpValue
             return this.user
@@ -32,8 +32,8 @@ class UserDataViewModel{
     }
 
     async updateUserInformation(id: string, token: string, body: User) {
-        const tmpValue = await this.AuthService.updateUser(id, token, body)
-        this.status = this.AuthService.getStatus()
+        const tmpValue = await this.UserService.updateUser(id, token, body)
+        this.status = this.UserService.getStatus()
         if (this.status === 200) {
             this.user = tmpValue
             return this.user
@@ -44,10 +44,10 @@ class UserDataViewModel{
     }
 
     async deleteUserInformation(id: string, token: string) {
-        const status =  await this.AuthService.deleteUser(id, token)
+        const status = await this.UserService.deleteUser(id, token)
         this.status = status
         if (this.status === 200) {
-            return this.status 
+            return this.status
         } else {
             this.handleErrorStatus()
             return this.status

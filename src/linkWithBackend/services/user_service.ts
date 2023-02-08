@@ -5,7 +5,7 @@ import TYPES, { User } from 'linkWithBackend/interfaces/TendonType'
 import APIService from './api_services'
 
 @injectable()
-class AuthService {
+class UserService {
     response: User
     status: number
     apiService: APIService
@@ -60,4 +60,4 @@ class AuthService {
     }
 }
 
-export default AuthService
+export default UserService

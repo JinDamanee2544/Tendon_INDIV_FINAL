@@ -49,8 +49,8 @@ export interface localStorageInterface {
 }
 
 let TYPES = {
+    UserService: Symbol("UserService"),
     AuthService: Symbol("AuthService"),
-    SignService: Symbol("SignService"),
     NodeService: Symbol("NodeService"),
     LessonService: Symbol("LessonService"),
     CourseService: Symbol("CourseService"),
