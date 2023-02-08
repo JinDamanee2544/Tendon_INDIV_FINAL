@@ -3,10 +3,10 @@ import { action, computed, makeAutoObservable, observable } from "mobx"
 
 import { Container } from "inversify";
 import TYPES, { Node } from 'linkWithBackend/interfaces/TendonType'
-import NodeService from "linkWithBackend/services/node_services";
+import NodeService from "linkWithBackend/services/node_service";
 
-class NodeDataViewModel{
-    private NodeService: NodeService 
+class NodeDataViewModel {
+    private NodeService: NodeService
     @observable private node: Node
     @observable private status: Number
     @observable private message: string
@@ -18,9 +18,9 @@ class NodeDataViewModel{
         this.status = 0
         this.message = ''
     }
-    
+
     async createNode(body: Node, token: string) {
-        const tmpValue =  await this.NodeService.postNode(body, token)
+        const tmpValue = await this.NodeService.postNode(body, token)
         this.status = this.NodeService.getStatus()
         if (this.status === 201) {
             this.node = tmpValue
@@ -33,7 +33,7 @@ class NodeDataViewModel{
 
     @action
     async getNodeData(id: string, token: string) {
-        const tmpValue =  await this.NodeService.getNodeById(id, token)
+        const tmpValue = await this.NodeService.getNodeById(id, token)
         this.status = this.NodeService.getStatus()
         if (this.status === 200) {
             this.node = tmpValue
@@ -46,7 +46,7 @@ class NodeDataViewModel{
     }
 
     async updateNodeData(id: string, token: string, body: Node) {
-        const tmpValue =  await this.NodeService.updateNode(id, token, body)
+        const tmpValue = await this.NodeService.updateNode(id, token, body)
         this.status = this.NodeService.getStatus()
         if (this.status === 200) {
             this.node = tmpValue
@@ -58,10 +58,10 @@ class NodeDataViewModel{
     }
 
     async deleteNode(id: string, token: string) {
-        const status =  await this.NodeService.deleteNode(id, token)
+        const status = await this.NodeService.deleteNode(id, token)
         this.status = status
         if (this.status === 200) {
-            return this.status 
+            return this.status
         } else {
             this.handleErrorStatus()
             return this.status

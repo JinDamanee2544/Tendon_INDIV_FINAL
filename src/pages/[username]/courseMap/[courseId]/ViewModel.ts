@@ -1,7 +1,7 @@
 import TYPES, { Lesson } from "linkWithBackend/interfaces/TendonType";
 import { getLessonInformation } from "linkWithBackend/lessonHandle/lessonData";
 import container from "linkWithBackend/services/inversify.config";
-import MemoryService from "linkWithBackend/services/memory_services";
+import MemoryService from "linkWithBackend/services/memory_service";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 

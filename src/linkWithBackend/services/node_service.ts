@@ -1,7 +1,7 @@
 import { makeAutoObservable } from "mobx"
 import { inject, injectable } from 'inversify'
 import TYPES, { Node } from 'linkWithBackend/interfaces/TendonType'
-import APIService from './api_services'
+import APIService from './api_service'
 
 @injectable()
 class NodeService {

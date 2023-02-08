@@ -13,7 +13,7 @@ import ArrowBox from "@components/baseComponents/ArrowBox";
 import GraphPathView from "../lessonMap/GraphShowView";
 import { useRouter } from "next/router";
 import container from "linkWithBackend/services/inversify.config";
-import MemoryService from "linkWithBackend/services/memory_services";
+import MemoryService from "linkWithBackend/services/memory_service";
 
 interface propsInterface {
     body: Course

@@ -10,7 +10,7 @@ import prepNodeAlgo from "linkWithBackend/lessonHandle/Graph_PrepNodeData";
 import { motion } from "framer-motion";
 import { getLessonInformation } from "linkWithBackend/lessonHandle/lessonData";
 import container from "linkWithBackend/services/inversify.config";
-import MemoryService from "linkWithBackend/services/memory_services";
+import MemoryService from "linkWithBackend/services/memory_service";
 
 interface graphProps {
     courseView: Course

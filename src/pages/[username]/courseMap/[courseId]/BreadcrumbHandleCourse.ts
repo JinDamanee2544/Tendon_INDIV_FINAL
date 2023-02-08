@@ -1,7 +1,7 @@
 import { useBreadCrumb } from "context";
 import TYPES from "linkWithBackend/interfaces/TendonType";
 import container from "linkWithBackend/services/inversify.config";
-import MemoryService from "linkWithBackend/services/memory_services";
+import MemoryService from "linkWithBackend/services/memory_service";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 

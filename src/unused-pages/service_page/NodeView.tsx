@@ -7,7 +7,7 @@ import NodeDataViewModel from "./NodeViewModel";
 import TYPES, { Node } from "linkWithBackend/interfaces/TendonType";
 import { useRouter } from "next/router";
 import container from "linkWithBackend/services/inversify.config";
-import MemoryService from "linkWithBackend/services/memory_services";
+import MemoryService from "linkWithBackend/services/memory_service";
 import { resSource } from "@customTypes/index";
 
 interface propsInterface {

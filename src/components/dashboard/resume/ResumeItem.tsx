@@ -2,7 +2,7 @@ import { resumeProps } from '@customTypes/index';
 import { motion } from 'framer-motion'
 import TYPES from 'linkWithBackend/interfaces/TendonType';
 import container from 'linkWithBackend/services/inversify.config';
-import MemoryService from 'linkWithBackend/services/memory_services';
+import MemoryService from 'linkWithBackend/services/memory_service';
 import { useRouter } from 'next/router';
 import { useEffect, useMemo } from 'react';
 import { useXarrow } from 'react-xarrows';

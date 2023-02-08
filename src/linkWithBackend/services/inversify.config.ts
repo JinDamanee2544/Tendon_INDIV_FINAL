@@ -3,11 +3,11 @@ import { Container } from "inversify";
 import UserService from "./user_service";
 import TYPES from "linkWithBackend/interfaces/TendonType";
 import AuthService from "./sign_service";
-import NodeService from "./node_services";
-import LessonService from "./lesson_services";
-import CourseService from "./course_services";
-import MemoryService from "./memory_services";
-import APIService from "./api_services";
+import NodeService from "./node_service";
+import LessonService from "./lesson_service";
+import CourseService from "./course_service";
+import MemoryService from "./memory_service";
+import APIService from "./api_service";
 import { APIServiceInterface, UserServiceInterface, CourseServiceInterface, LessonServiceInterface, MemoryServiceInterface, NodeServiceInterface, AuthServiceInterface } from "linkWithBackend/interfaces/ServiceInterface";
 
 var container: Container = new Container();

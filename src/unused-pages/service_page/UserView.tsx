@@ -6,7 +6,7 @@ import UserDataViewModel from './UserViewModel'
 import { useTendonContainer } from "linkWithBackend/services/container";
 import TYPES, { User } from "linkWithBackend/interfaces/TendonType";
 import container from "linkWithBackend/services/inversify.config";
-import MemoryService from "linkWithBackend/services/memory_services";
+import MemoryService from "linkWithBackend/services/memory_service";
 
 interface UserProps {
     user_id: string,

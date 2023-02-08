@@ -1,8 +1,8 @@
 import TYPES, { Lesson, Node } from "linkWithBackend/interfaces/TendonType"
 import container from "linkWithBackend/services/inversify.config"
-import LessonService from "linkWithBackend/services/lesson_services"
-import MemoryService from "linkWithBackend/services/memory_services"
-import NodeService from "linkWithBackend/services/node_services"
+import LessonService from "linkWithBackend/services/lesson_service"
+import MemoryService from "linkWithBackend/services/memory_service"
+import NodeService from "linkWithBackend/services/node_service"
 import { useEffect, useState } from "react"
 
 const memService = container.get<MemoryService>(TYPES.MemoryService)

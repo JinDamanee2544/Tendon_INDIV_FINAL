@@ -9,7 +9,7 @@ import CourseNode from "@components/courseMap/LessonNode";
 import { StatusType } from "@customTypes/index";
 import { useRouter } from "next/router";
 import container from "linkWithBackend/services/inversify.config";
-import MemoryService from "linkWithBackend/services/memory_services";
+import MemoryService from "linkWithBackend/services/memory_service";
 
 interface propsInterface {
     body: Lesson

@@ -2,10 +2,10 @@ import { makeAutoObservable } from "mobx"
 
 import { Container } from "inversify";
 import TYPES, { Lesson } from 'linkWithBackend/interfaces/TendonType'
-import LessonService from "linkWithBackend/services/lesson_services";
+import LessonService from "linkWithBackend/services/lesson_service";
 
-class LessonDataViewModel{
-    private LessonService: LessonService 
+class LessonDataViewModel {
+    private LessonService: LessonService
     private lesson: Lesson
     private status: Number
     private message: string
@@ -17,9 +17,9 @@ class LessonDataViewModel{
         this.status = 0
         this.message = ''
     }
-    
+
     async createLesson(body: Lesson, token: string) {
-        const tmpValue =  await this.LessonService.postLesson(body, token)
+        const tmpValue = await this.LessonService.postLesson(body, token)
         this.status = this.LessonService.getStatus()
         if (this.status === 201) {
             this.lesson = tmpValue
@@ -31,7 +31,7 @@ class LessonDataViewModel{
     }
 
     async getLessonData(id: string, token: string) {
-        const tmpValue =  await this.LessonService.getLessonById(id, token)
+        const tmpValue = await this.LessonService.getLessonById(id, token)
         this.status = this.LessonService.getStatus()
         if (this.status === 200) {
             this.lesson = tmpValue
@@ -43,7 +43,7 @@ class LessonDataViewModel{
     }
 
     async updateLessonData(id: string, token: string, body: Lesson) {
-        const tmpValue =  await this.LessonService.updateLesson(id, token, body)
+        const tmpValue = await this.LessonService.updateLesson(id, token, body)
         this.status = this.LessonService.getStatus()
         if (this.status === 200) {
             this.lesson = tmpValue
@@ -55,10 +55,10 @@ class LessonDataViewModel{
     }
 
     async deleteLesson(id: string, token: string) {
-        const status =  await this.LessonService.deleteLesson(id, token)
+        const status = await this.LessonService.deleteLesson(id, token)
         this.status = status
         if (this.status === 200) {
-            return this.status 
+            return this.status
         } else {
             this.handleErrorStatus()
             return this.status
