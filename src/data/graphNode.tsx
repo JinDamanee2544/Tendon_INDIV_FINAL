@@ -1,7 +1,5 @@
 import { LearningLessonNodeProps, StatusType } from "../customTypes";
 
-
-
 export const MockRelateCourse: LearningLessonNodeProps[] = [
     {
         lessonId: '2',

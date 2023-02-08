@@ -3,6 +3,7 @@ import { Suspense } from "react";
 import LoadingSpinner from "@components/baseComponents/LoadingSpinner";
 import BreadcrumbHandleCourse from "./BreadcrumbHandleCourse";
 import GraphLayout from "layout/GraphLayout";
+import { AuthProvider } from "context";
 const CourseMap = dynamic(() => import("@components/courseMap"));
 
 // Fetch Curriculum Data
@@ -19,11 +20,13 @@ const CoursePage = () => {
     const { courseId } = BreadcrumbHandleCourse();
 
     return (
-        <GraphLayout>
-            <Suspense fallback={<LoadingSpinner />}>
-                <CourseMap lid={courseId} />
-            </Suspense>
-        </GraphLayout>
+        <AuthProvider>
+            <GraphLayout>
+                <Suspense fallback={<LoadingSpinner />}>
+                    <CourseMap lid={courseId} />
+                </Suspense>
+            </GraphLayout>
+        </AuthProvider>
     )
 }
 export default CoursePage;
