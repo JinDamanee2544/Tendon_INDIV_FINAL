@@ -6,7 +6,7 @@ import { useTendonContainer } from "linkWithBackend/services/container";
 import LessonDataViewModel from "./LessonViewModel";
 import TYPES, { Lesson } from "linkWithBackend/interfaces/TendonType";
 import CourseNode from "@components/courseMap/LessonNode";
-import { StatusType } from "@customTypes/index";
+import { StatusType } from "types/index";
 import { useRouter } from "next/router";
 import container from "linkWithBackend/services/inversify.config";
 import MemoryService from "linkWithBackend/services/memory_service";

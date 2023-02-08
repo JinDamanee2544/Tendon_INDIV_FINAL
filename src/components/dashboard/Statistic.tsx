@@ -1,5 +1,5 @@
 import React from "react";
-import { statData } from "../../data";
+import { statData } from "../../mockData";
 import { AiFillBook } from 'react-icons/ai'
 import { motion } from 'framer-motion'
 const Statistic = () => {

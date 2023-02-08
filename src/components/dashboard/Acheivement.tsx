@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { AcheivementData as data } from '../../data/index'
+import { AcheivementData as data } from '../../mockData/index'
 import Scrollbars from 'react-custom-scrollbars-2'
 const Acheivement = () => {
 

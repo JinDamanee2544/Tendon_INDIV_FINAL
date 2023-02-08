@@ -1,4 +1,4 @@
-import { LearningLessonNodeProps, RenderLearningLessonNodeProps } from "@customTypes/index"
+import { LearningLessonNodeProps, RenderLearningLessonNodeProps } from "types/index"
 import TYPES, { localStorageInterface } from "linkWithBackend/interfaces/TendonType"
 import CourseService from "linkWithBackend/services/course_service"
 import container from "linkWithBackend/services/inversify.config"

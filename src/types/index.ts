@@ -1,6 +1,20 @@
 import { IconType } from "react-icons";
 import { Course } from "linkWithBackend/interfaces/TendonType";
 
+export type acheivementProps = {
+    id: number,
+    title: string,
+    thumbnail: string,
+};
+
+export type activityProps = {
+    id: number,
+    day: number,
+    month: number,
+    year: number,
+    isActive: boolean,
+};
+
 export enum modeType {
     'main',
     'search',
@@ -54,5 +68,3 @@ export interface resumeProps {
 //         resources: string;
 //     };
 // }
-
-export * from './mockData'

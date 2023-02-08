@@ -1,4 +1,4 @@
-import { modeType } from 'customTypes'
+import { modeType } from 'types'
 import { motion } from 'framer-motion'
 import { useRef } from 'react'
 

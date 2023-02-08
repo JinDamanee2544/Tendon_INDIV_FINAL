@@ -5,7 +5,7 @@ import { useXarrow, Xwrapper } from "react-xarrows";
 import Draggable from "react-draggable";
 import { useTheme } from "next-themes";
 import { prepNode } from "@components/courseMap/LessonNodeViewModel";
-import { LearningLessonNodeProps } from "../../../src/customTypes";
+import { LearningLessonNodeProps } from "../../types";
 import prepNodeAlgo from "linkWithBackend/lessonHandle/Graph_PrepNodeData";
 import { motion } from "framer-motion";
 import { getLessonInformation } from "linkWithBackend/lessonHandle/lessonData";

@@ -1,4 +1,4 @@
-import { activityData } from '../../data/index'
+import { activityData } from '../../mockData/index'
 import { motion } from 'framer-motion'
 const Activity = () => {
     return (

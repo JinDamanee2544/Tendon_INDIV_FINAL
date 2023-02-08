@@ -6,7 +6,7 @@ import Setting from "./setting";
 import { IoCaretForwardOutline } from 'react-icons/io5'
 import { useEffect, useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
-import { modeType } from "customTypes";
+import { modeType } from "types";
 import NavigateButton from "./NavigateButton";
 import DashBoardContainer from "@components/baseComponents/DashBoardContainer";
 import { useRouter } from "next/router";

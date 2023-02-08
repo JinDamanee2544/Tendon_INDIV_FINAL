@@ -1,4 +1,4 @@
-import { LearningLessonNodeProps } from "../../customTypes";
+import { LearningLessonNodeProps } from "../../types";
 import { Course, Lesson } from "linkWithBackend/interfaces/TendonType";
 import { action, computed, observable } from "mobx";
 import { getLessonInformation } from "linkWithBackend/lessonHandle/lessonData";

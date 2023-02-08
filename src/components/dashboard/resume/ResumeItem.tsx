@@ -1,4 +1,4 @@
-import { resumeProps } from '@customTypes/index';
+import { resumeProps } from 'types/index';
 import { motion } from 'framer-motion'
 import TYPES from 'linkWithBackend/interfaces/TendonType';
 import container from 'linkWithBackend/services/inversify.config';

@@ -1,5 +1,5 @@
 import { Course, Lesson } from "linkWithBackend/interfaces/TendonType";
-import { LearningLessonNodeProps, StatusType } from "../../customTypes"
+import { LearningLessonNodeProps, StatusType } from "../../types"
 
 interface prepAlgoInterface {
     courseView: Course

@@ -8,7 +8,7 @@ import TYPES, { Node } from "linkWithBackend/interfaces/TendonType";
 import { useRouter } from "next/router";
 import container from "linkWithBackend/services/inversify.config";
 import MemoryService from "linkWithBackend/services/memory_service";
-import { resSource } from "@customTypes/index";
+import { resSource } from "types/index";
 
 interface propsInterface {
     body: Node

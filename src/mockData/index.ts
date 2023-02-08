@@ -1,10 +1,4 @@
-
-
-type acheivementProps = {
-  id: number,
-  title: string,
-  thumbnail: string,
-};
+import { acheivementProps, activityProps } from "types";
 
 const AcheivementData: acheivementProps[] = [
   {
@@ -29,13 +23,7 @@ const AcheivementData: acheivementProps[] = [
   },
 ];
 
-type activityProps = {
-  id: number,
-  day: number,
-  month: number,
-  year: number,
-  isActive: boolean,
-}
+
 const activityData: activityProps[] = [
   {
     id: 1,

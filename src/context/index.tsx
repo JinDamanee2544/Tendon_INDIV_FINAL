@@ -1,2 +1,2 @@
-export * from './breadCrumb';
+export * from './breadCrumbContext';
 export * from './authContext';

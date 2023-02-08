@@ -1,4 +1,4 @@
-import { StatusType } from 'customTypes'
+import { StatusType } from 'types'
 import { motion } from 'framer-motion'
 import { useRouter } from 'next/router'
 import { useMemo, useRef } from 'react'
