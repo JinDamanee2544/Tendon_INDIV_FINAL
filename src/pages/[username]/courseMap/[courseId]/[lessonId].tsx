@@ -1,5 +1,5 @@
 import LoadingSpinner from "@components/baseComponents/LoadingSpinner";
-import LessonNode from "@components/lessonPanel";
+import LessonPanel from "@components/lessonPanel";
 import { Suspense } from "react";
 import BreadcrumbHandleLesson from './BreadcrumbHandleLesson'
 import MainLayout from "@layout/MainLayout";
@@ -15,7 +15,7 @@ const Lesson = () => {
         <AuthProvider>
             <MainLayout>
                 <Suspense fallback={<LoadingSpinner />}>
-                    <LessonNode lesson_id={lessonId} />
+                    <LessonPanel lesson_id={lessonId} />
                 </Suspense>
             </MainLayout>
         </AuthProvider>
