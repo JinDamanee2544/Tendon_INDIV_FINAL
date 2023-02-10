@@ -2,9 +2,10 @@ import { makeAutoObservable } from "mobx"
 import { inject, injectable } from 'inversify'
 import TYPES, { Lesson } from 'linkWithBackend/interfaces/TendonType'
 import APIService from './api_service'
+import { LessonServiceInterface } from 'linkWithBackend/interfaces/ServiceInterface'
 
 @injectable()
-class LessonService {
+class LessonService implements LessonServiceInterface {
     response: Lesson
     status: number
     message: string
@@ -34,7 +35,6 @@ class LessonService {
         const result = await this.apiService.post<Lesson>(
             "http://24.199.72.217:8080/api/v1/auth/lessons",
             bodySend,
-            token
         )
         this.message = result.message
         this.status = result.status
@@ -43,7 +43,7 @@ class LessonService {
     }
 
     async getLessonById(id: string, token: string){
-        var result = await this.apiService.get<Lesson>(`http://24.199.72.217:8080/api/v1/auth/lessons/${id}`, token)
+        var result = await this.apiService.get<Lesson>(`http://24.199.72.217:8080/api/v1/auth/lessons/${id}`)
         this.message = result.message
         this.status = result.status
         return this.response = result.response
@@ -64,7 +64,6 @@ class LessonService {
             "http://24.199.72.217:8080/api/v1/auth/lessons",
             bodySend,
             id,
-            token
         )
         this.message = result.message
         this.status = result.status
@@ -72,7 +71,7 @@ class LessonService {
     }
 
     async deleteLesson(id: string, token: string) {
-        return this.status = await this.apiService.delete<Lesson>("http://24.199.72.217:8080/api/v1/auth/lessons", id, token)
+        return this.status = await this.apiService.delete<Lesson>("http://24.199.72.217:8080/api/v1/auth/lessons", id)
     }
 
     public getStatus() {

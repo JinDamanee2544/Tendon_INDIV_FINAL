@@ -3,9 +3,10 @@ import { makeAutoObservable } from "mobx"
 import { inject, injectable } from 'inversify'
 import TYPES, { User } from 'linkWithBackend/interfaces/TendonType'
 import APIService from './api_service'
+import { UserServiceInterface } from 'linkWithBackend/interfaces/ServiceInterface'
 
 @injectable()
-class UserService {
+class UserService implements UserServiceInterface {
     response: User
     status: number
     apiService: APIService
@@ -21,7 +22,7 @@ class UserService {
 
 
     async getUserByID(id: string, token: string){
-        let result = await this.apiService.get<User>(`http://24.199.72.217:8080/api/v1/auth/users${id}`, token)
+        let result = await this.apiService.get<User>(`http://24.199.72.217:8080/api/v1/auth/users${id}`)
         this.status = result.status
         return this.response = result.response
     }
@@ -44,14 +45,13 @@ class UserService {
             "http://24.199.72.217:8080/api/v1/auth/nodes",
             bodySend,
             id,
-            token
         )
         this.status = result.status
         return this.response = result.response
     }
 
     async deleteUser(id: string, token: string) {
-        this.status = await this.apiService.delete<User>("http://24.199.72.217:8080/api/v1/auth/users", id, token)
+        this.status = await this.apiService.delete<User>("http://24.199.72.217:8080/api/v1/auth/users", id)
         return this.status
     }
 

@@ -1,20 +1,28 @@
 import axios from "axios";
-import { injectable } from "inversify";
+import { inject, injectable } from "inversify";
+import TYPES from "linkWithBackend/interfaces/TendonType";
 import { makeAutoObservable } from "mobx";
+import { APIServiceInterface } from "../interfaces/ServiceInterface";
+import MemoryService from "./memory_service";
 
 @injectable()
-class APIService {
+class APIService implements APIServiceInterface {
     status: number
     message: string
+    memService: MemoryService
 
-    constructor() {
+    constructor(
+        @inject(TYPES.MemoryService) memService: MemoryService
+    ) {
         makeAutoObservable(this)
         this.status = 0
         this.message = ""
+        this.memService = memService
     }
 
-    public async post<Type>(url: string, body: Type, token: string) {
+    public async post<Type>(url: string, body: Type) {
         let response: Type = {} as Type
+        let token = this.memService.getLocalStorage("token")
         const config = {
             headers: { Authorization: `Bearer ${token}` }
         };
@@ -39,8 +47,9 @@ class APIService {
         }
     }
 
-    public async get<Type>(url: string, token: string) {
+    public async get<Type>(url: string) {
         let response: Type = {} as Type
+        let token = this.memService.getLocalStorage("token")
         const config = {
             headers: { Authorization: `Bearer ${token}` }
         };
@@ -63,8 +72,9 @@ class APIService {
         }
     } 
 
-    public async update<Type>(url: string, body: Type, id: string, token: string) {
+    public async update<Type>(url: string, body: Type, id: string) {
         let response: Type = {} as Type
+        let token = this.memService.getLocalStorage("token")
         const config = {
             headers: { Authorization: `Bearer ${token}` }
         }
@@ -87,7 +97,8 @@ class APIService {
         }
     }
 
-    public async delete<Type>(url: string, id: string, token: string) {
+    public async delete<Type>(url: string, id: string) {
+        let token = this.memService.getLocalStorage("token")
         const config = {
             headers: { Authorization: `Bearer ${token}` }
         };

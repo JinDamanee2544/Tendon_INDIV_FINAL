@@ -3,9 +3,10 @@ import { inject, injectable } from 'inversify'
 import { Course } from 'linkWithBackend/interfaces/TendonType'
 import TYPES from "linkWithBackend/interfaces/TendonType";
 import APIService from './api_service';
+import { CourseServiceInterface } from 'linkWithBackend/interfaces/ServiceInterface';
 
 @injectable()
-class CourseService {
+class CourseService implements CourseServiceInterface {
     response: Course
     status: number
     message: string
@@ -33,7 +34,6 @@ class CourseService {
         const result = await this.apiService.post<Course>(
             "http://24.199.72.217:8080/api/v1/auth/courses",
             bodySend,
-            token
         )
         this.message = result.message
         this.status = result.status
@@ -41,7 +41,7 @@ class CourseService {
     }
 
     async getCourseById(id: string, token: string){
-        let result = await this.apiService.get<Course>(`http://24.199.72.217:8080/api/v1/auth/courses/${id}`, token)
+        let result = await this.apiService.get<Course>(`http://24.199.72.217:8080/api/v1/auth/courses/${id}`)
         this.message = result.message
         this.status = result.status
         return this.response = result.response
@@ -61,7 +61,6 @@ class CourseService {
             "http://24.199.72.217:8080/api/v1/auth/courses",
             bodySend,
             id,
-            token
         )
         this.message = result.message
         this.status = result.status
@@ -69,7 +68,7 @@ class CourseService {
     }
 
     async deleteCourse(id: string, token: string) {
-        return this.status = await this.apiService.delete<Course>("http://24.199.72.217:8080/api/v1/auth/courses", id, token)
+        return this.status = await this.apiService.delete<Course>("http://24.199.72.217:8080/api/v1/auth/courses", id)
     }
 
     public getStatus() {

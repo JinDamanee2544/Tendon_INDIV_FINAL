@@ -3,6 +3,7 @@ import { makeAutoObservable } from "mobx"
 import { injectable } from 'inversify'
 import { User } from 'linkWithBackend/interfaces/TendonType'
 import jwt_decode from 'jwt-decode'
+import { AuthServiceInterface } from 'linkWithBackend/interfaces/ServiceInterface'
 
 type claimProps = {
     iss: string;
@@ -13,7 +14,7 @@ type claimProps = {
     jti: string;
 }
 @injectable()
-class AuthService {
+class AuthService implements AuthServiceInterface {
     response: User
     status: number
     message: string[]

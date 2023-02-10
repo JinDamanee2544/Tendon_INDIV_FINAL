@@ -2,9 +2,10 @@ import { localStorageInterface } from "linkWithBackend/interfaces/TendonType";
 import { injectable } from "inversify";
 import { makeAutoObservable } from "mobx";
 import 'reflect-metadata'
+import { MemoryServiceInterface } from "linkWithBackend/interfaces/ServiceInterface";
 
 @injectable()
-class MemoryService {
+class MemoryService implements MemoryServiceInterface {
 
     constructor() {
         makeAutoObservable(this)

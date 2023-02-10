@@ -2,9 +2,10 @@ import { makeAutoObservable } from "mobx"
 import { inject, injectable } from 'inversify'
 import TYPES, { Node } from 'linkWithBackend/interfaces/TendonType'
 import APIService from './api_service'
+import { NodeServiceInterface } from 'linkWithBackend/interfaces/ServiceInterface'
 
 @injectable()
-class NodeService {
+class NodeService implements NodeServiceInterface {
     response: Node
     status: number
     apiService: APIService
@@ -27,14 +28,13 @@ class NodeService {
         const result = await this.apiService.post<Node>(
             "http://24.199.72.217:8080/api/v1/auth/nodes",
             bodySend,
-            token
         )
         this.status = result.status
         return this.response = result.response
     }
 
     async getNodeById(id: string, token: string){
-        let result = await this.apiService.get<Node>(`http://24.199.72.217:8080/api/v1/auth/nodes/${id}`, token)
+        let result = await this.apiService.get<Node>(`http://24.199.72.217:8080/api/v1/auth/nodes/${id}`)
         this.status = result.status
         return this.response = result.response
     }
@@ -50,14 +50,13 @@ class NodeService {
             "http://24.199.72.217:8080/api/v1/auth/nodes",
             bodySend,
             id,
-            token
         )
         this.status = result.status
         return this.response = result.response
     }
 
     async deleteNode(id: string, token: string) {
-        this.status = await this.apiService.delete<Node>("http://24.199.72.217:8080/api/v1/auth/nodes", id, token)
+        this.status = await this.apiService.delete<Node>("http://24.199.72.217:8080/api/v1/auth/nodes", id)
         return this.status
     }
 
