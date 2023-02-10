@@ -21,13 +21,13 @@ class UserService implements UserServiceInterface {
     }
 
 
-    async getUserByID(id: string, token: string){
+    async getUserByID(id: string){
         let result = await this.apiService.get<User>(`http://24.199.72.217:8080/api/v1/auth/users${id}`)
         this.status = result.status
         return this.response = result.response
     }
 
-    async updateUser(id: string, token: string, body: User) {
+    async updateUser(id: string, body: User) {
         let bodySend:User = {
             id: "",
             firstName: body.firstName,
@@ -50,7 +50,7 @@ class UserService implements UserServiceInterface {
         return this.response = result.response
     }
 
-    async deleteUser(id: string, token: string) {
+    async deleteUser(id: string) {
         this.status = await this.apiService.delete<User>("http://24.199.72.217:8080/api/v1/auth/users", id)
         return this.status
     }

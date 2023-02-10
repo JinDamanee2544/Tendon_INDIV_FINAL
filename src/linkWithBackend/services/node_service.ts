@@ -19,7 +19,7 @@ class NodeService implements NodeServiceInterface {
         this.status = 0
     }
 
-    async postNode(body: Node, token: string) {
+    async postNode(body: Node) {
         let bodySend: Node = {
             id: "",
             type: body.type,
@@ -33,13 +33,13 @@ class NodeService implements NodeServiceInterface {
         return this.response = result.response
     }
 
-    async getNodeById(id: string, token: string){
+    async getNodeById(id: string){
         let result = await this.apiService.get<Node>(`http://24.199.72.217:8080/api/v1/auth/nodes/${id}`)
         this.status = result.status
         return this.response = result.response
     }
 
-    async updateNode(id: string, token: string, body: Node) {
+    async updateNode(id: string, body: Node) {
         let bodySend:Node = {
             id: "",
             type: body.type,
@@ -55,7 +55,7 @@ class NodeService implements NodeServiceInterface {
         return this.response = result.response
     }
 
-    async deleteNode(id: string, token: string) {
+    async deleteNode(id: string) {
         this.status = await this.apiService.delete<Node>("http://24.199.72.217:8080/api/v1/auth/nodes", id)
         return this.status
     }

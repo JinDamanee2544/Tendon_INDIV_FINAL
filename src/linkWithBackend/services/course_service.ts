@@ -22,7 +22,7 @@ class CourseService implements CourseServiceInterface {
         this.message = ""
     }
 
-    async postCourse(body: Course, token: string) {
+    async postCourse(body: Course) {
         let bodySend:Course = {
             id: "",
             name: body.name,
@@ -40,14 +40,14 @@ class CourseService implements CourseServiceInterface {
         return this.response = result.response
     }
 
-    async getCourseById(id: string, token: string){
+    async getCourseById(id: string){
         let result = await this.apiService.get<Course>(`http://24.199.72.217:8080/api/v1/auth/courses/${id}`)
         this.message = result.message
         this.status = result.status
         return this.response = result.response
     }
 
-    async updateCourse(id: string, token: string, body: Course) {
+    async updateCourse(id: string, body: Course) {
         let bodySend:Course = {
             id: "",
             name: body.name,
@@ -67,7 +67,7 @@ class CourseService implements CourseServiceInterface {
         return this.response = result.response
     }
 
-    async deleteCourse(id: string, token: string) {
+    async deleteCourse(id: string) {
         return this.status = await this.apiService.delete<Course>("http://24.199.72.217:8080/api/v1/auth/courses", id)
     }
 
