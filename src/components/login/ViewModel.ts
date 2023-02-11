@@ -2,14 +2,17 @@ import TYPES, { localStorageInterface, User } from "linkWithBackend/interfaces/T
 import container from "linkWithBackend/services/inversify.config";
 import MemoryService from "linkWithBackend/services/memory_service";
 import AuthService from "linkWithBackend/services/sign_service";
+import { useTheme } from "next-themes";
 import { useRouter } from "next/router";
 import { FormEvent, useState } from "react";
+import { toast } from 'react-toastify';
 
 const authService = container.get<AuthService>(TYPES.AuthService)
 const memService = container.get<MemoryService>(TYPES.MemoryService)
 
 export default function ViewModel(){
     const router = useRouter();
+    const {theme} = useTheme() 
     const [userProps, setUserProps] = useState<User>({} as User)
     const [message, setMessage] = useState<string[]>([])
 
@@ -43,7 +46,15 @@ export default function ViewModel(){
         if (status === 200) {
             router.push(`/${user.firstName+user.lastName}/dashboard`)
         } else {
-            console.log(`Status : ${status} - Message : ${message}`)
+            toast.error(`${message}`, {
+                position: "bottom-left",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                theme: theme === 'dark' ? 'colored' : 'light',
+            });
         }
     }
     return {
