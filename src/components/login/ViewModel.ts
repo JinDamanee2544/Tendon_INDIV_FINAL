@@ -14,7 +14,6 @@ export default function ViewModel(){
     const router = useRouter();
     const {theme} = useTheme() 
     const [userProps, setUserProps] = useState<User>({} as User)
-    const [message, setMessage] = useState<string[]>([])
 
     const onChange = (e: any) => {
         setUserProps({
@@ -33,9 +32,6 @@ export default function ViewModel(){
         const user = await authService.signIn(userProps)
         const message = authService.getMessage()
         const status = authService.getStatus()
-
-        setMessage(message)
-        // setUserProps(user)
         
         let memStore = {} as localStorageInterface
         memStore.token = user.accessToken
@@ -58,7 +54,6 @@ export default function ViewModel(){
         }
     }
     return {
-        message,
         userProps,
         onChange,
         submitHandle
