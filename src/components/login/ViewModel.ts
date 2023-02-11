@@ -1,6 +1,6 @@
 import { User } from "linkWithBackend/interfaces/TendonType";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 
 export default function ViewModel(){
     const router = useRouter();
@@ -15,7 +15,8 @@ export default function ViewModel(){
         })
     }
 
-    const submitHandle = (): void => {
+    const submitHandle = (e:FormEvent) => {
+        e.preventDefault()
         setisCal(true)
     }
 
