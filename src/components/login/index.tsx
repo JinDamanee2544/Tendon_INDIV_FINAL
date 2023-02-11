@@ -4,11 +4,9 @@ import PanelContainer from '@components/baseComponents/PanelContainer'
 import { motion } from 'framer-motion'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useTheme } from 'next-themes';
 
 const Login = () => {
     const { onChange, submitHandle, userProps } = ViewModel()
-    const { theme } = useTheme();
 
     return (
         <div className="flex gap-x-20 justify-center" >
