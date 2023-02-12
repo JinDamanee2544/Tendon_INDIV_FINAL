@@ -11,10 +11,6 @@ const mockText = `default text file (in this case, it's not a pdf file)`
 const LessonPanel = ({ lesson_id }: LessonPanelProps) => {
     const { nodes, lessonName } = ViewModel(lesson_id)
 
-    // useEffect(() => {
-    //     console.log(nodes)
-    // }, [nodes])
-
     if (nodes.length === 0) {
         return <LoadingSpinner />
     }
@@ -57,6 +53,7 @@ const LessonPanel = ({ lesson_id }: LessonPanelProps) => {
                         data={'https://www.youtube.com/watch?v=ysz5S6PUM-U'}
                     />
                 }
+
             </div>
         </div>
     )

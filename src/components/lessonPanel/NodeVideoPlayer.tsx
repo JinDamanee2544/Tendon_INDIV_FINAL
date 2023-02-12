@@ -1,8 +1,7 @@
 import LoadingSpinner from "@components/baseComponents/LoadingSpinner"
-import Modal from "@components/baseComponents/Modal"
-import { useEffect, useState } from "react"
+import ReactModal from "@components/baseComponents/Modal"
+import { useState } from "react"
 import ReactPlayer from "react-player"
-import ModalOpener from "./ModalOpener"
 
 type NodeVideoPlayerProps = {
     name: string
@@ -13,28 +12,35 @@ type NodeVideoPlayerProps = {
 const mockMPD = "https://dash.akamaized.net/envivio/EnvivioDash3/manifest.mpd"
 
 const NodeVideoPlayer = ({ name, data, icon }: NodeVideoPlayerProps) => {
-    const [isPlaying, setIsPlaying] = useState<boolean>(true)
-
-    useEffect(() => {
-
-    }, [])
+    const [isModalOpen, setIsModalOpen] = useState(false)
+    const [isPlaying, setIsPlaying] = useState<boolean>(false)
 
     return (
         <>
-            <ModalOpener
-                icon={icon}
-                name={name}
-                id={name}
-            />
-            <Modal id={name}>
-                <h1 className="text-2xl p-2 font-bold text-center">{name}</h1>
-                <ReactPlayer
-                    url={mockMPD}
-                    controls
-                    playing={isPlaying}
-                    fallback={<LoadingSpinner />}
-                />
-            </Modal>
+            <button
+                className='flex gap-6 items-center p-4 bg-slate-200 dark:bg-gray-light rounded-2xl hover:scale-105 duration-200 active:translate-y-1'
+                onClick={() => setIsModalOpen(true)}>
+                <div className='bg-white dark:bg-slate-500 p-1.5 rounded-full scale-150'>
+                    {icon}
+                </div>
+                <p className='text-lg'>{name}</p>
+            </button>
+            {
+                isModalOpen ?
+                    <ReactModal setIsOpen={setIsModalOpen}>
+                        {/* {data} */}
+                        <article>
+                            <h1 className="text-2xl p-2 font-bold text-center">{name}</h1>
+                            <ReactPlayer
+                                url={mockMPD}
+                                controls
+                                playing={isPlaying}
+                                fallback={<LoadingSpinner />}
+                            />
+                        </article>
+                    </ReactModal> :
+                    <></>
+            }
         </>
     )
 }

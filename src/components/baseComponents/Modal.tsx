@@ -1,18 +1,26 @@
-type ModalProps = {
-    children: React.ReactNode
-    id: string
-}
-const Modal = ({ children, id }: ModalProps) => {
-    return (
-        <>
-            <input type="checkbox" id={`modal-${id}`} className="modal-toggle" />
-            <label htmlFor={`modal-${id}`} className="modal cursor-pointer">
-                <label className="modal-box min-w-max flex flex-col gap-4" htmlFor="">
-                    {children}
-                </label>
-            </label>
-        </>
-    )
+import { useEffect } from "react";
+import PanelContainer from "./PanelContainer";
+
+interface IModalProps {
+    setIsOpen: (isOpen: boolean) => void;
+    children: React.ReactNode;
 }
 
-export default Modal
+export default function Modal({ setIsOpen, children }: IModalProps) {
+    useEffect(() => {
+        console.log("Modal is open ")
+        return () => {
+            console.log("Modal is closed ")
+        }
+    }, [])
+
+    return (
+        <>
+            <div className="absolute top-0 left-0 h-screen w-screen bg-fadeBlack flex justify-center items-center" onClick={() => setIsOpen(false)} >
+                <PanelContainer>
+                    {children}
+                </PanelContainer>
+            </div>
+        </>
+    );
+}
