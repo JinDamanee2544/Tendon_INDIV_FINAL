@@ -52,7 +52,7 @@ const DashBoard = () => {
 
     return (
         <div
-            className="relative flex gap-x-20 justify-center"
+            className="relative flex justify-center gap-x-20"
         >
             <DashBoardContainer
                 mode={mode}
@@ -80,7 +80,7 @@ const DashBoard = () => {
                     onClick={() => navigateMode()}
                 />
             </DashBoardContainer>
-            <div className="flex z-0">
+            <div className="z-0 flex">
                 {mode === modeType.resume && <ResumeList />}
             </div>
         </div>

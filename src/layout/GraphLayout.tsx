@@ -11,7 +11,7 @@ const MainLayout = ({ children }: LayoutProps) => {
             <div className="row-span-1">
                 <Header />
             </div>
-            <div className="flex row-span-5">
+            <div className="row-span-5 flex">
                 {children}
             </div>
         </main >

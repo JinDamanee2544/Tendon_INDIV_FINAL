@@ -5,7 +5,7 @@ const LoadingSpinner = () => {
         <motion.main
             className='absolute top-1/2 left-1/2'
         >
-            <AiOutlineLoading3Quarters className='fill-slate-200 animate-spin text-6xl' />
+            <AiOutlineLoading3Quarters className='animate-spin fill-slate-200 text-6xl' />
         </motion.main>
     )
 }

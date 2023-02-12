@@ -16,7 +16,7 @@ export default function Modal({ setIsOpen, children }: IModalProps) {
 
     return (
         <>
-            <div className="absolute top-0 left-0 h-screen w-screen bg-fadeBlack flex justify-center items-center" onClick={() => setIsOpen(false)} >
+            <div className="absolute top-0 left-0 flex h-screen w-screen items-center justify-center bg-fadeBlack" onClick={() => setIsOpen(false)} >
                 <PanelContainer>
                     {children}
                 </PanelContainer>

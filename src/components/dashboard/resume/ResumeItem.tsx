@@ -19,7 +19,7 @@ const ResumeItem = ({ id, courseData, setIsReady }: resumeProps) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     return (
-        <motion.button className="p-2 rounded-lg bg-slate-500 dark:bg-gray-normal text-white dark:border-2 dark:border-purple-light dark:shadow-purple-neon shadow-lg"
+        <motion.button className="rounded-lg bg-slate-500 p-2 text-white shadow-lg dark:border-2 dark:border-purple-light dark:bg-gray-normal dark:shadow-purple-neon"
             initial={{ opacity: 0, scale: 0 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0 }}

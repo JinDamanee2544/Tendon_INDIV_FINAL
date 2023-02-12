@@ -18,9 +18,9 @@ const NodeVideoPlayer = ({ name, data, icon }: NodeVideoPlayerProps) => {
     return (
         <>
             <button
-                className='flex gap-6 items-center p-4 bg-slate-200 dark:bg-gray-light rounded-2xl hover:scale-105 duration-200 active:translate-y-1'
+                className='flex items-center gap-6 rounded-2xl bg-slate-200 p-4 duration-200 hover:scale-105 active:translate-y-1 dark:bg-gray-light'
                 onClick={() => setIsModalOpen(true)}>
-                <div className='bg-white dark:bg-slate-500 p-1.5 rounded-full scale-150'>
+                <div className='scale-150 rounded-full bg-white p-1.5 dark:bg-slate-500'>
                     {icon}
                 </div>
                 <p className='text-lg'>{name}</p>
@@ -30,7 +30,7 @@ const NodeVideoPlayer = ({ name, data, icon }: NodeVideoPlayerProps) => {
                     <ReactModal setIsOpen={setIsModalOpen}>
                         {/* {data} */}
                         <article>
-                            <h1 className="text-2xl p-2 font-bold text-center">{name}</h1>
+                            <h1 className="p-2 text-center text-2xl font-bold">{name}</h1>
                             <ReactPlayer
                                 url={mockMPD}
                                 controls

@@ -16,9 +16,9 @@ const LessonPanel = ({ lesson_id }: LessonPanelProps) => {
     }
 
     return (
-        <div className='flex gap-x-20 justify-center mt-10'>
-            <div className='flex flex-col gap-4 p-6 bg-slate-100 dark:bg-gray-normal rounded-3xl min-w-[300px]' >
-                <h1 className='text-2xl p-2 font-bold text-center'>{lessonName}</h1>
+        <div className='mt-10 flex justify-center gap-x-20'>
+            <div className='flex min-w-[300px] flex-col gap-4 rounded-3xl bg-slate-100 p-6 dark:bg-gray-normal' >
+                <h1 className='p-2 text-center text-2xl font-bold'>{lessonName}</h1>
                 {nodes.map((node) => {
                     return (
                         <NodeMUX

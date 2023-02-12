@@ -2,10 +2,10 @@ import { motion } from 'framer-motion'
 import { NavigateProps } from '../../types';
 const NavigateButton = ({ Icon, direction, onClick }: NavigateProps) => {
     return (
-        <main className="w-0 h-0">
+        <main className="h-0 w-0">
             <motion.button
                 className={
-                    `bg-slate-400 text-white dark:bg-gray-light shadow-xl h-fit w-fit rounded-full relative flex justify-center items-center p-2 top-[205px] z-10
+                    `relative top-[205px] z-10 flex h-fit w-fit items-center justify-center rounded-full bg-slate-400 p-2 text-white shadow-xl dark:bg-gray-light
             ${direction === 'right' ? '-right-0' : '-left-12'}`
                 }
                 whileTap={{ scale: 0.9 }}

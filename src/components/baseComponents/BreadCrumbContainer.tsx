@@ -14,7 +14,7 @@ const BreadCrumbContainer = ({ children }: props) => {
             drag
             dragConstraints={{ top: 0, bottom: 0, left: 0, right: 0 }}
             transition={{ duration: 0.5, type: "spring", stiffness: 100 }}
-            className="flex justify-center gap-4 items-center p-2 m-10 rounded-full bg-gradient-to-r from-purple-light to-purple-neon text-white text-xl font-bold "
+            className="m-10 flex items-center justify-center gap-4 rounded-full bg-gradient-to-r from-purple-light to-purple-neon p-2 text-xl font-bold text-white "
         >
             {children}
         </motion.main>

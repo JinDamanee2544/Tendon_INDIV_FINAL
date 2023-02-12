@@ -32,7 +32,7 @@ const LearningNodeMap = ({ lid }: LearningNodeMapProps) => {
     return (
         <>
             <motion.main
-                className="flex items-center justify-center gap-10 grow"
+                className="flex grow items-center justify-center gap-10"
                 transition={{ duration: 0.5, type: "spring", stiffness: 100 }}
             >
                 {/* HIDE Start Node */}
@@ -42,7 +42,7 @@ const LearningNodeMap = ({ lid }: LearningNodeMapProps) => {
                         {
                             renderingGraph.map((item, index) => {
                                 return (
-                                    <div key={index} className="flex gap-10 items-center" >
+                                    <div key={index} className="flex items-center gap-10" >
                                         <CourseNode
                                             key={item.lessonId}
                                             {...item}

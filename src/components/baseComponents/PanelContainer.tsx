@@ -6,7 +6,7 @@ type PanelContainerProps = {
 const PanelContainer = ({ children }: PanelContainerProps) => {
     return (
         <motion.main
-            className="bg-slate-100 dark:bg-gray-normal p-6 flex gap-4 rounded-3xl min-h-[500px]"
+            className="flex min-h-[500px] gap-4 rounded-3xl bg-slate-100 p-6 dark:bg-gray-normal"
             initial={{ opacity: 1, y: -100, scale: 0 }}
             animate={{
                 opacity: 1, y: 0, scale: 1,

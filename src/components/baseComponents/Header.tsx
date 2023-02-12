@@ -12,7 +12,7 @@ const Header = () => {
 
     return (
         <>
-            <nav className="flex flex-row justify-between items-center">
+            <nav className="flex flex-row items-center justify-between">
                 {
                     !noNavPath.includes(router.pathname) ?
                         <BreadCrumbNav /> :

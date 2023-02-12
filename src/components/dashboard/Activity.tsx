@@ -2,7 +2,7 @@ import { activityData } from '../../mockData/index'
 import { motion } from 'framer-motion'
 const Activity = () => {
     return (
-        <main className="grid gap-2 grid-rows-2 grid-flow-col w-fit p-4">
+        <main className="grid w-fit grid-flow-col grid-rows-2 gap-2 p-4">
             {activityData.map((item, idx) => {
                 return <ActivityBox key={idx} {...item} />
             })}

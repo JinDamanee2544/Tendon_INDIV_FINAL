@@ -15,10 +15,10 @@ const BreadCrumbNav = () => {
 
     return (
         <BreadCrumbContainer>
-            <div className='rounded-full overflow-hidden flex justify-center items-center'>
+            <div className='flex items-center justify-center overflow-hidden rounded-full'>
                 <Image src={'/raiden.jpg'} alt='user' height={50} width={50} />
             </div>
-            <div className="font-bold breadcrumbs p-2 overflow-hidden">
+            <div className="breadcrumbs overflow-hidden p-2 font-bold">
                 <ul>
                     {
                         pathList.map((path, index) => {
@@ -61,7 +61,7 @@ const NavItem = ({ name, link, isActive }: NavItemProps) => {
                 isActive ? (
                     <Link href={link}>{name}</Link>
                 ) :
-                    <span className='bg-white text-purple-light p-2 rounded-xl mr-2'>{name}</span>
+                    <span className='mr-2 rounded-xl bg-white p-2 text-purple-light'>{name}</span>
             }
         </>
     )

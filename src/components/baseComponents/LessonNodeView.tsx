@@ -36,7 +36,7 @@ const LearningNode = ({ courseId: lessonId, courseName, isRender, status }: Lear
         <>
             {isRender && (
                 <div className='indicator'>
-                    <span className="indicator-item indicator-start badge mx-10 dark:bg-gray-medium dark:shadow-xl dark:shadow-gray-dark dark:border-0">
+                    <span className="indicator-start badge indicator-item mx-10 dark:border-0 dark:bg-gray-medium dark:shadow-xl dark:shadow-gray-dark">
                         {["✓", "...", "!"][status]}
                     </span>
                     <motion.button

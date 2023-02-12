@@ -9,7 +9,7 @@ type DashBoardContainerProp = {
 const DashBoardContainer = ({ children, mode }: DashBoardContainerProp) => {
     const dashboardRef = useRef(null)
     return (
-        <motion.main className={`z-10 flex gap-4 p-6 bg-slate-100 dark:bg-gray-normal rounded-3xl min-h-[500px]`}
+        <motion.main className={`z-10 flex min-h-[500px] gap-4 rounded-3xl bg-slate-100 p-6 dark:bg-gray-normal`}
             key={'dashboard'}
             initial={{ opacity: 1, y: -100, scale: 0 }}
             animate={{
