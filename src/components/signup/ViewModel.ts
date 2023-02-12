@@ -68,7 +68,7 @@ export default function ViewModel(){
         memStore.lastName = user.lastName
         memService.setLocalStorage(memStore)
 
-        if (status === 200) {
+        if (status === 201) {
             router.push(`/${user.firstName+user.lastName}/dashboard`)
         } else {
             toast.error(`${message}`, {
