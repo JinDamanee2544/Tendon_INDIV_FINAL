@@ -22,9 +22,7 @@ const NodeText = ({ name, data, icon }: NodeTextProps) => {
                 id={name}
             />
             <Modal id={name}>
-                <h3 className="text-lg font-bold">
-                    {name}
-                </h3>
+                <h1 className="text-2xl p-2 font-bold text-center">{name}</h1>
                 <div>
                     <Image
                         src={mockLink}
@@ -33,9 +31,7 @@ const NodeText = ({ name, data, icon }: NodeTextProps) => {
                         width={300}
                     />
                 </div>
-                <p>
-                    {data}
-                </p>
+                <p>{data}</p>
             </Modal>
         </>
     )
