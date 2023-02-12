@@ -1,36 +1,23 @@
-import { User } from "linkWithBackend/interfaces/TendonType";
-import { useState } from "react";
+import TYPES, { localStorageInterface, User } from "linkWithBackend/interfaces/TendonType";
+import container from "linkWithBackend/services/inversify.config";
+import MemoryService from "linkWithBackend/services/memory_service";
+import AuthService from "linkWithBackend/services/sign_service";
+import { useTheme } from "next-themes";
+import { useRouter } from "next/router";
+import { FormEvent, useState } from "react";
+import { toast } from "react-toastify";
+
+const authService = container.get<AuthService>(TYPES.AuthService)
+const memService = container.get<MemoryService>(TYPES.MemoryService)
 
 export default function ViewModel(){
+    const router = useRouter();
+    const {theme} = useTheme();
     const [userProps, setUserProps] = useState<User>({} as User);
     const [confirmPassword, setConfirmPassword] = useState<string>("");
-    const [isCal, setIsCal] = useState<boolean>(false);
-    const onChangeFName = (e: React.FormEvent<HTMLInputElement>): void => {
-        setUserProps({
-            ...userProps,
-            firstName: e.currentTarget.value,
-        });
-    };
-    const onChangeLName = (e: React.FormEvent<HTMLInputElement>): void => {
-        setUserProps({
-            ...userProps,
-            lastName: e.currentTarget.value,
-        });
-    };
-    const onChangeEmail = (e: React.FormEvent<HTMLInputElement>): void => {
-        setUserProps({
-            ...userProps,
-            email: e.currentTarget.value,
-        });
-    };
-    const onChangePassword = (e: React.FormEvent<HTMLInputElement>): void => {
-        setUserProps({
-            ...userProps,
-            password: e.currentTarget.value,
-        });
-    };
+    
     const onChangeConfirmPassword = (
-        e: React.FormEvent<HTMLInputElement>
+        e: FormEvent<HTMLInputElement>
     ): void => {
         setConfirmPassword(e.currentTarget.value);
     };
@@ -42,30 +29,62 @@ export default function ViewModel(){
         });
     }
 
-    const submitHandle = (): void => {
-        if (userProps.email === undefined) {
-            setIsCal(false);
-            alert("Email cannot be blank");
-        } else if (userProps.firstName === undefined) {
-            setIsCal(false);
-            alert("Firstname cannot be blank");
-        } else if (userProps.lastName === undefined) {
-            setIsCal(false);
-            alert("Lastname cannot be blank");
-        } else if (userProps.password === undefined || userProps.password === "") {
-            setIsCal(false);
-            alert("Password cannot be blank");
-        } else if (userProps.password !== confirmPassword) {
-            setIsCal(false);
-            alert("Password and Confirm Password must be the same.!!!");
-        } else {
-            console.log("right");
-            setIsCal(true);
+    const errorNotify = (message:string) => {
+        toast.error(`${message}`, {
+            position: "bottom-left",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            theme: theme === 'dark' ? 'colored' : 'light',
+        });
+    }
+
+    const isPassClientValidate = () :boolean => {
+        if (userProps.password !== confirmPassword) {
+            errorNotify("Password and Confirm Password must be the same.");
+            return false;
         }
-    };
+        return true 
+    }
+
+    const submitHandle = (e:FormEvent) => {
+        e.preventDefault();
+        if (!isPassClientValidate()) {
+            return;
+        }
+        signUp();
+    }
+
+    const signUp = async() => {
+        const user = await authService.signUp(userProps)
+        const message = authService.getMessage()
+        const status = authService.getStatus()
+
+        let memStore = {} as localStorageInterface
+        memStore.token = user.accessToken
+        memStore.firstName = user.firstName
+        memStore.lastName = user.lastName
+        memService.setLocalStorage(memStore)
+
+        if (status === 200) {
+            router.push(`/${user.firstName+user.lastName}/dashboard`)
+        } else {
+            toast.error(`${message}`, {
+                position: "bottom-left",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                theme: theme === 'dark' ? 'colored' : 'light',
+            });
+        }
+    }
 
     return {
-        isCal,
+        confirmPassword,
         userProps,
         onChange,
         onChangeConfirmPassword,
