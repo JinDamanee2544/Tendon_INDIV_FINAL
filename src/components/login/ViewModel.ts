@@ -1,7 +1,7 @@
 import TYPES, { localStorageInterface, User } from "linkWithBackend/interfaces/TendonType";
 import container from "linkWithBackend/services/inversify.config";
 import MemoryService from "linkWithBackend/services/memory_service";
-import AuthService from "linkWithBackend/services/sign_service";
+import AuthService from "linkWithBackend/services/auth_service";
 import { useTheme } from "next-themes";
 import { useRouter } from "next/router";
 import { FormEvent, useState } from "react";

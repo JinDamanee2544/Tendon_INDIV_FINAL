@@ -3,7 +3,7 @@ import { makeAutoObservable } from "mobx"
 
 import { Container } from "inversify";
 import TYPES, { User } from 'linkWithBackend/interfaces/TendonType'
-import AuthService from "linkWithBackend/services/sign_service";
+import AuthService from "linkWithBackend/services/auth_service";
 
 class SignDataViewModel {
     private AuthService: AuthService

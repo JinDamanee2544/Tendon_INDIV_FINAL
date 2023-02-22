@@ -2,7 +2,7 @@ import { Container } from "inversify";
 
 import UserService from "./user_service";
 import TYPES from "linkWithBackend/interfaces/TendonType";
-import AuthService from "./sign_service";
+import AuthService from "./auth_service";
 import NodeService from "./node_service";
 import LessonService from "./lesson_service";
 import CourseService from "./course_service";
