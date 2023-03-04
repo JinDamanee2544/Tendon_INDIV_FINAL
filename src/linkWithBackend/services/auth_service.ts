@@ -27,11 +27,12 @@ class AuthService implements AuthServiceInterface {
     }
 
     async signUp(body: User) {
-        await axios.post('http://24.199.72.217:8080/api/v1/user/sign-up', {
+        await axios.post('https://tendon-backend-cspqlbu5la-as.a.run.app/api/v2/auth/sign-up', {
                 firstName: body.firstName,
                 lastName: body.lastName,
                 email: body.email,
-                password: body.password
+                password: body.password,
+                role: body.role
             })
         .then((response) => {
             this.status = response.status
@@ -54,7 +55,7 @@ class AuthService implements AuthServiceInterface {
     }
 
     async signIn(body: User) {
-        await axios.post('http://24.199.72.217:8080/api/v1/user/sign-in', {
+        await axios.post('https://tendon-backend-cspqlbu5la-as.a.run.app/api/v2/auth/sign-in', {
                 email: body.email,
                 password: body.password
             })

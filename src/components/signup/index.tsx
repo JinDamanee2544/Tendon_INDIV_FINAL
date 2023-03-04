@@ -41,6 +41,11 @@ const SignupBox = () => {
                             onChange={onChange}
                         />
                     </div>
+                    <select id="role" name="role" className="input" onChange={onChange} defaultValue={'DEFAULT'}>
+                        <option value="DEFAULT" disabled>--Please choose an option--</option>
+                        <option value="student">Student</option>
+                        <option value="teacher">Teacher</option>
+                    </select>
                     <input
                         name="password"
                         type="password"

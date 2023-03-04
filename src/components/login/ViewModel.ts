@@ -6,9 +6,11 @@ import { useTheme } from "next-themes";
 import { useRouter } from "next/router";
 import { FormEvent, useState } from "react";
 import { toast } from 'react-toastify';
+import UserService from "linkWithBackend/services/user_service";
 
 const authService = container.get<AuthService>(TYPES.AuthService)
 const memService = container.get<MemoryService>(TYPES.MemoryService)
+const userSerivce = container.get<UserService>(TYPES.UserService)
 
 export default function ViewModel(){
     const router = useRouter();
@@ -29,18 +31,22 @@ export default function ViewModel(){
     }
 
     const login = async() => {
-        const user = await authService.signIn(userProps)
+        let memStore = {} as localStorageInterface
+        
+        const response = await authService.signIn(userProps)
+        memStore.token = response.accessToken
+        memService.setLocalStorage(memStore)
+
+        const responseUser = await userSerivce.getUserByID()        // **
         const message = authService.getMessage()
         const status = authService.getStatus()
-        
-        let memStore = {} as localStorageInterface
-        memStore.token = user.accessToken
-        memStore.firstName = user.firstName
-        memStore.lastName = user.lastName
+    
+        memStore.firstName = responseUser.user.firstName
+        memStore.lastName = responseUser.user.lastName
         memService.setLocalStorage(memStore)
 
         if (status === 200) {
-            router.push(`/${user.firstName+user.lastName}/dashboard`)
+            router.push(`/${responseUser.user.firstName+responseUser.user.lastName}/dashboard`)
         } else {
             toast.error(`${message}`, {
                 position: "bottom-left",
@@ -53,6 +59,7 @@ export default function ViewModel(){
             });
         }
     }
+
     return {
         userProps,
         onChange,

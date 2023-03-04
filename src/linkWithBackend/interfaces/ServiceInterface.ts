@@ -29,7 +29,7 @@ export interface NodeServiceInterface {
 }
 
 export interface UserServiceInterface {
-    getUserByID(id: string): Promise<User>;
+    getUserByID(id: string): Promise<{message: string, user:User}>;
     updateUser(id: string, body: User): Promise<User>;
     deleteUser(id: string): Promise<number>;
 }

@@ -21,10 +21,10 @@ class UserService implements UserServiceInterface {
     }
 
 
-    async getUserByID(id: string){
-        let result = await this.apiService.get<User>(`http://24.199.72.217:8080/api/v1/auth/users${id}`)
+    async getUserByID(){
+        let result = await this.apiService.get<User>(`https://tendon-backend-cspqlbu5la-as.a.run.app/api/v2/user`)
         this.status = result.status
-        return this.response = result.response
+        return {message: result.message, user:result.response}
     }
 
     async updateUser(id: string, body: User) {

@@ -58,14 +58,15 @@ class APIService implements APIServiceInterface {
         try { 
             tmp_response =  await axios.get<any>(url, config)
             this.status = tmp_response.status
-            response = tmp_response.data
+            this.message = tmp_response.data.message
+            response = tmp_response.data.user
         } catch (err) {
             this.status = Object(err)["response"]["request"]["status"]
             this.message = Object(err)["response"]["data"]["message"]
             response = {} as Type
         }
 
-        return { 
+        return {
             response: response, 
             status: this.status, 
             message: this.message 

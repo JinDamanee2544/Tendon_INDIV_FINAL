@@ -58,18 +58,18 @@ export default function ViewModel(){
     }
 
     const signUp = async() => {
-        const user = await authService.signUp(userProps)
+        const response = await authService.signUp(userProps)
         const message = authService.getMessage()
         const status = authService.getStatus()
 
         let memStore = {} as localStorageInterface
-        memStore.token = user.accessToken
-        memStore.firstName = user.firstName
-        memStore.lastName = user.lastName
+        memStore.token = response.accessToken
+        memStore.firstName = userProps.firstName
+        memStore.lastName = userProps.lastName
         memService.setLocalStorage(memStore)
 
         if (status === 201) {
-            router.push(`/${user.firstName+user.lastName}/dashboard`)
+            router.push(`/${userProps.firstName+userProps.lastName}/dashboard`)
         } else {
             toast.error(`${message}`, {
                 position: "bottom-left",
