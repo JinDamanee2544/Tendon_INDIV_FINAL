@@ -32,15 +32,15 @@ const ResumeList = () => {
                         return (
                             <div key={index}>
                                 <ResumeItem
-                                    key={course.id}
-                                    id={course.id}
+                                    key={course.ID}
+                                    id={course.ID}
                                     courseData={course}
                                     setIsReady={() => false}
                                 />
                                 <ArrowBox>
                                     <Xarrow
                                         start={'dashboard'}
-                                        end={course.id}
+                                        end={course.ID}
                                         color={theme === 'light' ? '#475569' : '#961EFF'}
                                     />
                                 </ArrowBox>

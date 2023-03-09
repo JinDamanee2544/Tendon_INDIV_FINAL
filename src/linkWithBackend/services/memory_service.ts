@@ -24,6 +24,9 @@ class MemoryService implements MemoryServiceInterface {
             if ( data.token !== undefined ) {
                 localStorage.setItem('token', data.token)
             }
+            if (data.courseIDs !== undefined) {
+                localStorage.setItem('courseIDs',data.courseIDs.toString())
+            }
         }
     }
 
@@ -40,6 +43,8 @@ class MemoryService implements MemoryServiceInterface {
                     return localStorage.getItem('courseName') || ""
                 case 'token':
                     return localStorage.getItem('token') || ""
+                case 'courseIDs':
+                    return localStorage.getItem('courseIDs') || ""
                 default:
                     return ""
             }

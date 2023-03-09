@@ -38,8 +38,8 @@ export default function prepNodeAlgo(props: prepAlgoInterface) {
     // console.log(props)
     dict = props.dataDict
     var tmp = {
-        lessonId: props.courseView.id,
-        lessonName: props.courseView.name,
+        lessonId: props.courseView.ID,
+        lessonName: props.courseView.Title,
         status: StatusType.INPROGRESS,
         next: recursive(props.initLesson)
     }

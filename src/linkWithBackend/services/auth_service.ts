@@ -18,12 +18,14 @@ class AuthService implements AuthServiceInterface {
     response: User
     status: number
     message: string[]
+    courseIDs: string[]
 
     constructor() {
         makeAutoObservable(this)
         this.response = {} as User
         this.status = 0
         this.message = []
+        this.courseIDs = []
     }
 
     async signUp(body: User) {
@@ -37,6 +39,7 @@ class AuthService implements AuthServiceInterface {
         .then((response) => {
             this.status = response.status
             this.response = response.data
+            this.courseIDs = response.data.courseIDs
         })
         .catch((err) => {
             this.status = Object(err)["response"]["request"]["status"]
@@ -62,6 +65,7 @@ class AuthService implements AuthServiceInterface {
         .then((response) => {
             this.status = response.status
             this.response = response.data
+            this.courseIDs = response.data.courses
         })
         .catch((err) => {
             this.status = Object(err)["response"]["request"]["status"]
@@ -73,7 +77,6 @@ class AuthService implements AuthServiceInterface {
                 this.message = [Object(err)["response"]["data"]["message"]]
             }
         });
-
         return this.response
     }
 
@@ -122,6 +125,10 @@ class AuthService implements AuthServiceInterface {
 
     public getMessage() {
         return this.message
+    }
+
+    public getCourseIDs() {
+        return this.courseIDs
     }
 
 }

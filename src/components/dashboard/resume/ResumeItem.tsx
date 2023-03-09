@@ -18,6 +18,8 @@ const ResumeItem = ({ id, courseData, setIsReady }: resumeProps) => {
         setTimeout(() => setIsReady(true), 200)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
+
+
     return (
         <motion.button className="rounded-lg bg-slate-500 p-2 text-white shadow-lg dark:border-2 dark:border-purple-light dark:bg-gray-normal dark:shadow-purple-neon"
             initial={{ opacity: 0, scale: 0 }}
@@ -32,9 +34,9 @@ const ResumeItem = ({ id, courseData, setIsReady }: resumeProps) => {
             onUpdate={() => {
                 setInterval(updateArrow, 100)
             }}
-            onClick={() => router.push(`/${username}/courseMap/${id}${"-"}${courseData.name}`)}
+            onClick={() => router.push(`/${username}/courseMap/${id}${"-"}${courseData.Title}`)}
         >
-            {courseData.name}
+            {courseData.Title}
         </motion.button>
     )
 }

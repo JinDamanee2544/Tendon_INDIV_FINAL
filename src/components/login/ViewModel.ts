@@ -10,7 +10,6 @@ import UserService from "linkWithBackend/services/user_service";
 
 const authService = container.get<AuthService>(TYPES.AuthService)
 const memService = container.get<MemoryService>(TYPES.MemoryService)
-const userSerivce = container.get<UserService>(TYPES.UserService)
 
 export default function ViewModel(){
     const router = useRouter();
@@ -35,18 +34,16 @@ export default function ViewModel(){
         
         const response = await authService.signIn(userProps)
         memStore.token = response.accessToken
+        memStore.courseIDs = response.courses
+        memStore.firstName = response.firstName
+        memStore.lastName = response.lastName
         memService.setLocalStorage(memStore)
 
-        const responseUser = await userSerivce.getUserByID()        // **
         const message = authService.getMessage()
         const status = authService.getStatus()
-    
-        memStore.firstName = responseUser.user.firstName
-        memStore.lastName = responseUser.user.lastName
-        memService.setLocalStorage(memStore)
 
         if (status === 200) {
-            router.push(`/${responseUser.user.firstName+responseUser.user.lastName}/dashboard`)
+            router.push(`/${response.firstName+response.lastName}/dashboard`)
         } else {
             toast.error(`${message}`, {
                 position: "bottom-left",

@@ -19,7 +19,7 @@ interface showResultInterface {
 var COURSE: Course = {} as Course
 COURSE = {
     ...COURSE,
-    lessons: [],              // init array
+    Lessons: [],              // init array
 }
 
 function ShowResultField(props: resultShowType) {
@@ -101,7 +101,7 @@ function IDCOURSEComponent(props: componentType) {
     const onChange = (e: React.FormEvent<HTMLInputElement>): void => {
         COURSE = {
             ...COURSE,
-            id: e.currentTarget.value
+            ID: e.currentTarget.value
         }
         onChangeHandle(props)
     };
@@ -140,7 +140,7 @@ function ArrayComponent(props: componentArrayType) {
         myArray[index] = e.currentTarget.value
         COURSE = {
             ...COURSE,
-            lessons: myArray
+            Lessons: myArray
         }
         onChangeHandle(newProps)
     }
@@ -165,28 +165,28 @@ function FormCourseComponent(props: componentType) {
     const onChangeName = (e: React.FormEvent<HTMLInputElement>): void => {
         COURSE = {
             ...COURSE,
-            name: e.currentTarget.value
+            Title: e.currentTarget.value
         }
         onChangeHandle(props)
     };
     const onChangeDescription = (e: React.FormEvent<HTMLInputElement>): void => {
         COURSE = {
             ...COURSE,
-            description: e.currentTarget.value
+            Description: e.currentTarget.value
         }
         onChangeHandle(props)
     };
     const selectAccess = (e: React.ChangeEvent<HTMLSelectElement>) => {
         COURSE = {
             ...COURSE,
-            access: e.currentTarget.value
+            Access: e.currentTarget.value
         }
         onChangeHandle(props)
     };
     const onChangeCreateBy = (e: React.FormEvent<HTMLInputElement>): void => {
         COURSE = {
             ...COURSE,
-            createBy: e.currentTarget.value
+            CreateBy: e.currentTarget.value
         }
         onChangeHandle(props)
     };

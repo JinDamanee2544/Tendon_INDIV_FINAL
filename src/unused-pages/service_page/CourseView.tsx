@@ -111,7 +111,7 @@ export const CourseGetHandle = observer((props: realInterface) => {
     //     setStatus(viewModel.getStatus())
     // })
 
-    if (courseView.id === undefined) {
+    if (courseView.ID === undefined) {
         if (message === "") {
             return (
                 <div> Loading... </div>
@@ -134,13 +134,13 @@ export const CourseGetHandle = observer((props: realInterface) => {
     if (props.component === "resume") {
         return (
             <>
-                <ResumeItem key={courseView.id} id={courseView.id} courseData={courseView} setIsReady={setIsReady} />
+                <ResumeItem key={courseView.ID} id={courseView.ID} courseData={courseView} setIsReady={setIsReady} />
                 {
                     isReady && (
                         <ArrowBox>
                             <Xarrow
                                 start={'dashboard'}
-                                end={courseView.id}
+                                end={courseView.ID}
                                 color={theme === 'light' ? '#475569' : '#961EFF'}
                             />
                         </ArrowBox>
@@ -162,7 +162,7 @@ export const CourseGetHandle = observer((props: realInterface) => {
 })
 
 export const CourseUpdateHandle = observer((props: propsInterface) => {
-    const course_id = props.body.id!
+    const course_id = props.body.ID!
     const body = props.body
     const [courseView, setCourseView] = useState<Course>({} as Course)
     const [message, setMessage] = useState<String>("")
@@ -177,7 +177,7 @@ export const CourseUpdateHandle = observer((props: propsInterface) => {
         setMessage(viewModel.getMessage())
     })
 
-    if (courseView.id === undefined) {
+    if (courseView.ID === undefined) {
         if (message === "") {
             return (
                 <div> Loading... </div>
@@ -202,7 +202,7 @@ export const CourseUpdateHandle = observer((props: propsInterface) => {
 })
 
 export const CourseDeleteHandle = observer((props: propsInterface) => {
-    const course_id = props.body.id!
+    const course_id = props.body.ID!
     const [deleteStatus, setDeleteStatus] = useState<Number>(0)
     const [message, setMessage] = useState<String>("")
     const viewModel = new CourseDataViewModel(useTendonContainer())
@@ -246,12 +246,12 @@ interface ShowDataViewProps {
 const CourseView = observer(({ viewModel }: ShowDataViewProps) => {
     return (
         <div>
-            <div key={viewModel.id}>
-                <p> #### {viewModel.id} #### </p>
-                <li> {viewModel.name} </li>
-                <li> {viewModel.description} </li>
+            <div key={viewModel.ID}>
+                <p> #### {viewModel.ID} #### </p>
+                <li> {viewModel.Title} </li>
+                <li> {viewModel.Description} </li>
                 <li> lessons:
-                    {viewModel.lessons.map((data: string) => (
+                    {viewModel.Lessons.map((data: string) => (
                         <div key={data}>
                             <p> {data} </p>
                         </div>

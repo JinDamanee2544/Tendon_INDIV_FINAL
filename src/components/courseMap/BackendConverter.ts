@@ -20,7 +20,7 @@ export default class NewBackendConvert {
 
     constructor(course: Course) {
         this.course = course
-        this.lessonArray = course.lessons!
+        this.lessonArray = course.Lessons!
     }
 
     @computed get getPrepArray() {

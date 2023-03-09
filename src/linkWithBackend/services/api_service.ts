@@ -73,6 +73,32 @@ class APIService implements APIServiceInterface {
         }
     } 
 
+    public async getManyByID<Type>(url: string) {
+        let response: Type[] = [] as Type[]
+        let token = this.memService.getLocalStorage("token")
+        const config = {
+            headers: { Authorization: `Bearer ${token}` }
+        };
+
+        let tmp_response: any
+        try { 
+            tmp_response =  await axios.get<any>(url, config)
+            this.status = tmp_response.status
+            this.message = tmp_response.data.message
+            response = tmp_response.data.courses
+        } catch (err) {
+            this.status = Object(err)["response"]["request"]["status"]
+            this.message = Object(err)["response"]["data"]["message"]
+            response = [] as Type[]
+        }
+
+        return {
+            response: response, 
+            status: this.status, 
+            message: this.message 
+        }
+    }
+
     public async update<Type>(url: string, body: Type, id: string) {
         let response: Type = {} as Type
         let token = this.memService.getLocalStorage("token")

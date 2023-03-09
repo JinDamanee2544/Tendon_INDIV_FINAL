@@ -5,6 +5,7 @@ export interface APIServiceInterface {
     get<Type>(url: string): Promise<{ response: Type, status: number, message: string }>;
     update<Type>(url: string, body: Type, id: string): Promise<{ response: Type, status: number, message: string }>;
     delete<Type>(url: string, id: string): Promise<number>;
+    getManyByID<Type>(url: string): Promise<{ response: Type[], status: number, message: string }>;
 }
 
 export interface CourseServiceInterface {
@@ -12,6 +13,7 @@ export interface CourseServiceInterface {
     getCourseById(id: string): Promise<Course>;
     updateCourse(id: string, body: Course): Promise<Course>;
     deleteCourse(id: string): Promise<number>;
+    getManyCourseByID(ids: string): Promise<Course[]>;
 }
 
 export interface LessonServiceInterface {

@@ -9,16 +9,17 @@ export interface User {
     updateAt: string
     password: string
     accessToken: string
+    courses: string[]
 }
 
 export interface Course {
-    id: string
-    name: string
-    description: string
-    access: string
-    createBy?: string
-    updateAt?: string
-    lessons: string[]
+    ID: string
+    Title: string
+    Description: string
+    Access: string
+    CreateBy?: string
+    UpdatedAt?: string
+    Lessons: string[]
 }
 
 export interface Lesson {
@@ -46,6 +47,7 @@ export interface localStorageInterface {
     lastName: string
     courseID: string
     courseName: string
+    courseIDs: string[]
 }
 
 let TYPES = {

@@ -8,6 +8,7 @@ import { CourseServiceInterface } from 'linkWithBackend/interfaces/ServiceInterf
 @injectable()
 class CourseService implements CourseServiceInterface {
     response: Course
+    responseMany: Course[]
     status: number
     message: string
     apiService: APIService
@@ -20,15 +21,16 @@ class CourseService implements CourseServiceInterface {
         this.response = {} as Course
         this.status = 0
         this.message = ""
+        this.responseMany = []
     }
 
     async postCourse(body: Course) {
         let bodySend:Course = {
-            id: "",
-            name: body.name,
-            description: body.description,
-            access: body.access,
-            lessons: body.lessons
+            ID: "",
+            Title: body.Title,
+            Description: body.Description,
+            Access: body.Access,
+            Lessons: body.Lessons
         }
 
         const result = await this.apiService.post<Course>(
@@ -49,12 +51,12 @@ class CourseService implements CourseServiceInterface {
 
     async updateCourse(id: string, body: Course) {
         let bodySend:Course = {
-            id: "",
-            name: body.name,
-            description: body.description,
-            access: body.access,
-            createBy: body.createBy,
-            lessons: body.lessons
+            ID: "",
+            Title: body.Title,
+            Description: body.Description,
+            Access: body.Access,
+            CreateBy: body.CreateBy,
+            Lessons: body.Lessons
         }
 
         const result = await this.apiService.update<Course>(
@@ -69,6 +71,13 @@ class CourseService implements CourseServiceInterface {
 
     async deleteCourse(id: string) {
         return this.status = await this.apiService.delete<Course>("http://24.199.72.217:8080/api/v1/auth/courses", id)
+    }
+
+    async getManyCourseByID(ids: string) {
+        const result = await this.apiService.getManyByID<Course>("https://tendon-backend-cspqlbu5la-as.a.run.app/api/v2/course/course-id-many/"+ ids.toString())
+        this.message = result.message
+        this.status = result.status
+        return this.responseMany = result.response
     }
 
     public getStatus() {

@@ -39,7 +39,7 @@ const DraggableBoxx = ({ id, name, level }: { id: string, name: string, level: {
 }
 
 export default function GraphPathView({ courseView }: graphProps) {
-    const lessonArray = courseView.lessons
+    const lessonArray = courseView.Lessons
     var data: Lesson[] = []
     var lonely: string[] = []
     var prepArray: LearningLessonNodeProps = {} as LearningLessonNodeProps
