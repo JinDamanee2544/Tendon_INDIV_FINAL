@@ -34,10 +34,10 @@ export interface CourseServiceInterface {
 
 export interface LessonServiceInterface {
     postLesson(body: Lesson): Promise<Lesson>;
-    getLessonById(id: string): Promise<Lesson>;
+    getLessonById(courseID: string, lessonID: string): Promise<Lesson>;
     updateLesson(id: string, body: Lesson): Promise<Lesson>;
     deleteLesson(id: string): Promise<number>;
-    getManyLessonByID(ids: string): Promise<Lesson[]>;
+    getManyLessonByID(courseID: string, lessonIDs: string): Promise<Lesson[]>;
 }
 
 export interface NodeServiceInterface {
@@ -45,7 +45,7 @@ export interface NodeServiceInterface {
     getNodeById(id: string): Promise<Node>;
     updateNode(id: string, body: Node): Promise<Node>;
     deleteNode(id: string): Promise<number>;
-    getManyNodeByID(ids: string): Promise<Node[]>;
+    getManyNodeByID(courseID: string, lessonID: string, nodeIDs: string): Promise<Node[]>;
 }
 
 export interface UserServiceInterface {

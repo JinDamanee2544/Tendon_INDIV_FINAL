@@ -18,14 +18,13 @@ export default function ViewModel() {
     const username = memService.getLocalStorage('firstName') + memService.getLocalStorage('lastName')
 
     useEffect(() => {
-        // const promiseLoading = new Promise<Lesson>((resolve, reject) => {
         let tmpValue = {} as Lesson
         if (lessonId.trim() !== "" && lessonId !== undefined) {
 
             const promiseLesson = new Promise<Lesson>((resolve, reject) => {
                 const lessonService = container.get<LessonService>(TYPES.LessonService)
                 const lessonInformation = async () => {
-                    tmpValue = await lessonService.getLessonById(courseID + "/" + lessonId)
+                    tmpValue = await lessonService.getLessonById(courseID, lessonId)
                     resolve(tmpValue)
                 }
                 lessonInformation()
@@ -36,17 +35,9 @@ export default function ViewModel() {
                     setLessonName(value.Title)
                 }
             })
-
         } else {
             tmpValue = {} as Lesson
         }
-        //})
-        // promiseLoading.then(value => {
-        //     console.log("result: ", value)
-        //     if (value.Title !== undefined) {
-        //         setLessonName(value.Title)
-        //     }
-        // })
     }, [lessonId])
 
     return {

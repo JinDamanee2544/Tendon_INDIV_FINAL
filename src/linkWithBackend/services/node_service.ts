@@ -25,7 +25,9 @@ class NodeService implements NodeServiceInterface {
         let bodySend: Node = {
             ID: "",
             FileType: body.FileType,
-            Data: body.Data
+            Data: body.Data,
+            Title: "",
+            Description: ""
         }
         const result = await this.apiService.post<Node>(
             "http://24.199.72.217:8080/api/v1/auth/nodes",
@@ -45,7 +47,9 @@ class NodeService implements NodeServiceInterface {
         let bodySend:Node = {
             ID: "",
             FileType: body.FileType,
-            Data: body.Data
+            Data: body.Data,
+            Title: "",
+            Description: ""
         }
 
         const result = await this.apiService.update<Node>(
@@ -62,10 +66,10 @@ class NodeService implements NodeServiceInterface {
         return this.status
     }
 
-    async getManyNodeByID(ids: string) {
-        let result = await this.apiService.getManyByID<Node>("https://tendon-backend-cspqlbu5la-as.a.run.app/api/v2/node/node-id-many/" + ids)
+    async getManyNodeByID(courseID: string, lessonID: string, nodeIDs: string) {
+        let result = await this.apiService.getManyByID<Node>("https://tendon-backend-cspqlbu5la-as.a.run.app/api/v2/node/node-id-many/" + courseID + "/" + lessonID + "/" + nodeIDs)
         this.status = result.status
-        return this.responseMany = result.response.nodes!       // *
+        return this.responseMany = result.response.nodes!     
     }
 
     public getStatus() {

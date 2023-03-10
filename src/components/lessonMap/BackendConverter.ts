@@ -35,7 +35,7 @@ export default class NewBackendConvert {
             const lessonService = container.get<LessonService>(TYPES.LessonService)
             let tmpValue: Lesson[] = []
             const getAllLessonInformation =async () => {
-                tmpValue = await lessonService.getManyLessonByID(this.course.ID + "/" + this.lessonIdArray.toString())  
+                tmpValue = await lessonService.getManyLessonByID(this.course.ID, this.lessonIdArray.toString())  
                 resolve(tmpValue)
             }
             getAllLessonInformation()

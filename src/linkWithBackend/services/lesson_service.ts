@@ -43,8 +43,8 @@ class LessonService implements LessonServiceInterface {
 
     }
 
-    async getLessonById(id: string){
-        var result = await this.apiService.get<Lesson>("https://tendon-backend-cspqlbu5la-as.a.run.app/api/v2/lesson/"+id)
+    async getLessonById(courseID: string, lessonID: string){
+        var result = await this.apiService.get<Lesson>("https://tendon-backend-cspqlbu5la-as.a.run.app/api/v2/lesson/"+courseID+"/"+lessonID)
         this.message = result.message
         this.status = result.status
         if (result.response?.lesson) {
@@ -77,8 +77,8 @@ class LessonService implements LessonServiceInterface {
         return this.status = await this.apiService.delete<Lesson>("http://24.199.72.217:8080/api/v1/auth/lessons", id)
     }
 
-    async getManyLessonByID(ids: string) {
-        const result = await this.apiService.getManyByID<Lesson>("https://tendon-backend-cspqlbu5la-as.a.run.app/api/v2/lesson/lesson-id-many/"+ids)
+    async getManyLessonByID(courseID: string, lessonIDs: string) {
+        const result = await this.apiService.getManyByID<Lesson>("https://tendon-backend-cspqlbu5la-as.a.run.app/api/v2/lesson/lesson-id-many/"+courseID+"/"+lessonIDs)
         this.message = result.message
         this.status = result.status
         if (result.response?.lessons) {

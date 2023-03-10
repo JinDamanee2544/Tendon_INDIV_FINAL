@@ -11,7 +11,7 @@ const fetchAllNode = async(lesson:Lesson, courseID: string) => {
     let nodes: Node[] = []
     const nodePromise = new Promise<Node[]>(async (resolve, reject) => {
         const tmp =async () => {
-            nodes = await nodeService.getManyNodeByID(courseID + "/" + lesson.ID + "/" + nodeIDs.toString())
+            nodes = await nodeService.getManyNodeByID(courseID, lesson.ID, nodeIDs.toString())
             resolve(nodes)
         }
         tmp()
@@ -29,7 +29,7 @@ export default function ViewModel(lesson_id:string) {
             const lessonService = container.get<LessonService>(TYPES.LessonService)
             const memoryService = container.get<MemoryService>(TYPES.MemoryService)
             const courseID = memoryService.getLocalStorage('courseID')
-            const lesson = await lessonService.getLessonById(courseID+ "/"+ lesson_id)
+            const lesson = await lessonService.getLessonById(courseID, lesson_id)
             const nodes = await fetchAllNode(lesson, courseID)
             setNodes(nodes)
             setLessonName(lesson.Title)

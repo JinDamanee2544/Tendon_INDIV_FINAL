@@ -25,7 +25,7 @@ const LessonPanel = ({ lesson_id }: LessonPanelProps) => {
                             name={node.Title}
                             key={node.ID}
                             FileType={NodeType.pdfNode}
-                            Data={'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf'}
+                            Data={node.Data}
                             ID={node.ID}
                             Title={node.Title}
                             Description={node.Description}
