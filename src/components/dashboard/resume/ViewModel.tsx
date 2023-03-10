@@ -25,7 +25,11 @@ export default function ViewModel() {
                 resolve(course)
                 return course
             }
-            fetchingCourseData()
+            if (resumeCourseID !== "") {
+                fetchingCourseData()
+            } else {
+                resolve([])
+            }
         })
 
         courseLoading.then((courses) => {

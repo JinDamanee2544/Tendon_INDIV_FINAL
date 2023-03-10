@@ -17,9 +17,11 @@ export default function ViewModel(lid: string): RenderLearningLessonNodeProps[] 
     useEffect(() => {
         const fetchCourse = async () => {
             if (lid) {
+                console.log("fetching course: ", lid)
                 const courseService = container.get<CourseService>(TYPES.CourseService)
                 const memService = container.get<MemoryService>(TYPES.MemoryService)
-                const course = await courseService.getCourseById(lid, memService.getLocalStorage('token'))
+                const course = await courseService.getCourseById(lid)
+
                 let memStore = {} as localStorageInterface
                 memService.setLocalStorage({...memStore, courseID: lid, courseName: course.Title})
                 let Converter = new NewBackendConvert(course)

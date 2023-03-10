@@ -5,11 +5,11 @@ export function dataHandle(props: Lesson[]) {
     var dataDict: {[key: string]: Lesson} = {}
 
     for (let i =0; i < props.length; i++) {
-        dataDict[props[i]!.id] = {
-            ... dataDict[props[i]!.id]!,
-            id: props[i]!.id,
-            prevLesson: props[i]!.prevLesson,
-            nextLesson: props[i]!.nextLesson
+        dataDict[props[i]!.ID] = {
+            ... dataDict[props[i]!.ID]!,
+            ID: props[i]!.ID,
+            PrevLessons: props[i]!.PrevLessons,
+            NextLessons: props[i]!.NextLessons
         }
     }
 
@@ -20,9 +20,9 @@ export function dataPairHandle(props: Lesson[]) {
     var dataPair: string[][] = []
     var index: number = 0
     for (let i =0; i < props.length; i++) {
-        var v1: string = props[i]!.id
-        for (let j = 0; j < props[i]!.nextLesson.length; j++) {
-            var v2 = props[i]!.nextLesson[j]!
+        var v1: string = props[i]!.ID
+        for (let j = 0; j < props[i]!.NextLessons.length; j++) {
+            var v2 = props[i]!.NextLessons[j]!
             dataPair[index] = [v1, v2]
             index += 1
         }

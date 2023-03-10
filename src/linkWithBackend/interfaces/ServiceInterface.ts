@@ -1,11 +1,27 @@
 import { Course, Lesson, localStorageInterface, Node, User } from "./TendonType";
 
+export interface GetResponse<Type> {
+    status: number
+    response: {
+        [x: string]: Type; data: Type
+    }
+    message: string
+}
+
+export interface GetManyResponse<Type> {
+    status: number
+    response: {
+        [x: string]: Type[]; data: Type[]
+    }
+    message: string
+}
+
 export interface APIServiceInterface {
     post<Type>(url: string, body: Type): Promise<{ response: Type, status: number, message: string }>;
-    get<Type>(url: string): Promise<{ response: Type, status: number, message: string }>;
+    get<Type>(url: string): Promise<GetResponse<Type>>;
     update<Type>(url: string, body: Type, id: string): Promise<{ response: Type, status: number, message: string }>;
     delete<Type>(url: string, id: string): Promise<number>;
-    getManyByID<Type>(url: string): Promise<{ response: Type[], status: number, message: string }>;
+    getManyByID<Type>(url: string): Promise<GetManyResponse<Type>>;
 }
 
 export interface CourseServiceInterface {
@@ -21,6 +37,7 @@ export interface LessonServiceInterface {
     getLessonById(id: string): Promise<Lesson>;
     updateLesson(id: string, body: Lesson): Promise<Lesson>;
     deleteLesson(id: string): Promise<number>;
+    getManyLessonByID(ids: string): Promise<Lesson[]>;
 }
 
 export interface NodeServiceInterface {

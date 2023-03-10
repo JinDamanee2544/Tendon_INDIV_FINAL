@@ -81,7 +81,7 @@ export const LessonGetHandle = observer((props: realLessonInterface) => {
         setStatus(viewModel.getStatus())
     })
 
-    if (lessonView.id === undefined) {
+    if (lessonView.ID === undefined) {
         if (message === "") {
             return (
                 <div> Loading... </div>
@@ -104,9 +104,9 @@ export const LessonGetHandle = observer((props: realLessonInterface) => {
     return (
         <div>
             <CourseNode
-                key={lessonView.id}
-                lessonId={lessonView.id}
-                lessonName={lessonView.name}
+                key={lessonView.ID}
+                lessonId={lessonView.ID}
+                lessonName={lessonView.Title}
                 status={StatusType.COMPLETED}
                 setChildReady={() => { }}
                 isRender={true}
@@ -117,7 +117,7 @@ export const LessonGetHandle = observer((props: realLessonInterface) => {
 
 export const LessonUpdateHandle = observer((props: propsInterface) => {
     const body = props.body
-    const lesson_id = props.body.id!
+    const lesson_id = props.body.ID!
     const [lessonView, setLessonView] = useState<Lesson>({} as Lesson)
     const [message, setMessage] = useState<String>("")
     const viewModel = new LessonDataViewModel(useTendonContainer())
@@ -131,7 +131,7 @@ export const LessonUpdateHandle = observer((props: propsInterface) => {
         setMessage(viewModel.getMessage())
     })
 
-    if (lessonView.id === undefined) {
+    if (lessonView.ID === undefined) {
         if (message === "") {
             return (
                 <div> Loading... </div>
@@ -154,7 +154,7 @@ export const LessonUpdateHandle = observer((props: propsInterface) => {
 })
 
 export const LessonDeleteHandle = observer((props: propsInterface) => {
-    const lesson_id = props.body.id!
+    const lesson_id = props.body.ID!
     const [deleteStatus, setDeleteStatus] = useState<Number>(0)
     const [message, setMessage] = useState<String>("")
     const viewModel = new LessonDataViewModel(useTendonContainer())
@@ -198,13 +198,13 @@ interface ShowDataViewProps {
 const LessonView = observer(({ viewModel }: ShowDataViewProps) => {
     return (
         <div>
-            <div key={viewModel.id}>
-                <p> #### {viewModel.id} #### </p>
-                <li> name: {viewModel.name} </li>
-                <li> description: {viewModel.description} </li>
+            <div key={viewModel.ID}>
+                <p> #### {viewModel.ID} #### </p>
+                <li> name: {viewModel.Title} </li>
+                <li> description: {viewModel.Description} </li>
                 <br></br>
                 <li> nodes:
-                    {viewModel.nodes.map((data: string) => (
+                    {viewModel.Nodes.map((data: string) => (
                         <div key={data}>
                             <p> {data} </p>
                         </div>
@@ -212,7 +212,7 @@ const LessonView = observer(({ viewModel }: ShowDataViewProps) => {
                 </li>
                 <br></br>
                 <li> prevLesson:
-                    {viewModel.prevLesson.map((data: string) => (
+                    {viewModel.PrevLessons.map((data: string) => (
                         <div key={data}>
                             <p> {data} </p>
                         </div>
@@ -220,7 +220,7 @@ const LessonView = observer(({ viewModel }: ShowDataViewProps) => {
                 </li>
                 <br></br>
                 <li> nextLesson:
-                    {viewModel.nextLesson.map((data: string) => (
+                    {viewModel.NextLessons.map((data: string) => (
                         <div key={data}>
                             <p> {data} </p>
                         </div>

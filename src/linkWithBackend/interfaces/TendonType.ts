@@ -23,15 +23,14 @@ export interface Course {
 }
 
 export interface Lesson {
-    id: string
-    name: string
-    description: string
-    access: string
-    createBy?: string
-    updateAt?: string
-    nodes: string[]
-    nextLesson: string[]
-    prevLesson: string[]
+    ID: string
+    Title: string
+    Description: string
+    CreateBy?: string
+    UpdatedAt?: string
+    Nodes: string[]
+    NextLessons: string[]
+    PrevLessons: string[]
 }
 export interface Node {
     id: string

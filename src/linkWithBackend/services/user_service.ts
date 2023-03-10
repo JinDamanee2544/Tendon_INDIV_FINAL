@@ -24,7 +24,7 @@ class UserService implements UserServiceInterface {
     async getUserByID(){
         let result = await this.apiService.get<User>(`https://tendon-backend-cspqlbu5la-as.a.run.app/api/v2/user`)
         this.status = result.status
-        return {message: result.message, user:result.response}
+        return {message: result.message, user:result.response.user! }
     }
 
     async updateUser(id: string, body: User) {
@@ -38,7 +38,8 @@ class UserService implements UserServiceInterface {
             role: '',
             createAt: '',
             updateAt: '',
-            accessToken: ''
+            accessToken: '',
+            courses: [],
         }
 
         const result = await this.apiService.update<User>(

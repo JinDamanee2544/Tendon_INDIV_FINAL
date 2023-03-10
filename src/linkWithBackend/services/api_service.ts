@@ -1,8 +1,8 @@
 import axios from "axios";
 import { inject, injectable } from "inversify";
 import TYPES from "linkWithBackend/interfaces/TendonType";
-import { makeAutoObservable } from "mobx";
-import { APIServiceInterface } from "../interfaces/ServiceInterface";
+import { makeAutoObservable, values } from "mobx";
+import { APIServiceInterface, GetManyResponse, GetResponse } from "../interfaces/ServiceInterface";
 import MemoryService from "./memory_service";
 
 @injectable()
@@ -12,7 +12,7 @@ class APIService implements APIServiceInterface {
     memService: MemoryService
 
     constructor(
-        @inject(TYPES.MemoryService) memService: MemoryService
+        @inject(TYPES.MemoryService) memService: MemoryService,
     ) {
         makeAutoObservable(this)
         this.status = 0
@@ -48,7 +48,7 @@ class APIService implements APIServiceInterface {
     }
 
     public async get<Type>(url: string) {
-        let response: Type = {} as Type
+        let result: GetResponse<Type> = {} as GetResponse<Type>
         let token = this.memService.getLocalStorage("token")
         const config = {
             headers: { Authorization: `Bearer ${token}` }
@@ -58,23 +58,20 @@ class APIService implements APIServiceInterface {
         try { 
             tmp_response =  await axios.get<any>(url, config)
             this.status = tmp_response.status
-            this.message = tmp_response.data.message
-            response = tmp_response.data.user
+            result = {
+                status: this.status,
+                response: tmp_response.data,
+                message: tmp_response.data.message
+            }
         } catch (err) {
             this.status = Object(err)["response"]["request"]["status"]
-            this.message = Object(err)["response"]["data"]["message"]
-            response = {} as Type
+            result = {} as GetResponse<Type>
         }
-
-        return {
-            response: response, 
-            status: this.status, 
-            message: this.message 
-        }
+        return result
     } 
 
     public async getManyByID<Type>(url: string) {
-        let response: Type[] = [] as Type[]
+        let result: GetManyResponse<Type> = {} as GetManyResponse<Type>
         let token = this.memService.getLocalStorage("token")
         const config = {
             headers: { Authorization: `Bearer ${token}` }
@@ -84,19 +81,17 @@ class APIService implements APIServiceInterface {
         try { 
             tmp_response =  await axios.get<any>(url, config)
             this.status = tmp_response.status
-            this.message = tmp_response.data.message
-            response = tmp_response.data.courses
+            result = {
+                status: this.status,
+                response: tmp_response.data,
+                message: tmp_response.data.message
+            }
         } catch (err) {
             this.status = Object(err)["response"]["request"]["status"]
             this.message = Object(err)["response"]["data"]["message"]
-            response = [] as Type[]
+            result = {} as GetManyResponse<Type>
         }
-
-        return {
-            response: response, 
-            status: this.status, 
-            message: this.message 
-        }
+        return result
     }
 
     public async update<Type>(url: string, body: Type, id: string) {

@@ -18,10 +18,10 @@ function recursive(nextIdArray: string[]) {
         var myLessonID = nextIdArray[i]
         try {
             tmp.push({
-                lessonId: dict[myLessonID!]!.id,
-                lessonName: dict[myLessonID!]!.name,
+                lessonId: dict[myLessonID!]!.ID,
+                lessonName: dict[myLessonID!]!.Title,
                 status: StatusType.INPROGRESS,                  // TODO: change to real status                 
-                next: recursive(dict[myLessonID!]!.nextLesson)
+                next: recursive(dict[myLessonID!]!.NextLessons)
             })
         } catch (err) {
             console.log(err + "==> " + myLessonID)

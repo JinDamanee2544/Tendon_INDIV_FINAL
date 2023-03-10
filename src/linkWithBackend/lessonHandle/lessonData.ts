@@ -18,13 +18,13 @@ export async function getLessonInformation(lesson_id: string) {
 
         result = {
             ...result,
-            id: lessonInformation?.id,
-            name: lessonInformation?.name,
-            description: lessonInformation?.description,
+            ID: lessonInformation?.ID,
+            Title: lessonInformation?.Title,
+            Description: lessonInformation?.Description,
             access: lessonInformation?.access,
-            nodes: lessonInformation?.nodes,
-            nextLesson: lessonInformation?.nextLesson,
-            prevLesson: lessonInformation?.prevLesson
+            Nodes: lessonInformation?.Nodes,
+            NextLessons: lessonInformation?.NextLessons,
+            PrevLessons: lessonInformation?.PrevLessons
         }
         dictLesson[lesson_id] = result
         return result

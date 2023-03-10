@@ -15,9 +15,9 @@ const ResumeList = () => {
     const { theme } = useTheme()
     const courses = ViewModel()
 
-    if (courses.length === 0) {
-        return <LoadingSpinner />
-    }
+    // if (courses.length === 0) {
+    //     return <LoadingSpinner />
+    // }
 
     return (
         <main className='flex flex-col justify-center gap-10'>

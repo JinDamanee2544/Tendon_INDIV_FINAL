@@ -59,12 +59,12 @@ export default function GraphPathView({ courseView }: graphProps) {
         })
         promise.then(value => {
             // var tmp = dataDict
-            dataDict[value.id] = value
-            isRender[value.id] = true
+            dataDict[value.ID] = value
+            isRender[value.ID] = true
             data.push(value)
             try {
-                if (value.prevLesson.length === 0) {
-                    lonely.push(value.id)
+                if (value.PrevLessons.length === 0) {
+                    lonely.push(value.ID)
                 }
             } catch (err) {
                 // console.log("--> ", value)

@@ -1,8 +1,10 @@
 import { LearningLessonNodeProps } from "../../types";
-import { Course, Lesson } from "linkWithBackend/interfaces/TendonType";
+import TYPES, { Course, Lesson } from "linkWithBackend/interfaces/TendonType";
 import { action, computed, observable } from "mobx";
 import { getLessonInformation } from "linkWithBackend/lessonHandle/lessonData";
 import prepNodeAlgo from "linkWithBackend/lessonHandle/Graph_PrepNodeData";
+import container from "linkWithBackend/services/inversify.config";
+import LessonService from "linkWithBackend/services/lesson_service";
 
 const dataDict: { [key: string]: Lesson } = {}
 const isRender: { [key: string]: boolean } = {}
@@ -12,7 +14,7 @@ let initNode: string[] = []
 let prepNodePrepare: LearningLessonNodeProps = {} as LearningLessonNodeProps
 
 export default class NewBackendConvert {
-    @observable lessonArray:string[] = []
+    @observable lessonIdArray:string[] = []
     @observable data: Lesson[] = []
     @observable lonely: string[] = []
     @observable prepArray: LearningLessonNodeProps = {} as LearningLessonNodeProps
@@ -20,7 +22,7 @@ export default class NewBackendConvert {
 
     constructor(course: Course) {
         this.course = course
-        this.lessonArray = course.Lessons!
+        this.lessonIdArray = course.Lessons!
     }
 
     @computed get getPrepArray() {
@@ -29,20 +31,30 @@ export default class NewBackendConvert {
 
     @action
     async converter() {
-        const allCoursesLoading = Promise.all(this.lessonArray?.map(async (lesson) => {
-            const tmpValue = await getLessonInformation(lesson)
-            dataDict[tmpValue.id!] = tmpValue
-            isRender[tmpValue.id!] = true
-            this.data.push(tmpValue)
-            try {
-                if (tmpValue.prevLesson.length === 0) {
-                    this.lonely.push(tmpValue.id!)
-                }
-            } catch (err) {
-                console.log("Error: ", err)
+        const allCoursesLoading = new Promise<Lesson[]>((resolve, reject) => {
+            const lessonService = container.get<LessonService>(TYPES.LessonService)
+            let tmpValue: Lesson[] = []
+            const getAllLessonInformation =async () => {
+                tmpValue = await lessonService.getManyLessonByID(this.course.ID + "/" + this.lessonIdArray.toString())  
+                resolve(tmpValue)
             }
-        }))
-        await allCoursesLoading;
+            getAllLessonInformation()
+        })
+        allCoursesLoading.then((res: Lesson[]) => {
+            res.forEach((lesson: Lesson) => {
+                dataDict[lesson.ID] = lesson
+                isRender[lesson.ID!] = true
+                this.data.push(lesson)
+                try {
+                    if (lesson.PrevLessons.length === 0) {
+                        this.lonely.push(lesson.ID!)
+                    }
+                } catch (err) {
+                    console.log("Error: ", err)
+                }
+            })
+        })
+        await allCoursesLoading
         initNode = this.lonely;
         firstCal = true;
         this.prepArray = prepNodeAlgo({ courseView: this.course, dataDict: dataDict, initLesson: this.lonely })

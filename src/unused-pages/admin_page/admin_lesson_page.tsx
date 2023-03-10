@@ -19,9 +19,9 @@ interface showResultInterface {
 var LESSON: Lesson = {} as Lesson
 LESSON = {
     ...LESSON,
-    nodes: [],              // init array
-    prevLesson: [],
-    nextLesson: []
+    Nodes: [],              // init array
+    PrevLessons: [],
+    NextLessons: []
 }
 
 function ShowResultField(props: resultShowType) {
@@ -103,7 +103,7 @@ function IDLESSONComponent(props: componentType) {
     const onChange = (e: React.FormEvent<HTMLInputElement>): void => {
         LESSON = {
             ...LESSON,
-            id: e.currentTarget.value
+            ID: e.currentTarget.value
         }
         onChangeHandle(props)
     };
@@ -144,17 +144,17 @@ function ArrayComponent(props: componentArrayType) {
         if (props.element === "nodes") {
             LESSON = {
                 ...LESSON,
-                nodes: myArray
+                Nodes: myArray
             }
         } else if (props.element === "prevL") {
             LESSON = {
                 ...LESSON,
-                prevLesson: myArray
+                PrevLessons: myArray
             }
         } else if (props.element === "nextL") {
             LESSON = {
                 ...LESSON,
-                nextLesson: myArray
+                NextLessons: myArray
             }
         } else {
 
@@ -182,14 +182,14 @@ function FormLESSONComponent(props: componentType) {
     const onChangeName = (e: React.FormEvent<HTMLInputElement>): void => {
         LESSON = {
             ...LESSON,
-            name: e.currentTarget.value
+            Title: e.currentTarget.value
         }
         onChangeHandle(props)
     };
     const onChangeDescription = (e: React.FormEvent<HTMLInputElement>): void => {
         LESSON = {
             ...LESSON,
-            description: e.currentTarget.value
+            Description: e.currentTarget.value
         }
         onChangeHandle(props)
     };
@@ -203,7 +203,7 @@ function FormLESSONComponent(props: componentType) {
     const onChangeCreateBy = (e: React.FormEvent<HTMLInputElement>): void => {
         LESSON = {
             ...LESSON,
-            createBy: e.currentTarget.value
+            CreateBy: e.currentTarget.value
         }
         onChangeHandle(props)
     };

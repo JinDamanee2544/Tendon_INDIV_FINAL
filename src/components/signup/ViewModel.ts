@@ -66,6 +66,7 @@ export default function ViewModel(){
         memStore.token = response.accessToken
         memStore.firstName = userProps.firstName
         memStore.lastName = userProps.lastName
+        memStore.courseIDs = []
         memService.setLocalStorage(memStore)
 
         if (status === 201) {

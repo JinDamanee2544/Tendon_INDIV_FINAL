@@ -8,7 +8,7 @@ import { useEffect, useState } from "react"
 const memService = container.get<MemoryService>(TYPES.MemoryService)
 
 const fetchAllNode = async(lesson:Lesson) => {
-    const nodeIDs =  lesson.nodes
+    const nodeIDs =  lesson.Nodes
     const nodeService = container.get<NodeService>(TYPES.NodeService)
     const nodes = await Promise.all(nodeIDs.map(async (nodeID) => {
         const node = await nodeService.getNodeById(nodeID, memService.getLocalStorage('token'))
@@ -27,7 +27,7 @@ export default function ViewModel(lesson_id:string) {
             const lesson = await lessonService.getLessonById(lesson_id, memService.getLocalStorage('token'))
             const nodes = await fetchAllNode(lesson)
             setNodes(nodes)
-            setLessonName(lesson.name)
+            setLessonName(lesson.Title)
         }
         fetchLesson()
     }, [lesson_id])

@@ -28,8 +28,8 @@ export default function ViewModel() {
             resolve(tmpValue)
         })
         promiseLoading.then(value => {
-            if (value.name !== undefined) {
-                setLessonName(value.name)
+            if (value.Title !== undefined) {
+                setLessonName(value.Title)
             }
         })
     }, [lessonId])

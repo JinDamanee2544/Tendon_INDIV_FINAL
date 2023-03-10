@@ -10,6 +10,7 @@ class LessonService implements LessonServiceInterface {
     status: number
     message: string
     apiService: APIService
+    responseMany: Lesson[]
 
     constructor(
         @inject(TYPES.APIService) apiService: APIService
@@ -19,17 +20,17 @@ class LessonService implements LessonServiceInterface {
         this.response = {} as Lesson
         this.status = 0
         this.message = ""
+        this.responseMany = []
     }
 
     async postLesson(body: Lesson) {
         let bodySend:Lesson = {
-                id: "",
-                name: body.name,
-                description: body.description,
-                access: body.access,
-                nodes: body.nodes,
-                nextLesson: body.nextLesson,
-                prevLesson: body.prevLesson
+                ID: "",
+                Title: body.Title,
+                Description: body.Description,
+                Nodes: body.Nodes,
+                NextLessons: body.NextLessons,
+                PrevLessons: body.PrevLessons
         }
 
         const result = await this.apiService.post<Lesson>(
@@ -46,18 +47,17 @@ class LessonService implements LessonServiceInterface {
         var result = await this.apiService.get<Lesson>(`http://24.199.72.217:8080/api/v1/auth/lessons/${id}`)
         this.message = result.message
         this.status = result.status
-        return this.response = result.response
+        return this.response = result.response.data
     }
 
     async updateLesson(id: string, body: Lesson) {
         let bodySend:Lesson = {
-            id: "",
-            name: body.name,
-            description: body.description,
-            access: body.access,
-            nodes: body.nodes,
-            nextLesson: body.nextLesson,
-            prevLesson: body.prevLesson
+            ID: "",
+            Title: body.Title,
+            Description: body.Description,
+            Nodes: body.Nodes,
+            NextLessons: body.NextLessons,
+            PrevLessons: body.PrevLessons
         }
 
         const result = await this.apiService.update<Lesson>(
@@ -72,6 +72,16 @@ class LessonService implements LessonServiceInterface {
 
     async deleteLesson(id: string) {
         return this.status = await this.apiService.delete<Lesson>("http://24.199.72.217:8080/api/v1/auth/lessons", id)
+    }
+
+    async getManyLessonByID(ids: string) {
+        const result = await this.apiService.getManyByID<Lesson>("https://tendon-backend-cspqlbu5la-as.a.run.app/api/v2/lesson/lesson-id-many/"+ids)
+        this.message = result.message
+        this.status = result.status
+        if (result.response?.lessons) {
+            return this.responseMany = result.response.lessons!
+        }
+        return []
     }
 
     public getStatus() {
