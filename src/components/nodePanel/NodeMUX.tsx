@@ -43,7 +43,7 @@ interface NodeExtended extends Omit<Node, 'id'> {
     name: string
 }
 
-const NodeMUX = ({ name, type, data }: NodeExtended) => {
+const NodeMUX = ({ name, FileType: type, Data: data }: NodeExtended) => {
     const icon = getIcon(type)
     switch (type) {
         case NodeType.textNode:

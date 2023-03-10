@@ -22,10 +22,13 @@ const LessonPanel = ({ lesson_id }: LessonPanelProps) => {
                 {nodes.map((node) => {
                     return (
                         <NodeMUX
-                            name={node.data}
-                            key={node.id}
-                            type={NodeType.pdfNode}
-                            data={'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf'}
+                            name={node.Title}
+                            key={node.ID}
+                            FileType={NodeType.pdfNode}
+                            Data={'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf'}
+                            ID={node.ID}
+                            Title={node.Title}
+                            Description={node.Description}
                         />
                     )
                 })}
@@ -33,24 +36,33 @@ const LessonPanel = ({ lesson_id }: LessonPanelProps) => {
                     <NodeMUX
                         name={'test-sound'}
                         key={'test-sound'}
-                        type={NodeType.soundNode}
-                        data={'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3'}
+                        FileType={NodeType.soundNode}
+                        Data={'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3'}
+                        ID={'test-sound'}
+                        Title={'sound title'}
+                        Description={'sound description'}
                     />
                 }
                 {
                     <NodeMUX
                         name={'test-text'}
                         key={'test-text'}
-                        type={NodeType.textNode}
-                        data={mockText}
+                        FileType={NodeType.textNode}
+                        Data={mockText}
+                        ID={'test-text'}
+                        Title={'text title'}
+                        Description={'text description'}
                     />
                 }
                 {
                     <NodeMUX
                         name={'test-video'}
                         key={'test-video'}
-                        type={NodeType.videoNode}
-                        data={'https://www.youtube.com/watch?v=ysz5S6PUM-U'}
+                        FileType={NodeType.videoNode}
+                        Data={'https://www.youtube.com/watch?v=ysz5S6PUM-U'}
+                        ID={'test-video'}
+                        Title={'video title'}
+                        Description={'video description'}
                     />
                 }
 

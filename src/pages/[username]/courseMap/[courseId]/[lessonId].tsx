@@ -1,5 +1,5 @@
 import LoadingSpinner from "@components/baseComponents/LoadingSpinner";
-import LessonPanel from "@components/lessonPanel";
+import LessonPanel from "@components/nodePanel";
 import { Suspense } from "react";
 import BreadcrumbHandleLesson from './BreadcrumbHandleLesson'
 import MainLayout from "@layout/MainLayout";

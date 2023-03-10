@@ -33,11 +33,13 @@ export interface Lesson {
     PrevLessons: string[]
 }
 export interface Node {
-    id: string
-    type: string
-    data: string
-    createBy?: string
-    updateAt?: string
+    ID: string
+    Title: string
+    FileType: string
+    Data: string
+    Description: string
+    CreateBy?: string
+    UpdateAt?: string
 }
 
 export interface localStorageInterface {

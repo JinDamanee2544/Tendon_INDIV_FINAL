@@ -17,8 +17,8 @@ export default function BreadcrumbHandleLesson() {
                 link: `/${localMem.username}/courseMap/${localMem.courseID}-${localMem.courseName}`,
             },
             {
-                name: `${localMem.lessonName}`,
-                link: `/`,
+                name: `${localMem.lessonName}`,             // TODO: Change Path!
+                link: `/aaa`,
             }
         ])
     }, [localMem.lessonName,localMem.courseName,localMem.courseID,localMem.username,setPathList])

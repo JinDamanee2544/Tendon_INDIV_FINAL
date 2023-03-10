@@ -4,7 +4,7 @@ import LoadingSpinner from "@components/baseComponents/LoadingSpinner";
 import BreadcrumbHandleCourse from "./BreadcrumbHandleCourse";
 import GraphLayout from "layout/GraphLayout";
 import { AuthProvider } from "context";
-const CourseMap = dynamic(() => import("@components/courseMap"));
+const CourseMap = dynamic(() => import("@components/lessonMap"));
 
 // Fetch Curriculum Data
 // const getCurriculaNodeData = (courseId: string): LearningLessonNodeProps => {

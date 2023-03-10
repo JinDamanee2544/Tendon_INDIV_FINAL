@@ -44,10 +44,13 @@ class LessonService implements LessonServiceInterface {
     }
 
     async getLessonById(id: string){
-        var result = await this.apiService.get<Lesson>(`http://24.199.72.217:8080/api/v1/auth/lessons/${id}`)
+        var result = await this.apiService.get<Lesson>("https://tendon-backend-cspqlbu5la-as.a.run.app/api/v2/lesson/"+id)
         this.message = result.message
         this.status = result.status
-        return this.response = result.response.data
+        if (result.response?.lesson) {
+            return this.response = result.response.lesson!
+        }
+        return {} as Lesson
     }
 
     async updateLesson(id: string, body: Lesson) {

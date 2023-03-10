@@ -45,6 +45,7 @@ export interface NodeServiceInterface {
     getNodeById(id: string): Promise<Node>;
     updateNode(id: string, body: Node): Promise<Node>;
     deleteNode(id: string): Promise<number>;
+    getManyNodeByID(ids: string): Promise<Node[]>;
 }
 
 export interface UserServiceInterface {

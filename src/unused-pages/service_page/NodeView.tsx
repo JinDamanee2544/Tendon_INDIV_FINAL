@@ -85,7 +85,7 @@ export const NodeGetHandle = observer((props: getNodeInterface) => {
         setMessage(viewModel.getMessage())
     })
 
-    if (nodeView.id === undefined) {
+    if (nodeView.ID === undefined) {
         if (message === "") {
             return (
                 <div> Loading... </div>
@@ -124,7 +124,7 @@ export const NodeGetHandle = observer((props: getNodeInterface) => {
 })
 
 export const NodeUpdateHandle = observer((props: propsInterface) => {
-    const node_id = props.body.id!
+    const node_id = props.body.ID!
     const body = props.body
     const [nodeView, setNodeView] = useState<Node>({} as Node)
     const [message, setMessage] = useState<String>("")
@@ -139,7 +139,7 @@ export const NodeUpdateHandle = observer((props: propsInterface) => {
         setMessage(viewModel.getMessage())
     })
 
-    if (nodeView.id === undefined) {
+    if (nodeView.ID === undefined) {
         if (message === "") {
             return (
                 <div> Loading... </div>
@@ -162,7 +162,7 @@ export const NodeUpdateHandle = observer((props: propsInterface) => {
 })
 
 export const NodeDeleteHandle = observer((props: propsInterface) => {
-    const node_id = props.body.id!
+    const node_id = props.body.ID!
     const [deleteStatus, setDeleteStatus] = useState<Number>(0)
     const [message, setMessage] = useState<String>("")
     const viewModel = new NodeDataViewModel(useTendonContainer())
@@ -206,11 +206,11 @@ interface ShowDataViewProps {
 const NodeView = observer(({ viewModel }: ShowDataViewProps) => {
     return (
         <div>
-            <div key={viewModel.id}>
-                <p> **** {viewModel.id} **** </p>
-                <li> {viewModel.type} </li>
-                <li> {viewModel.data} </li>
-                <li> {viewModel.updateAt} </li>
+            <div key={viewModel.ID}>
+                <p> **** {viewModel.ID} **** </p>
+                <li> {viewModel.FileType} </li>
+                <li> {viewModel.Data} </li>
+                <li> {viewModel.UpdateAt} </li>
                 <hr></hr>
             </div>
         </div>

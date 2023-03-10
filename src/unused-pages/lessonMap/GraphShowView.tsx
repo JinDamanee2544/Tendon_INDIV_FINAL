@@ -1,10 +1,10 @@
-import CourseNode from "@components/courseMap/LessonNode";
+import CourseNode from "@components/lessonMap/LessonNode";
 import TYPES, { Course, Lesson } from "linkWithBackend/interfaces/TendonType";
 import React, { useMemo, useState } from "react";
 import { useXarrow, Xwrapper } from "react-xarrows";
 import Draggable from "react-draggable";
 import { useTheme } from "next-themes";
-import { prepNode } from "@components/courseMap/LessonNodeViewModel";
+import { prepNode } from "@components/lessonMap/LessonNodeViewModel";
 import { LearningLessonNodeProps } from "../../types";
 import prepNodeAlgo from "linkWithBackend/lessonHandle/Graph_PrepNodeData";
 import { motion } from "framer-motion";

@@ -97,7 +97,7 @@ function IDNodeComponent(props: componentType) {
     const onChange = (e: React.FormEvent<HTMLInputElement>): void => {
         node = {
             ...node,
-            id: e.currentTarget.value
+            ID: e.currentTarget.value
         }
         onChangeHandle(props)
     };
@@ -115,14 +115,14 @@ function FormNodeComponent(props: componentType) {
     const onChangeType = (e: React.FormEvent<HTMLInputElement>): void => {
         node = {
             ...node,
-            type: e.currentTarget.value
+            FileType: e.currentTarget.value
         }
         onChangeHandle(props)
     };
     const onChangeData = (e: React.FormEvent<HTMLInputElement>): void => {
         node = {
             ...node,
-            data: e.currentTarget.value
+            Data: e.currentTarget.value
         }
         onChangeHandle(props)
     };
