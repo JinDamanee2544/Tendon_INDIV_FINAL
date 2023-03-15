@@ -39,7 +39,7 @@ class CourseService implements CourseServiceInterface {
         )
         this.message = result.message
         this.status = result.status
-        return this.response = result.response
+        return this.response = result.response.data
     }
 
     async getCourseById(id: string){

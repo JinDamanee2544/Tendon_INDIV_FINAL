@@ -34,7 +34,8 @@ class NodeService implements NodeServiceInterface {
             bodySend,
         )
         this.status = result.status
-        return this.response = result.response
+        this.response = result.response.data
+        return this.response
     }
 
     async getNodeById(id: string){
@@ -69,6 +70,9 @@ class NodeService implements NodeServiceInterface {
     async getManyNodeByID(courseID: string, lessonID: string, nodeIDs: string) {
         let result = await this.apiService.getManyByID<Node>("https://tendon-backend-cspqlbu5la-as.a.run.app/api/v2/node/node-id-many/" + courseID + "/" + lessonID + "/" + nodeIDs)
         this.status = result.status
+        if (result.response == undefined) {
+            return this.responseMany = []
+        }
         return this.responseMany = result.response.nodes!     
     }
 

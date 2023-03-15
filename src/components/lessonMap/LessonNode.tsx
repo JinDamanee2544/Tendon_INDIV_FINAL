@@ -7,6 +7,7 @@ import ArrowBox from '../baseComponents/ArrowBox'
 import LessonNodeView from '@components/baseComponents/LessonNodeView'
 
 const LessonNode = ({ lessonId: courseId, lessonName: courseName, next, setChildReady, isRender, status }: RenderLearningLessonNodeProps) => {
+
     const { theme } = useTheme();
     const [subChildReady, setSubChildReady] = useState(false);
 

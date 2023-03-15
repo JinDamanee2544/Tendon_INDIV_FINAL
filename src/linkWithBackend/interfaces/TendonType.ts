@@ -51,6 +51,16 @@ export interface localStorageInterface {
     courseIDs: string[]
 }
 
+export interface ProgressBodyInterface {
+    nodeID: string
+    courseID: string
+    lessonID: string
+}
+
+export interface ProgressBodyResponseInterface {
+    progress: number
+}
+
 let TYPES = {
     UserService: Symbol("UserService"),
     AuthService: Symbol("AuthService"),
@@ -58,7 +68,8 @@ let TYPES = {
     LessonService: Symbol("LessonService"),
     CourseService: Symbol("CourseService"),
     MemoryService: Symbol("MemoryService"),
-    APIService: Symbol("APIService")
+    APIService: Symbol("APIService"),
+    ProgressService: Symbol("ProgressService"),
 };
 
 export default TYPES

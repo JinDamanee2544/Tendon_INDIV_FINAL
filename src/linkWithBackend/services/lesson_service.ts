@@ -39,7 +39,7 @@ class LessonService implements LessonServiceInterface {
         )
         this.message = result.message
         this.status = result.status
-        return this.response = result.response
+        return this.response = result.response.data
 
     }
 

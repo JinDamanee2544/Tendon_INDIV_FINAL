@@ -2,7 +2,7 @@ import axios from "axios";
 import { inject, injectable } from "inversify";
 import TYPES from "linkWithBackend/interfaces/TendonType";
 import { makeAutoObservable, values } from "mobx";
-import { APIServiceInterface, GetManyResponse, GetResponse } from "../interfaces/ServiceInterface";
+import { APIServiceInterface, GetManyResponse, GetResponse, PostResponse } from "../interfaces/ServiceInterface";
 import MemoryService from "./memory_service";
 
 @injectable()
@@ -21,7 +21,7 @@ class APIService implements APIServiceInterface {
     }
 
     public async post<Type>(url: string, body: Type) {
-        let response: Type = {} as Type
+        let result: PostResponse<Type> = {} as PostResponse<Type>
         let token = this.memService.getLocalStorage("token")
         const config = {
             headers: { Authorization: `Bearer ${token}` }
@@ -30,21 +30,18 @@ class APIService implements APIServiceInterface {
         await axios.post(url, body, config)
 
         .then((response) => {
-            this.status = response.status
-            response = response.data
+            result.status = response.status
+            result.message = response.data.message
+            result.response = response.data
         })
         .catch((err) => {
             this.status = Object(err)["response"]["request"]["status"]
             this.message = Object(err)["response"]["data"]["message"]
             console.log(err)
-            response = {} as Type
+            result = {} as PostResponse<Type>
         })
 
-        return { 
-            response: response, 
-            status: this.status, 
-            message: this.message 
-        }
+        return result
     }
 
     public async get<Type>(url: string) {

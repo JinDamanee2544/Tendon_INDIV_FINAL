@@ -13,6 +13,7 @@ type LearningNodeProps = {
 }
 
 const nodeStatusColor = (status: StatusType): string => {
+    console.log(status)
     switch (status) {
         case StatusType.NOTSTARTED:
             return ''
