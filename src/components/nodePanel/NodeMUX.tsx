@@ -41,21 +41,30 @@ export const getIcon = (type: string) => {
 
 interface NodeExtended extends Omit<Node, 'id'> {
     name: string
+    progress?: number
 }
 
-const NodeMUX = ({ name, FileType: type, Data: data }: NodeExtended) => {
-    const icon = getIcon(type)
-    switch (type) {
+const NodeMUX = (props: NodeExtended) => {
+    const icon = getIcon(props.FileType)
+
+    const eachNodeProps = {
+        data: props.Data,
+        name: props.name,
+        icon,
+        progress: props.progress,
+    }
+
+    switch (props.FileType) {
         case NodeType.textNode:
-            return <NodeText name={name} data={data} icon={icon} />
+            return <NodeText {...eachNodeProps} />
         case NodeType.imageNode:
-            return <NodeText name={name} data={data} icon={icon} />
+            return <NodeText {...eachNodeProps} />
         case NodeType.pdfNode:
-            return <NodeOpenFile name={name} data={data} icon={icon} />
+            return <NodeOpenFile {...eachNodeProps} />
         case NodeType.soundNode:
-            return <NodeOpenFile name={name} data={data} icon={icon} />
+            return <NodeOpenFile {...eachNodeProps} />
         case NodeType.videoNode:
-            return <NodeVideoPlayer name={name} data={data} icon={icon} />
+            return <NodeVideoPlayer {...eachNodeProps} />
         default:
             return <></>
     }

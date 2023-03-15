@@ -6,7 +6,6 @@ import { useTheme } from "next-themes";
 import { useRouter } from "next/router";
 import { FormEvent, useState } from "react";
 import { toast } from 'react-toastify';
-import UserService from "linkWithBackend/services/user_service";
 
 const authService = container.get<AuthService>(TYPES.AuthService)
 const memService = container.get<MemoryService>(TYPES.MemoryService)

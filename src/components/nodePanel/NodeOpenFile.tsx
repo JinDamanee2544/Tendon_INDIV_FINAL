@@ -1,18 +1,26 @@
+import NodeBaseView from "./NodeBaseView"
+import { nodeStyle, updateProgress } from "./ViewModel"
+
 type NodeOpenFileProps = {
     name: string
     data: string
     icon: React.ReactNode
+    progress?: number
 }
 
-const NodeOpenFile = ({ name, data, icon }: NodeOpenFileProps) => {
+const NodeOpenFile = ({ name, data, icon, progress }: NodeOpenFileProps) => {
+    const style = nodeStyle(progress || 0)
+
     return (
-        <a className='flex items-center gap-6 rounded-2xl bg-slate-200 p-4 text-lg duration-200 hover:scale-105 active:translate-y-1 dark:bg-gray-light'
+        <a className={`node ${style}`}
             href={data} target='_blank' rel='noopener noreferrer'
+            onClick={() => updateProgress(100)}
         >
-            <div className='scale-150 rounded-full bg-white p-1.5 dark:bg-slate-500'>
-                {icon}
-            </div>
-            <p className='text-lg'>{name}</p>
+            <NodeBaseView
+                name={name}
+                icon={icon}
+                progress={progress}
+            />
         </a>
     )
 }

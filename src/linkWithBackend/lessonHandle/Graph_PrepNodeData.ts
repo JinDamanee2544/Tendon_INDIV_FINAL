@@ -6,21 +6,20 @@ interface prepAlgoInterface {
     dataDict: { [key: string]: Lesson }
     initLesson: string[]
 }
-var dict: { [key: string]: Lesson }
+let dict: { [key: string]: Lesson }
 
 function recursive(nextIdArray: string[]) {
-    // console.log("call: ", nextIdArray)
     if (nextIdArray.length == 0) {
         return []
     }
-    var tmp: LearningLessonNodeProps[] = []
+    let tmp: LearningLessonNodeProps[] = []
     for (let i = 0; i < nextIdArray.length; i++) {
-        var myLessonID = nextIdArray[i]
+        let myLessonID = nextIdArray[i]
         try {
             tmp.push({
                 lessonId: dict[myLessonID!]!.ID,
                 lessonName: dict[myLessonID!]!.Title,
-                status: StatusType.INPROGRESS,                  // TODO: change to real status                 
+                status: StatusType.COMPLETED,                  // TODO: change to real status                 
                 next: recursive(dict[myLessonID!]!.NextLessons)
             })
         } catch (err) {
@@ -32,17 +31,14 @@ function recursive(nextIdArray: string[]) {
 }
 
 export default function prepNodeAlgo(props: prepAlgoInterface) {
-    // let promise = new Promise<LearningLessonNodeProps>((resolve, reject) => {
-    //     dict = props.dataDict
-    // })
-    // console.log(props)
     dict = props.dataDict
-    var tmp = {
+
+    // start node is just a dummy node :P, so we can put any value in it
+    let tmp = {
         lessonId: props.courseView.ID,
         lessonName: props.courseView.Title,
         status: StatusType.INPROGRESS,
         next: recursive(props.initLesson)
     }
-    // console.log("output: ", tmp)
     return tmp
 }

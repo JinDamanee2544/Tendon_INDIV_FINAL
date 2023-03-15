@@ -12,7 +12,7 @@ type LearningNodeProps = {
     status: StatusType
 }
 
-const nodeStatusColor = (status: StatusType): string => {
+const nodeStyle = (status: StatusType): string => {
     console.log(status)
     switch (status) {
         case StatusType.NOTSTARTED:
@@ -25,21 +25,32 @@ const nodeStatusColor = (status: StatusType): string => {
             throw new Error('Invalid status')
     }
 }
+const nodeSymbol = (status: StatusType): string => {
+    switch (status) {
+        case StatusType.NOTSTARTED:
+            return '•'
+        case StatusType.INPROGRESS:
+            return '•••'
+        case StatusType.COMPLETED:
+            return '✓'
+        default:
+            throw new Error('Invalid status')
+    }
+}
 
 const LearningNode = ({ courseId: lessonId, courseName, isRender, status }: LearningNodeProps) => {
     const updateArrow = useXarrow();
     const router = useRouter();
     const nodeRef = useRef(null);
 
-    const statusColor = useMemo(() => nodeStatusColor(status), [status])
+    const statusColor = useMemo(() => nodeStyle(status), [status])
+    const symbol = useMemo(() => nodeSymbol(status), [status])
 
     return (
         <>
             {isRender && (
                 <div className='indicator'>
-                    <span className="indicator-start badge indicator-item mx-10 dark:border-0 dark:bg-gray-medium dark:shadow-xl dark:shadow-gray-dark">
-                        {["✓", "...", "!"][status]}
-                    </span>
+                    <span className="indicator-start badge indicator-item mx-10 dark:border-0 dark:bg-gray-medium dark:shadow-xl dark:shadow-gray-dark">{symbol}</span>
                     <motion.button
                         className={`course-node ${statusColor}`}
                         id={lessonId.toString()}

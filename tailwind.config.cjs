@@ -27,5 +27,14 @@ module.exports = {
 
   daisyui: {
     base: false,
+    themes: [
+      {
+        tendon: {
+          primary: "#961EFF",
+        },
+      },
+      "dark",
+      "cupcake",
+    ],
   },
 };

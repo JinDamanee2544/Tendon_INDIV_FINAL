@@ -33,7 +33,8 @@ export default function ViewModel(lid: string): RenderLearningLessonNodeProps[] 
         fetchCourse()
     }, [lid])
 
+    console.log(renderingGraph)
+
     return renderingGraph
-    // return []
 }
 

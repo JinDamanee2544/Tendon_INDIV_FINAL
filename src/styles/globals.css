@@ -21,8 +21,11 @@
     @apply grid grid-rows-6 min-h-screen min-w-fit bg-slate-300 dark:bg-gray-dark;
   }
   .course-node {
-    @apply p-4 text-xl rounded-lg shadow-lg min-w-[80px] h-fit
+    @apply p-4 text-xl rounded-lg shadow-lg min-w-[80px] h-fit select-none
             bg-slate-500 dark:bg-gray-normal text-white mx-10;
+  }
+  .node {
+    @apply flex items-center gap-6 rounded-2xl bg-slate-200 p-4 duration-200 hover:scale-105 active:translate-y-1 dark:bg-gray-light;
   }
 }
 

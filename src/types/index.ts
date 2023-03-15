@@ -1,5 +1,6 @@
 import { IconType } from "react-icons";
 import { Course } from "linkWithBackend/interfaces/TendonType";
+import {Node} from "linkWithBackend/interfaces/TendonType";
 
 export type acheivementProps = {
     id: number,
@@ -27,7 +28,9 @@ export interface NavigateProps {
 }
 
 export enum StatusType {
-    'COMPLETED', 'INPROGRESS', 'NOTSTARTED'
+    'COMPLETED' = 'COMPLETED', 
+    'INPROGRESS'=  'INPROGRESS',
+    'NOTSTARTED' = 'NOTSTARTED',
 }
 
 export type LearningLessonNodeProps = {                 // *
@@ -56,6 +59,11 @@ export interface resumeProps {
     courseData: Course,
     setIsReady: (value: boolean) => void
   }
+
+export interface NodeWithProgress extends Node {
+    progress: number
+}
+
 
 // export type Node = {
 //     id: string
