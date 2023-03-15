@@ -25,5 +25,6 @@ export default function BreadcrumbHandleLesson() {
 
     return {
         lessonId : localMem.lessonId,
+        courseId : localMem.courseID,
     }
 }

@@ -38,11 +38,11 @@ const fetchAllNode = async(lesson:Lesson, courseID: string) => {
     return nodes
 }
 
-const fetchAndAddProgressToAllNode = async (nodes:Node[]) => {
+const fetchAndAddProgressToAllNode = async (nodes:Node[], course_id:string, lesson_id:string) => {
 
     const progress = await Promise.all(nodes.map(async (node) => {
         try{
-            const resp = await progressService.getNodesProgress(node.ID,"" ,"") // need explanation
+            const resp = await progressService.getNodesProgress(node.ID,lesson_id ,course_id) // need explanation
             return resp.progress
         } catch (e) {
             console.log('add progress failed ',e)
@@ -60,8 +60,12 @@ const fetchAndAddProgressToAllNode = async (nodes:Node[]) => {
     return nodesWithProgress as NodeWithProgress[]
 }
 
-export default function ViewModel(lesson_id:string) {
-    // const [nodes, setNodes] = useState<Node[]>([])
+interface IViewModel {
+    lesson_id: string,
+    course_id: string
+}
+
+export default function ViewModel({lesson_id, course_id}:IViewModel) {
     const [nodesWithProgress, setNodesWithProgress] = useState<NodeWithProgress[]>([])
     const [lessonProgress, setLessonProgress] = useState<number>(0)
     const [lessonName, setLessonName] = useState<string>('Loading...')
@@ -74,16 +78,15 @@ export default function ViewModel(lesson_id:string) {
             const lesson = await lessonService.getLessonById(courseID, lesson_id)
             const nodes = await fetchAllNode(lesson, courseID)
 
-            const nodeWithProgress = await fetchAndAddProgressToAllNode(nodes);
+            const nodeWithProgress = await fetchAndAddProgressToAllNode(nodes, course_id, lesson_id);
             setNodesWithProgress(nodeWithProgress)
-            // setNodes(nodes)
             setLessonName(lesson.Title)
 
-            // const progress = await progressService.getLessonsProgress(lesson_id,"") // can't do any shit
-            setLessonProgress(70) // mock
+            const resp = await progressService.getLessonsProgress(lesson_id,courseID)
+            setLessonProgress(resp.progress)
         }
         fetchLesson()
-    }, [lesson_id])
+    }, [lesson_id,course_id])
 
     return {
         nodesWithProgress,

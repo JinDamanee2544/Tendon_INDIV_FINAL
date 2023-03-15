@@ -6,7 +6,7 @@ import MainLayout from "@layout/MainLayout";
 import { AuthProvider } from "context";
 
 const Lesson = () => {
-    const { lessonId } = BreadcrumbHandleLesson()
+    const { lessonId, courseId } = BreadcrumbHandleLesson()
 
     if (lessonId === undefined || lessonId.trim() === "") {
         return <LoadingSpinner />
@@ -15,7 +15,7 @@ const Lesson = () => {
         <AuthProvider>
             <MainLayout>
                 <Suspense fallback={<LoadingSpinner />}>
-                    <LessonPanel lesson_id={lessonId} />
+                    <LessonPanel lesson_id={lessonId} course_id={courseId} />
                 </Suspense>
             </MainLayout>
         </AuthProvider>

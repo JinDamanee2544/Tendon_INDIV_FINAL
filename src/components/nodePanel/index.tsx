@@ -2,16 +2,18 @@ import LoadingSpinner from '@components/baseComponents/LoadingSpinner';
 import ViewModel from './ViewModel';
 import NodeMUX, { NodeType } from './NodeMUX';
 import { NodeWithProgress } from 'types';
-import { useEffect, useMemo, useState } from 'react';
 
 type LessonPanelProps = {
     lesson_id: string
+    course_id: string
 }
 
+const initialProgress = 20 // just for display purposes
 const mockText = `default text file (in this case, it's not a pdf file)`
 
-const LessonPanel = ({ lesson_id }: LessonPanelProps) => {
-    const { nodesWithProgress, lessonName, lessonProgress } = ViewModel(lesson_id)
+const LessonPanel = ({ lesson_id, course_id }: LessonPanelProps) => {
+
+    const { nodesWithProgress, lessonName, lessonProgress } = ViewModel({ lesson_id, course_id })
 
 
     if (nodesWithProgress.length === 0) {
@@ -22,7 +24,7 @@ const LessonPanel = ({ lesson_id }: LessonPanelProps) => {
         <div className='mt-10 flex justify-center gap-x-20'>
             <div className='flex min-w-[300px] flex-col gap-4 rounded-3xl bg-slate-100 p-6 dark:bg-gray-normal' >
                 <h1 className='p-2 text-center text-2xl font-bold'>{lessonName}</h1>
-                <progress data-theme='tendon' className="progress progress-primary" value={lessonProgress} max="100"></progress>
+                <progress data-theme='tendon' className="progress progress-primary" value={lessonProgress || 20} max="100"></progress>
 
                 {nodesWithProgress.map((node: NodeWithProgress) => {
                     return (
@@ -34,7 +36,7 @@ const LessonPanel = ({ lesson_id }: LessonPanelProps) => {
                             ID={node.ID}
                             Title={node.Title}
                             Description={node.Description}
-                            progress={node.progress}
+                            progress={node.progress || 0}
                         />
                     )
                 })}
