@@ -5,6 +5,13 @@ import { makeAutoObservable, values } from "mobx";
 import { APIServiceInterface, GetManyResponse, GetResponse, PostResponse } from "../interfaces/ServiceInterface";
 import MemoryService from "./memory_service";
 
+// Create a new instance of axios 
+// So that I can attach a interceptor to it
+ 
+// const axiosClient = axios.create({
+//     baseURL: "http://localhost:3000",
+// }) 
+
 @injectable()
 class APIService implements APIServiceInterface {
     status: number

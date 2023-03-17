@@ -34,6 +34,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
   }, [router])
 
+  // add axios interceptor to redirect to login page if 401 response
+
   return (
     <authContext.Provider value={{}}>
       {children}

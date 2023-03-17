@@ -40,6 +40,8 @@ const LessonPanel = ({ lesson_id, course_id }: LessonPanelProps) => {
                         />
                     )
                 })}
+
+                {/* Mock */}
                 {
                     <NodeMUX
                         name={'test-sound'}

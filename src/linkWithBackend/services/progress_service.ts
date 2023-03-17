@@ -59,7 +59,7 @@ class ProgressService implements ProgressServiceInterface {
         }
     }
 
-    public setProgress(progress: number): void {
+    public setProgress(progress: number): void { // lob due naja 
         this.progress = progress;
     }
 }

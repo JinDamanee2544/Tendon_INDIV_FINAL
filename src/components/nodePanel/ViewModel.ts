@@ -74,6 +74,7 @@ export default function ViewModel({lesson_id, course_id}:IViewModel) {
         const fetchLesson = async () => {
             const lessonService = container.get<LessonService>(TYPES.LessonService)
             const memoryService = container.get<MemoryService>(TYPES.MemoryService)
+            // TODO : handle error when courseID,lesson,nodes is empty
             const courseID = memoryService.getLocalStorage('courseID')
             const lesson = await lessonService.getLessonById(courseID, lesson_id)
             const nodes = await fetchAllNode(lesson, courseID)
