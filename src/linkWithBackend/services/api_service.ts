@@ -1,10 +1,10 @@
-import axios from "axios";
 import { inject, injectable } from "inversify";
 import TYPES from "linkWithBackend/interfaces/TendonType";
 import { makeAutoObservable, values } from "mobx";
 import { APIServiceInterface, GetManyResponse, GetResponse, PostResponse } from "../interfaces/ServiceInterface";
 import MemoryService from "./memory_service";
 import { MemType } from "../interfaces/TendonType";
+import apiClient from "util/apiClient";
 
 // Create a new instance of axios 
 // So that I can attach a interceptor to it
@@ -35,7 +35,7 @@ class APIService implements APIServiceInterface {
             headers: { Authorization: `Bearer ${token}` }
         };
 
-        await axios.post(url, body, config)
+        await apiClient.post(url, body, config)
 
         .then((response) => {
             result.status = response.status
@@ -61,7 +61,7 @@ class APIService implements APIServiceInterface {
 
         let tmp_response: any
         try { 
-            tmp_response =  await axios.get<any>(url, config)
+            tmp_response =  await apiClient.get<any>(url, config)
             this.status = tmp_response.status
             result = {
                 status: this.status,
@@ -84,7 +84,7 @@ class APIService implements APIServiceInterface {
 
         let tmp_response: any
         try { 
-            tmp_response =  await axios.get<any>(url, config)
+            tmp_response =  await apiClient.get<any>(url, config)
             this.status = tmp_response.status
             result = {
                 status: this.status,
@@ -106,7 +106,7 @@ class APIService implements APIServiceInterface {
             headers: { Authorization: `Bearer ${token}` }
         }
         try { 
-            await axios.patch(url+"/"+id, body, config)
+            await apiClient.patch(url+"/"+id, body, config)
             .then((res) => {
                 this.status = res.status
                 response = res.data
@@ -131,7 +131,7 @@ class APIService implements APIServiceInterface {
         };
 
         try {
-            await axios.delete(url+"/"+id, config)
+            await apiClient.delete(url+"/"+id, config)
             .then((res) => {
                 this.status = res.status
             })
