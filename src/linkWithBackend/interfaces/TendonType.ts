@@ -9,6 +9,7 @@ export interface User {
     updateAt: string
     password: string
     accessToken: string
+    refreshToken: string
     courses: string[]
 }
 
@@ -23,6 +24,7 @@ export interface Course {
 }
 
 export interface Lesson {
+    [x: string]: any
     ID: string
     Title: string
     Description: string
@@ -44,6 +46,7 @@ export interface Node {
 
 export interface localStorageInterface {
     token: string
+    refreshToken: string
     firstName: string
     lastName: string
     courseID: string
@@ -57,8 +60,18 @@ export interface ProgressBodyInterface {
     lessonID: string
 }
 
-export interface ProgressBodyResponseInterface {
+export interface ProgressInterface {
     progress: number
+}
+
+export enum MemType {
+    token = 'token',
+    refreshToken = 'refreshToken',
+    firstName = 'firstName',
+    lastName = 'lastName',
+    courseID = 'courseID',
+    courseName = 'courseName',
+    courseIDs = 'courseIDs'
 }
 
 let TYPES = {

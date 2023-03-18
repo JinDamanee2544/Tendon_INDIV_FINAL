@@ -1,5 +1,5 @@
 import CourseNode from "@components/lessonMap/LessonNode";
-import TYPES, { Course, Lesson } from "linkWithBackend/interfaces/TendonType";
+import TYPES, { Course, Lesson, MemType } from "linkWithBackend/interfaces/TendonType";
 import React, { useMemo, useState } from "react";
 import { useXarrow, Xwrapper } from "react-xarrows";
 import Draggable from "react-draggable";
@@ -23,7 +23,7 @@ export interface coordinateXY {
 }
 
 const memService = container.get<MemoryService>(TYPES.MemoryService)
-var token = memService.getLocalStorage("token")
+var token = memService.getLocalStorage(MemType.token)
 const DraggableBoxx = ({ id, name, level }: { id: string, name: string, level: { [key: string]: coordinateXY } }) => {
     const updateXarrow = useXarrow();
 

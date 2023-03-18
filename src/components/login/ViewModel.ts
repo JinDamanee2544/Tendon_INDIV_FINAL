@@ -29,15 +29,8 @@ export default function ViewModel(){
     }
 
     const login = async() => {
-        let memStore = {} as localStorageInterface
         
         const response = await authService.signIn(userProps)
-        memStore.token = response.accessToken
-        memStore.courseIDs = response.courses
-        memStore.firstName = response.firstName
-        memStore.lastName = response.lastName
-        memService.setLocalStorage(memStore)
-
         const message = authService.getMessage()
         const status = authService.getStatus()
 

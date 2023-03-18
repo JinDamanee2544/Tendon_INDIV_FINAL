@@ -9,13 +9,14 @@ const mockFilename = 'Activity 1 # Quantum Entanglement'
 const mockImage = '/raiden.jpg'
 
 type NodeTextProps = {
+    id: string
     name: string
     data: string
     icon: React.ReactNode
     progress?: number
 }
 
-const NodeText = ({ name, data, icon, progress }: NodeTextProps) => {
+const NodeText = ({ id, name, data, icon, progress }: NodeTextProps) => {
     const [isModalOpen, setIsModalOpen] = useState(false)
     const style = nodeStyle(progress || 0)
 
@@ -25,7 +26,7 @@ const NodeText = ({ name, data, icon, progress }: NodeTextProps) => {
                 className={`node ${style}`}
                 onClick={() => {
                     setIsModalOpen(true)
-                    updateProgress(100)
+                    updateProgress(id)
                 }}>
                 <NodeBaseView
                     name={name}

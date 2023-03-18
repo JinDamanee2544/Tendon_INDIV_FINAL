@@ -7,7 +7,6 @@ import { useEffect, useState } from "react"
 import NewBackendConvert from "./BackendConverter"
 import { prepNode } from "./LessonNodeViewModel"
 
-
 export default function ViewModel(lid: string): RenderLearningLessonNodeProps[] {
 
     const [renderingGraph, setrenderingGraph] = useState<RenderLearningLessonNodeProps[]>([])
@@ -28,12 +27,11 @@ export default function ViewModel(lid: string): RenderLearningLessonNodeProps[] 
                 const lessonGraph: LearningLessonNodeProps = Converter.getPrepArray
                 const res = prepNode(lessonGraph, () => false)
                 setrenderingGraph([...res])
+
             }
         }
         fetchCourse()
     }, [lid])
-
-    console.log(renderingGraph)
 
     return renderingGraph
 }

@@ -31,7 +31,7 @@ const LessonPanel = ({ lesson_id, course_id }: LessonPanelProps) => {
                         <NodeMUX
                             name={node.Title}
                             key={node.ID}
-                            FileType={NodeType.pdfNode}
+                            FileType={node.FileType as NodeType}
                             Data={node.Data}
                             ID={node.ID}
                             Title={node.Title}
@@ -42,7 +42,7 @@ const LessonPanel = ({ lesson_id, course_id }: LessonPanelProps) => {
                 })}
 
                 {/* Mock */}
-                {
+                {/* {
                     <NodeMUX
                         name={'test-sound'}
                         key={'test-sound'}
@@ -77,7 +77,7 @@ const LessonPanel = ({ lesson_id, course_id }: LessonPanelProps) => {
                         Description={'video description'}
                         progress={70}
                     />
-                }
+                } */}
             </div>
         </div>
     )

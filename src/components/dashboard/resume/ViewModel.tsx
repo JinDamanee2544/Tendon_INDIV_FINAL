@@ -1,4 +1,4 @@
-import TYPES, { Course } from "linkWithBackend/interfaces/TendonType"
+import TYPES, { Course, MemType } from "linkWithBackend/interfaces/TendonType"
 import AuthService from "linkWithBackend/services/auth_service"
 import CourseService from "linkWithBackend/services/course_service"
 import container from "linkWithBackend/services/inversify.config"
@@ -12,7 +12,7 @@ export default function ViewModel() {
 
     useEffect(() => {
         const memService = container.get<MemoryService>(TYPES.MemoryService)
-        const resumeCourseID: string = memService.getLocalStorage("courseIDs")
+        const resumeCourseID: string = memService.getLocalStorage(MemType.courseIDs)
 
         const courseService = container.get<CourseService>(TYPES.CourseService)
 

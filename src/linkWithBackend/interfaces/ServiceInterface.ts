@@ -1,4 +1,4 @@
-import { Course, Lesson, localStorageInterface, Node, ProgressBodyResponseInterface, User } from "./TendonType";
+import { Course, Lesson, localStorageInterface, Node, ProgressInterface, User } from "./TendonType";
 
 export interface PostResponse<Type> {
     status: number
@@ -65,18 +65,19 @@ export interface UserServiceInterface {
 export interface AuthServiceInterface {
     signIn(body: User): Promise<User>;
     signUp(body: User): Promise<User>;
-    signOut(token: string): Promise<number>;
+    signOut(): Promise<number>;
+    renewAccessToken(): Promise<User>;
 }
 
 export interface MemoryServiceInterface {           
     setLocalStorage(data: localStorageInterface): void;
     getLocalStorage(item: string): string;
+    removeLocalStorage(item: string): void;
 }
 
 export interface ProgressServiceInterface {
-    postProgress(nodeID: string, lessonID: string, courseID: string): Promise<ProgressBodyResponseInterface>;
-    getCoursesProgress(courseID: string): Promise<ProgressBodyResponseInterface>;
-    getLessonsProgress(lessonID: string, courseID: string): Promise<ProgressBodyResponseInterface>;
-    getNodesProgress(nodeID: string, lessonID: string, courseID: string): Promise<ProgressBodyResponseInterface>; 
-    setProgress(progress: number): void;
+    postProgress(nodeID: string, lessonID: string, courseID: string): Promise<ProgressInterface>;
+    getCoursesProgress(courseID: string): Promise<ProgressInterface>;
+    getLessonsProgress(lessonID: string, courseID: string): Promise<ProgressInterface>;
+    getNodesProgress(nodeID: string, lessonID: string, courseID: string): Promise<ProgressInterface>; 
 }
