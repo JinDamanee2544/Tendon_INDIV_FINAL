@@ -3,6 +3,7 @@ import { AiOutlineLogout, AiOutlineSetting, AiOutlineUser } from 'react-icons/ai
 import { motion } from 'framer-motion'
 import { useRouter } from "next/router";
 import ControlBtn from "./SettingBtn";
+import { signOutHandle } from "./viewModel";
 
 const Setting = () => {
     const router = useRouter();
@@ -12,15 +13,16 @@ const Setting = () => {
             key='setting'
             initial={{ opacity: 0, scale: 0, y: -100 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-        // exit={'hidden'}
-        // variants={item}
         >
             <ControlBtn Icon={AiOutlineUser} title='Profile' />
             <ControlBtn Icon={AiOutlineSetting} title='Setting' />
             <ControlBtn
                 Icon={AiOutlineLogout}
                 title='Logout'
-                onclick={() => router.push('/login')}
+                onclick={() => {
+                    signOutHandle()
+                    router.push('/login')
+                }}
             />
         </motion.main>
 

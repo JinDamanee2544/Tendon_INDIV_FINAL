@@ -80,12 +80,9 @@ class AuthService implements AuthServiceInterface {
         return this.response
     }
 
-    async signOut(token: string) {                     // Unfinish
-        const config = {
-            headers: { Authorization: `Bearer ${token}` }
-        };
+    async signOut(refreshToken: string) {              
 
-        await axios.post('http://24.199.72.217:8080/api/v1/user/sign-out', config)
+        await axios.post('https://tendon-backend-cspqlbu5la-as.a.run.app/api/v2/auth/sign-out', {refreshToken: refreshToken})
         .then((response) => {
             this.status = response.status
         })

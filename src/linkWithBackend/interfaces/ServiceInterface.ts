@@ -71,6 +71,7 @@ export interface AuthServiceInterface {
 export interface MemoryServiceInterface {           
     setLocalStorage(data: localStorageInterface): void;
     getLocalStorage(item: string): string;
+    removeLocalStorage(item: string): void;
 }
 
 export interface ProgressServiceInterface {

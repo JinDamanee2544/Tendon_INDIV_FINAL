@@ -9,6 +9,7 @@ export interface User {
     updateAt: string
     password: string
     accessToken: string
+    refreshToken: string
     courses: string[]
 }
 
@@ -44,6 +45,7 @@ export interface Node {
 
 export interface localStorageInterface {
     token: string
+    refreshToken: string
     firstName: string
     lastName: string
     courseID: string

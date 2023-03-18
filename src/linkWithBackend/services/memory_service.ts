@@ -27,6 +27,9 @@ class MemoryService implements MemoryServiceInterface {
             if (data.courseIDs !== undefined) {
                 localStorage.setItem('courseIDs',data.courseIDs.toString())
             }
+            if (data.refreshToken !== undefined) {
+                localStorage.setItem('refreshToken', data.refreshToken)
+            }
         }
     }
 
@@ -45,11 +48,25 @@ class MemoryService implements MemoryServiceInterface {
                     return localStorage.getItem('token') || ""
                 case 'courseIDs':
                     return localStorage.getItem('courseIDs') || ""
+                case 'refreshToken':
+                    return localStorage.getItem('refreshToken') || ""
                 default:
                     return ""
             }
         }
         return ""
+    }
+
+    removeLocalStorage() {
+        if (typeof window !== 'undefined') {
+            localStorage.removeItem('firstName')
+            localStorage.removeItem('lastName')
+            localStorage.removeItem('courseID')
+            localStorage.removeItem('courseName')
+            localStorage.removeItem('token')
+            localStorage.removeItem('courseIDs')
+            localStorage.removeItem('refreshToken')
+        }
     }
 
 }

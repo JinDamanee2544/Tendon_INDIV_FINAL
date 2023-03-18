@@ -36,6 +36,7 @@ export default function ViewModel(){
         memStore.courseIDs = response.courses
         memStore.firstName = response.firstName
         memStore.lastName = response.lastName
+        memStore.refreshToken = response.refreshToken
         memService.setLocalStorage(memStore)
 
         const message = authService.getMessage()
