@@ -24,6 +24,7 @@ export interface Course {
 }
 
 export interface Lesson {
+    [x: string]: any
     ID: string
     Title: string
     Description: string
@@ -61,6 +62,16 @@ export interface ProgressBodyInterface {
 
 export interface ProgressInterface {
     progress: number
+}
+
+export enum MemType {
+    token = 'token',
+    refreshToken = 'refreshToken',
+    firstName = 'firstName',
+    lastName = 'lastName',
+    courseID = 'courseID',
+    courseName = 'courseName',
+    courseIDs = 'courseIDs'
 }
 
 let TYPES = {

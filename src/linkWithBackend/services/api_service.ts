@@ -4,6 +4,7 @@ import TYPES from "linkWithBackend/interfaces/TendonType";
 import { makeAutoObservable, values } from "mobx";
 import { APIServiceInterface, GetManyResponse, GetResponse, PostResponse } from "../interfaces/ServiceInterface";
 import MemoryService from "./memory_service";
+import { MemType } from "../interfaces/TendonType";
 
 // Create a new instance of axios 
 // So that I can attach a interceptor to it
@@ -29,7 +30,7 @@ class APIService implements APIServiceInterface {
 
     public async post<Type>(url: string, body: Type) {
         let result: PostResponse<Type> = {} as PostResponse<Type>
-        let token = this.memService.getLocalStorage("token")
+        let token = this.memService.getLocalStorage(MemType.token)
         const config = {
             headers: { Authorization: `Bearer ${token}` }
         };
@@ -53,7 +54,7 @@ class APIService implements APIServiceInterface {
 
     public async get<Type>(url: string) {
         let result: GetResponse<Type> = {} as GetResponse<Type>
-        let token = this.memService.getLocalStorage("token")
+        let token = this.memService.getLocalStorage(MemType.token)
         const config = {
             headers: { Authorization: `Bearer ${token}` }
         };
@@ -76,7 +77,7 @@ class APIService implements APIServiceInterface {
 
     public async getManyByID<Type>(url: string) {
         let result: GetManyResponse<Type> = {} as GetManyResponse<Type>
-        let token = this.memService.getLocalStorage("token")
+        let token = this.memService.getLocalStorage(MemType.token)
         const config = {
             headers: { Authorization: `Bearer ${token}` }
         };
@@ -100,7 +101,7 @@ class APIService implements APIServiceInterface {
 
     public async update<Type>(url: string, body: Type, id: string) {
         let response: Type = {} as Type
-        let token = this.memService.getLocalStorage("token")
+        let token = this.memService.getLocalStorage(MemType.token)
         const config = {
             headers: { Authorization: `Bearer ${token}` }
         }
@@ -124,7 +125,7 @@ class APIService implements APIServiceInterface {
     }
 
     public async delete<Type>(url: string, id: string) {
-        let token = this.memService.getLocalStorage("token")
+        let token = this.memService.getLocalStorage(MemType.token)
         const config = {
             headers: { Authorization: `Bearer ${token}` }
         };

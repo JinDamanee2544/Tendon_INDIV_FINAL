@@ -1,4 +1,4 @@
-import TYPES, { Lesson } from "linkWithBackend/interfaces/TendonType";
+import TYPES, { Lesson, MemType } from "linkWithBackend/interfaces/TendonType";
 import container from "linkWithBackend/services/inversify.config";
 import LessonService from "linkWithBackend/services/lesson_service";
 import MemoryService from "linkWithBackend/services/memory_service";
@@ -13,9 +13,9 @@ export default function ViewModel() {
 
     const [lessonName, setLessonName] = useState<string>("")
 
-    const courseID = memService.getLocalStorage('courseID')
-    const courseName = memService.getLocalStorage('courseName')
-    const username = memService.getLocalStorage('firstName') + memService.getLocalStorage('lastName')
+    const courseID = memService.getLocalStorage(MemType.courseID)
+    const courseName = memService.getLocalStorage(MemType.courseName)
+    const username = memService.getLocalStorage(MemType.firstName) + memService.getLocalStorage(MemType.lastName)
 
     useEffect(() => {
         let tmpValue = {} as Lesson

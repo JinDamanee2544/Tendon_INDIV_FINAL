@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 
 import { useTendonContainer } from "linkWithBackend/services/container";
 import CourseDataViewModel from "./CourseViewModel";
-import TYPES, { Course } from "linkWithBackend/interfaces/TendonType";
+import TYPES, { Course, MemType } from "linkWithBackend/interfaces/TendonType";
 
 import Xarrow from "react-xarrows";
 import { useTheme } from "next-themes";
@@ -25,7 +25,7 @@ interface realInterface {
 }
 
 const memService = container.get<MemoryService>(TYPES.MemoryService)
-var token = memService.getLocalStorage("token")
+var token = memService.getLocalStorage(MemType.token)
 
 export const CourseCreateHandle = observer((props: propsInterface) => {
     const body = props.body
@@ -83,7 +83,7 @@ export const CourseGetHandle = observer((props: realInterface) => {
 
     useEffect(() => {
         // const viewModel = new CourseDataViewModel(useTendonContainer())
-        const mytoken = memService.getLocalStorage("token")
+        const mytoken = memService.getLocalStorage(MemType.token)
         const tmpCourse: Promise<Course> = viewModel.getCourseData(course_id, mytoken)
         tmpCourse.then((value) => {
             setCourseView(value)

@@ -62,13 +62,6 @@ export default function ViewModel(){
         const message = authService.getMessage()
         const status = authService.getStatus()
 
-        let memStore = {} as localStorageInterface
-        memStore.token = response.accessToken
-        memStore.firstName = userProps.firstName
-        memStore.lastName = userProps.lastName
-        memStore.courseIDs = []
-        memService.setLocalStorage(memStore)
-
         if (status === 201) {
             router.push(`/${userProps.firstName+userProps.lastName}/dashboard`)
         } else {

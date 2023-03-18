@@ -1,5 +1,5 @@
 import { useBreadCrumb } from "context";
-import TYPES from "linkWithBackend/interfaces/TendonType";
+import TYPES, { MemType } from "linkWithBackend/interfaces/TendonType";
 import container from "linkWithBackend/services/inversify.config";
 import MemoryService from "linkWithBackend/services/memory_service";
 import { useRouter } from "next/router";
@@ -27,7 +27,7 @@ export default function BreadcrumbHandleCourse() {
 
     const { pathList, setPathList } = useBreadCrumb()
     useEffect(() => {
-        const username = memService.getLocalStorage('firstName') + memService.getLocalStorage('lastName')
+        const username = memService.getLocalStorage(MemType.firstName) + memService.getLocalStorage(MemType.lastName)
         setPathList([
             {
                 name: 'Dashboard',

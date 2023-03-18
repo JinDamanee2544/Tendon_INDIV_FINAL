@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 
 import { useTendonContainer } from "linkWithBackend/services/container";
 import LessonDataViewModel from "./LessonViewModel";
-import TYPES, { Lesson } from "linkWithBackend/interfaces/TendonType";
+import TYPES, { Lesson, MemType } from "linkWithBackend/interfaces/TendonType";
 import CourseNode from "@components/lessonMap/LessonNode";
 import { StatusType } from "types/index";
 import { useRouter } from "next/router";
@@ -20,7 +20,7 @@ interface realLessonInterface {
 }
 
 var memService = container.get<MemoryService>(TYPES.MemoryService)
-var token = memService.getLocalStorage("token")
+var token = memService.getLocalStorage(MemType.token)
 
 export const LessonCreateHandle = observer((props: propsInterface) => {
     const body = props.body
@@ -71,7 +71,7 @@ export const LessonGetHandle = observer((props: realLessonInterface) => {
     const viewModel = new LessonDataViewModel(useTendonContainer())
     new Promise(function (myResolve, myReject) {
         useEffect(() => {
-            var mytoken = memService.getLocalStorage("token")
+            var mytoken = memService.getLocalStorage(MemType.token)
             const tmpValue = viewModel.getLessonData(lesson_id, mytoken)
             myResolve(tmpValue)
         }, [])

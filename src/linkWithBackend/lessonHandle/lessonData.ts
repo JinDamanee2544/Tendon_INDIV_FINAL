@@ -1,4 +1,4 @@
-import TYPES, { Lesson } from "linkWithBackend/interfaces/TendonType";
+import TYPES, { Lesson, MemType } from "linkWithBackend/interfaces/TendonType";
 import container from "linkWithBackend/services/inversify.config";
 import LessonService from "linkWithBackend/services/lesson_service";
 import MemoryService from "linkWithBackend/services/memory_service";
@@ -6,7 +6,7 @@ import MemoryService from "linkWithBackend/services/memory_service";
 export var dictLesson: { [key: string]: Lesson } = {}
 
 const memService = container.get<MemoryService>(TYPES.MemoryService)
-var token = memService.getLocalStorage('token')
+var token = memService.getLocalStorage(MemType.token)
 
 export async function getLessonInformation(lesson_id: string) {
     if (lesson_id in dictLesson) {

@@ -1,5 +1,5 @@
 import { ProgressServiceInterface } from "linkWithBackend/interfaces/ServiceInterface"
-import TYPES, { Lesson, Node } from "linkWithBackend/interfaces/TendonType"
+import TYPES, { Lesson, MemType, Node } from "linkWithBackend/interfaces/TendonType"
 import container from "linkWithBackend/services/inversify.config"
 import LessonService from "linkWithBackend/services/lesson_service"
 import MemoryService from "linkWithBackend/services/memory_service"
@@ -78,7 +78,7 @@ export default function ViewModel({lesson_id, course_id}:IViewModel) {
             const memoryService = container.get<MemoryService>(TYPES.MemoryService)
 
             // TODO : handle error when courseID,lesson,nodes is empty
-            const courseID = memoryService.getLocalStorage('courseID')
+            const courseID = memoryService.getLocalStorage(MemType.courseID)
             const lesson = await lessonService.getLessonById(courseID, lesson_id)
             const nodes = await fetchAllNode(lesson, courseID)
 

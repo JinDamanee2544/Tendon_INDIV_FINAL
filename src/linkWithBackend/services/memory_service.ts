@@ -1,4 +1,4 @@
-import { localStorageInterface } from "linkWithBackend/interfaces/TendonType";
+import { localStorageInterface, MemType } from "linkWithBackend/interfaces/TendonType";
 import { injectable } from "inversify";
 import { makeAutoObservable } from "mobx";
 import 'reflect-metadata'
@@ -14,21 +14,21 @@ class MemoryService implements MemoryServiceInterface {
     setLocalStorage(data: localStorageInterface) {
         if (typeof window !== 'undefined' && data !== null && data !== undefined) {
             if (data.firstName !== undefined && data.lastName !== undefined) {
-                localStorage.setItem('firstName', data.firstName)
-                localStorage.setItem('lastName', data.lastName)
+                localStorage.setItem(MemType.firstName, data.firstName)
+                localStorage.setItem(MemType.lastName, data.lastName)
             }
             if (data.courseID !== undefined && data.courseName !== undefined) {
-                localStorage.setItem('courseID', data.courseID)
-                localStorage.setItem('courseName', data.courseName) 
+                localStorage.setItem(MemType.courseID, data.courseID)
+                localStorage.setItem(MemType.courseName, data.courseName) 
             }
             if ( data.token !== undefined ) {
-                localStorage.setItem('token', data.token)
+                localStorage.setItem(MemType.token, data.token)
             }
             if (data.courseIDs !== undefined) {
-                localStorage.setItem('courseIDs',data.courseIDs.toString())
+                localStorage.setItem(MemType.courseIDs,data.courseIDs.toString())
             }
             if (data.refreshToken !== undefined) {
-                localStorage.setItem('refreshToken', data.refreshToken)
+                localStorage.setItem(MemType.refreshToken, data.refreshToken)
             }
         }
     }
@@ -36,20 +36,20 @@ class MemoryService implements MemoryServiceInterface {
     getLocalStorage(item: string) {
         if (typeof window !== 'undefined') {
             switch (item) {
-                case 'firstName':
-                    return localStorage.getItem('firstName') || ""
-                case 'lastName':
-                    return localStorage.getItem('lastName') || ""
-                case 'courseID':
-                    return localStorage.getItem('courseID') || ""
-                case 'courseName':
-                    return localStorage.getItem('courseName') || ""
-                case 'token':
-                    return localStorage.getItem('token') || ""
-                case 'courseIDs':
-                    return localStorage.getItem('courseIDs') || ""
-                case 'refreshToken':
-                    return localStorage.getItem('refreshToken') || ""
+                case MemType.firstName:
+                    return localStorage.getItem(MemType.firstName) || ""
+                case MemType.lastName:
+                    return localStorage.getItem(MemType.lastName) || ""
+                case MemType.courseID:
+                    return localStorage.getItem(MemType.courseID) || ""
+                case MemType.courseName:
+                    return localStorage.getItem(MemType.courseName) || ""
+                case MemType.token:
+                    return localStorage.getItem(MemType.token) || ""
+                case MemType.courseIDs:
+                    return localStorage.getItem(MemType.courseIDs) || ""
+                case MemType.refreshToken:
+                    return localStorage.getItem(MemType.refreshToken) || ""
                 default:
                     return ""
             }
@@ -59,13 +59,13 @@ class MemoryService implements MemoryServiceInterface {
 
     removeLocalStorage() {
         if (typeof window !== 'undefined') {
-            localStorage.removeItem('firstName')
-            localStorage.removeItem('lastName')
-            localStorage.removeItem('courseID')
-            localStorage.removeItem('courseName')
-            localStorage.removeItem('token')
-            localStorage.removeItem('courseIDs')
-            localStorage.removeItem('refreshToken')
+            localStorage.removeItem(MemType.firstName)
+            localStorage.removeItem(MemType.lastName)
+            localStorage.removeItem(MemType.courseID)
+            localStorage.removeItem(MemType.courseName)
+            localStorage.removeItem(MemType.token)
+            localStorage.removeItem(MemType.courseIDs)
+            localStorage.removeItem(MemType.refreshToken)
         }
     }
 

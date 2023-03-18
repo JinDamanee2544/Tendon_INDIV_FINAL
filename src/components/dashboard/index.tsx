@@ -12,7 +12,7 @@ import DashBoardContainer from "@components/baseComponents/DashBoardContainer";
 import { useRouter } from "next/router";
 import container from "linkWithBackend/services/inversify.config";
 import MemoryService from "linkWithBackend/services/memory_service";
-import TYPES from "linkWithBackend/interfaces/TendonType";
+import TYPES, { MemType } from "linkWithBackend/interfaces/TendonType";
 import ResumeList from "./resume/ResumeList";
 
 const DashBoard = () => {
@@ -21,7 +21,7 @@ const DashBoard = () => {
 
     const router = useRouter()
     var memService = container.get<MemoryService>(TYPES.MemoryService)
-    var userInformation = { firstName: memService.getLocalStorage("firstName"), lastName: memService.getLocalStorage("lastName") }
+    var userInformation = { firstName: memService.getLocalStorage(MemType.firstName), lastName: memService.getLocalStorage(MemType.lastName) }
 
     const navigateMode = () => {
         //const currentWidth = dashboardRef.current.clientWidth

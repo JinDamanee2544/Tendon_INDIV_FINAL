@@ -1,6 +1,6 @@
 import { resumeProps } from 'types/index';
 import { motion } from 'framer-motion'
-import TYPES from 'linkWithBackend/interfaces/TendonType';
+import TYPES, { MemType } from 'linkWithBackend/interfaces/TendonType';
 import container from 'linkWithBackend/services/inversify.config';
 import MemoryService from 'linkWithBackend/services/memory_service';
 import { useRouter } from 'next/router';
@@ -12,7 +12,7 @@ const memService = container.get<MemoryService>(TYPES.MemoryService)
 const ResumeItem = ({ id, courseData, setIsReady }: resumeProps) => {
     const updateArrow = useXarrow();
     const router = useRouter();
-    const username = useMemo(() => memService.getLocalStorage('firstName') + memService.getLocalStorage('lastName'), [])
+    const username = useMemo(() => memService.getLocalStorage(MemType.firstName) + memService.getLocalStorage(MemType.lastName), [])
 
     useEffect(() => {
         setTimeout(() => setIsReady(true), 200)
