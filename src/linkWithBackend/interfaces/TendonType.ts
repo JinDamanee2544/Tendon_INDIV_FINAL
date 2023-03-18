@@ -57,7 +57,7 @@ export interface ProgressBodyInterface {
     lessonID: string
 }
 
-export interface ProgressBodyResponseInterface {
+export interface ProgressInterface {
     progress: number
 }
 

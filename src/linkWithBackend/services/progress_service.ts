@@ -1,12 +1,14 @@
 import { id, inject, injectable } from "inversify";
 import { ProgressServiceInterface } from "linkWithBackend/interfaces/ServiceInterface";
-import TYPES, { ProgressBodyInterface, ProgressBodyResponseInterface } from "linkWithBackend/interfaces/TendonType";
+import TYPES, { ProgressBodyInterface } from "linkWithBackend/interfaces/TendonType";
 import { makeAutoObservable } from "mobx";
 import APIService from "./api_service";
 
 @injectable()
 class ProgressService implements ProgressServiceInterface {
     progress = 0;
+    message = "";
+    status = 0;
     apiService: APIService;
     
     constructor(
@@ -39,28 +41,38 @@ class ProgressService implements ProgressServiceInterface {
     }
 
     async getCoursesProgress(courseID: string) {
-        let result = await this.apiService.get<ProgressBodyResponseInterface>(`https://tendon-backend-cspqlbu5la-as.a.run.app/api/v2/course/progress/${courseID}`)
+        let result = await this.apiService.get<number>(`https://tendon-backend-cspqlbu5la-as.a.run.app/api/v2/course/progress/${courseID}`)
         return {
-            progress: result.response.progress?.progress!
+            progress: result.response.percent!
         }
     }
 
     async getLessonsProgress(lessonID: string, courseID: string) {
-        let result = await this.apiService.get<ProgressBodyResponseInterface>(`https://tendon-backend-cspqlbu5la-as.a.run.app/api/v2/lesson/progress/${lessonID}/${courseID}`)
+        let result = await this.apiService.get<number>(`https://tendon-backend-cspqlbu5la-as.a.run.app/api/v2/lesson/progress/${lessonID}/${courseID}`)
         return {
-            progress: result.response.progress?.progress!
+            progress: result.response.percent!
         }
     }
 
     async getNodesProgress(nodeID: string, lessonID: string, courseID: string) {
-        let result = await this.apiService.get<ProgressBodyResponseInterface>(`https://tendon-backend-cspqlbu5la-as.a.run.app/api/v2/node/progress/${nodeID}/${lessonID}/${courseID}`)
-        return {
-            progress: result.response.progress?.progress!
+        let result = await this.apiService.get<boolean>(`https://tendon-backend-cspqlbu5la-as.a.run.app/api/v2/node/progress/${nodeID}/${lessonID}/${courseID}`)
+        this.message = result.message
+        this.status = result.status
+        if (result.response.progress !== undefined) {
+            if (result.response.progress == true) {
+                return {
+                    progress: 100
+                }
+            }
+            else {
+                return {
+                    progress: 0
+                }
+            }
         }
-    }
-
-    public setProgress(progress: number): void { // lob due naja 
-        this.progress = progress;
+        return {
+            progress: 0
+        }
     }
 }
 

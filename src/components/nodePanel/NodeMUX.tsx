@@ -7,24 +7,24 @@ import NodeText from './NodeText';
 import NodeVideoPlayer from './NodeVideoPlayer';
 
 export enum NodeType {
-    pdfNode = 'pdfNode',
-    videoNode = 'videoNode',
-    textNode = 'textNode',
-    soundNode = 'soundNode',
-    imageNode = 'imageNode'
+    pdfNode = 'pdf',
+    videoNode = 'video',
+    textNode = 'text',
+    soundNode = 'mp3',
+    imageNode = 'image'
 }
 
 export const getIcon = (type: string) => {
     switch (type) {
-        case 'pdfNode':
+        case 'pdf':
             return <AiFillFilePdf />        // OK
-        case 'videoNode':
+        case 'video':
             return <FaVideo />
-        case 'textNode':
+        case 'text':
             return <ImParagraphJustify />   // OK
-        case 'soundNode':
+        case 'mp3':
             return <AiFillSound />
-        case 'imageNode':
+        case 'image':
             return <FaImage />              // OK
 
         // For testing
@@ -33,6 +33,7 @@ export const getIcon = (type: string) => {
 
         default:
             // console.log('No icon found for type: ' + type)
+            console.log('No icon found for type: ' + type)
             return <AiFillFile />
         // throw new Error('No match type')
     }
@@ -48,6 +49,7 @@ const NodeMUX = (props: NodeExtended) => {
     const icon = getIcon(props.FileType)
 
     const eachNodeProps = {
+        id: props.ID,
         data: props.Data,
         name: props.name,
         icon,

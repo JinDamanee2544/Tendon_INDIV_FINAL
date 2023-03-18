@@ -6,6 +6,7 @@ import NodeBaseView from "./NodeBaseView"
 import { nodeStyle, updateProgress } from "./ViewModel"
 
 type NodeVideoPlayerProps = {
+    id: string
     name: string
     data: string
     icon: React.ReactNode
@@ -14,7 +15,7 @@ type NodeVideoPlayerProps = {
 
 const mockMPD = "https://dash.akamaized.net/envivio/EnvivioDash3/manifest.mpd"
 
-const NodeVideoPlayer = ({ name, data, icon, progress }: NodeVideoPlayerProps) => {
+const NodeVideoPlayer = ({ id, name, data, icon, progress }: NodeVideoPlayerProps) => {
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [videoProgress, setVideoProgress] = useState<number>(progress || 0)
     const style = nodeStyle(progress || 0)
@@ -43,6 +44,7 @@ const NodeVideoPlayer = ({ name, data, icon, progress }: NodeVideoPlayerProps) =
             {
                 isModalOpen ?
                     <PlayerModal
+                        id={id}
                         name={name}
                         data={data}
                         videoProgress={videoProgress}
@@ -57,6 +59,7 @@ const NodeVideoPlayer = ({ name, data, icon, progress }: NodeVideoPlayerProps) =
 export default NodeVideoPlayer
 
 interface IPlayerModalProps {
+    id: string
     name: string
     data: string
     videoProgress: number
@@ -71,7 +74,7 @@ const PlayerModal = (props: IPlayerModalProps) => {
 
     useEffect(() => {
         return () => {
-            updateProgress(videoProgress)
+            updateProgress(props.id)
         }
     }, [videoProgress])
 
@@ -88,12 +91,12 @@ const PlayerModal = (props: IPlayerModalProps) => {
                 <h1 className="p-2 text-center text-2xl font-bold">{name}</h1>
                 <ReactPlayer
                     ref={playerRef}
-                    url={mockMPD}
+                    url={ data }            // earth: Little error ?
                     volume={0.5}
                     controls
                     stopOnUnmount
                     fallback={<LoadingSpinner />}
-                    onEnded={() => updateProgress(100)}
+                    onEnded={() => updateProgress(props.id)}
                     progressInterval={10 * 1000}
                     onProgress={({ played }) => {
                         setVideoProgress(played * 100)

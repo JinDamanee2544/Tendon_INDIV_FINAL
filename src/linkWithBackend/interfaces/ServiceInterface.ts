@@ -1,4 +1,4 @@
-import { Course, Lesson, localStorageInterface, Node, ProgressBodyResponseInterface, User } from "./TendonType";
+import { Course, Lesson, localStorageInterface, Node, ProgressInterface, User } from "./TendonType";
 
 export interface PostResponse<Type> {
     status: number
@@ -74,9 +74,8 @@ export interface MemoryServiceInterface {
 }
 
 export interface ProgressServiceInterface {
-    postProgress(nodeID: string, lessonID: string, courseID: string): Promise<ProgressBodyResponseInterface>;
-    getCoursesProgress(courseID: string): Promise<ProgressBodyResponseInterface>;
-    getLessonsProgress(lessonID: string, courseID: string): Promise<ProgressBodyResponseInterface>;
-    getNodesProgress(nodeID: string, lessonID: string, courseID: string): Promise<ProgressBodyResponseInterface>; 
-    setProgress(progress: number): void;
+    postProgress(nodeID: string, lessonID: string, courseID: string): Promise<ProgressInterface>;
+    getCoursesProgress(courseID: string): Promise<ProgressInterface>;
+    getLessonsProgress(lessonID: string, courseID: string): Promise<ProgressInterface>;
+    getNodesProgress(nodeID: string, lessonID: string, courseID: string): Promise<ProgressInterface>; 
 }
