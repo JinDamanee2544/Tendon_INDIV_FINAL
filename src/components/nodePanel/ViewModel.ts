@@ -4,6 +4,7 @@ import container from "linkWithBackend/services/inversify.config"
 import LessonService from "linkWithBackend/services/lesson_service"
 import MemoryService from "linkWithBackend/services/memory_service"
 import NodeService from "linkWithBackend/services/node_service"
+import Router, { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 import { NodeWithProgress } from "types"
 
@@ -29,9 +30,6 @@ export const finishProgress = (nodeID: string) => {
 
 const fetchAllNode = async(lesson:Lesson, courseID: string) => {
     const nodeIDs =  lesson.Nodes
-    if (nodeIDs.length === 0) {
-        throw new Error('nodeIDs is empty')
-    }
 
     let nodes: Node[] = []
     const nodePromise = new Promise<Node[]>(async (resolve, reject) => {
@@ -80,17 +78,24 @@ export default function ViewModel({lesson_id, course_id}:IViewModel) {
         lessonID = lesson_id
         courseID = course_id
         const fetchLesson = async () => {
-            // TODO : handle error when courseID,lesson,nodes is empty
             const courseID = memoryService.getLocalStorage(MemType.courseID)
             if (!courseID) {
                 console.log('courseID is empty')
+                Router.reload()
                 return
             }
 
             const lesson = await lessonService.getLessonById(courseID, lesson_id)
+            // return in blank of lesson
+            if (Object.keys(lesson).length===0) {
+                console.log('lesson is empty')
+                Router.reload()
+                return
+            }
+
             const nodes = await fetchAllNode(lesson, courseID)
-            if (nodes.length === 0) {
-                console.log('nodes is empty')
+            if (!nodes) {
+                Router.reload()
                 return
             }
 

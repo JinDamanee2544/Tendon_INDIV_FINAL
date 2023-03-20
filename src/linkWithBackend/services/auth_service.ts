@@ -125,14 +125,14 @@ class AuthService implements AuthServiceInterface {
         })
         .catch((err) => {
             this.status = Object(err)["response"]["request"]["status"]
-            this.response = {} as User
+            accessToken = ""
         });
 
         let memStore = {} as localStorageInterface
         memStore.token = accessToken
         this.memService.setLocalStorage(memStore)
 
-        return this.response
+        return accessToken
     }
 
     public isTokenValid():boolean{
@@ -142,7 +142,6 @@ class AuthService implements AuthServiceInterface {
         }
         try {
             const claim : claimProps = jwt_decode(token)
-            // console.log(claim)
             const currentTime = new Date().getTime() / 1000
             if (claim.exp < currentTime) {
                 // console.log("Token is expired")

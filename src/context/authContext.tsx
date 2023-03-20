@@ -20,18 +20,20 @@ type AuthProviderProps = {
   children: ReactNode;
 };
 
-const signService = container.get<AuthService>(TYPES.AuthService)
+const authService = container.get<AuthService>(TYPES.AuthService)
 
 export function AuthProvider({ children }: AuthProviderProps) {
   const router = useRouter();
 
   useEffect(() => {
-    if (!signService.isTokenValid()) {
-      router.push('/login')
+    const checkToken = async () => {
+      if (!authService.isTokenValid()) {
+        const resp = await authService.renewAccessToken()
+        if (resp === "") router.push('/login')
+      }
     }
+    checkToken();
   }, [router])
-
-  // add axios interceptor to redirect to login page if 401 response
 
   return (
     <authContext.Provider value={{}}>

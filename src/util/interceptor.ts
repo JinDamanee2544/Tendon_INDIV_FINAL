@@ -8,10 +8,12 @@ export const responseSuccess = (response: AxiosResponse) => {
 };
 
 export const responseReject = async (error: Error) => {
-  const signService = container.get<AuthService>(TYPES.AuthService)
-  if (!signService.isTokenValid()) {
+  const authService = container.get<AuthService>(TYPES.AuthService)
+  if (!authService.isTokenValid()) {
+    const resp = await authService.renewAccessToken()
+    console.log("renewAccessToken")
     // redirect to login page
-    window.location.href = "/login";
+    if (resp === "") window.location.href = "/login";
   }
-  return Promise.reject(error); 
+  return Promise.reject(error);
 };

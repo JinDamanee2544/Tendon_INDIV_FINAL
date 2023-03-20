@@ -66,7 +66,7 @@ export interface AuthServiceInterface {
     signIn(body: User): Promise<User>;
     signUp(body: User): Promise<User>;
     signOut(): Promise<number>;
-    renewAccessToken(): Promise<User>;
+    renewAccessToken(): Promise<string>;
 }
 
 export interface MemoryServiceInterface {           

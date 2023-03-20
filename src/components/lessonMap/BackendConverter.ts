@@ -1,13 +1,12 @@
 import { LearningLessonNodeProps } from "../../types";
 import TYPES, { Course, Lesson } from "linkWithBackend/interfaces/TendonType";
 import { action, computed, observable } from "mobx";
-import { getLessonInformation } from "linkWithBackend/lessonHandle/lessonData";
 import prepNodeAlgo from "linkWithBackend/lessonHandle/Graph_PrepNodeData";
 import container from "linkWithBackend/services/inversify.config";
 import LessonService from "linkWithBackend/services/lesson_service";
 
 const dataDict: { [key: string]: Lesson } = {}
-const isRender: { [key: string]: boolean } = {}
+// const isRender: { [key: string]: boolean } = {}
 let firstCal: boolean = false
 let childReady: boolean = false
 let initNode: string[] = []
@@ -43,7 +42,7 @@ export default class NewBackendConvert {
         allCoursesLoading.then((res: Lesson[]) => {
             res.forEach((lesson: Lesson) => {
                 dataDict[lesson.ID] = lesson
-                isRender[lesson.ID!] = true
+                // isRender[lesson.ID!] = true
                 this.data.push(lesson)
                 try {
                     if (lesson.PrevLessons.length === 0) {
