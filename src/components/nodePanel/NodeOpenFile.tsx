@@ -1,5 +1,5 @@
 import NodeBaseView from "./NodeBaseView"
-import { nodeStyle, updateProgress } from "./ViewModel"
+import { nodeStyle, finishProgress } from "./ViewModel"
 
 type NodeOpenFileProps = {
     id: string
@@ -15,7 +15,7 @@ const NodeOpenFile = ({ id, name, data, icon, progress }: NodeOpenFileProps) => 
     return (
         <a className={`node ${style}`}
             href={data} target='_blank' rel='noopener noreferrer'
-            onClick={() => updateProgress(id)}
+            onClick={() => finishProgress(id)}
         >
             <NodeBaseView
                 name={name}

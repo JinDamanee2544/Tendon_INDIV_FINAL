@@ -2,7 +2,7 @@ import ReactModal from "@components/baseComponents/Modal"
 import Image from "next/image"
 import { useState } from "react"
 import NodeBaseView from "./NodeBaseView"
-import { nodeStyle, updateProgress } from "./ViewModel"
+import { nodeStyle, finishProgress } from "./ViewModel"
 
 const mockText = `default text file (in this case, it's not a pdf file)`
 const mockFilename = 'Activity 1 # Quantum Entanglement'
@@ -26,7 +26,7 @@ const NodeText = ({ id, name, data, icon, progress }: NodeTextProps) => {
                 className={`node ${style}`}
                 onClick={() => {
                     setIsModalOpen(true)
-                    updateProgress(id)
+                    finishProgress(id)
                 }}>
                 <NodeBaseView
                     name={name}

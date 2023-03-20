@@ -9,6 +9,9 @@ import { NodeWithProgress } from "types"
 
 const nodeService = container.get<NodeService>(TYPES.NodeService)
 const progressService = container.get<ProgressServiceInterface>(TYPES.ProgressService)
+const lessonService = container.get<LessonService>(TYPES.LessonService)
+const memoryService = container.get<MemoryService>(TYPES.MemoryService)
+
 var lessonID = ""
 var courseID = ""
 
@@ -20,12 +23,15 @@ export const nodeStyle = (progress:number):string => {
     }
 }
 
-export const updateProgress = (nodeID: string) => {
+export const finishProgress = (nodeID: string) => {
     progressService.postProgress(nodeID, lessonID, courseID)
 }
 
 const fetchAllNode = async(lesson:Lesson, courseID: string) => {
     const nodeIDs =  lesson.Nodes
+    if (nodeIDs.length === 0) {
+        throw new Error('nodeIDs is empty')
+    }
 
     let nodes: Node[] = []
     const nodePromise = new Promise<Node[]>(async (resolve, reject) => {
@@ -74,13 +80,19 @@ export default function ViewModel({lesson_id, course_id}:IViewModel) {
         lessonID = lesson_id
         courseID = course_id
         const fetchLesson = async () => {
-            const lessonService = container.get<LessonService>(TYPES.LessonService)
-            const memoryService = container.get<MemoryService>(TYPES.MemoryService)
-
             // TODO : handle error when courseID,lesson,nodes is empty
             const courseID = memoryService.getLocalStorage(MemType.courseID)
+            if (!courseID) {
+                console.log('courseID is empty')
+                return
+            }
+
             const lesson = await lessonService.getLessonById(courseID, lesson_id)
             const nodes = await fetchAllNode(lesson, courseID)
+            if (nodes.length === 0) {
+                console.log('nodes is empty')
+                return
+            }
 
             const nodeWithProgress = await fetchAndAddProgressToAllNode(nodes, course_id, lesson_id);       
             setNodesWithProgress(nodeWithProgress)
@@ -88,7 +100,6 @@ export default function ViewModel({lesson_id, course_id}:IViewModel) {
 
             const resp = await progressService.getLessonsProgress(lesson_id, courseID)
             setLessonProgress(resp.progress)
-
         }
         fetchLesson()
     }, [lesson_id,course_id])

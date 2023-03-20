@@ -39,7 +39,6 @@ export const getIcon = (type: string) => {
     }
 }
 
-
 interface NodeExtended extends Omit<Node, 'id'> {
     name: string
     progress?: number

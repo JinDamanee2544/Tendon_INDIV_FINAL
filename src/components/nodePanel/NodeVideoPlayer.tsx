@@ -1,9 +1,9 @@
 import LoadingSpinner from "@components/baseComponents/LoadingSpinner"
 import ReactModal from "@components/baseComponents/Modal"
-import { useEffect, useRef, useState } from "react"
+import { useRef, useState } from "react"
 import ReactPlayer from "react-player"
 import NodeBaseView from "./NodeBaseView"
-import { nodeStyle, updateProgress } from "./ViewModel"
+import { nodeStyle, finishProgress } from "./ViewModel"
 
 type NodeVideoPlayerProps = {
     id: string
@@ -17,18 +17,8 @@ const mockMPD = "https://dash.akamaized.net/envivio/EnvivioDash3/manifest.mpd"
 
 const NodeVideoPlayer = ({ id, name, data, icon, progress }: NodeVideoPlayerProps) => {
     const [isModalOpen, setIsModalOpen] = useState(false)
-    const [videoProgress, setVideoProgress] = useState<number>(progress || 0)
+    // const [videoProgress, setVideoProgress] = useState<number>(progress || 0)
     const style = nodeStyle(progress || 0)
-
-    // useEffect(() => {
-    //     if (!isModalOpen) {
-    //         updateProgress(videoProgress)
-    //     }
-    // }, [isModalOpen, videoProgress])
-
-    // useEffect(() => {
-    //     playerRef.current.seekTo(progress / 100)
-    // })
 
     return (
         <>
@@ -47,9 +37,9 @@ const NodeVideoPlayer = ({ id, name, data, icon, progress }: NodeVideoPlayerProp
                         id={id}
                         name={name}
                         data={data}
-                        videoProgress={videoProgress}
+                        // videoProgress={videoProgress}
                         setIsModalOpen={setIsModalOpen}
-                        setVideoProgress={setVideoProgress}
+                    // setVideoProgress={setVideoProgress}
                     /> :
                     <></>
             }
@@ -62,31 +52,31 @@ interface IPlayerModalProps {
     id: string
     name: string
     data: string
-    videoProgress: number
+    // videoProgress: number
     setIsModalOpen: (isOpen: boolean) => void
-    setVideoProgress: (progress: number) => void
+    // setVideoProgress: (progress: number) => void
 }
 
-
 const PlayerModal = (props: IPlayerModalProps) => {
-    const { setIsModalOpen, name, data, setVideoProgress, videoProgress } = props
+    const { setIsModalOpen, name, data } = props
     const playerRef = useRef<ReactPlayer>(null)
 
-    useEffect(() => {
-        return () => {
-            updateProgress(props.id)
-        }
-    }, [props.id])
+    // No progress in percentage only finished or not
 
-    const loadPreviousVideoProgress = () => {
-        if (playerRef.current) {
-            playerRef.current.seekTo(parseFloat((videoProgress / 100).toFixed(2)))
-        }
-    }
+    // useEffect(() => {
+    //     return () => {
+    //         finishProgress(props.id)
+    //     }
+    // }, [props.id])
+
+    // const loadPreviousVideoProgress = () => {
+    //     if (playerRef.current) {
+    //         playerRef.current.seekTo(parseFloat((videoProgress / 100).toFixed(2)))
+    //     }
+    // }
 
     return (
         <ReactModal setIsOpen={setIsModalOpen}>
-            {/* {data} */}
             <article>
                 <h1 className="p-2 text-center text-2xl font-bold">{name}</h1>
                 <ReactPlayer
@@ -96,12 +86,12 @@ const PlayerModal = (props: IPlayerModalProps) => {
                     controls
                     stopOnUnmount
                     fallback={<LoadingSpinner />}
-                    onEnded={() => updateProgress(props.id)}
-                    progressInterval={10 * 1000}
-                    onProgress={({ played }) => {
-                        setVideoProgress(played * 100)
-                    }}
-                    onReady={loadPreviousVideoProgress}
+                    onEnded={() => finishProgress(props.id)}
+                // progressInterval={10 * 1000}
+                // onProgress={({ played }) => {
+                //     setVideoProgress(played * 100)
+                // }}
+                // onReady={loadPreviousVideoProgress}
                 />
             </article>
         </ReactModal>

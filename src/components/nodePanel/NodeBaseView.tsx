@@ -1,4 +1,3 @@
-
 interface INodeBaseView {
     icon: React.ReactNode,
     name: string,
