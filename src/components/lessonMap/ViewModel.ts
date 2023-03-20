@@ -23,7 +23,6 @@ export default function ViewModel(lid: string): RenderLearningLessonNodeProps[] 
                     Router.reload()
                     return 
                 }
-                console.log(course)
 
                 let memStore = {} as localStorageInterface
                 memService.setLocalStorage({...memStore, courseID: lid, courseName: course.Title})

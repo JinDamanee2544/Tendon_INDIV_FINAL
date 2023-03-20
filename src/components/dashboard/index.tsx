@@ -23,8 +23,6 @@ const DashBoard = () => {
     const [onClient, setOnClient] = useState<boolean>(false);
     const router = useRouter()
 
-    console.log(mode)
-
     const navigateMode = () => {
         //const currentWidth = dashboardRef.current.clientWidth
         if (mode === modeType.main) {

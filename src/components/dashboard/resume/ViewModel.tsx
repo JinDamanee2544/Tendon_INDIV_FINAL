@@ -55,7 +55,6 @@ export default function ViewModel() {
         })
         courseLoading.then((finishLoadingCourses) => {
             courses = finishLoadingCourses
-            console.log(courses)
         }).then(() => {
             extendProgressOnCourse(courses)
         })
