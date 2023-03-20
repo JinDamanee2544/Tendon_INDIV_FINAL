@@ -1,7 +1,6 @@
 import { createContext, ReactNode, useContext, useEffect } from "react";
-import TYPES, { MemType } from "linkWithBackend/interfaces/TendonType"
+import TYPES from "linkWithBackend/interfaces/TendonType"
 import container from "linkWithBackend/services/inversify.config"
-import MemoryService from "linkWithBackend/services/memory_service"
 import AuthService from "linkWithBackend/services/auth_service"
 import { useRouter } from "next/router";
 
@@ -21,15 +20,13 @@ type AuthProviderProps = {
   children: ReactNode;
 };
 
-const memService = container.get<MemoryService>(TYPES.MemoryService)
 const signService = container.get<AuthService>(TYPES.AuthService)
 
 export function AuthProvider({ children }: AuthProviderProps) {
   const router = useRouter();
 
   useEffect(() => {
-    const token = memService.getLocalStorage(MemType.token);
-    if (!signService.isTokenValid(token)) {
+    if (!signService.isTokenValid()) {
       router.push('/login')
     }
   }, [router])

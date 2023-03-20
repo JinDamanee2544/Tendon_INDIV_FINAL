@@ -135,7 +135,8 @@ class AuthService implements AuthServiceInterface {
         return this.response
     }
 
-    public isTokenValid(token : string|null):boolean{
+    public isTokenValid():boolean{
+        const token = this.memService.getLocalStorage(MemType.token)
         if (token === null) {
             return false
         }
