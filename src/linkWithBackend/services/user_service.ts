@@ -40,6 +40,7 @@ class UserService implements UserServiceInterface {
             updateAt: '',
             accessToken: '',
             courses: [],
+            refreshToken: '',
         }
 
         const result = await this.apiService.update<User>(

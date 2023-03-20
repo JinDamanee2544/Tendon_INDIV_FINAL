@@ -1,10 +1,9 @@
 import TYPES, { Course, MemType } from "linkWithBackend/interfaces/TendonType"
-import AuthService from "linkWithBackend/services/auth_service"
 import CourseService from "linkWithBackend/services/course_service"
 import container from "linkWithBackend/services/inversify.config"
 import MemoryService from "linkWithBackend/services/memory_service"
 import { useRouter } from "next/router"
-import { useCallback, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 
 export default function ViewModel() {
     const [courses, setCourses] = useState<Course[]>([] as Course[])
@@ -36,7 +35,7 @@ export default function ViewModel() {
             setCourses(courses)
         })
 
-    }, [])
+    }, [router])
 
     return courses
 } 

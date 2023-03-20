@@ -76,7 +76,7 @@ const PlayerModal = (props: IPlayerModalProps) => {
         return () => {
             updateProgress(props.id)
         }
-    }, [videoProgress])
+    }, [props.id])
 
     const loadPreviousVideoProgress = () => {
         if (playerRef.current) {
@@ -91,7 +91,7 @@ const PlayerModal = (props: IPlayerModalProps) => {
                 <h1 className="p-2 text-center text-2xl font-bold">{name}</h1>
                 <ReactPlayer
                     ref={playerRef}
-                    url={ data }            // earth: Little error ?
+                    url={data}            // earth: Little error ?
                     volume={0.5}
                     controls
                     stopOnUnmount

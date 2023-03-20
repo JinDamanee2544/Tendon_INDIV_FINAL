@@ -38,7 +38,7 @@ export default function ViewModel() {
         } else {
             tmpValue = {} as Lesson
         }
-    }, [lessonId])
+    }, [lessonId,courseID])
 
     return {
         courseID: courseID,
