@@ -2,7 +2,7 @@ import LoadingSpinner from '@components/baseComponents/LoadingSpinner';
 import { motion } from 'framer-motion'
 import React, { useEffect, useState } from "react"
 import { Xwrapper } from 'react-xarrows';
-import CourseNode from './LessonNode';
+import LessonNode from './LessonNode';
 import ViewModel from './ViewModel';
 
 interface LearningNodeMapProps {
@@ -43,7 +43,7 @@ const LearningNodeMap = ({ lid }: LearningNodeMapProps) => {
                             renderingGraph.map((item, index) => {
                                 return (
                                     <div key={index} className="flex items-center gap-10" >
-                                        <CourseNode
+                                        <LessonNode
                                             key={item.lessonId}
                                             {...item}
                                             setChildReady={setChildReady}

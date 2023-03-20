@@ -6,8 +6,8 @@ import { RenderLearningLessonNodeProps } from '../../types'
 import ArrowBox from '../baseComponents/ArrowBox'
 import LessonNodeView from '@components/baseComponents/LessonNodeView'
 
-const LessonNode = ({ lessonId: courseId, lessonName: courseName, next, setChildReady, isRender, status }: RenderLearningLessonNodeProps) => {
-
+const LessonNode = (props: RenderLearningLessonNodeProps) => {
+    const { lessonId, lessonName, isRender, status, next, setChildReady } = props;
     const { theme } = useTheme();
     const [subChildReady, setSubChildReady] = useState(false);
 
@@ -19,8 +19,8 @@ const LessonNode = ({ lessonId: courseId, lessonName: courseName, next, setChild
         <>
             {/* This Course */}
             <LessonNodeView
-                courseId={courseId}
-                courseName={courseName}
+                lessonId={lessonId}
+                lessonName={lessonName}
                 isRender={isRender}
                 status={status}
             />
@@ -40,7 +40,7 @@ const LessonNode = ({ lessonId: courseId, lessonName: courseName, next, setChild
                                     <ArrowBox>
                                         {subChildReady &&
                                             <Xarrow
-                                                start={courseId.toString()}
+                                                start={lessonId.toString()}
                                                 end={item.lessonId.toString()}
                                                 color={theme === 'light' ? '#475569' : '#961EFF'}
                                             />

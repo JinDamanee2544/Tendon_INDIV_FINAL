@@ -5,15 +5,14 @@ import { useMemo, useRef } from 'react'
 import { useXarrow } from 'react-xarrows'
 
 type LearningNodeProps = {
-    // statusColor: string
-    courseId: string
-    courseName: string
+    lessonId: string
+    lessonName: string
     isRender: boolean
     status: StatusType
 }
 
 const nodeStyle = (status: StatusType): string => {
-    console.log(status)
+    // console.log(status)
     switch (status) {
         case StatusType.NOTSTARTED:
             return ''
@@ -38,7 +37,8 @@ const nodeSymbol = (status: StatusType): string => {
     }
 }
 
-const LearningNode = ({ courseId: lessonId, courseName, isRender, status }: LearningNodeProps) => {
+const LearningNode = (props: LearningNodeProps) => {
+    const { lessonId, lessonName, isRender, status } = props;
     const updateArrow = useXarrow();
     const router = useRouter();
     const nodeRef = useRef(null);
@@ -75,7 +75,7 @@ const LearningNode = ({ courseId: lessonId, courseName, isRender, status }: Lear
                             })
                         }}
                     >
-                        <h1>{courseName}</h1>
+                        <h1>{lessonName}</h1>
                     </motion.button>
                 </div>
             )}
