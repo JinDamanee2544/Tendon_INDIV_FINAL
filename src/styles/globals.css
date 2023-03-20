@@ -27,6 +27,9 @@
   .node {
     @apply flex items-center gap-6 rounded-2xl bg-slate-200 p-4 duration-200 hover:scale-105 active:translate-y-1 dark:bg-gray-light;
   }
+  .course {
+    @apply rounded-lg bg-slate-500 p-2 text-white shadow-lg  dark:bg-gray-normal;
+  }
 }
 
 /* Tan Part  */

@@ -15,13 +15,15 @@ import MemoryService from "linkWithBackend/services/memory_service";
 import TYPES, { MemType } from "linkWithBackend/interfaces/TendonType";
 import ResumeList from "./resume/ResumeList";
 
+const memService = container.get<MemoryService>(TYPES.MemoryService)
+let userInformation = { firstName: memService.getLocalStorage(MemType.firstName), lastName: memService.getLocalStorage(MemType.lastName) }
+
 const DashBoard = () => {
     const [mode, setMode] = useState<modeType>(modeType.main);
     const [onClient, setOnClient] = useState<boolean>(false);
-
     const router = useRouter()
-    var memService = container.get<MemoryService>(TYPES.MemoryService)
-    var userInformation = { firstName: memService.getLocalStorage(MemType.firstName), lastName: memService.getLocalStorage(MemType.lastName) }
+
+    console.log(mode)
 
     const navigateMode = () => {
         //const currentWidth = dashboardRef.current.clientWidth
@@ -45,11 +47,6 @@ const DashBoard = () => {
     if (!onClient) {
         return <></>
     }
-    // if (ready) {
-    //     //userInformation = getUserCurrentData()
-    //     //console.log("--> ", getToken(), getUserCurrentData())
-    // }
-
     return (
         <div
             className="relative flex justify-center gap-x-20"

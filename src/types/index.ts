@@ -17,9 +17,9 @@ export type activityProps = {
 };
 
 export enum modeType {
-    'main',
-    'search',
-    'resume'
+    'main'='main',
+    'search'= 'search',
+    'resume'= 'resume',
 }
 export interface NavigateProps {
     Icon: IconType,
@@ -54,13 +54,13 @@ export type resSource = {
     resType: string
 }
 
-export interface resumeProps {
-    id: string,
-    courseData: Course,
-    setIsReady: (value: boolean) => void
-  }
+
 
 export interface NodeWithProgress extends Node {
+    progress: number
+}
+
+export interface CourseWithProgress extends Course {
     progress: number
 }
 
