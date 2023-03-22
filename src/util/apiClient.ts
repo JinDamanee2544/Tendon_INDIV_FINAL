@@ -1,5 +1,5 @@
 import axios, { CreateAxiosDefaults } from "axios";
-import { responseReject, responseSuccess } from "./interceptor";
+import { responseRejectHandler, responseSuccessHandler } from "./interceptor";
 
 const createAxiosConfig = (): CreateAxiosDefaults<any> => {
   axios.defaults.headers.common['Authorization'] = '';
@@ -11,6 +11,6 @@ const createAxiosConfig = (): CreateAxiosDefaults<any> => {
 
 const apiClient = axios.create(createAxiosConfig());
 
-apiClient.interceptors.response.use(responseSuccess, responseReject);   // TODO: refresh token
+apiClient.interceptors.response.use(responseSuccessHandler, responseRejectHandler);   // TODO: refresh token
 
 export default apiClient;
