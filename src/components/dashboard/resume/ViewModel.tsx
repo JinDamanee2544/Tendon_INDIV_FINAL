@@ -42,8 +42,8 @@ export default function ViewModel() {
             const fetchingCourseData = async () => {
                 const result = await courseService.getManyCourseByID(resumeCourseID)
                 const course = result.courses
-                if (result.status === 400) {
-                    Router.push("/login")
+                if (result.status === 401 || result.status === 403) {
+                    Router.reload()
                 }
                 resolve(course)
                 return course

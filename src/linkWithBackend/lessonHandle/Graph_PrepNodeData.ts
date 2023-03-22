@@ -22,7 +22,8 @@ function recursive(nextIdArray: string[], courseID: string) {
             tmp.push({
                 lessonId: dict[myLessonID!]!.ID,
                 lessonName: dict[myLessonID!]!.Title,
-                status: dictLessonProgress[myLessonID!] === 100 ? StatusType.COMPLETED : StatusType.INPROGRESS,
+                // var variable = (condition) ? (true block) : ((condition2) ? (true block2) : (else block2))
+                status: dictLessonProgress[myLessonID!] === 100 ? StatusType.COMPLETED : dictLessonProgress[myLessonID!] === 0 ? StatusType.NOTSTARTED : StatusType.INPROGRESS ,
                 next: recursive(dict[myLessonID!]!.NextLessons, courseID)
             })
         } catch (err) {
