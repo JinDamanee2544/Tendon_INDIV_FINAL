@@ -69,8 +69,11 @@ class APIService implements APIServiceInterface {
                 message: tmp_response.data.message
             }
         } catch (err) {
+            console.log(err)
             this.status = Object(err)["response"]["request"]["status"]
             result = {} as GetResponse<Type>
+            result.status = this.status
+            result.message = Object(err)["response"]["data"]["message"]
         }
         return result
     } 

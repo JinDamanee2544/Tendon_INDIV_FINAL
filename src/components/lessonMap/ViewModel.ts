@@ -27,6 +27,7 @@ export default function ViewModel(lid: string): RenderLearningLessonNodeProps[] 
                 let memStore = {} as localStorageInterface
                 memService.setLocalStorage({...memStore, courseID: lid, courseName: course.Title})
 
+                
                 let Converter = new NewBackendConvert(course)
                 await Converter.converter()
                 const lessonGraph: LearningLessonNodeProps = Converter.getPrepArray
