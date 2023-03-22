@@ -40,8 +40,9 @@ export default function ViewModel() {
         const resumeCourseID: string = memService.getLocalStorage(MemType.courseIDs)
         const courseLoading = new Promise<Course[]>((resolve, reject) => {
             const fetchingCourseData = async () => {
-                const course = await courseService.getManyCourseByID(resumeCourseID)
-                if (courseService.getStatus() === 409) {
+                const result = await courseService.getManyCourseByID(resumeCourseID)
+                const course = result.courses
+                if (result.status === 400) {
                     Router.push("/login")
                 }
                 resolve(course)

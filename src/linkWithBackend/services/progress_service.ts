@@ -42,10 +42,7 @@ class ProgressService implements ProgressServiceInterface {
 
     async getCoursesProgress(courseID: string) {
         let result = await this.apiService.get<number>(`https://tendon-backend-cspqlbu5la-as.a.run.app/api/v2/course/progress/${courseID}`)
-        
         if (result.status !== 200) {
-            console.log("status: ", result.status)
-            console.log("error: ", result.message)
             return {
                 progress: 0
             }
@@ -58,8 +55,6 @@ class ProgressService implements ProgressServiceInterface {
     async getLessonsProgress(lessonID: string, courseID: string) {
         let result = await this.apiService.get<number>(`https://tendon-backend-cspqlbu5la-as.a.run.app/api/v2/lesson/progress/${lessonID}/${courseID}`)
         if (result.status !== 200) {
-            console.log("status: ", result.status)
-            console.log("error: ", result.message)
             return {
                 progress: 0
             }

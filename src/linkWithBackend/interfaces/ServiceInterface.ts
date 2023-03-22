@@ -16,6 +16,12 @@ export interface GetResponse<Type> {
     message: string
 }
 
+export interface UpdateResponse<Type> {
+    status: number
+    response: Type
+    message: string
+}
+
 export interface GetManyResponse<Type> {
     status: number
     response: {
@@ -27,17 +33,17 @@ export interface GetManyResponse<Type> {
 export interface APIServiceInterface {
     post<Type>(url: string, body: Type): Promise<PostResponse<Type>>;
     get<Type>(url: string): Promise<GetResponse<Type>>;
-    update<Type>(url: string, body: Type, id: string): Promise<{ response: Type, status: number, message: string }>;
+    update<Type>(url: string, body: Type, id: string): Promise<UpdateResponse<Type> >;
     delete<Type>(url: string, id: string): Promise<number>;
     getManyByID<Type>(url: string): Promise<GetManyResponse<Type>>;
 }
 
 export interface CourseServiceInterface {
     postCourse(body: Course): Promise<Course>;
-    getCourseById(id: string): Promise<Course>;
+    getCourseById(id: string): Promise<{course: Course, status: number}>;
     updateCourse(id: string, body: Course): Promise<Course>;
     deleteCourse(id: string): Promise<number>;
-    getManyCourseByID(ids: string): Promise<Course[]>;
+    getManyCourseByID(ids: string): Promise<{courses: Course[], status: number}>;
 }
 
 export interface LessonServiceInterface {

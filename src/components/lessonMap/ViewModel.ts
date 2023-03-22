@@ -18,8 +18,9 @@ export default function ViewModel(lid: string): RenderLearningLessonNodeProps[] 
             if (lid) {
                 const courseService = container.get<CourseService>(TYPES.CourseService)
                 const memService = container.get<MemoryService>(TYPES.MemoryService)
-                const course = await courseService.getCourseById(lid) // handle error
-                if (!course) {
+                const result = await courseService.getCourseById(lid) 
+                const course = result.course
+                if (!course || result.status !== 200) {
                     Router.reload()
                     return 
                 }

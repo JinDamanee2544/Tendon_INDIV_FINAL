@@ -46,7 +46,17 @@ class CourseService implements CourseServiceInterface {
         let result = await this.apiService.get<Course>(`https://tendon-backend-cspqlbu5la-as.a.run.app/api/v2/course/${id}`)
         this.message = result.message
         this.status = result.status
-        return this.response = result.response.course!
+        if (this.status !== 200 || result.response === undefined) {
+            return {
+                course: {} as Course,
+                status: this.status
+            }
+        }
+
+        return {
+            course: result.response.course!,
+            status: this.status
+        }
     }
 
     async updateCourse(id: string, body: Course) {
@@ -77,7 +87,17 @@ class CourseService implements CourseServiceInterface {
         const result = await this.apiService.getManyByID<Course>("https://tendon-backend-cspqlbu5la-as.a.run.app/api/v2/course/course-id-many/"+ ids.toString())
         this.message = result.message
         this.status = result.status
-        return this.responseMany = result.response.courses!
+        if (this.status !== 200 || result.response === undefined) {
+            return {
+                courses:  [],
+                status: this.status
+            }
+        }
+
+        return {
+            courses: result.response.courses!,
+            status: this.status
+        }
     }
 
     public getStatus() {
