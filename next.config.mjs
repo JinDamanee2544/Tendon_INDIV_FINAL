@@ -9,13 +9,11 @@
  * @constraint {{import('next').NextConfig}}
  */
 function defineNextConfig(config) {
-    return config;
+  return config;
 }
 
 export default defineNextConfig({
-    reactStrictMode: false,
-    swcMinify: true,
-    images: {
-        domains: ["raw.githubusercontent.com"],
-    },
+  reactStrictMode: false,
+  swcMinify: true,
+  output: "standalone",
 });
