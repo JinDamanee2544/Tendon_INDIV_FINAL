@@ -1,5 +1,5 @@
 import BreadCrumbContainer from '@baseComponents/BreadCrumbContainer';
-import { useBreadCrumb } from 'context/breadCrumbContext';
+import { useBreadCrumb } from 'context/breadcrumb/breadCrumbContext';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';

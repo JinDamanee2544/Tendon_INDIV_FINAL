@@ -1,7 +1,7 @@
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
 import LoadingSpinner from "@components/baseComponents/LoadingSpinner";
-import BreadcrumbHandleCourse from "./BreadcrumbHandleCourse";
+import BreadcrumbHandleCourse from "context/breadcrumb/BreadcrumbHandleCourse";
 import GraphLayout from "layout/GraphLayout";
 import { AuthProvider } from "context";
 const CourseMap = dynamic(() => import("@components/lessonMap"));

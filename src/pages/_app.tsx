@@ -2,7 +2,7 @@ import "../styles/globals.css";
 import type { AppType } from "next/dist/shared/lib/utils";
 import Head from "next/head";
 import { ThemeProvider } from "next-themes";
-import { BreadcrumbProvider } from "context/breadCrumbContext";
+import { BreadcrumbProvider } from "context/breadcrumb/breadCrumbContext";
 import { ContainerProviderTendon } from "linkWithBackend/services/container";
 
 const MyApp: AppType = ({ Component, pageProps }) => {

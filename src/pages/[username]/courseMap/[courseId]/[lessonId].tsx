@@ -1,9 +1,9 @@
 import LoadingSpinner from "@components/baseComponents/LoadingSpinner";
 import LessonPanel from "@components/nodePanel";
 import { Suspense } from "react";
-import BreadcrumbHandleLesson from './BreadcrumbHandleLesson'
 import MainLayout from "@layout/MainLayout";
 import { AuthProvider } from "context";
+import BreadcrumbHandleLesson from "context/breadcrumb/BreadcrumbHandleLesson";
 
 const Lesson = () => {
     const { lessonId, courseId } = BreadcrumbHandleLesson()

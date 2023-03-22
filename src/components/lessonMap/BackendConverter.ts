@@ -1,5 +1,6 @@
-import { LearningLessonNodeProps } from "types";
-import TYPES, { Course, Lesson } from "linkWithBackend/interfaces/TendonType";
+import type { LearningLessonNodeProps } from "types";
+import type {Course, Lesson} from "linkWithBackend/interfaces/TendonType";
+import TYPES from "linkWithBackend/interfaces/TendonType";
 import { action, computed, observable } from "mobx";
 import prepNodeAlgo from "linkWithBackend/lessonHandle/Graph_PrepNodeData";
 import container from "linkWithBackend/services/inversify.config";
