@@ -8,8 +8,6 @@ type LessonPanelProps = {
     course_id: string
 }
 
-const mockText = `default text file (in this case, it's not a pdf file)`
-
 const LessonPanel = ({ lesson_id, course_id }: LessonPanelProps) => {
     const { nodesWithProgress, lessonName, lessonProgress } = ViewModel({ lesson_id, course_id })
     if (nodesWithProgress.length === 0) {

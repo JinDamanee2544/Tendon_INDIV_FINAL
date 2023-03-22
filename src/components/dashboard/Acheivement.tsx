@@ -2,21 +2,11 @@ import { motion } from 'framer-motion'
 import { AcheivementData as data } from '../../mockData/index'
 import Scrollbars from 'react-custom-scrollbars-2'
 const Acheivement = () => {
-
-    // const item = {
-    //     hidden: {
-    //         opacity: 0,
-    //         scale: 0,
-    //         transition: { duration: 0.1 }
-    //     },
-    // }
-
     return (
         <motion.main className='flex w-[300px] flex-col gap-2 rounded-lg bg-slate-200 p-4 text-slate-700 dark:bg-gray-light dark:text-white'
             key={'acheivement'}
             initial={{ opacity: 0, y: -100, scale: 0 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-
         // exit={'hidden'}
         // variants={item}
         >

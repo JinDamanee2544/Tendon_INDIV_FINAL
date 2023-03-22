@@ -3,41 +3,16 @@ import { motion } from 'framer-motion'
 import { useRouter } from 'next/router'
 import { useMemo, useRef } from 'react'
 import { useXarrow } from 'react-xarrows'
+import { nodeStyle, nodeSymbol } from './ViewModel'
 
-type LearningNodeProps = {
+type LessonNodeViewProps = {
     lessonId: string
     lessonName: string
     isRender: boolean
     status: StatusType
 }
 
-const nodeStyle = (status: StatusType): string => {
-    // console.log(status)
-    switch (status) {
-        case StatusType.NOTSTARTED:
-            return ''
-        case StatusType.INPROGRESS:
-            return 'bg-purple-light dark:border-2 dark:border-pale-yellow dark:shadow-pale-yellow'
-        case StatusType.COMPLETED:
-            return 'bg-purple-neon dark:border-2 dark:border-purple-light dark:shadow-purple-neon'
-        default:
-            throw new Error('Invalid status')
-    }
-}
-const nodeSymbol = (status: StatusType): string => {
-    switch (status) {
-        case StatusType.NOTSTARTED:
-            return '•'
-        case StatusType.INPROGRESS:
-            return '•••'
-        case StatusType.COMPLETED:
-            return '✓'
-        default:
-            throw new Error('Invalid status')
-    }
-}
-
-const LearningNode = (props: LearningNodeProps) => {
+const LessonNodeView = (props: LessonNodeViewProps) => {
     const { lessonId, lessonName, isRender, status } = props;
     const updateArrow = useXarrow();
     const router = useRouter();
@@ -80,8 +55,7 @@ const LearningNode = (props: LearningNodeProps) => {
                 </div>
             )}
         </>
-
     )
 }
 
-export default LearningNode
+export default LessonNodeView

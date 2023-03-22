@@ -1,6 +1,6 @@
 import { inject, injectable } from "inversify";
 import TYPES from "linkWithBackend/interfaces/TendonType";
-import { makeAutoObservable, values } from "mobx";
+import { makeAutoObservable } from "mobx";
 import { APIServiceInterface, GetManyResponse, GetResponse, PostResponse } from "../interfaces/ServiceInterface";
 import MemoryService from "./memory_service";
 import { MemType } from "../interfaces/TendonType";

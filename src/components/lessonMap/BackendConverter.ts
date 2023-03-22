@@ -1,4 +1,4 @@
-import { LearningLessonNodeProps } from "../../types";
+import { LearningLessonNodeProps } from "types";
 import TYPES, { Course, Lesson } from "linkWithBackend/interfaces/TendonType";
 import { action, computed, observable } from "mobx";
 import prepNodeAlgo from "linkWithBackend/lessonHandle/Graph_PrepNodeData";
@@ -8,11 +8,8 @@ import ProgressService from "linkWithBackend/services/progress_service";
 
 const dataDict: { [key: string]: Lesson } = {}
 const lessonProgressDict: { [key: string]: number } = {}
-// const isRender: { [key: string]: boolean } = {}
 let firstCal: boolean = false
-let childReady: boolean = false
 let initNode: string[] = []
-let prepNodePrepare: LearningLessonNodeProps = {} as LearningLessonNodeProps
 
 interface converterPromiseInterface {
     allLesson: Lesson[],
@@ -70,7 +67,6 @@ export default class NewBackendConvert {
                 }
             })
         })
-
 
         await allCoursesLoading
         initNode = this.lonely;

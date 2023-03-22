@@ -1,6 +1,5 @@
-import TYPES, { localStorageInterface, User } from "linkWithBackend/interfaces/TendonType";
+import TYPES, { User } from "linkWithBackend/interfaces/TendonType";
 import container from "linkWithBackend/services/inversify.config";
-import MemoryService from "linkWithBackend/services/memory_service";
 import AuthService from "linkWithBackend/services/auth_service";
 import { useTheme } from "next-themes";
 import { useRouter } from "next/router";
@@ -8,7 +7,6 @@ import { FormEvent, useState } from "react";
 import { toast } from "react-toastify";
 
 const authService = container.get<AuthService>(TYPES.AuthService)
-const memService = container.get<MemoryService>(TYPES.MemoryService)
 
 export default function ViewModel(){
     const router = useRouter();

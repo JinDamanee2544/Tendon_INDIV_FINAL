@@ -5,19 +5,18 @@ import { Xwrapper } from 'react-xarrows';
 import LessonNode from './LessonNode';
 import ViewModel from './ViewModel';
 
-interface LearningNodeMapProps {
+interface LessonMapProps {
     lid: string
 }
 // Entire View of the Course Map (Container)
-const LearningNodeMap = ({ lid }: LearningNodeMapProps) => {
+const LessonMap = ({ lid }: LessonMapProps) => {
     const [childReady, setChildReady] = useState(false);
     const [onClient, setOnClient] = useState(false);
+    const renderingGraph = ViewModel(lid)
 
     useEffect(() => {
         setOnClient(true)
     }, [])
-
-    const renderingGraph = ViewModel(lid)
 
     // For preventing SSR on Xarrow
     if (!onClient) {
@@ -59,4 +58,4 @@ const LearningNodeMap = ({ lid }: LearningNodeMapProps) => {
     )
 }
 
-export default LearningNodeMap;
+export default LessonMap;

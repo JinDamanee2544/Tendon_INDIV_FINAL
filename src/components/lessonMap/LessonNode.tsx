@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react'
 import { Xwrapper } from 'react-xarrows'
 import Xarrow from 'react-xarrows'
 import { useTheme } from 'next-themes'
-import { RenderLearningLessonNodeProps } from '../../types'
+import { RenderLearningLessonNodeProps } from 'types'
 import ArrowBox from '../baseComponents/ArrowBox'
-import LessonNodeView from '@components/baseComponents/LessonNodeView'
+import LessonNodeView from '@components/lessonMap/LessonNodeView'
 
 const LessonNode = (props: RenderLearningLessonNodeProps) => {
     const { lessonId, lessonName, isRender, status, next, setChildReady } = props;

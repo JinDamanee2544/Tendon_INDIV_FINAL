@@ -4,7 +4,7 @@ import container from "linkWithBackend/services/inversify.config"
 import LessonService from "linkWithBackend/services/lesson_service"
 import MemoryService from "linkWithBackend/services/memory_service"
 import NodeService from "linkWithBackend/services/node_service"
-import Router, { useRouter } from "next/router"
+import Router from "next/router"
 import { useEffect, useState } from "react"
 import { NodeWithProgress } from "types"
 
